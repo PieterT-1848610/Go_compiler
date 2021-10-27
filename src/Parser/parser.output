@@ -1,0 +1,62 @@
+Terminals unused in grammar
+
+   INT
+   FLOAT32
+   BOOL
+   CHAR
+   STRING
+   RUNE
+   BYTE
+   IDENTIFIER
+
+
+Grammar
+
+    0 $accept: start $end
+
+    1 start: /* empty */
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+INT (258)
+FLOAT32 (259)
+BOOL (260)
+CHAR (261)
+STRING (262)
+RUNE (263)
+BYTE (264)
+IDENTIFIER (265)
+
+
+Nonterminals, with rules where they appear
+
+$accept (11)
+    on left: 0
+start (12)
+    on left: 1, on right: 0
+
+
+state 0
+
+    0 $accept: . start $end
+
+    $default  reduce using rule 1 (start)
+
+    start  go to state 1
+
+
+state 1
+
+    0 $accept: start . $end
+
+    $end  shift, and go to state 2
+
+
+state 2
+
+    0 $accept: start $end .
+
+    $default  accept

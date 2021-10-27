@@ -1,0 +1,6 @@
+Running of the parser file
+bison -v -o src/Parser/parser.cpp includes/Parser/parse.y
+
+
+Runnen van de go file
+go run test/test.go
