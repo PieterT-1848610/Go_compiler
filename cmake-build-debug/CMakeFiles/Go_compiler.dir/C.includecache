@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../includes/Parser/parser.hpp
+
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lex.yy.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+io.h
+-
+stdlib.h
+-
+includes/Parser/parser.hpp
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/includes/Parser/parser.hpp
+stdlib.h
+-
+

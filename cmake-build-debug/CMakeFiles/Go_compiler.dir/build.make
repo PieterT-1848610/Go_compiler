@@ -65,28 +65,28 @@ include CMakeFiles/Go_compiler.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Go_compiler.dir/flags.make
 
-CMakeFiles/Go_compiler.dir/lexer.c.obj: CMakeFiles/Go_compiler.dir/flags.make
-CMakeFiles/Go_compiler.dir/lexer.c.obj: CMakeFiles/Go_compiler.dir/includes_C.rsp
-CMakeFiles/Go_compiler.dir/lexer.c.obj: ../lexer.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Go_compiler.dir/lexer.c.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Go_compiler.dir\lexer.c.obj -c C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\lexer.c
+CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj: CMakeFiles/Go_compiler.dir/flags.make
+CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj: CMakeFiles/Go_compiler.dir/includes_C.rsp
+CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj: ../src/Lexer/lex.yy.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\Go_compiler.dir\src\Lexer\lex.yy.c.obj -c C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\src\Lexer\lex.yy.c
 
-CMakeFiles/Go_compiler.dir/lexer.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Go_compiler.dir/lexer.c.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\lexer.c > CMakeFiles\Go_compiler.dir\lexer.c.i
+CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.i"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\src\Lexer\lex.yy.c > CMakeFiles\Go_compiler.dir\src\Lexer\lex.yy.c.i
 
-CMakeFiles/Go_compiler.dir/lexer.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Go_compiler.dir/lexer.c.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\lexer.c -o CMakeFiles\Go_compiler.dir\lexer.c.s
+CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.s"
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler\src\Lexer\lex.yy.c -o CMakeFiles\Go_compiler.dir\src\Lexer\lex.yy.c.s
 
 # Object files for target Go_compiler
 Go_compiler_OBJECTS = \
-"CMakeFiles/Go_compiler.dir/lexer.c.obj"
+"CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj"
 
 # External object files for target Go_compiler
 Go_compiler_EXTERNAL_OBJECTS =
 
-Go_compiler.exe: CMakeFiles/Go_compiler.dir/lexer.c.obj
+Go_compiler.exe: CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj
 Go_compiler.exe: CMakeFiles/Go_compiler.dir/build.make
 Go_compiler.exe: CMakeFiles/Go_compiler.dir/linklibs.rsp
 Go_compiler.exe: CMakeFiles/Go_compiler.dir/objects1.rsp

@@ -6,6 +6,4 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_executable(Go_compiler
-        lexer.c
-        lexer.h
-        tokens.h)
+        ${src} src/Lexer/lex.yy.c src/Parser/parser.cpp)

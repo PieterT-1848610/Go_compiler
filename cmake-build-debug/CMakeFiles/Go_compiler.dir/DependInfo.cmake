@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/lexer.c" "C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/cmake-build-debug/CMakeFiles/Go_compiler.dir/lexer.c.obj"
+  "C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lex.yy.c" "C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/cmake-build-debug/CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

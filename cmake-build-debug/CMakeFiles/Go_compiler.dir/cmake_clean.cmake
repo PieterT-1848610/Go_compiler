@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Go_compiler.dir/lexer.c.obj"
+  "CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj"
   "Go_compiler.exe"
   "Go_compiler.exe.manifest"
   "Go_compiler.pdb"

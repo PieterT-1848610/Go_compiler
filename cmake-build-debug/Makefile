@@ -128,29 +128,29 @@ Go_compiler/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/build
 .PHONY : Go_compiler/fast
 
-lexer.obj: lexer.c.obj
-.PHONY : lexer.obj
+src/Lexer/lex.yy.obj: src/Lexer/lex.yy.c.obj
+.PHONY : src/Lexer/lex.yy.obj
 
 # target to build an object file
-lexer.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/lexer.c.obj
-.PHONY : lexer.c.obj
+src/Lexer/lex.yy.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.obj
+.PHONY : src/Lexer/lex.yy.c.obj
 
-lexer.i: lexer.c.i
-.PHONY : lexer.i
+src/Lexer/lex.yy.i: src/Lexer/lex.yy.c.i
+.PHONY : src/Lexer/lex.yy.i
 
 # target to preprocess a source file
-lexer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/lexer.c.i
-.PHONY : lexer.c.i
+src/Lexer/lex.yy.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.i
+.PHONY : src/Lexer/lex.yy.c.i
 
-lexer.s: lexer.c.s
-.PHONY : lexer.s
+src/Lexer/lex.yy.s: src/Lexer/lex.yy.c.s
+.PHONY : src/Lexer/lex.yy.s
 
 # target to generate assembly for a file
-lexer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/lexer.c.s
-.PHONY : lexer.c.s
+src/Lexer/lex.yy.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.s
+.PHONY : src/Lexer/lex.yy.c.s
 
 # Help Target
 help:
@@ -161,9 +161,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Go_compiler
-	@echo ... lexer.obj
-	@echo ... lexer.i
-	@echo ... lexer.s
+	@echo ... src/Lexer/lex.yy.obj
+	@echo ... src/Lexer/lex.yy.i
+	@echo ... src/Lexer/lex.yy.s
 .PHONY : help
 
 

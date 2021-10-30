@@ -76,13 +76,10 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/lexer.c">
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lex.yy.c">
 			<Option target="Go_compiler"/>
 		</Unit>
-		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/lexer.h">
-			<Option target="Go_compiler"/>
-		</Unit>
-		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/tokens.h">
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp">
 			<Option target="Go_compiler"/>
 		</Unit>
 		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeLists.txt">
