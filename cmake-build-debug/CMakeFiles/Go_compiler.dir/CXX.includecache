@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/asb.cpp
+includes/ASB/asb.hpp
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/includes/ASB/asb.hpp
+
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lex.yy.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+io.h
+-
+stdlib.h
+-
+includes/Parser/parser.hpp
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/includes/Parser/parser.hpp
+cstring
+-
+stdlib.h
+-
+
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp
+
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/main.cpp
+iostream
+-
+cstdio
+-
+Lexer/lex.yy.c
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lex.yy.c
+includes/Parser/parser.hpp
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/includes/Parser/parser.hpp
+

@@ -128,6 +128,30 @@ Go_compiler/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/build
 .PHONY : Go_compiler/fast
 
+src/ASB/asb.obj: src/ASB/asb.cpp.obj
+.PHONY : src/ASB/asb.obj
+
+# target to build an object file
+src/ASB/asb.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.obj
+.PHONY : src/ASB/asb.cpp.obj
+
+src/ASB/asb.i: src/ASB/asb.cpp.i
+.PHONY : src/ASB/asb.i
+
+# target to preprocess a source file
+src/ASB/asb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.i
+.PHONY : src/ASB/asb.cpp.i
+
+src/ASB/asb.s: src/ASB/asb.cpp.s
+.PHONY : src/ASB/asb.s
+
+# target to generate assembly for a file
+src/ASB/asb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.s
+.PHONY : src/ASB/asb.cpp.s
+
 src/Lexer/lex.yy.obj: src/Lexer/lex.yy.c.obj
 .PHONY : src/Lexer/lex.yy.obj
 
@@ -152,6 +176,102 @@ src/Lexer/lex.yy.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Lexer/lex.yy.c.s
 .PHONY : src/Lexer/lex.yy.c.s
 
+src/Lexer/lexer.obj: src/Lexer/lexer.cpp.obj
+.PHONY : src/Lexer/lexer.obj
+
+# target to build an object file
+src/Lexer/lexer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.obj
+.PHONY : src/Lexer/lexer.cpp.obj
+
+src/Lexer/lexer.i: src/Lexer/lexer.cpp.i
+.PHONY : src/Lexer/lexer.i
+
+# target to preprocess a source file
+src/Lexer/lexer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.i
+.PHONY : src/Lexer/lexer.cpp.i
+
+src/Lexer/lexer.s: src/Lexer/lexer.cpp.s
+.PHONY : src/Lexer/lexer.s
+
+# target to generate assembly for a file
+src/Lexer/lexer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.s
+.PHONY : src/Lexer/lexer.cpp.s
+
+src/Parser/parser.obj: src/Parser/parser.cpp.obj
+.PHONY : src/Parser/parser.obj
+
+# target to build an object file
+src/Parser/parser.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.obj
+.PHONY : src/Parser/parser.cpp.obj
+
+src/Parser/parser.i: src/Parser/parser.cpp.i
+.PHONY : src/Parser/parser.i
+
+# target to preprocess a source file
+src/Parser/parser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.i
+.PHONY : src/Parser/parser.cpp.i
+
+src/Parser/parser.s: src/Parser/parser.cpp.s
+.PHONY : src/Parser/parser.s
+
+# target to generate assembly for a file
+src/Parser/parser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.s
+.PHONY : src/Parser/parser.cpp.s
+
+src/lexer.obj: src/lexer.c.obj
+.PHONY : src/lexer.obj
+
+# target to build an object file
+src/lexer.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/lexer.c.obj
+.PHONY : src/lexer.c.obj
+
+src/lexer.i: src/lexer.c.i
+.PHONY : src/lexer.i
+
+# target to preprocess a source file
+src/lexer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/lexer.c.i
+.PHONY : src/lexer.c.i
+
+src/lexer.s: src/lexer.c.s
+.PHONY : src/lexer.s
+
+# target to generate assembly for a file
+src/lexer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/lexer.c.s
+.PHONY : src/lexer.c.s
+
+src/main.obj: src/main.cpp.obj
+.PHONY : src/main.obj
+
+# target to build an object file
+src/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/main.cpp.obj
+.PHONY : src/main.cpp.obj
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Go_compiler.dir\build.make CMakeFiles/Go_compiler.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -161,9 +281,24 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Go_compiler
+	@echo ... src/ASB/asb.obj
+	@echo ... src/ASB/asb.i
+	@echo ... src/ASB/asb.s
 	@echo ... src/Lexer/lex.yy.obj
 	@echo ... src/Lexer/lex.yy.i
 	@echo ... src/Lexer/lex.yy.s
+	@echo ... src/Lexer/lexer.obj
+	@echo ... src/Lexer/lexer.i
+	@echo ... src/Lexer/lexer.s
+	@echo ... src/Parser/parser.obj
+	@echo ... src/Parser/parser.i
+	@echo ... src/Parser/parser.s
+	@echo ... src/lexer.obj
+	@echo ... src/lexer.i
+	@echo ... src/lexer.s
+	@echo ... src/main.obj
+	@echo ... src/main.i
+	@echo ... src/main.s
 .PHONY : help
 
 

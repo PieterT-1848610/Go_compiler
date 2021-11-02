@@ -3,13 +3,13 @@
 //die gebruikt worden 
 %code{
     #include <iostream>
-    #include <string>
+    #include <cstring>
 
 }
 //alles wat in hearder file komt te staan
 %code requires{
-    //#include <string>
-    //#include <vector>
+    #include <cstring>
+    #include <vector>
 
 }
 
@@ -20,7 +20,7 @@
     bool booleanValue;
     char charValue;
     char *identifierValue;
-    str stringValue;
+    std::string stringValue;
 
 }
 
@@ -33,8 +33,17 @@
 %token RUNE
 %token BYTE
 
+%token SEMI
+%token IF
+%token ELSE
+
 
 %token <identifierValue> IDENTIFIER
+%token <integerValue> INTEGER_LITERAL
+%token <floatValue> FLOAT_LITERAL
+%token <booleanValue> BOOLEAN_LITERAL
+%token <charValue> CHAR_LITERAL
+%token <stringValue> STRING_LITERAL
 //type declaratie van niet-terminaal symbolen
 
 //more noting

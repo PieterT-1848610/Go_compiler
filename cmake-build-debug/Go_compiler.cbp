@@ -24,7 +24,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/."/>
+					<Add directory="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes"/>
+					<Add directory="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/include"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
@@ -43,7 +47,11 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/."/>
+					<Add directory="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes"/>
+					<Add directory="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/include"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
 					<Add directory="C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
@@ -76,10 +84,28 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/asb.cpp">
+			<Option target="Go_compiler"/>
+		</Unit>
 		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lex.yy.c">
 			<Option target="Go_compiler"/>
 		</Unit>
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp">
+			<Option target="Go_compiler"/>
+		</Unit>
 		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp">
+			<Option target="Go_compiler"/>
+		</Unit>
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp.rule">
+			<Option target="Go_compiler"/>
+		</Unit>
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/lexer.c">
+			<Option target="Go_compiler"/>
+		</Unit>
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/lexer.h">
+			<Option target="Go_compiler"/>
+		</Unit>
+		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/main.cpp">
 			<Option target="Go_compiler"/>
 		</Unit>
 		<Unit filename="C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeLists.txt">

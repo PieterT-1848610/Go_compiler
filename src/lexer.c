@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "tokens.h"
 #include "lexer.h"
 
 /* Array with tokens such that index = tokenid - 250*/

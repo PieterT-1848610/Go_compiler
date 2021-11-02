@@ -6,8 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../includes/Parser/parser.hpp
-
 C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lex.yy.c
 stdio.h
 -
@@ -21,6 +19,18 @@ stdlib.h
 -
 includes/Parser/parser.hpp
 C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/includes/Parser/parser.hpp
+cstring
+-
 stdlib.h
 -
+
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/lexer.c
+stdio.h
+-
+tokens.h
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/tokens.h
+lexer.h
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/lexer.h
+
+C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/lexer.h
 

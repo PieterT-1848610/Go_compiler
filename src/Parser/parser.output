@@ -7,7 +7,15 @@ Terminals unused in grammar
    STRING
    RUNE
    BYTE
+   SEMI
+   IF
+   ELSE
    IDENTIFIER
+   INTEGER_LITERAL
+   FLOAT_LITERAL
+   BOOLEAN_LITERAL
+   CHAR_LITERAL
+   STRING_LITERAL
 
 
 Grammar
@@ -28,14 +36,22 @@ CHAR (261)
 STRING (262)
 RUNE (263)
 BYTE (264)
-IDENTIFIER (265)
+SEMI (265)
+IF (266)
+ELSE (267)
+IDENTIFIER (268)
+INTEGER_LITERAL (269)
+FLOAT_LITERAL (270)
+BOOLEAN_LITERAL (271)
+CHAR_LITERAL (272)
+STRING_LITERAL (273)
 
 
 Nonterminals, with rules where they appear
 
-$accept (11)
+$accept (19)
     on left: 0
-start (12)
+start (20)
     on left: 1, on right: 0
 
 

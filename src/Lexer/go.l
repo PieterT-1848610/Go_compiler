@@ -1,18 +1,28 @@
 %option noyywrap
-
+%option header-file="includes/Lexer/lexer.hpp"
 %{
 
 	#include "includes/Parser/parser.hpp"
+	#include <cstring>
 	int line_nr = 1;
 	int col_nr = 1; 
 
+	char *copyString(char *input);
+	char *removeLowerLine(char *input);
+	char *removeQuotes(char *input);
 
+	long 	decimalToInteger(char *input);
+	long 	binaryToInteger(char * input);
+	long 	octalToInteger(char * input);
+	long 	heximalToInteger(char * input);
+	float 	decimalToFloat(char * input);
 
+	char	charToCharLiteral(char * input);
 %}
 
 decimal_literal 		0|([1-9](_)?[0-9]+)*
 binary_literal 			0(b|B)((_)?[0|1]+)+
-ocatal_literal 			0(o|O)((_)?[0-7]+)+
+octal_literal 			0(o|O)((_)?[0-7]+)+
 heximal_literal 		0(x|X)((_)?[0-9a-fA-F]+)+
 
 decimal_float_literal  	([0-9](_)?[0-9]+)*\.([0-9]((_)?[0-9]+)*)?
@@ -22,9 +32,12 @@ identifier 				[_a-zA-Z]([_a-zA-Z0-9])*
 
 rune_escape_char 		\\(a|b|c|f|n|r|t|v|\'|\"|\\)
 rune_hex_value 			\\(x)[0-9a-fA-F]{2}
-rune_ocatal_value 		\\[0-7]{3}
+rune_octal_value 		\\[0-7]{3}
 
-rune_literal 			\'({rune_escape_char}|{rune_hex_value}|{rune_ocatal_value})
+rune_literal 			({rune_escape_char}|{rune_hex_value}|{rune_octal_value})
+
+
+
 %%
 "//".*  {}
 [\t]  {}
@@ -37,19 +50,21 @@ char    {return CHAR;}
 string  {return STRING;}
 rune    {return RUNE;}
 byte    {return BYTE;}
+if 		{return IF;}
+else	{return ELSE;}
 
-{identifier} 	{
-					auto s = new char(yyleng+1);
-					strcpy(s, yytext);
-					yylval.id = s;
-					return ID;
-				}
+{identifier} 		{yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
 
+
+{decimal_literal}		{yylval.intergerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
+{binary_literal}		{yylval.intergerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
+{octal_literal}			{yylval.intergerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
+{heximal_literal}		{yylval.intergerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
+
+{decimal_float_literal}	{yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
+
+\'{rune_literal}'\		{yylval.charValue = }
 %%
-
-
-
-
 
 
 
@@ -57,4 +72,62 @@ byte    {return BYTE;}
    true (non-zero) (f)lex will terminate and continue otherwise.*/
 int yywrap(){
   return (1);
+}
+
+char *copyString(char *input){
+	auto s = new char[strlen(input)+1];
+	strcpy(s, input);
+	return s;
+}
+
+char *removeLowerLine(char *input){
+    auto result = new char[strlen(input)+1];
+    size_t j = 0;
+
+    for(size_t i=0; i<strlen(input); i++){
+        if(input[i] !='_') {
+            result[j] = input[i];
+            j++;
+        }
+    }
+    result[j] = '\0';
+    return result;
+}
+
+char *removeQuotes(char *input){
+	auto result = copyString(input+1); 	//remove the first "
+	result[strlen(result)-1] = '\0';	//remove the second "
+	return result;
+}
+
+long decimalToInteger(char *input){
+	auto formated = removeLowerLine(input);
+	return std::stol(formated, nullptr, 10);
+}
+
+long binaryToInteger(char *input){
+	auto formated = removeLowerLine(input);
+	formated = formated + 2; //remove 0b or 0B
+	return std::stol(formated, nullptr, 2);
+}
+
+long octalToInteger(char *input){
+	auto formated = removeLowerLine(input);
+	formated = formated + 2; //remove 0o or 0O
+	return std::stol(formated, nullptr, 8);
+}
+
+long heximalToInteger(char *input){
+	auto formated = removeLowerLine(input);
+	formated = formated + 2; //remove 0x or 0X
+	return std::stol(formated, nullptr, 16);
+}
+
+float decimalToFloat(char *input){
+	auto formated = removeLowerLine(input);
+	return std::stof(formated);
+}
+
+char charToCharLiteral(char *input){
+
 }

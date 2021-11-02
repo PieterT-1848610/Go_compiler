@@ -37,8 +37,8 @@
 /* Line 1676 of yacc.c  */
 #line 10 "includes/Parser/parse.y"
 
-    //#include <string>
-    //#include <vector>
+    #include <cstring>
+    #include <vector>
 
 
 
@@ -59,7 +59,15 @@
      STRING = 262,
      RUNE = 263,
      BYTE = 264,
-     IDENTIFIER = 265
+     SEMI = 265,
+     IF = 266,
+     ELSE = 267,
+     IDENTIFIER = 268,
+     INTEGER_LITERAL = 269,
+     FLOAT_LITERAL = 270,
+     BOOLEAN_LITERAL = 271,
+     CHAR_LITERAL = 272,
+     STRING_LITERAL = 273
    };
 #endif
 
@@ -77,13 +85,13 @@ typedef union YYSTYPE
     bool booleanValue;
     char charValue;
     char *identifierValue;
-    str stringValue;
+    std::string stringValue;
 
 
 
 
 /* Line 1676 of yacc.c  */
-#line 87 "includes/Parser/parser.hpp"
+#line 95 "includes/Parser/parser.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
