@@ -2,8 +2,8 @@
 %option header-file="includes/Lexer/lexer.hpp"
 %{
 
-	#include "includes/Parser/parser.hpp"
-	#include <cstring>
+	#include "Parser/parser.hpp"
+	#include <string>
 	int line_nr = 1;
 	int col_nr = 1; 
 
@@ -22,7 +22,7 @@
 
 decimal_literal 		0|([1-9](_)?[0-9]+)*
 binary_literal 			0(b|B)((_)?[0|1]+)+
-octal_literal 			0(o|O)((_)?[0-7]+)+
+octal_literal 			0(o|O)?((_)?[0-7]+)+
 heximal_literal 		0(x|X)((_)?[0-9a-fA-F]+)+
 
 decimal_float_literal  	([0-9](_)?[0-9]+)*\.([0-9]((_)?[0-9]+)*)?
@@ -45,7 +45,7 @@ rune_literal 			({rune_escape_char}|{rune_hex_value}|{rune_octal_value})
 
 bool    {return BOOL;}
 int     {return INT;}
-float32 {return float32;}
+float32 {return FLOAT32;}
 char    {return CHAR;}
 string  {return STRING;}
 rune    {return RUNE;}
@@ -56,23 +56,20 @@ else	{return ELSE;}
 {identifier} 		{yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
 
 
-{decimal_literal}		{yylval.intergerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
-{binary_literal}		{yylval.intergerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
-{octal_literal}			{yylval.intergerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
-{heximal_literal}		{yylval.intergerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
+{decimal_literal}		{yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
+{binary_literal}		{yylval.integerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
+{octal_literal}			{yylval.integerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
+{heximal_literal}		{yylval.integerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
 
 {decimal_float_literal}	{yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
 
-\'{rune_literal}'\		{yylval.charValue = }
+\'{rune_literal}\'		{yylval.charValue = }
 %%
 
 
 
 /* Function called by (f)lex when EOF is read. If yywrap returns a
    true (non-zero) (f)lex will terminate and continue otherwise.*/
-int yywrap(){
-  return (1);
-}
 
 char *copyString(char *input){
 	auto s = new char[strlen(input)+1];
@@ -113,7 +110,7 @@ long binaryToInteger(char *input){
 
 long octalToInteger(char *input){
 	auto formated = removeLowerLine(input);
-	formated = formated + 2; //remove 0o or 0O
+	formated = formated + 2; //remove 0o or 0O //llok if o or O is placed
 	return std::stol(formated, nullptr, 8);
 }
 
@@ -131,3 +128,4 @@ float decimalToFloat(char *input){
 char charToCharLiteral(char *input){
 
 }
+//TODO: start making the stupid tree

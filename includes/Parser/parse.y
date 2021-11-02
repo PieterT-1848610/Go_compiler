@@ -3,12 +3,12 @@
 //die gebruikt worden 
 %code{
     #include <iostream>
-    #include <cstring>
+    #include <string>
 
 }
 //alles wat in hearder file komt te staan
 %code requires{
-    #include <cstring>
+    #include <string>
     #include <vector>
 
 }
