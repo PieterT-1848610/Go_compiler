@@ -6,3 +6,6 @@ Runnen van de go file
 go run test/test.go
 
 %option header-file="includes/Lexer/lexer.hpp"
+
+
+use wsl commando "cmake . && make"
