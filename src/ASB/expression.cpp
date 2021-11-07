@@ -1,21 +1,21 @@
 #include "ASB/expression.hpp"
 
-IdentifierExpression::IdentifierExpression(std::string id): id{id}{
+ASB::IdentifierExpression::IdentifierExpression(std::string id): id{id}{
 
 }
 
-BoolExpression::BoolExpression(bool value): value{value}{
+ASB::BoolExpression::BoolExpression(bool value): value{value}{
 
 }
 
-IntegerExpression::IntegerExpression(int value): value{value}{
+ASB::IntegerExpression::IntegerExpression(int value): value{value}{
 
 }
 
-FloatExpression::FloatExpression(float value): value{value}{
+ASB::FloatExpression::FloatExpression(float value): value{value}{
 
 }
 
-CharExpression::CharExpression(char value): value{value}{
+ASB::CharExpression::CharExpression(char value): value{value}{
     
 }

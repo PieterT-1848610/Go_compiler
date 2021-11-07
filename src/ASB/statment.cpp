@@ -1,19 +1,19 @@
-#include "ASB/stament.hpp"
+#include "ASB/statment.hpp"
 
-ExpressionStatment::ExpressionStatment(Expression *expression): expression{expression}{
+ASB::ExpressionStatment::ExpressionStatment(Expression *expression): expression{expression}{
 
 }
 
-ExpressionStatment::~ExpressionStatment(){
+ASB::ExpressionStatment::~ExpressionStatment(){
     delete expression;
 }
 
-AssignmentStatment::AssignmentStatment(std::vector<Expression *> leftSide, std::vector<Expression *> rightSide):
+ASB::AssignmentStatment::AssignmentStatment(std::vector<Expression *> leftSide, std::vector<Expression *> rightSide):
                                             leftSide {leftSide}, rightSide{rightSide}{
 
     }
 
-AssignmentStatment::~AssignmentStatment(){
+ASB::AssignmentStatment::~AssignmentStatment(){
     for(int i=0; i< leftSide.size(); i++){
         delete leftSide[i];
     }
@@ -22,43 +22,43 @@ AssignmentStatment::~AssignmentStatment(){
     }
 }
 
-ForStatment::ForStatment(SimpleStatment *init, Expression *condition, SimpleStatment *post, Block *bodyFor):
+ASB::ForStatment::ForStatment(SimpleStatment *init, Expression *condition, SimpleStatment *post, Block *bodyFor):
                         initStatment{init}, condition{condition}, postStatment{post}, bodyFor{bodyFor}{
 
     }
 
-ForStatment::~ForStatment(){
+ASB::ForStatment::~ForStatment(){
     delete initStatment;
     delete condition;
     delete postStatment;
     delete bodyFor;
 }
 
-DeclarationStatment::DeclarationStatment(Declaration *declaration): declaration{declaration}{
+ASB::DeclarationStatment::DeclarationStatment(Declaration *declaration): declaration{declaration}{
 
 }
 
-DeclarationStatment::~DeclarationStatment(){
+ASB::DeclarationStatment::~DeclarationStatment(){
     delete declaration;
 }
 
-IfStatment::IfStatment(Expression *condition, Block *TrueCondition, Block *FalseCondition):
+ASB::IfStatment::IfStatment(Expression *condition, Block *TrueCondition, Block *FalseCondition):
                     condition{condition}, TrueCondition{TrueCondition}, FalseCondition{FalseCondition}{
 
     }
 
-IfStatment::~IfStatment(){
+ASB::IfStatment::~IfStatment(){
     delete condition;
     delete TrueCondition;
     delete FalseCondition;
 }
 
 
-ReturnStatment::ReturnStatment(std::vector<Expression *> expressions): expressions{expressions}{
+ASB::ReturnStatment::ReturnStatment(std::vector<Expression *> expressions): expressions{expressions}{
 
 }
 
-ReturnStatment::~ReturnStatment(){
+ASB::ReturnStatment::~ReturnStatment(){
     for(int i=0; i<expressions.size(); i++){
         delete expressions[i];
     }

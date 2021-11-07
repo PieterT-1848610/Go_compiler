@@ -107,13 +107,15 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 10 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 14 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
     #include <string>
     #include <vector>
+    #include <ASB/asb.hpp>
 
 
-#line 117 "src/Parser/parser.cpp"
+
+#line 119 "src/Parser/parser.cpp"
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -141,7 +143,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 23 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
     int integerValue;
     float floatValue;
@@ -149,8 +151,10 @@ union YYSTYPE
     char charValue;
     char *identifierValue;
     
+    
 
-#line 154 "src/Parser/parser.cpp"
+
+#line 158 "src/Parser/parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -185,9 +189,13 @@ int yyparse (void);
 
     #include <iostream>
     #include <string>
+    
+    ASB::Root *tree;
+
+    void yyerror(char const *message);
 
 
-#line 191 "src/Parser/parser.cpp"
+#line 199 "src/Parser/parser.cpp"
 
 #ifdef short
 # undef short
@@ -552,7 +560,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    51,    51
+       0,    59,    59
 };
 #endif
 
@@ -1434,7 +1442,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1438 "src/Parser/parser.cpp"
+#line 1446 "src/Parser/parser.cpp"
 
       default: break;
     }
@@ -1672,4 +1680,9 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 53 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 61 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+
+
+void yyerror(char const *message){
+    printf("Error: %s\n", message);
+}

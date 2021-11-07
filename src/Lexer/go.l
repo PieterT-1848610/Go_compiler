@@ -54,6 +54,11 @@ rune    {return RUNE;}
 byte    {return BYTE;}
 if 		{return IF;}
 else	{return ELSE;}
+for     {return FOR;}
+return  {return RETURN;}
+var     {return VAR;}
+func    {return FUNC;}
+
 
 {identifier} 		{yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
 

@@ -1,6 +1,7 @@
 #include "asb.hpp"
 #include <string>
 
+namespace ASB{
 class FunctionDeclaration: public TopDeclaration{
     public:
         FunctionDeclaration(std::string id, Type *signature, Block *functionBody);
@@ -22,3 +23,4 @@ class VariableDeclaration: public Declaration{
         Type                        *type;
         std::vector<Expression *>   expressions;
 };
+}

@@ -1,6 +1,8 @@
 #include "asb.hpp"
 #include <string>
 
+namespace ASB{
+
 class IdentifierExpression: public Expression{
     public:
         IdentifierExpression(std::string id);
@@ -46,3 +48,4 @@ class CharExpression: public Expression{
     private:
         char value;
 };
+}

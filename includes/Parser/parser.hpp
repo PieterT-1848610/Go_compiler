@@ -44,13 +44,15 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 10 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 14 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
     #include <string>
     #include <vector>
+    #include <ASB/asb.hpp>
 
 
-#line 54 "includes/Parser/parser.hpp"
+
+#line 56 "includes/Parser/parser.hpp"
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -78,7 +80,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 17 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 23 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
     int integerValue;
     float floatValue;
@@ -86,8 +88,10 @@ union YYSTYPE
     char charValue;
     char *identifierValue;
     
+    
 
-#line 91 "includes/Parser/parser.hpp"
+
+#line 95 "includes/Parser/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

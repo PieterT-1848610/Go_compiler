@@ -1,6 +1,8 @@
 #include "asb.hpp"
 
-class IntType: public Type{
+namespace ASB
+{
+    class IntType: public Type{
     public:
         virtual ~IntType() override = default;
         IntType() = default;
@@ -25,3 +27,7 @@ class CharType: public Type{
         virtual ~CharType() override = default;
         CharType() = default;
 };
+} // namespace ASB
+
+
+

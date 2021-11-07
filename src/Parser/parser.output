@@ -1,61 +1,58 @@
 Terminals unused in grammar
 
-   INT
-   FLOAT32
-   BOOL
-   CHAR
-   STRING
-   RUNE
-   BYTE
-   SEMI
-   IF
-   ELSE
-   IDENTIFIER
-   INTEGER_LITERAL
-   FLOAT_LITERAL
-   BOOLEAN_LITERAL
-   CHAR_LITERAL
-   STRING_LITERAL
+    INT
+    FLOAT32
+    BOOL
+    CHAR
+    RUNE
+    BYTE
+    SEMI
+    IF
+    ELSE
+    IDENTIFIER
+    INTEGER_LITERAL
+    FLOAT_LITERAL
+    BOOLEAN_LITERAL
+    CHAR_LITERAL
 
 
 Grammar
 
     0 $accept: start $end
 
-    1 start: /* empty */
+    1 start: %empty
 
 
 Terminals, with rules where they appear
 
-$end (0) 0
-error (256)
-INT (258)
-FLOAT32 (259)
-BOOL (260)
-CHAR (261)
-STRING (262)
-RUNE (263)
-BYTE (264)
-SEMI (265)
-IF (266)
-ELSE (267)
-IDENTIFIER (268)
-INTEGER_LITERAL (269)
-FLOAT_LITERAL (270)
-BOOLEAN_LITERAL (271)
-CHAR_LITERAL (272)
-STRING_LITERAL (273)
+    $end (0) 0
+    error (256)
+    INT (258)
+    FLOAT32 (259)
+    BOOL (260)
+    CHAR (261)
+    RUNE (262)
+    BYTE (263)
+    SEMI (264)
+    IF (265)
+    ELSE (266)
+    IDENTIFIER <identifierValue> (267)
+    INTEGER_LITERAL <integerValue> (268)
+    FLOAT_LITERAL <floatValue> (269)
+    BOOLEAN_LITERAL <booleanValue> (270)
+    CHAR_LITERAL <charValue> (271)
 
 
 Nonterminals, with rules where they appear
 
-$accept (19)
-    on left: 0
-start (20)
-    on left: 1, on right: 0
+    $accept (17)
+        on left: 0
+    start (18)
+        on left: 1
+        on right: 0
 
 
-state 0
+State 0
 
     0 $accept: . start $end
 
@@ -64,14 +61,14 @@ state 0
     start  go to state 1
 
 
-state 1
+State 1
 
     0 $accept: start . $end
 
     $end  shift, and go to state 2
 
 
-state 2
+State 2
 
     0 $accept: start $end .
 

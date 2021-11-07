@@ -1,7 +1,7 @@
 //File voor de tree mee op te bouwen
 
 #include <vector>
-
+namespace ASB{
 //Base Node class
 class Node{
     public:
@@ -92,3 +92,4 @@ class Root: public Node{
         std::vector<TopDeclaration *> declarations;
 
 };
+}
