@@ -61,18 +61,16 @@ extern int yydebug;
     FLOAT32 = 259,
     BOOL = 260,
     CHAR = 261,
-    STRING = 262,
-    RUNE = 263,
-    BYTE = 264,
-    SEMI = 265,
-    IF = 266,
-    ELSE = 267,
-    IDENTIFIER = 268,
-    INTEGER_LITERAL = 269,
-    FLOAT_LITERAL = 270,
-    BOOLEAN_LITERAL = 271,
-    CHAR_LITERAL = 272,
-    STRING_LITERAL = 273
+    RUNE = 262,
+    BYTE = 263,
+    SEMI = 264,
+    IF = 265,
+    ELSE = 266,
+    IDENTIFIER = 267,
+    INTEGER_LITERAL = 268,
+    FLOAT_LITERAL = 269,
+    BOOLEAN_LITERAL = 270,
+    CHAR_LITERAL = 271
   };
 #endif
 
@@ -87,10 +85,9 @@ union YYSTYPE
     bool booleanValue;
     char charValue;
     char *identifierValue;
-    std::string stringValue;
+    
 
-
-#line 94 "includes/Parser/parser.hpp"
+#line 91 "includes/Parser/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

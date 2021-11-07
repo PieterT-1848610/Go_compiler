@@ -124,18 +124,16 @@ extern int yydebug;
     FLOAT32 = 259,
     BOOL = 260,
     CHAR = 261,
-    STRING = 262,
-    RUNE = 263,
-    BYTE = 264,
-    SEMI = 265,
-    IF = 266,
-    ELSE = 267,
-    IDENTIFIER = 268,
-    INTEGER_LITERAL = 269,
-    FLOAT_LITERAL = 270,
-    BOOLEAN_LITERAL = 271,
-    CHAR_LITERAL = 272,
-    STRING_LITERAL = 273
+    RUNE = 262,
+    BYTE = 263,
+    SEMI = 264,
+    IF = 265,
+    ELSE = 266,
+    IDENTIFIER = 267,
+    INTEGER_LITERAL = 268,
+    FLOAT_LITERAL = 269,
+    BOOLEAN_LITERAL = 270,
+    CHAR_LITERAL = 271
   };
 #endif
 
@@ -150,10 +148,9 @@ union YYSTYPE
     bool booleanValue;
     char charValue;
     char *identifierValue;
-    std::string stringValue;
+    
 
-
-#line 157 "src/Parser/parser.cpp"
+#line 154 "src/Parser/parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -190,7 +187,7 @@ int yyparse (void);
     #include <string>
 
 
-#line 194 "src/Parser/parser.cpp"
+#line 191 "src/Parser/parser.cpp"
 
 #ifdef short
 # undef short
@@ -500,7 +497,7 @@ union yyalloc
 #define YYLAST   0
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  19
+#define YYNTOKENS  17
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  2
 /* YYNRULES -- Number of rules.  */
@@ -509,7 +506,7 @@ union yyalloc
 #define YYNSTATES  3
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   273
+#define YYMAXUTOK   271
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -548,14 +545,14 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18
+      15,    16
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    52,    52
+       0,    51,    51
 };
 #endif
 
@@ -564,10 +561,9 @@ static const yytype_int8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "INT", "FLOAT32", "BOOL", "CHAR",
-  "STRING", "RUNE", "BYTE", "SEMI", "IF", "ELSE", "IDENTIFIER",
-  "INTEGER_LITERAL", "FLOAT_LITERAL", "BOOLEAN_LITERAL", "CHAR_LITERAL",
-  "STRING_LITERAL", "$accept", "start", YY_NULLPTR
+  "$end", "error", "$undefined", "INT", "FLOAT32", "BOOL", "CHAR", "RUNE",
+  "BYTE", "SEMI", "IF", "ELSE", "IDENTIFIER", "INTEGER_LITERAL",
+  "FLOAT_LITERAL", "BOOLEAN_LITERAL", "CHAR_LITERAL", "$accept", "start", YY_NULLPTR
 };
 #endif
 
@@ -577,7 +573,7 @@ static const char *const yytname[] =
 static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273
+     265,   266,   267,   268,   269,   270,   271
 };
 # endif
 
@@ -635,13 +631,13 @@ static const yytype_int8 yycheck[] =
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    20,     0
+       0,    18,     0
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    19,    20
+       0,    17,    18
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1438,7 +1434,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1442 "src/Parser/parser.cpp"
+#line 1438 "src/Parser/parser.cpp"
 
       default: break;
     }
@@ -1676,4 +1672,4 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 54 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 53 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"

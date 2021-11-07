@@ -10,6 +10,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/lexer.c" "CMakeFiles/Go_compiler.dir/src/lexer.c.o" "gcc" "CMakeFiles/Go_compiler.dir/src/lexer.c.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/asb.cpp" "CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.o.d"
+  "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/declaration.cpp" "CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.o.d"
+  "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/expression.cpp" "CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.o.d"
+  "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/statment.cpp" "CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp" "CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp" "CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/main.cpp" "CMakeFiles/Go_compiler.dir/src/main.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/main.cpp.o.d"

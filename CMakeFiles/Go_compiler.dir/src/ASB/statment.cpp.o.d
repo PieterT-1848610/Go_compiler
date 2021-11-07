@@ -1,6 +1,7 @@
-CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.o: \
- /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/asb.cpp \
+CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.o: \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/statment.cpp \
  /usr/include/stdc-predef.h \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/stament.hpp \
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/asb.hpp \
  /usr/include/c++/9/vector /usr/include/c++/9/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \

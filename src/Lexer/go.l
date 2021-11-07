@@ -49,7 +49,7 @@ bool    {return BOOL;}
 int     {return INT;}
 float32 {return FLOAT32;}
 char    {return CHAR;}
-string  {return STRING;}
+
 rune    {return RUNE;}
 byte    {return BYTE;}
 if 		{return IF;}
@@ -199,7 +199,8 @@ float decimalToFloat(char *input){
 
 char charToCharLiteral(char *input){
 	auto noQuotes = removeQuotes(input);
-	auto result = charTochar(noQuotes);
+    int length = 0;
+	auto result = charTochar(noQuotes, length);
 	delete noQuotes;
 	return result;
 }

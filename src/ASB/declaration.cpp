@@ -1,4 +1,4 @@
-#include "./includes/ASB/declaration.hpp"
+#include "ASB/declaration.hpp"
 
 FunctionDeclaration::FunctionDeclaration(std::string id, Type *signature, Block *functionBody):
                                         id{id}, signature {signature}, functionBody{functionBody}{

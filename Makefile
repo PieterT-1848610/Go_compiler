@@ -153,6 +153,78 @@ src/ASB/asb.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.s
 .PHONY : src/ASB/asb.cpp.s
 
+src/ASB/declaration.o: src/ASB/declaration.cpp.o
+.PHONY : src/ASB/declaration.o
+
+# target to build an object file
+src/ASB/declaration.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.o
+.PHONY : src/ASB/declaration.cpp.o
+
+src/ASB/declaration.i: src/ASB/declaration.cpp.i
+.PHONY : src/ASB/declaration.i
+
+# target to preprocess a source file
+src/ASB/declaration.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.i
+.PHONY : src/ASB/declaration.cpp.i
+
+src/ASB/declaration.s: src/ASB/declaration.cpp.s
+.PHONY : src/ASB/declaration.s
+
+# target to generate assembly for a file
+src/ASB/declaration.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.s
+.PHONY : src/ASB/declaration.cpp.s
+
+src/ASB/expression.o: src/ASB/expression.cpp.o
+.PHONY : src/ASB/expression.o
+
+# target to build an object file
+src/ASB/expression.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.o
+.PHONY : src/ASB/expression.cpp.o
+
+src/ASB/expression.i: src/ASB/expression.cpp.i
+.PHONY : src/ASB/expression.i
+
+# target to preprocess a source file
+src/ASB/expression.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.i
+.PHONY : src/ASB/expression.cpp.i
+
+src/ASB/expression.s: src/ASB/expression.cpp.s
+.PHONY : src/ASB/expression.s
+
+# target to generate assembly for a file
+src/ASB/expression.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.s
+.PHONY : src/ASB/expression.cpp.s
+
+src/ASB/statment.o: src/ASB/statment.cpp.o
+.PHONY : src/ASB/statment.o
+
+# target to build an object file
+src/ASB/statment.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.o
+.PHONY : src/ASB/statment.cpp.o
+
+src/ASB/statment.i: src/ASB/statment.cpp.i
+.PHONY : src/ASB/statment.i
+
+# target to preprocess a source file
+src/ASB/statment.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.i
+.PHONY : src/ASB/statment.cpp.i
+
+src/ASB/statment.s: src/ASB/statment.cpp.s
+.PHONY : src/ASB/statment.s
+
+# target to generate assembly for a file
+src/ASB/statment.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.s
+.PHONY : src/ASB/statment.cpp.s
+
 src/Lexer/lexer.o: src/Lexer/lexer.cpp.o
 .PHONY : src/Lexer/lexer.o
 
@@ -261,6 +333,15 @@ help:
 	@echo "... src/ASB/asb.o"
 	@echo "... src/ASB/asb.i"
 	@echo "... src/ASB/asb.s"
+	@echo "... src/ASB/declaration.o"
+	@echo "... src/ASB/declaration.i"
+	@echo "... src/ASB/declaration.s"
+	@echo "... src/ASB/expression.o"
+	@echo "... src/ASB/expression.i"
+	@echo "... src/ASB/expression.s"
+	@echo "... src/ASB/statment.o"
+	@echo "... src/ASB/statment.i"
+	@echo "... src/ASB/statment.s"
 	@echo "... src/Lexer/lexer.o"
 	@echo "... src/Lexer/lexer.i"
 	@echo "... src/Lexer/lexer.s"

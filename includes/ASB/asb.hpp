@@ -74,7 +74,7 @@ class Declaration: public TopDeclaration{
 class Block: public Node{
     public:
         Block(std::vector<Statment *> statments);
-        virtual ~Block() = default;
+        virtual ~Block();
 
     protected:
         std::vector<Statment * > statments; 
@@ -86,7 +86,7 @@ class Block: public Node{
 class Root: public Node{
     public:
         Root(std::vector<TopDeclaration *> declarations);
-        virtual ~Root() = default;
+        virtual ~Root();
 
     protected:
         std::vector<TopDeclaration *> declarations;

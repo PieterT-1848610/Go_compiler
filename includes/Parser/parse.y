@@ -20,8 +20,7 @@
     bool booleanValue;
     char charValue;
     char *identifierValue;
-    std::string stringValue;
-
+    
 }
 
 
@@ -29,7 +28,7 @@
 %token FLOAT32
 %token BOOL
 %token CHAR
-%token STRING
+//%token STRING
 %token RUNE
 %token BYTE
 
@@ -43,7 +42,7 @@
 %token <floatValue> FLOAT_LITERAL
 %token <booleanValue> BOOLEAN_LITERAL
 %token <charValue> CHAR_LITERAL
-%token <stringValue> STRING_LITERAL
+//%token <stringValue> STRING_LITERAL
 //type declaratie van niet-terminaal symbolen
 
 //more noting
