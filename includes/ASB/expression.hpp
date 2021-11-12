@@ -1,3 +1,6 @@
+#ifndef ASB_EXPRESSION_HPP
+#define ASB_EXPRESSION_HPP
+
 #include "asb.hpp"
 #include <string>
 
@@ -49,3 +52,4 @@ class CharExpression: public Expression{
         char value;
 };
 }
+#endif

@@ -1,3 +1,6 @@
+#ifndef ASB_DECLARTION_HPP
+#define ASB_DECLARTION_HPP
+
 #include "asb.hpp"
 #include <string>
 
@@ -24,3 +27,5 @@ class VariableDeclaration: public Declaration{
         std::vector<Expression *>   expressions;
 };
 }
+
+#endif

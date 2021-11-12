@@ -44,6 +44,16 @@
 
     ASB::Expression     *expression;
 
+    linkedList<ASB::Statment> *listStatment;
+    linkedList<ASB::SimpleStatment> *listSimpleStatment;
+
+    linkedList<ASB::TopDeclaration> *listTopDeclaration;
+    linkedList<ASB::Declaration> *listDeclaration;
+    
+    linkedList<ASB::Expression> *listExpression;
+
+
+
 }
 
 
@@ -72,14 +82,16 @@
 //type declaratie van niet-terminaal symbolen
 
 //alle nodes die van statment komen
+%type <listStatment> statments;
+%type <listStatment> statment_list;
 %type <statment> forStatment;
 %type <statment> ifStatment;
 %type <statment> returnStatment;
 %type <statment> declarationStatment;
 
- 
-%type <simpleStatment> expressionStatment;
-%type <simpleStatment> assignmentStatment;
+%type <simpleStatment> simpleStatment;
+//%type <simpleStatment> expressionStatment;
+//%type <simpleStatment> assignmentStatment;
 
 %type <expression> identifierExpression;
 %type <expression> boolExpression;
@@ -90,14 +102,12 @@
 %type <block> block;
 
 
-%type <type> intType;
-%type <type> booleanType;
-%type <type> floatType;
-%type <type> charType;
+%type <type> type;
 
+%type <listTopDeclaration> listTopDeclaration;
 %type <topDeclaration> functionDeclaration;
 
-
+%type <listDeclaration> listDeclaration;
 %type <declaration> variableDeclaration;
 
 
@@ -106,9 +116,22 @@
 
 //more noting
 %%
-start: ;
+start
+    :listTopDeclaration     {tree = new AST::Root{$1->toStdVector()}; }
+    ;
+//For type things
+type
+    :INT                    {$$ = new AST::IntType{}; }
+    |FLOAT32                {$$ = new AST::FloatType{}; }
+    |BOOL                   {$$ = new AST::BooleanType{}; }
+    |CHAR                   {$$ = new AST::CharType{}; }
+    ;
 
-
+   
+//For a block of code
+block
+    : '{' statment_list '}'     {$$ = new AST::Block{$2->toStdVector()}; delete $2;}
+    ;
 
 %%
 

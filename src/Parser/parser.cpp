@@ -112,10 +112,15 @@ extern int yydebug;
     #include <string>
     #include <vector>
     #include <ASB/asb.hpp>
+    #include <ASB/declaration.hpp>
+    #include <ASB/expression.hpp>
+    #include <ASB/statment.hpp>
+    #include <ASB/types.hpp>
+    #include <other/linkedlist.hpp>
 
 
 
-#line 119 "src/Parser/parser.cpp"
+#line 124 "src/Parser/parser.cpp"
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -131,11 +136,15 @@ extern int yydebug;
     SEMI = 264,
     IF = 265,
     ELSE = 266,
-    IDENTIFIER = 267,
-    INTEGER_LITERAL = 268,
-    FLOAT_LITERAL = 269,
-    BOOLEAN_LITERAL = 270,
-    CHAR_LITERAL = 271
+    FOR = 267,
+    RETURN = 268,
+    VAR = 269,
+    FUNC = 270,
+    IDENTIFIER = 271,
+    INTEGER_LITERAL = 272,
+    FLOAT_LITERAL = 273,
+    BOOLEAN_LITERAL = 274,
+    CHAR_LITERAL = 275
   };
 #endif
 
@@ -143,7 +152,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 23 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 28 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
     int integerValue;
     float floatValue;
@@ -151,10 +160,20 @@ union YYSTYPE
     char charValue;
     char *identifierValue;
     
+    ASB::Block *block;
     
+    ASB::Type  *type;
+
+    ASB::Statment *statment;
+    ASB::SimpleStatment *simpleStatment;
+
+    ASB::TopDeclaration *topDeclaration;
+    ASB::Declaration    *declaration;
+
+    ASB::Expression     *expression;
 
 
-#line 158 "src/Parser/parser.cpp"
+#line 177 "src/Parser/parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -195,7 +214,7 @@ int yyparse (void);
     void yyerror(char const *message);
 
 
-#line 199 "src/Parser/parser.cpp"
+#line 218 "src/Parser/parser.cpp"
 
 #ifdef short
 # undef short
@@ -505,7 +524,7 @@ union yyalloc
 #define YYLAST   0
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  17
+#define YYNTOKENS  21
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  2
 /* YYNRULES -- Number of rules.  */
@@ -514,7 +533,7 @@ union yyalloc
 #define YYNSTATES  3
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   271
+#define YYMAXUTOK   275
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -553,14 +572,14 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16
+      15,    16,    17,    18,    19,    20
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    59,    59
+       0,   109,   109
 };
 #endif
 
@@ -570,8 +589,9 @@ static const yytype_int8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "INT", "FLOAT32", "BOOL", "CHAR", "RUNE",
-  "BYTE", "SEMI", "IF", "ELSE", "IDENTIFIER", "INTEGER_LITERAL",
-  "FLOAT_LITERAL", "BOOLEAN_LITERAL", "CHAR_LITERAL", "$accept", "start", YY_NULLPTR
+  "BYTE", "SEMI", "IF", "ELSE", "FOR", "RETURN", "VAR", "FUNC",
+  "IDENTIFIER", "INTEGER_LITERAL", "FLOAT_LITERAL", "BOOLEAN_LITERAL",
+  "CHAR_LITERAL", "$accept", "start", YY_NULLPTR
 };
 #endif
 
@@ -581,7 +601,8 @@ static const char *const yytname[] =
 static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271
+     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
+     275
 };
 # endif
 
@@ -639,13 +660,13 @@ static const yytype_int8 yycheck[] =
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    18,     0
+       0,    22,     0
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    17,    18
+       0,    21,    22
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1442,7 +1463,7 @@ yyreduce:
   switch (yyn)
     {
 
-#line 1446 "src/Parser/parser.cpp"
+#line 1467 "src/Parser/parser.cpp"
 
       default: break;
     }
@@ -1680,7 +1701,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 61 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 113 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
 
 void yyerror(char const *message){

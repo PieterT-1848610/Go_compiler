@@ -1,4 +1,7 @@
+#ifndef ASB_BASE_HPP
+#define ASB_BASE_HPP
 //File voor de tree mee op te bouwen
+
 
 #include <vector>
 namespace ASB{
@@ -93,3 +96,5 @@ class Root: public Node{
 
 };
 }
+
+#endif

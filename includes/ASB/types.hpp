@@ -1,5 +1,7 @@
-#include "asb.hpp"
+#ifndef ASB_TYPES_HPP
+#define ASB_TYPES_HPP
 
+#include "asb.hpp"
 namespace ASB
 {
     class IntType: public Type{
@@ -29,5 +31,4 @@ class CharType: public Type{
 };
 } // namespace ASB
 
-
-
+#endif

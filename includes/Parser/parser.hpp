@@ -49,10 +49,15 @@ extern int yydebug;
     #include <string>
     #include <vector>
     #include <ASB/asb.hpp>
+    #include <ASB/declaration.hpp>
+    #include <ASB/expression.hpp>
+    #include <ASB/statment.hpp>
+    #include <ASB/types.hpp>
+    #include <other/linkedlist.hpp>
 
 
 
-#line 56 "includes/Parser/parser.hpp"
+#line 61 "includes/Parser/parser.hpp"
 
 /* Token type.  */
 #ifndef YYTOKENTYPE
@@ -68,11 +73,15 @@ extern int yydebug;
     SEMI = 264,
     IF = 265,
     ELSE = 266,
-    IDENTIFIER = 267,
-    INTEGER_LITERAL = 268,
-    FLOAT_LITERAL = 269,
-    BOOLEAN_LITERAL = 270,
-    CHAR_LITERAL = 271
+    FOR = 267,
+    RETURN = 268,
+    VAR = 269,
+    FUNC = 270,
+    IDENTIFIER = 271,
+    INTEGER_LITERAL = 272,
+    FLOAT_LITERAL = 273,
+    BOOLEAN_LITERAL = 274,
+    CHAR_LITERAL = 275
   };
 #endif
 
@@ -80,7 +89,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 23 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 28 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
     int integerValue;
     float floatValue;
@@ -88,10 +97,20 @@ union YYSTYPE
     char charValue;
     char *identifierValue;
     
+    ASB::Block *block;
     
+    ASB::Type  *type;
+
+    ASB::Statment *statment;
+    ASB::SimpleStatment *simpleStatment;
+
+    ASB::TopDeclaration *topDeclaration;
+    ASB::Declaration    *declaration;
+
+    ASB::Expression     *expression;
 
 
-#line 95 "includes/Parser/parser.hpp"
+#line 114 "includes/Parser/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

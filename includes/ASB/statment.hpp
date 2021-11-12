@@ -1,5 +1,7 @@
-#include "asb.hpp"
+#ifndef ASB_STATMENT_HPP
+#define ASB_STATMENT_HPP
 
+#include "asb.hpp"
 namespace ASB{
 
 class ExpressionStatment: public SimpleStatment{
@@ -70,3 +72,4 @@ class ReturnStatment: public Statment{
 };
 
 }
+#endif

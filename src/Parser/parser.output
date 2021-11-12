@@ -1,3 +1,25 @@
+Nonterminals useless in grammar
+
+    forStatment
+    ifStatment
+    returnStatment
+    declarationStatment
+    expressionStatment
+    assignmentStatment
+    identifierExpression
+    boolExpression
+    intergerExpression
+    floatExpression
+    charExpression
+    block
+    intType
+    booleanType
+    floatType
+    charType
+    functionDeclaration
+    variableDeclaration
+
+
 Terminals unused in grammar
 
     INT
@@ -9,6 +31,10 @@ Terminals unused in grammar
     SEMI
     IF
     ELSE
+    FOR
+    RETURN
+    VAR
+    FUNC
     IDENTIFIER
     INTEGER_LITERAL
     FLOAT_LITERAL
@@ -36,18 +62,22 @@ Terminals, with rules where they appear
     SEMI (264)
     IF (265)
     ELSE (266)
-    IDENTIFIER <identifierValue> (267)
-    INTEGER_LITERAL <integerValue> (268)
-    FLOAT_LITERAL <floatValue> (269)
-    BOOLEAN_LITERAL <booleanValue> (270)
-    CHAR_LITERAL <charValue> (271)
+    FOR (267)
+    RETURN (268)
+    VAR (269)
+    FUNC (270)
+    IDENTIFIER <identifierValue> (271)
+    INTEGER_LITERAL <integerValue> (272)
+    FLOAT_LITERAL <floatValue> (273)
+    BOOLEAN_LITERAL <booleanValue> (274)
+    CHAR_LITERAL <charValue> (275)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (17)
+    $accept (21)
         on left: 0
-    start (18)
+    start (22)
         on left: 1
         on right: 0
 

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdio>
-#include "Lexer/lexer.cpp"
+#include "lexer/lexer.hpp"
 #include "includes/Parser/parser.hpp"
 extern int yyparse();
 

@@ -1,4 +1,5 @@
 #include <vector>
+#include <stdexcept>
 
 template <class T>
 class LinkNode{

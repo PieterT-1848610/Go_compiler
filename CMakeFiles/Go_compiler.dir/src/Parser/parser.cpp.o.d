@@ -126,14 +126,20 @@ CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.o: \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/asb.hpp \
- /usr/include/c++/9/iostream /usr/include/c++/9/ostream \
- /usr/include/c++/9/ios /usr/include/c++/9/bits/ios_base.h \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/declaration.hpp \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/asb.hpp \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/expression.hpp \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/statment.hpp \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/types.hpp \
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/linkedlist.hpp \
+ /usr/include/c++/9/stdexcept /usr/include/c++/9/iostream \
+ /usr/include/c++/9/ostream /usr/include/c++/9/ios \
+ /usr/include/c++/9/bits/ios_base.h \
  /usr/include/c++/9/bits/locale_classes.h \
  /usr/include/c++/9/bits/locale_classes.tcc \
  /usr/include/c++/9/system_error \
  /usr/include/x86_64-linux-gnu/c++/9/bits/error_constants.h \
- /usr/include/c++/9/stdexcept /usr/include/c++/9/streambuf \
- /usr/include/c++/9/bits/streambuf.tcc \
+ /usr/include/c++/9/streambuf /usr/include/c++/9/bits/streambuf.tcc \
  /usr/include/c++/9/bits/basic_ios.h \
  /usr/include/c++/9/bits/locale_facets.h /usr/include/c++/9/cwctype \
  /usr/include/wctype.h /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
