@@ -52,8 +52,9 @@
     
     linkedList<ASB::Expression> *listExpression;
 
+    linkedList<std::string> *idenList;
 
-
+    linkedList<std::pair<std::string, ASB::Type *>> *fields;
 }
 
 
@@ -103,6 +104,14 @@
 
 
 %type <type> type;
+%type <type> literalType;
+%type <type> functionSignature;
+%type <idenList> identifierList;
+
+
+%type <fields> functionParameters;
+%type <fields> functionResults;
+%type <fields> functionParametersList;
 
 %type <listTopDeclaration> listTopDeclaration;
 %type <topDeclaration> functionDeclaration;
@@ -117,20 +126,118 @@
 //more noting
 %%
 start
-    :listTopDeclaration     {tree = new AST::Root{$1->toStdVector()}; }
+    :listTopDeclaration     {tree = new ASB::Root{$1->toVector()}; }
     ;
 //For type things
 type
-    :INT                    {$$ = new AST::IntType{}; }
-    |FLOAT32                {$$ = new AST::FloatType{}; }
-    |BOOL                   {$$ = new AST::BooleanType{}; }
-    |CHAR                   {$$ = new AST::CharType{}; }
+    :'('type ')'                    {$$ = $2;}
+    |INT                            {$$ = new ASB::IntType{}; }
+    |FLOAT32                        {$$ = new ASB::FloatType{}; }
+    |BOOL                           {$$ = new ASB::BooleanType{}; }
+    |CHAR                           {$$ = new ASB::CharType{}; }
+    |literalType                    {$$ = $1;}
+    |FUNC functionSignature         {$$ = $2;}
     ;
 
-   
+
+//No clue yet
+literalType
+    :IDENTIFIER                     {}
+    ;
+
+
+functionSignature
+    :functionParameters functionResults 
+                                    {
+                                        $$=new ASB::functionType{$1->toVector(), $2->toVector()};
+                                        delete $1;
+                                        delete $2;
+                                    }
+    ;
+
+
+functionResults
+    :                               {$$= new linkedList<std::pair<std::string, ASB::Type *>>;}
+    |functionParameters             {$$ = $1;}
+    |type                           {
+                                        auto type = $1;
+                                        auto list = new linkedList<std::pair<std::string, ASB::Type *>>;
+                                        list->add(0, std::make_pair("", type));
+                                        $$ = list; 
+                                    }
+    ;
+
+
+functionParameters
+    :'(' ')'                            {$$ = new linkedList<std::pair<std::string, ASB::Type *>>; }
+    |'(' functionParametersList ')'     {$$ = $2; }
+    |'(' functionParametersList ',' ')' 
+                                        {$$ = $2; }
+    ;
+
+
+functionParametersList
+    :type                               {
+                                            auto type = $1;
+                                            auto list = new linkedList<std::pair<std::string, ASB::Type *>>;
+                                            list->add(0, std::make_pair("", type));
+                                            $$ = list;
+                                        }
+
+    |identifierList type                {
+                                            auto ids = $1->toVector();
+                                            auto type = $2;
+                                            auto list = new linkedList<std::pair<std::string, ASB::Type *>>;
+                                            for(int i=0; i<ids.size(); i++){
+                                                list->add(i, std::make_pair(ids[i], type));
+                                            }
+                                            $$=list;
+                                            delete $1;
+                                        }
+
+    |type ',' functionParametersList    {
+                                            auto type = $1;
+                                            auto list = $3;
+                                            list->add(0, std::make_pair("", type));
+                                            $$ = list;
+                                        }
+    
+    |identifierList type ',' functionParametersList
+                                        {
+                                            auto ids = $1->toVector();
+                                            auto type = $2;
+                                            auto list = $4;
+                                            for(int i=0; i<ids.size(); i++){
+                                                list->add(i, std::make_pair(ids[i], type));
+                                            }
+                                            $$ = list;
+                                            delete $1;
+
+                                        }
+    ;
+
+identifierList
+    :IDENTIFIER                         {
+                                            auto list = new linkedList<std::string>{};
+                                            list->add(0, $1);
+                                            $$ = list;
+                                            delete $1;
+                                        }
+    |IDENTIFIER ',' identifierList      
+                                        {
+                                            auto list = $3;
+                                            list->add(0, $1);
+                                            $$ = list;
+                                            delete $1;
+                                        }
+    ;
+
+
+
+
 //For a block of code
 block
-    : '{' statment_list '}'     {$$ = new AST::Block{$2->toStdVector()}; delete $2;}
+    : '{' statment_list '}'         {$$ = new ASB::Block{$2->toVector()}; delete $2;}
     ;
 
 %%

@@ -2,6 +2,7 @@
 #define ASB_TYPES_HPP
 
 #include "asb.hpp"
+#include <string>
 namespace ASB
 {
     class IntType: public Type{
@@ -29,6 +30,19 @@ class CharType: public Type{
         virtual ~CharType() override = default;
         CharType() = default;
 };
+
+class FunctionType: public Type{
+    public:
+        FunctionType(
+            std::vector<std::pair<std::string, Type *>>parameters,
+            std::vector<std::pair<std::string, Type *>>results);
+
+        virtual ~FunctionType() override = default;    
+    private:
+        std::vector<std::pair<std::string, Type *>> parameters;
+        std::vector<std::pair<std::string, Type *>> results;
+};
+
 } // namespace ASB
 
 #endif
