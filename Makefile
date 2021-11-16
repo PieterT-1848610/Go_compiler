@@ -225,6 +225,30 @@ src/ASB/statment.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.s
 .PHONY : src/ASB/statment.cpp.s
 
+src/ASB/types.o: src/ASB/types.cpp.o
+.PHONY : src/ASB/types.o
+
+# target to build an object file
+src/ASB/types.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/types.cpp.o
+.PHONY : src/ASB/types.cpp.o
+
+src/ASB/types.i: src/ASB/types.cpp.i
+.PHONY : src/ASB/types.i
+
+# target to preprocess a source file
+src/ASB/types.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/types.cpp.i
+.PHONY : src/ASB/types.cpp.i
+
+src/ASB/types.s: src/ASB/types.cpp.s
+.PHONY : src/ASB/types.s
+
+# target to generate assembly for a file
+src/ASB/types.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/types.cpp.s
+.PHONY : src/ASB/types.cpp.s
+
 src/Lexer/lexer.o: src/Lexer/lexer.cpp.o
 .PHONY : src/Lexer/lexer.o
 
@@ -342,6 +366,9 @@ help:
 	@echo "... src/ASB/statment.o"
 	@echo "... src/ASB/statment.i"
 	@echo "... src/ASB/statment.s"
+	@echo "... src/ASB/types.o"
+	@echo "... src/ASB/types.i"
+	@echo "... src/ASB/types.s"
 	@echo "... src/Lexer/lexer.o"
 	@echo "... src/Lexer/lexer.i"
 	@echo "... src/Lexer/lexer.s"

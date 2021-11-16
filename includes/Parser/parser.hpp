@@ -109,8 +109,19 @@ union YYSTYPE
 
     ASB::Expression     *expression;
 
+    LinkedList<ASB::Statment *> *listStatment;
+    LinkedList<ASB::SimpleStatment *> *listSimpleStatment;
 
-#line 114 "includes/Parser/parser.hpp"
+    LinkedList<ASB::TopDeclaration *> *listTopDeclaration;
+    LinkedList<ASB::Declaration *> *listDeclaration;
+    
+    LinkedList<ASB::Expression *> *listExpression;
+
+    LinkedList<std::string> *idenList;
+
+    LinkedList<std::pair<std::string, ASB::Type *>> *fields;
+
+#line 125 "includes/Parser/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

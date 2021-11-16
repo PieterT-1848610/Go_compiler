@@ -4,7 +4,7 @@
 ASB::FunctionType::FunctionType(std::vector<std::pair<std::string, Type *>>parameters,
             std::vector<std::pair<std::string, Type *>>results): parameters{parameters}, results{results}{
 
-            }
+};
 
 ASB::FunctionType::~FunctionType(){
     for(int i=0; i<parameters.size(); i++){
@@ -14,4 +14,8 @@ ASB::FunctionType::~FunctionType(){
     for(int i=0; i<results.size(); i++){
         delete results[i].second;
     }
+};
+
+ASB::IdentifierType::IdentifierType(std::string id): id{id}{
+    
 };

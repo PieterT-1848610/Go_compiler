@@ -71,5 +71,12 @@ class ReturnStatment: public Statment{
         std::vector<Expression *> expressions;
 };
 
+class EmptyStatment: public SimpleStatment{
+    public:
+        EmptyStatment();
+        virtual ~EmptyStatment() override;
+
+};
+
 }
 #endif

@@ -2002,9 +2002,9 @@ char charTochar(char *input, int &length){
         }else if(*input == 'b'){
             length = 2;
             return '\b';
-        }else if(*input == 'c'){
+        /* }else if(*input == 'c'){
             length = 2;
-            return '\c';
+            return '\c'; */
         }else if(*input == 'f'){
             length = 2;
             return '\f';

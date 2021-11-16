@@ -36,7 +36,7 @@ public:
 
     long length(){
         long len = 0;
-        LinkNode<int>* temp = head;
+        LinkNode<T>* temp = head;
         while(temp != NULL){    //run until null
             len++;
             temp = temp->next;

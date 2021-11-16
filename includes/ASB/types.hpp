@@ -37,10 +37,19 @@ class FunctionType: public Type{
             std::vector<std::pair<std::string, Type *>>parameters,
             std::vector<std::pair<std::string, Type *>>results);
 
-        virtual ~FunctionType() override = default;    
+        virtual ~FunctionType() override;    
     private:
         std::vector<std::pair<std::string, Type *>> parameters;
         std::vector<std::pair<std::string, Type *>> results;
+};
+
+class IdentifierType: public Type{
+    public:
+        IdentifierType(std::string id);
+        virtual ~IdentifierType() override = default;
+
+    private:
+        std::string id;
 };
 
 } // namespace ASB
