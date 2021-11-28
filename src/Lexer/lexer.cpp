@@ -530,6 +530,7 @@ char *yytext;
 
 	#include "Parser/parser.hpp"
 	#include <string>
+    #include <iostream>
 	int line_nr = 1;
 	int col_nr = 1; 
 
@@ -546,8 +547,8 @@ char *yytext;
 	char 	charTochar(char * input, int &length);
 
 	char	charToCharLiteral(char * input);
-#line 550 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
 #line 551 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
+#line 552 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
 
 #define INITIAL 0
 
@@ -764,9 +765,9 @@ YY_DECL
 		}
 
 	{
-#line 43 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 44 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 
-#line 770 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
+#line 771 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -825,115 +826,115 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 44 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 45 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 45 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 46 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 48 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 49 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return BOOL;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 49 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 50 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return INT;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 50 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 51 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return FLOAT32;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 51 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 52 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return CHAR;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 53 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 54 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return RUNE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 54 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 55 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return BYTE;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 55 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 56 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return IF;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 56 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 57 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return ELSE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 57 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 58 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return FOR;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 58 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 59 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return RETURN;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 59 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 60 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return VAR;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 60 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 61 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {return FUNC;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 63 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 64 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 66 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 67 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 67 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 68 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {yylval.integerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 68 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 69 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {yylval.integerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 69 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 70 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {yylval.integerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 71 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 72 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 73 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 74 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {yylval.charValue = charToCharLiteral(yytext); return CHAR_LITERAL;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 74 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 75 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 ECHO;
 	YY_BREAK
-#line 937 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
+#line 938 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1938,7 +1939,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 74 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 75 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 
 
 
@@ -2035,7 +2036,8 @@ char charTochar(char *input, int &length){
         length = 1;
         return *input;
     }
-    
+    length = 1;
+    return *input;
 }
 
 long decimalToInteger(char *input){
@@ -2078,3 +2080,4 @@ char charToCharLiteral(char *input){
 	return result;
 }
 //TODO: start making the stupid tree
+

@@ -13,8 +13,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.o.d"
   "CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.o"
   "CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.o.d"
-  "CMakeFiles/Go_compiler.dir/src/lexer.c.o"
-  "CMakeFiles/Go_compiler.dir/src/lexer.c.o.d"
   "CMakeFiles/Go_compiler.dir/src/main.cpp.o"
   "CMakeFiles/Go_compiler.dir/src/main.cpp.o.d"
   "Go_compiler"
@@ -25,6 +23,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang C CXX)
+foreach(lang CXX)
   include(CMakeFiles/Go_compiler.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

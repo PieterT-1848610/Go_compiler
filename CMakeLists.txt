@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.20)
-project(Go_compiler )
+project(Gocompiler)
 
 
 
@@ -24,5 +24,4 @@ include_directories(include ${FLEX_INCLUDE} ${BISON_INCLUDE})
 file(GLOB src src/*.c src/*.cpp src/*/*.cpp src/*/*.c)
 
 
-add_executable(Go_compiler
-        ${src} src/Lexer/lexer.cpp src/Parser/parser.cpp)
+add_executable(Gocompiler ${src} src/Lexer/lexer.cpp src/Parser/parser.cpp)

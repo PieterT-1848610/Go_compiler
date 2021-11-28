@@ -14,6 +14,13 @@ class ExpressionStatment: public SimpleStatment{
 };
 
 
+class EmptyStatment: public SimpleStatment{
+    public:
+        EmptyStatment() = default;
+        virtual ~EmptyStatment() override = default;
+
+};
+
 class AssignmentStatment: public SimpleStatment{
     public:
         AssignmentStatment(std::vector<Expression *> leftSide, std::vector<Expression *> rightSide);
@@ -71,12 +78,7 @@ class ReturnStatment: public Statment{
         std::vector<Expression *> expressions;
 };
 
-class EmptyStatment: public SimpleStatment{
-    public:
-        EmptyStatment();
-        virtual ~EmptyStatment() override;
 
-};
 
 }
 #endif

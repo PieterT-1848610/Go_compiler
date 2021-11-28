@@ -219,7 +219,7 @@ int yyparse (void);
 
     #include <iostream>
     #include <string>
-    
+    #include <lexer/lexer.hpp>
     ASB::Root *tree;
 
     void yyerror(char const *message);
@@ -1780,7 +1780,7 @@ yyreduce:
 
   case 28:
 #line 276 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.listDeclaration) = (yyvsp[0].declaration);}
+                                    {(yyval.listDeclaration) = (yyvsp[0].listDeclaration);}
 #line 1785 "src/Parser/parser.cpp"
     break;
 
@@ -1790,7 +1790,7 @@ yyreduce:
                                         auto varspec = (yyvsp[0].declaration);
                                         auto list = new LinkedList<ASB::Declaration *>;
                                         list->add(0, varspec);
-                                        (yyval.declaration) = list;
+                                        (yyval.listDeclaration) = list;
                                     }
 #line 1796 "src/Parser/parser.cpp"
     break;
@@ -1798,7 +1798,7 @@ yyreduce:
   case 30:
 #line 288 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
-                                        (yyval.declaration) = (yyvsp[-1].listDeclaration);
+                                        (yyval.listDeclaration) = (yyvsp[-1].listDeclaration);
                                     }
 #line 1804 "src/Parser/parser.cpp"
     break;
@@ -1949,7 +1949,7 @@ yyreduce:
 
   case 46:
 #line 383 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-1].expression), (yyvsp[0].block), new ASB::Block{{}}}; }
+                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-1].expression), (yyvsp[0].block), new ASB::Block{ {} } }; }
 #line 1954 "src/Parser/parser.cpp"
     break;
 

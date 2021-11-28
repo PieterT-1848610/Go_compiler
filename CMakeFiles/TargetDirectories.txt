@@ -1,3 +1,3 @@
 /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles/rebuild_cache.dir
 /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles/edit_cache.dir
-/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles/Go_compiler.dir
+/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles/Gocompiler.dir

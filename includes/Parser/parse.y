@@ -4,7 +4,7 @@
 %code{
     #include <iostream>
     #include <string>
-    
+    #include <lexer/lexer.hpp>
     ASB::Root *tree;
 
     void yyerror(char const *message);
@@ -116,7 +116,7 @@
 %type <topDeclaration> functionDeclaration;
 
 %type <listDeclaration> listDeclaration;
-%type <declaration> variableDeclaration;
+%type <listDeclaration> variableDeclaration;
 %type <listDeclaration> varSpecList;
 %type <declaration> varSpec;
 
@@ -380,7 +380,7 @@ simpleStatment
 
 
 ifStatment
-    :IF expression block            {$$ = new ASB::IfStatment{$2, $3, new ASB::Block{{}}}; }
+    :IF expression block            {$$ = new ASB::IfStatment{$2, $3, new ASB::Block{ {} } }; }
     |IF expression block ELSE ifStatment  
                                     {$$ = new ASB::IfStatment{$2, $3, new ASB::Block{{$5}}}; }
     |IF expression block ELSE block {$$ = new ASB::IfStatment{$2, $3, $5}; }       

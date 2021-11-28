@@ -1,4 +1,4 @@
-CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.o: \
+CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: \
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/9/string \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \

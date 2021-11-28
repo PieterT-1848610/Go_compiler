@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/lexer.c" "CMakeFiles/Go_compiler.dir/src/lexer.c.o" "gcc" "CMakeFiles/Go_compiler.dir/src/lexer.c.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/asb.cpp" "CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/declaration.cpp" "CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/expression.cpp" "CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.o" "gcc" "CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.o.d"

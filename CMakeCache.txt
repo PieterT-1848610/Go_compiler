@@ -148,7 +148,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Go_compiler
+CMAKE_PROJECT_NAME:STATIC=Gocompiler
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -226,6 +226,12 @@ Go_compiler_BINARY_DIR:STATIC=/mnt/c/Users/thomi/Documents/Master/Compilers/giti
 
 //Value Computed by CMake
 Go_compiler_SOURCE_DIR:STATIC=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler
+
+//Value Computed by CMake
+Gocompiler_BINARY_DIR:STATIC=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler
+
+//Value Computed by CMake
+Gocompiler_SOURCE_DIR:STATIC=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler
 
 
 ########################

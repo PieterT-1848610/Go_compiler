@@ -4,6 +4,7 @@
 
 	#include "Parser/parser.hpp"
 	#include <string>
+    #include <iostream>
 	int line_nr = 1;
 	int col_nr = 1; 
 
@@ -20,6 +21,8 @@
 	char 	charTochar(char * input, int &length);
 
 	char	charToCharLiteral(char * input);
+
+    
 %}
 
 decimal_literal 		0|([1-9](_)?[0-9]+)*
@@ -167,7 +170,8 @@ char charTochar(char *input, int &length){
         length = 1;
         return *input;
     }
-    
+    length = 1;
+    return *input;
 }
 
 long decimalToInteger(char *input){

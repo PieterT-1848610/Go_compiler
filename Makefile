@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Go_compiler
+# Target rules for targets named Gocompiler
 
 # Build rule for target.
-Go_compiler: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Go_compiler
-.PHONY : Go_compiler
+Gocompiler: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Gocompiler
+.PHONY : Gocompiler
 
 # fast build rule for target.
-Go_compiler/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/build
-.PHONY : Go_compiler/fast
+Gocompiler/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/build
+.PHONY : Gocompiler/fast
 
 src/ASB/asb.o: src/ASB/asb.cpp.o
 .PHONY : src/ASB/asb.o
 
 # target to build an object file
 src/ASB/asb.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/asb.cpp.o
 .PHONY : src/ASB/asb.cpp.o
 
 src/ASB/asb.i: src/ASB/asb.cpp.i
@@ -142,7 +142,7 @@ src/ASB/asb.i: src/ASB/asb.cpp.i
 
 # target to preprocess a source file
 src/ASB/asb.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/asb.cpp.i
 .PHONY : src/ASB/asb.cpp.i
 
 src/ASB/asb.s: src/ASB/asb.cpp.s
@@ -150,7 +150,7 @@ src/ASB/asb.s: src/ASB/asb.cpp.s
 
 # target to generate assembly for a file
 src/ASB/asb.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/asb.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/asb.cpp.s
 .PHONY : src/ASB/asb.cpp.s
 
 src/ASB/declaration.o: src/ASB/declaration.cpp.o
@@ -158,7 +158,7 @@ src/ASB/declaration.o: src/ASB/declaration.cpp.o
 
 # target to build an object file
 src/ASB/declaration.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/declaration.cpp.o
 .PHONY : src/ASB/declaration.cpp.o
 
 src/ASB/declaration.i: src/ASB/declaration.cpp.i
@@ -166,7 +166,7 @@ src/ASB/declaration.i: src/ASB/declaration.cpp.i
 
 # target to preprocess a source file
 src/ASB/declaration.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/declaration.cpp.i
 .PHONY : src/ASB/declaration.cpp.i
 
 src/ASB/declaration.s: src/ASB/declaration.cpp.s
@@ -174,7 +174,7 @@ src/ASB/declaration.s: src/ASB/declaration.cpp.s
 
 # target to generate assembly for a file
 src/ASB/declaration.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/declaration.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/declaration.cpp.s
 .PHONY : src/ASB/declaration.cpp.s
 
 src/ASB/expression.o: src/ASB/expression.cpp.o
@@ -182,7 +182,7 @@ src/ASB/expression.o: src/ASB/expression.cpp.o
 
 # target to build an object file
 src/ASB/expression.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/expression.cpp.o
 .PHONY : src/ASB/expression.cpp.o
 
 src/ASB/expression.i: src/ASB/expression.cpp.i
@@ -190,7 +190,7 @@ src/ASB/expression.i: src/ASB/expression.cpp.i
 
 # target to preprocess a source file
 src/ASB/expression.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/expression.cpp.i
 .PHONY : src/ASB/expression.cpp.i
 
 src/ASB/expression.s: src/ASB/expression.cpp.s
@@ -198,7 +198,7 @@ src/ASB/expression.s: src/ASB/expression.cpp.s
 
 # target to generate assembly for a file
 src/ASB/expression.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/expression.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/expression.cpp.s
 .PHONY : src/ASB/expression.cpp.s
 
 src/ASB/statment.o: src/ASB/statment.cpp.o
@@ -206,7 +206,7 @@ src/ASB/statment.o: src/ASB/statment.cpp.o
 
 # target to build an object file
 src/ASB/statment.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/statment.cpp.o
 .PHONY : src/ASB/statment.cpp.o
 
 src/ASB/statment.i: src/ASB/statment.cpp.i
@@ -214,7 +214,7 @@ src/ASB/statment.i: src/ASB/statment.cpp.i
 
 # target to preprocess a source file
 src/ASB/statment.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/statment.cpp.i
 .PHONY : src/ASB/statment.cpp.i
 
 src/ASB/statment.s: src/ASB/statment.cpp.s
@@ -222,7 +222,7 @@ src/ASB/statment.s: src/ASB/statment.cpp.s
 
 # target to generate assembly for a file
 src/ASB/statment.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/statment.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/statment.cpp.s
 .PHONY : src/ASB/statment.cpp.s
 
 src/ASB/types.o: src/ASB/types.cpp.o
@@ -230,7 +230,7 @@ src/ASB/types.o: src/ASB/types.cpp.o
 
 # target to build an object file
 src/ASB/types.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/types.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.o
 .PHONY : src/ASB/types.cpp.o
 
 src/ASB/types.i: src/ASB/types.cpp.i
@@ -238,7 +238,7 @@ src/ASB/types.i: src/ASB/types.cpp.i
 
 # target to preprocess a source file
 src/ASB/types.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/types.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.i
 .PHONY : src/ASB/types.cpp.i
 
 src/ASB/types.s: src/ASB/types.cpp.s
@@ -246,7 +246,7 @@ src/ASB/types.s: src/ASB/types.cpp.s
 
 # target to generate assembly for a file
 src/ASB/types.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/ASB/types.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.s
 .PHONY : src/ASB/types.cpp.s
 
 src/Lexer/lexer.o: src/Lexer/lexer.cpp.o
@@ -254,7 +254,7 @@ src/Lexer/lexer.o: src/Lexer/lexer.cpp.o
 
 # target to build an object file
 src/Lexer/lexer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o
 .PHONY : src/Lexer/lexer.cpp.o
 
 src/Lexer/lexer.i: src/Lexer/lexer.cpp.i
@@ -262,7 +262,7 @@ src/Lexer/lexer.i: src/Lexer/lexer.cpp.i
 
 # target to preprocess a source file
 src/Lexer/lexer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.i
 .PHONY : src/Lexer/lexer.cpp.i
 
 src/Lexer/lexer.s: src/Lexer/lexer.cpp.s
@@ -270,7 +270,7 @@ src/Lexer/lexer.s: src/Lexer/lexer.cpp.s
 
 # target to generate assembly for a file
 src/Lexer/lexer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/Lexer/lexer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.s
 .PHONY : src/Lexer/lexer.cpp.s
 
 src/Parser/parser.o: src/Parser/parser.cpp.o
@@ -278,7 +278,7 @@ src/Parser/parser.o: src/Parser/parser.cpp.o
 
 # target to build an object file
 src/Parser/parser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o
 .PHONY : src/Parser/parser.cpp.o
 
 src/Parser/parser.i: src/Parser/parser.cpp.i
@@ -286,7 +286,7 @@ src/Parser/parser.i: src/Parser/parser.cpp.i
 
 # target to preprocess a source file
 src/Parser/parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.i
 .PHONY : src/Parser/parser.cpp.i
 
 src/Parser/parser.s: src/Parser/parser.cpp.s
@@ -294,39 +294,15 @@ src/Parser/parser.s: src/Parser/parser.cpp.s
 
 # target to generate assembly for a file
 src/Parser/parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/Parser/parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s
 .PHONY : src/Parser/parser.cpp.s
-
-src/lexer.o: src/lexer.c.o
-.PHONY : src/lexer.o
-
-# target to build an object file
-src/lexer.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/lexer.c.o
-.PHONY : src/lexer.c.o
-
-src/lexer.i: src/lexer.c.i
-.PHONY : src/lexer.i
-
-# target to preprocess a source file
-src/lexer.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/lexer.c.i
-.PHONY : src/lexer.c.i
-
-src/lexer.s: src/lexer.c.s
-.PHONY : src/lexer.s
-
-# target to generate assembly for a file
-src/lexer.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/lexer.c.s
-.PHONY : src/lexer.c.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -334,7 +310,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -342,7 +318,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Go_compiler.dir/build.make CMakeFiles/Go_compiler.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -353,7 +329,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... Go_compiler"
+	@echo "... Gocompiler"
 	@echo "... src/ASB/asb.o"
 	@echo "... src/ASB/asb.i"
 	@echo "... src/ASB/asb.s"
@@ -375,9 +351,6 @@ help:
 	@echo "... src/Parser/parser.o"
 	@echo "... src/Parser/parser.i"
 	@echo "... src/Parser/parser.s"
-	@echo "... src/lexer.o"
-	@echo "... src/lexer.i"
-	@echo "... src/lexer.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
