@@ -7,7 +7,7 @@
     #include <lexer/lexer.hpp>
     ASB::Root *tree;
 
-    void yyerror(char const *message);
+    void yyerror(char *message);
 
 }
 //alles wat in hearder file komt te staan
@@ -57,6 +57,7 @@
     LinkedList<std::pair<std::string, ASB::Type *>> *fields;
 }
 
+%start start
 
 %token INT
 %token FLOAT32
@@ -120,7 +121,8 @@
 %type <listDeclaration> varSpecList;
 %type <declaration> varSpec;
 
-
+%left '+' '-' '^'
+%left '*' '/' '%'
 
 
 //more noting
@@ -436,6 +438,13 @@ expressionList
 
 %%
 
-void yyerror(char const *message){
-    printf("Error: %s\n", message);
+//debug but learn and adapt
+void yyerror(char *message)
+{
+    std::cerr << message << " on line " << yylloc.first_line << ", column " << yylloc.first_column+1 << std::endl;
+    if (*yytext == '\n') {
+        std::cerr  << "unexpected newline (implicit semicolon)." << std::endl;
+    } else {
+        std::cerr  << "unexpected \'" << yytext << "\'." << std::endl;
+    }
 }

@@ -5,6 +5,21 @@
 	#include "Parser/parser.hpp"
 	#include <string>
     #include <iostream>
+
+    //rewrite and get debugging
+    #define YY_USER_ACTION \
+        yylloc.first_line = yylloc.last_line; \
+        yylloc.first_column = yylloc.last_column; \
+        for(int i = 0; yytext[i] != '\0'; i++) { \
+            if(yytext[i] == '\n') { \
+                yylloc.last_line++; \
+                yylloc.last_column = 0; \
+            } \
+            else { \
+                yylloc.last_column++; \
+            } \
+        }
+
 	int line_nr = 1;
 	int col_nr = 1; 
 
@@ -22,7 +37,7 @@
 
 	char	charToCharLiteral(char * input);
 
-    
+    bool    semicollonPlac = false;
 %}
 
 decimal_literal 		0|([1-9](_)?[0-9]+)*
@@ -45,35 +60,50 @@ rune_literal 			({rune_escape_char}|{rune_hex_value}|{rune_octal_value})
 
 %%
 "//".*  {}
-[\t]  {}
+[\t]    {}
+\n      {
+            if(semicollonPlac){
+                semicollonPlac = false;
+                return ';';
+            }
+        }
+
+bool    {semicollonPlac = true; return BOOL;}
+int     {semicollonPlac = true; return INT;}
+float32 {semicollonPlac = true; return FLOAT32;}
+char    {semicollonPlac = true; return CHAR;}
+
+rune    {semicollonPlac = true; return RUNE;}
+byte    {semicollonPlac = true; return BYTE;}
 
 
-bool    {return BOOL;}
-int     {return INT;}
-float32 {return FLOAT32;}
-char    {return CHAR;}
+if 		{semicollonPlac = false; return IF;}
+else	{semicollonPlac = false; return ELSE;}
+for     {semicollonPlac = false; return FOR;}
+return  {semicollonPlac = false; return RETURN;}
+var     {semicollonPlac = false; return VAR;}
+func    {semicollonPlac = false; return FUNC;}
 
-rune    {return RUNE;}
-byte    {return BYTE;}
-if 		{return IF;}
-else	{return ELSE;}
-for     {return FOR;}
-return  {return RETURN;}
-var     {return VAR;}
-func    {return FUNC;}
+true    {semicollonPlac = true; yylval.booleanValue = true; return BOOLEAN_LITERAL; }
+false   {semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL;}
 
 
-{identifier} 		{yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
+{identifier} 		{semicollonPlac = true; yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
 
 
-{decimal_literal}		{yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
-{binary_literal}		{yylval.integerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
-{octal_literal}			{yylval.integerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
-{heximal_literal}		{yylval.integerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
+{decimal_literal}		{semicollonPlac = true; yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
+{binary_literal}		{semicollonPlac = true; yylval.integerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
+{octal_literal}			{semicollonPlac = true; yylval.integerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
+{heximal_literal}		{semicollonPlac = true; yylval.integerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
 
-{decimal_float_literal}	{yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
+{decimal_float_literal}	{semicollonPlac = true; yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
 
-\'{rune_literal}\'		{yylval.charValue = charToCharLiteral(yytext); return CHAR_LITERAL;}
+\'{rune_literal}\'		{semicollonPlac = true; yylval.charValue = charToCharLiteral(yytext); return CHAR_LITERAL;}
+
+.                       {
+                            semicollonPlac = (*yytext == ')' || *yytext == ']' || *yytext == '}') ; 
+                                return *yytext; 
+                        }
 %%
 
 
