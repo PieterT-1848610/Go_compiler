@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 26
-#define YY_END_OF_BUFFER 27
+#define YY_NUM_RULES 25
+#define YY_END_OF_BUFFER 26
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -364,27 +364,27 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[98] =
+static const flex_int16_t yy_accept[95] =
     {   0,
-       19,   19,   27,   25,    2,    3,   25,   23,   25,   19,
-       25,   18,   18,   18,   18,   18,   18,   18,   18,   18,
-        0,   23,    1,   21,    0,    0,    0,    0,    0,   19,
-        0,   18,   18,   18,   18,   18,   18,   18,   18,   18,
-       10,   18,   18,   18,   18,   18,    0,    0,    0,   23,
-        0,    1,   23,   21,    0,    0,   20,    0,   21,   22,
-        0,   19,   19,   18,   18,   18,   18,   18,   18,   12,
-       18,    5,   18,   18,   18,   14,   24,    0,    0,    0,
-        4,    9,    7,   11,   18,   18,   15,   18,    8,   16,
-       17,   18,   18,   18,   13,    6,    0
+       17,   17,   26,   24,    2,    3,   24,   21,   24,   17,
+       24,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+        0,   21,    1,   19,    0,    0,    0,    0,    0,   17,
+        0,   23,   23,   23,   23,   23,   23,   23,   23,    9,
+       23,   23,   23,   23,   23,    0,    0,    0,   21,    0,
+        1,   21,   19,    0,    0,   18,    0,   19,   20,    0,
+       17,   17,   23,   23,   23,   23,   23,   11,   23,    5,
+       23,   23,   23,   13,   22,    0,    0,    0,    4,    7,
+       10,   23,   23,   14,   23,    8,   15,   16,   23,   23,
+       23,   12,    6,    0
 
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    4,    1,    1,    1,    1,    5,    1,
+        1,    2,    1,    4,    1,    1,    1,    1,    5,    1,
         1,    1,    1,    1,    1,    6,    7,    8,    9,   10,
        11,   12,   12,   12,   12,   13,   13,    1,    1,    1,
         1,    1,    1,    1,   14,   15,   14,   14,   14,   14,
@@ -394,7 +394,7 @@ static const YY_CHAR yy_ec[256] =
 
        24,   25,   16,   26,   27,   16,   16,   28,   16,   29,
        30,   16,   16,   31,   32,   33,   34,   35,   16,   36,
-       37,   16,    1,   38,    1,    1,    1,    1,    1,    1,
+       16,   16,    1,   37,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -411,110 +411,106 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[39] =
+static const YY_CHAR yy_meta[38] =
     {   0,
         1,    1,    2,    1,    1,    3,    1,    4,    4,    4,
         4,    4,    5,    6,    6,    7,    7,    7,    1,    8,
         6,    6,    6,    6,    6,    7,    7,    7,    7,    7,
-        7,    7,    7,    7,    7,    7,    7,    1
+        7,    7,    7,    7,    7,    7,    1
     } ;
 
-static const flex_int16_t yy_base[112] =
+static const flex_int16_t yy_base[109] =
     {   0,
-        0,    0,  213,  214,  214,  214,  193,    0,  204,   31,
-      190,    0,   15,  183,  180,   26,   30,   34,  176,  185,
-       65,  185,    0,   44,  198,   71,  183,  182,  188,   57,
-      180,    0,  169,  165,  176,  164,  167,  150,  144,  145,
-        0,  140,  134,  137,  122,  122,  147,   94,    0,  123,
-      122,    0,    0,   65,   75,  102,   99,   84,  116,  115,
-      114,  109,  113,  104,  107,   99,  104,   89,   99,    0,
-       95,    0,   82,   75,   73,    0,  214,  115,    0,    0,
-        0,    0,    0,    0,   65,   50,    0,   51,    0,    0,
-        0,   61,   37,   52,    0,    0,  214,  134,  136,  141,
+        0,    0,  209,  210,  210,  210,  189,    0,  200,   30,
+      186,    0,  175,  178,  175,   23,   29,   22,  171,  180,
+       63,  180,    0,   49,  193,   56,  178,  177,  183,   53,
+      175,    0,  164,  158,  142,  145,  142,  135,  136,    0,
+      122,  119,  122,  108,  110,  130,   69,    0,  113,  112,
+        0,    0,   77,   43,   92,   97,   99,  111,  110,  109,
+      103,  108,   99,   95,  101,   92,  101,    0,   98,    0,
+       86,   95,   94,    0,  210,  104,    0,    0,    0,    0,
+        0,   86,   62,    0,   60,    0,    0,    0,   78,   58,
+       60,    0,    0,  210,  133,  135,  140,  145,  153,  159,
 
-      146,  154,  160,  166,  168,  173,  178,  181,  183,  186,
-      189
+      165,  167,  172,  177,  180,  182,  185,  188
     } ;
 
-static const flex_int16_t yy_def[112] =
+static const flex_int16_t yy_def[109] =
     {   0,
-       97,    1,   97,   97,   97,   97,   97,   98,   97,   97,
-       99,  100,  100,  100,  100,  100,  100,  100,  100,  100,
-       97,  101,  102,  103,  104,   97,  105,  106,  107,  108,
-       99,  100,  100,  100,  100,  100,  100,  100,  100,  100,
-      100,  100,  100,  100,  100,  100,   97,   97,  109,  101,
-      101,  102,   98,  103,  104,   97,   97,   97,  105,  106,
-      106,  108,   62,  100,  100,  100,  100,  100,  100,  100,
-      100,  100,  100,  100,  100,  100,   97,   97,  110,  111,
-      100,  100,  100,  100,  100,  100,  100,  100,  100,  100,
-      100,  100,  100,  100,  100,  100,    0,   97,   97,   97,
-
+       94,    1,   94,   94,   94,   94,   94,   95,   94,   94,
+       96,   97,   97,   97,   97,   97,   97,   97,   97,   97,
+       94,   98,   99,  100,  101,   94,  102,  103,  104,  105,
+       96,   97,   97,   97,   97,   97,   97,   97,   97,   97,
+       97,   97,   97,   97,   97,   94,   94,  106,   98,   98,
+       99,   95,  100,  101,   94,   94,   94,  102,  103,  103,
+      105,   61,   97,   97,   97,   97,   97,   97,   97,   97,
+       97,   97,   97,   97,   94,   94,  107,  108,   97,   97,
        97,   97,   97,   97,   97,   97,   97,   97,   97,   97,
-       97
+       97,   97,   97,    0,   94,   94,   94,   94,   94,   94,
+
+       94,   94,   94,   94,   94,   94,   94,   94
     } ;
 
-static const flex_int16_t yy_nxt[253] =
+static const flex_int16_t yy_nxt[248] =
     {   0,
         4,    5,    6,    4,    7,    8,    9,   10,   11,   11,
        11,   11,   11,   12,   12,   12,   12,   12,    4,   12,
        12,   13,   14,   15,   16,   12,   17,   12,   12,   12,
-       18,   12,   19,   12,   20,   12,   12,    4,   24,   24,
-       24,   24,   24,   25,   33,   26,   37,   27,   28,   53,
-       29,   34,   26,   38,   41,   39,   55,   43,   42,   40,
-       27,   96,   53,   56,   62,   95,   28,   44,   47,   47,
-       53,   94,   48,   48,   48,   48,   48,   55,   57,   57,
-       53,   93,   92,   47,   29,   47,   47,   47,   91,   47,
-       58,   57,   57,   47,   80,   47,   90,   47,   89,   47,
+       18,   12,   19,   12,   20,   12,    4,   24,   24,   24,
+       24,   24,   25,   36,   26,   42,   27,   28,   52,   29,
+       37,   26,   38,   40,   52,   43,   39,   41,   52,   27,
+       61,   54,   78,   56,   56,   28,   46,   46,   55,   93,
+       47,   47,   47,   47,   47,   57,   76,   76,   76,   76,
+       76,   46,   52,   46,   46,   46,   92,   46,   91,   54,
+       90,   46,   56,   46,   89,   46,   29,   46,   48,   58,
 
-       49,   78,   78,   78,   78,   78,   57,   57,   57,   59,
-       59,   59,   59,   59,   53,   88,   62,   87,   58,   86,
-       85,   57,   47,   47,   47,   47,   47,   84,   80,   83,
-       82,   81,   31,   97,   61,   56,   57,   22,   22,   30,
-       30,   97,   51,   30,   32,   32,   32,   32,   32,   50,
-       50,   77,   76,   50,   52,   75,   52,   52,   52,   52,
-       52,   52,   54,   54,   54,   74,   73,   54,   55,   55,
-       55,   59,   72,   71,   70,   59,   60,   60,   60,   69,
-       60,   24,   24,   63,   63,   63,   79,   79,   79,   47,
-       47,   47,   25,   25,   68,   67,   66,   65,   64,   97,
+       58,   58,   58,   58,   56,   56,   56,   56,   52,   88,
+       61,   46,   46,   46,   46,   46,   57,   87,   86,   85,
+       84,   83,   78,   82,   81,   80,   79,   31,   94,   60,
+       55,   94,   50,   56,   75,   56,   22,   22,   30,   30,
+       74,   73,   30,   32,   32,   32,   32,   32,   49,   49,
+       72,   71,   49,   51,   70,   51,   51,   51,   51,   51,
+       51,   53,   53,   53,   69,   68,   53,   54,   54,   54,
+       58,   67,   66,   65,   58,   59,   59,   59,   64,   59,
+       24,   24,   62,   62,   62,   77,   77,   77,   46,   46,
+       46,   25,   25,   63,   94,   25,   60,   55,   52,   50,
 
-       25,   61,   56,   53,   51,   46,   45,   36,   35,   31,
-       23,   21,   97,    3,   97,   97,   97,   97,   97,   97,
-       97,   97,   97,   97,   97,   97,   97,   97,   97,   97,
-       97,   97,   97,   97,   97,   97,   97,   97,   97,   97,
-       97,   97,   97,   97,   97,   97,   97,   97,   97,   97,
-       97,   97
+       45,   44,   35,   34,   33,   31,   23,   21,   94,    3,
+       94,   94,   94,   94,   94,   94,   94,   94,   94,   94,
+       94,   94,   94,   94,   94,   94,   94,   94,   94,   94,
+       94,   94,   94,   94,   94,   94,   94,   94,   94,   94,
+       94,   94,   94,   94,   94,   94,   94
     } ;
 
-static const flex_int16_t yy_chk[253] =
+static const flex_int16_t yy_chk[248] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,   10,   10,
-       10,   10,   10,   10,   13,   10,   16,   10,   10,   24,
-       10,   13,   10,   16,   17,   16,   24,   18,   17,   16,
-       10,   94,   30,   24,   30,   93,   10,   18,   21,   21,
-       54,   92,   21,   21,   21,   21,   21,   54,   26,   26,
-       55,   88,   86,   21,   54,   21,   21,   21,   85,   21,
-       26,   58,   58,   21,   55,   21,   75,   21,   74,   21,
+        1,    1,    1,    1,    1,    1,    1,   10,   10,   10,
+       10,   10,   10,   16,   10,   18,   10,   10,   54,   10,
+       16,   10,   16,   17,   24,   18,   16,   17,   30,   10,
+       30,   24,   54,   26,   26,   10,   21,   21,   24,   91,
+       21,   21,   21,   21,   21,   26,   47,   47,   47,   47,
+       47,   21,   53,   21,   21,   21,   90,   21,   89,   53,
+       85,   21,   26,   21,   83,   21,   53,   21,   21,   55,
 
-       21,   48,   48,   48,   48,   48,   57,   57,   26,   56,
-       56,   56,   56,   56,   62,   73,   62,   71,   57,   69,
-       68,   58,   78,   78,   78,   78,   78,   67,   62,   66,
-       65,   64,   63,   61,   60,   59,   57,   98,   98,   99,
-       99,   51,   50,   99,  100,  100,  100,  100,  100,  101,
-      101,   47,   46,  101,  102,   45,  102,  102,  102,  102,
-      102,  102,  103,  103,  103,   44,   43,  103,  104,  104,
-      104,  105,   42,   40,   39,  105,  106,  106,  106,   38,
-      106,  107,  107,  108,  108,  108,  109,  109,  109,  110,
-      110,  110,  111,  111,   37,   36,   35,   34,   33,   31,
+       55,   55,   55,   55,   56,   56,   57,   57,   61,   82,
+       61,   76,   76,   76,   76,   76,   56,   73,   72,   71,
+       69,   67,   61,   66,   65,   64,   63,   62,   60,   59,
+       58,   50,   49,   56,   46,   57,   95,   95,   96,   96,
+       45,   44,   96,   97,   97,   97,   97,   97,   98,   98,
+       43,   42,   98,   99,   41,   99,   99,   99,   99,   99,
+       99,  100,  100,  100,   39,   38,  100,  101,  101,  101,
+      102,   37,   36,   35,  102,  103,  103,  103,   34,  103,
+      104,  104,  105,  105,  105,  106,  106,  106,  107,  107,
+      107,  108,  108,   33,   31,   29,   28,   27,   25,   22,
 
-       29,   28,   27,   25,   22,   20,   19,   15,   14,   11,
-        9,    7,    3,   97,   97,   97,   97,   97,   97,   97,
-       97,   97,   97,   97,   97,   97,   97,   97,   97,   97,
-       97,   97,   97,   97,   97,   97,   97,   97,   97,   97,
-       97,   97,   97,   97,   97,   97,   97,   97,   97,   97,
-       97,   97
+       20,   19,   15,   14,   13,   11,    9,    7,    3,   94,
+       94,   94,   94,   94,   94,   94,   94,   94,   94,   94,
+       94,   94,   94,   94,   94,   94,   94,   94,   94,   94,
+       94,   94,   94,   94,   94,   94,   94,   94,   94,   94,
+       94,   94,   94,   94,   94,   94,   94
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -552,8 +548,7 @@ char *yytext;
             } \
         }
 
-	int line_nr = 1;
-	int col_nr = 1; 
+
 
 	char *copyString(char *input);
 	char *removeLowerLine(char *input);
@@ -570,8 +565,8 @@ char *yytext;
 	char	charToCharLiteral(char * input);
 
     bool    semicollonPlac = false;
-#line 574 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
-#line 575 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
+#line 569 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
+#line 570 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
 
 #define INITIAL 0
 
@@ -788,9 +783,9 @@ YY_DECL
 		}
 
 	{
-#line 61 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 60 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 
-#line 794 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
+#line 789 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -817,13 +812,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 98 )
+				if ( yy_current_state >= 95 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 214 );
+		while ( yy_base[yy_current_state] != 210 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -849,18 +844,18 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 62 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 61 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 63 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 62 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {}
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 64 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 63 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {
             if(semicollonPlac){
                 semicollonPlac = false;
@@ -870,123 +865,118 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 71 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 70 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {semicollonPlac = true; return BOOL;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 72 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 71 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {semicollonPlac = true; return INT;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 73 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 72 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {semicollonPlac = true; return FLOAT32;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 74 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 73 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {semicollonPlac = true; return CHAR;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 76 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 75 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {semicollonPlac = true; return RUNE;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 77 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; return BYTE;}
+#line 78 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = false; return IF;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 80 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = false; return IF;}
+#line 79 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = false; return ELSE;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 81 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = false; return ELSE;}
+#line 80 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = false; return FOR;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 82 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = false; return FOR;}
+#line 81 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; return RETURN;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 83 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = false; return RETURN;}
+#line 82 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = false; return VAR;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 84 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = false; return VAR;}
+#line 83 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = false; return FUNC;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 85 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = false; return FUNC;}
+{semicollonPlac = true; yylval.booleanValue = true; return BOOLEAN_LITERAL; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 87 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.booleanValue = true; return BOOLEAN_LITERAL; }
+#line 86 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 88 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL;}
+#line 91 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 91 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
+#line 92 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; yylval.integerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 94 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
+#line 93 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; yylval.integerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 95 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.integerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
+#line 94 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; yylval.integerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 96 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.integerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
+{semicollonPlac = true; yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 97 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.integerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
+#line 98 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; yylval.charValue = charToCharLiteral(yytext); return CHAR_LITERAL;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 99 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
+#line 100 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+{semicollonPlac = true; yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 101 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
-{semicollonPlac = true; yylval.charValue = charToCharLiteral(yytext); return CHAR_LITERAL;}
-	YY_BREAK
-case 25:
-YY_RULE_SETUP
 #line 103 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 {
-                            semicollonPlac = (*yytext == ')' || *yytext == ']' || *yytext == '}') ; 
+                            semicollonPlac = *yytext == '}' || *yytext == ']' || *yytext == ')' ; 
                                 return *yytext; 
                         }
 	YY_BREAK
-case 26:
+case 25:
 YY_RULE_SETUP
 #line 107 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 ECHO;
 	YY_BREAK
-#line 990 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
+#line 980 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1283,7 +1273,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 98 )
+			if ( yy_current_state >= 95 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1311,11 +1301,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 98 )
+		if ( yy_current_state >= 95 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 97);
+	yy_is_jam = (yy_current_state == 94);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }

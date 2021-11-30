@@ -132,19 +132,17 @@ extern int yydebug;
     BOOL = 260,
     CHAR = 261,
     RUNE = 262,
-    BYTE = 263,
-    SEMI = 264,
-    IF = 265,
-    ELSE = 266,
-    FOR = 267,
-    RETURN = 268,
-    VAR = 269,
-    FUNC = 270,
-    IDENTIFIER = 271,
-    INTEGER_LITERAL = 272,
-    FLOAT_LITERAL = 273,
-    BOOLEAN_LITERAL = 274,
-    CHAR_LITERAL = 275
+    IF = 263,
+    ELSE = 264,
+    FOR = 265,
+    RETURN = 266,
+    VAR = 267,
+    FUNC = 268,
+    IDENTIFIER = 269,
+    INTEGER_LITERAL = 270,
+    FLOAT_LITERAL = 271,
+    BOOLEAN_LITERAL = 272,
+    CHAR_LITERAL = 273
   };
 #endif
 
@@ -184,7 +182,7 @@ union YYSTYPE
 
     LinkedList<std::pair<std::string, ASB::Type *>> *fields;
 
-#line 188 "src/Parser/parser.cpp"
+#line 186 "src/Parser/parser.cpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -225,7 +223,7 @@ int yyparse (void);
     void yyerror(char *message);
 
 
-#line 229 "src/Parser/parser.cpp"
+#line 227 "src/Parser/parser.cpp"
 
 #ifdef short
 # undef short
@@ -532,10 +530,10 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  14
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   132
+#define YYLAST   134
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  34
+#define YYNTOKENS  32
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  25
 /* YYNRULES -- Number of rules.  */
@@ -544,7 +542,7 @@ union yyalloc
 #define YYNSTATES  103
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   275
+#define YYMAXUTOK   273
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -559,16 +557,16 @@ static const yytype_int8 yytranslate[] =
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,    26,     2,     2,
-      27,    28,    24,    21,    29,    22,     2,    25,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,    33,
-       2,    32,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,    24,     2,     2,
+      25,    26,    22,    19,    27,    20,     2,    23,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,    31,
+       2,    30,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,    23,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,    21,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    30,     2,    31,     2,     2,     2,     2,
+       2,     2,     2,    28,     2,    29,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -583,20 +581,20 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20
+      15,    16,    17,    18
 };
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   131,   131,   137,   138,   139,   140,   141,   142,   143,
-     149,   154,   164,   165,   166,   176,   177,   178,   184,   191,
-     203,   210,   226,   232,   246,   253,   262,   272,   278,   283,
-     290,   296,   297,   298,   302,   308,   318,   321,   334,   340,
-     346,   352,   358,   372,   373,   374,   385,   386,   388,   393,
-     394,   396,   400,   404,   405,   417,   418,   419,   420,   421,
-     425,   431
+       0,   130,   130,   136,   137,   138,   139,   140,   141,   142,
+     148,   153,   163,   164,   165,   175,   176,   177,   183,   190,
+     202,   209,   229,   236,   245,   255,   261,   266,   273,   279,
+     280,   281,   285,   291,   301,   304,   317,   323,   329,   335,
+     341,   355,   356,   357,   368,   369,   371,   376,   377,   379,
+     383,   387,   388,   400,   401,   402,   403,   404,   408,   414,
+     424,   430
 };
 #endif
 
@@ -606,16 +604,16 @@ static const yytype_int16 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "INT", "FLOAT32", "BOOL", "CHAR", "RUNE",
-  "BYTE", "SEMI", "IF", "ELSE", "FOR", "RETURN", "VAR", "FUNC",
-  "IDENTIFIER", "INTEGER_LITERAL", "FLOAT_LITERAL", "BOOLEAN_LITERAL",
-  "CHAR_LITERAL", "'+'", "'-'", "'^'", "'*'", "'/'", "'%'", "'('", "')'",
-  "','", "'{'", "'}'", "'='", "';'", "$accept", "start", "type",
-  "literalType", "functionSignature", "functionResults",
-  "functionParameters", "functionParametersList", "identifierList",
-  "block", "topDeclaration", "functionDeclaration", "listDeclaration",
-  "variableDeclaration", "varSpec", "varSpecList", "listTopDeclaration",
-  "statments", "simpleStatment", "ifStatment", "forStatment",
-  "returnStatment", "statmentList", "expression", "expressionList", YY_NULLPTR
+  "IF", "ELSE", "FOR", "RETURN", "VAR", "FUNC", "IDENTIFIER",
+  "INTEGER_LITERAL", "FLOAT_LITERAL", "BOOLEAN_LITERAL", "CHAR_LITERAL",
+  "'+'", "'-'", "'^'", "'*'", "'/'", "'%'", "'('", "')'", "','", "'{'",
+  "'}'", "'='", "';'", "$accept", "start", "type", "literalType",
+  "functionSignature", "functionResults", "functionParameters",
+  "functionParametersList", "block", "topDeclaration",
+  "functionDeclaration", "listDeclaration", "variableDeclaration",
+  "varSpec", "varSpecList", "listTopDeclarations", "statments",
+  "simpleStatment", "ifStatment", "forStatment", "returnStatment",
+  "statmentList", "expression", "expressionList", "identifierList", YY_NULLPTR
 };
 #endif
 
@@ -625,18 +623,18 @@ static const char *const yytname[] =
 static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,    43,    45,    94,    42,    47,    37,    40,    41,    44,
-     123,   125,    61,    59
+     265,   266,   267,   268,   269,   270,   271,   272,   273,    43,
+      45,    94,    42,    47,    37,    40,    41,    44,   123,   125,
+      61,    59
 };
 # endif
 
-#define YYPACT_NINF (-61)
+#define YYPACT_NINF (-63)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-61)
+#define YYTABLE_NINF (-59)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -645,17 +643,17 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -1,    -5,    -9,    17,   -13,   -61,   -61,   -61,   -61,    -3,
-      13,    49,   -61,     9,   -61,    -1,    13,    16,    23,   -61,
-     -61,   -61,   -61,     9,   -61,    63,    75,    30,   -61,    55,
-      47,    69,   -61,   -61,    13,   -61,   -61,    52,   -61,   -61,
-     -61,   -61,   -61,    64,   -61,    75,     3,   -61,    71,     6,
-      63,    95,   -61,    55,   -61,   -61,   -61,   -61,   -61,    75,
-     -61,    83,   -61,    73,    74,    75,   100,    75,   -61,    88,
-     -61,   -61,   -61,   -61,    91,    15,    70,    28,   -61,   -61,
-     -61,    83,    47,   -61,    90,   -25,   -61,    95,   -61,    75,
-     -61,    93,    75,   -61,   -61,   -61,     0,    92,   -61,   -61,
-      75,    47,   -61
+      18,   -11,     3,     7,     1,   -63,   -63,   -63,   -63,    -1,
+      30,   -63,    48,    24,   -63,    18,    30,    33,    39,   -63,
+     -63,   -63,   -63,    24,   -63,    71,    89,    36,   -63,    54,
+      41,    84,   -63,   -63,    30,   -63,   -63,    44,   -63,   -63,
+     -63,   -63,   -63,    45,   -63,    89,     9,   -63,    55,    21,
+      71,   100,   -63,    54,   -63,   -63,   -63,   -63,   -63,    89,
+     -63,    88,   -63,    57,    59,    89,   105,    89,   -63,    40,
+     -63,   -63,   -63,   -63,    52,    -5,    65,    29,   -63,   -63,
+     -63,    88,    41,   -63,    68,   -17,   -63,   100,   -63,    89,
+     -63,    91,    89,   -63,   -63,   -63,     0,    93,   -63,   -63,
+      89,    41,   -63
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -663,33 +661,33 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,    36,    26,    25,    28,     2,    22,
-       0,     0,    29,     0,     1,     0,     0,     0,     0,     4,
-       5,     6,     7,     0,    10,     0,     0,    31,     8,     0,
-       0,    12,    37,    23,    34,    30,     9,     0,    59,    55,
-      57,    56,    58,    60,    32,     0,    22,    15,    18,     0,
-       0,    43,    27,     0,    14,    11,    13,    35,     3,     0,
-      33,     0,    16,     0,    19,     0,    43,     0,    42,     0,
-      38,    39,    41,    40,     0,    44,     0,     0,    61,    20,
-      17,     0,     0,    51,     0,    60,    52,    43,    24,     0,
-      21,    46,     0,    49,    54,    45,     0,     0,    48,    47,
-      43,     0,    50
+       0,     0,     0,     0,    34,    24,    23,    26,     2,    60,
+       0,    27,     0,     0,     1,     0,     0,     0,     0,     4,
+       5,     6,     7,     0,    10,     0,     0,    29,     9,     0,
+       0,    12,    35,    61,    32,    28,     8,     0,    57,    53,
+      55,    54,    56,    58,    31,     0,    60,    15,    18,     0,
+       0,    41,    25,     0,    14,    11,    13,    33,     3,     0,
+      30,     0,    16,     0,    19,     0,    41,     0,    40,     0,
+      36,    37,    39,    38,     0,    42,     0,     0,    59,    20,
+      17,     0,     0,    49,     0,    42,    50,    41,    22,     0,
+      21,    44,     0,    47,    52,    43,     0,     0,    46,    45,
+      41,     0,    48
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -61,   -61,    -7,   -61,   101,   -61,    96,   -58,    11,   -57,
-     -61,   -61,   -49,   -61,   105,    94,   114,   -61,   -60,    35,
-     -61,   -61,    45,   -50,   -26
+     -63,   -63,    -7,   -63,   102,   -63,    95,   -52,   -62,   -63,
+     -63,   -49,   -63,   126,    94,   115,   -63,   -60,    35,   -63,
+     -63,    47,   -50,   -26,    11
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     3,    48,    28,    30,    55,    31,    49,    50,    52,
-       4,     5,     6,     7,    17,    18,     8,    69,    70,    71,
-      72,    73,    74,    43,    76
+      -1,     3,    48,    28,    30,    55,    31,    49,    52,     4,
+       5,     6,     7,    17,    18,     8,    69,    70,    71,    72,
+      73,    74,    43,    76,    50
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -697,78 +695,78 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      44,    75,    68,    79,    27,    51,    84,    13,    59,    83,
-      65,     9,    11,     1,     2,    82,    85,    14,    37,    60,
-      15,    11,    10,    90,    54,    91,    16,    33,    93,     9,
-      51,   -10,    16,    78,    62,    63,    29,    75,    68,    98,
-     101,    86,    97,    64,   102,    11,    77,   -60,    59,    34,
-      75,    35,    19,    20,    21,    22,    58,    61,    19,    20,
-      21,    22,    45,    95,    23,    24,    19,    20,    21,    22,
-      23,    46,    19,    20,    21,    22,    25,    51,    23,    24,
-      58,    26,    25,    47,    23,    24,    19,    20,    21,    22,
-      25,    38,    39,    40,    41,    42,    53,    59,    23,    46,
-      61,    80,    89,    81,    96,    65,    12,    66,    67,     1,
-      25,    38,    39,    40,    41,    42,    38,    39,    40,    41,
-      42,    87,    88,    92,    36,   100,   -53,    56,    57,    32,
-      51,    99,    94
+      44,    75,    68,     9,    83,    27,    84,    14,    65,    79,
+      59,    51,    12,   -58,    10,    82,    85,    13,    37,    60,
+      91,    12,    59,    93,    54,   -58,    16,    33,    51,    90,
+       1,     2,    15,    78,    98,   -10,    16,    75,    68,   102,
+     101,    86,    97,    64,     9,    12,    77,    62,    63,    29,
+      75,    19,    20,    21,    22,    58,    61,    19,    20,    21,
+      22,    23,    24,    95,    34,    35,    45,    23,    46,    51,
+      58,    87,    59,    25,    19,    20,    21,    22,    26,    25,
+      47,    88,    61,    80,    23,    24,    81,    19,    20,    21,
+      22,    19,    20,    21,    22,    89,    25,    23,    24,    92,
+      96,    23,    46,    38,    39,    40,    41,    42,    65,    53,
+      66,    67,     1,    25,    38,    39,    40,    41,    42,    38,
+      39,    40,    41,    42,   100,    36,    56,    11,    57,   -51,
+      32,    99,     0,    51,    94
 };
 
 static const yytype_int8 yycheck[] =
 {
-      26,    51,    51,    61,    11,    30,    66,    16,    33,    66,
-      10,    16,     1,    14,    15,    65,    66,     0,    25,    45,
-      33,    10,    27,    81,    31,    82,    29,    16,    85,    16,
-      30,    28,    29,    59,    28,    29,    27,    87,    87,    96,
-     100,    67,    92,    50,   101,    34,    53,    32,    33,    33,
-     100,    28,     3,     4,     5,     6,    28,    29,     3,     4,
-       5,     6,    32,    89,    15,    16,     3,     4,     5,     6,
-      15,    16,     3,     4,     5,     6,    27,    30,    15,    16,
-      28,    32,    27,    28,    15,    16,     3,     4,     5,     6,
-      27,    16,    17,    18,    19,    20,    27,    33,    15,    16,
-      29,    28,    32,    29,    11,    10,     1,    12,    13,    14,
-      27,    16,    17,    18,    19,    20,    16,    17,    18,    19,
-      20,    33,    31,    33,    23,    33,    31,    31,    34,    15,
-      30,    96,    87
+      26,    51,    51,    14,    66,    12,    66,     0,     8,    61,
+      27,    28,     1,    30,    25,    65,    66,    14,    25,    45,
+      82,    10,    27,    85,    31,    30,    27,    16,    28,    81,
+      12,    13,    31,    59,    96,    26,    27,    87,    87,   101,
+     100,    67,    92,    50,    14,    34,    53,    26,    27,    25,
+     100,     3,     4,     5,     6,    26,    27,     3,     4,     5,
+       6,    13,    14,    89,    31,    26,    30,    13,    14,    28,
+      26,    31,    27,    25,     3,     4,     5,     6,    30,    25,
+      26,    29,    27,    26,    13,    14,    27,     3,     4,     5,
+       6,     3,     4,     5,     6,    30,    25,    13,    14,    31,
+       9,    13,    14,    14,    15,    16,    17,    18,     8,    25,
+      10,    11,    12,    25,    14,    15,    16,    17,    18,    14,
+      15,    16,    17,    18,    31,    23,    31,     1,    34,    29,
+      15,    96,    -1,    28,    87
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    14,    15,    35,    44,    45,    46,    47,    50,    16,
-      27,    42,    48,    16,     0,    33,    29,    48,    49,     3,
-       4,     5,     6,    15,    16,    27,    32,    36,    37,    27,
-      38,    40,    50,    42,    33,    28,    38,    36,    16,    17,
-      18,    19,    20,    57,    58,    32,    16,    28,    36,    41,
-      42,    30,    43,    27,    36,    39,    40,    49,    28,    33,
-      58,    29,    28,    29,    36,    10,    12,    13,    46,    51,
-      52,    53,    54,    55,    56,    57,    58,    36,    58,    41,
-      28,    29,    57,    43,    52,    57,    58,    33,    31,    32,
-      41,    43,    33,    43,    56,    58,    11,    57,    43,    53,
-      33,    52,    43
+       0,    12,    13,    33,    41,    42,    43,    44,    47,    14,
+      25,    45,    56,    14,     0,    31,    27,    45,    46,     3,
+       4,     5,     6,    13,    14,    25,    30,    34,    35,    25,
+      36,    38,    47,    56,    31,    26,    36,    34,    14,    15,
+      16,    17,    18,    54,    55,    30,    14,    26,    34,    39,
+      56,    28,    40,    25,    34,    37,    38,    46,    26,    27,
+      55,    27,    26,    27,    34,     8,    10,    11,    43,    48,
+      49,    50,    51,    52,    53,    54,    55,    34,    55,    39,
+      26,    27,    54,    40,    49,    54,    55,    31,    29,    30,
+      39,    40,    31,    40,    53,    55,     9,    54,    40,    50,
+      31,    49,    40
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    34,    35,    36,    36,    36,    36,    36,    36,    36,
-      37,    38,    39,    39,    39,    40,    40,    40,    41,    41,
-      41,    41,    42,    42,    43,    44,    44,    45,    46,    47,
-      47,    48,    48,    48,    49,    49,    50,    50,    51,    51,
-      51,    51,    51,    52,    52,    52,    53,    53,    53,    54,
-      54,    54,    55,    56,    56,    57,    57,    57,    57,    57,
-      58,    58
+       0,    32,    33,    34,    34,    34,    34,    34,    34,    34,
+      35,    36,    37,    37,    37,    38,    38,    38,    39,    39,
+      39,    39,    40,    41,    41,    42,    43,    44,    44,    45,
+      45,    45,    46,    46,    47,    47,    48,    48,    48,    48,
+      48,    49,    49,    49,    50,    50,    50,    51,    51,    51,
+      52,    53,    53,    54,    54,    54,    54,    54,    55,    55,
+      56,    56
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     3,     1,     1,     1,     1,     1,     2,
+       0,     2,     1,     3,     1,     1,     1,     1,     2,     1,
        1,     2,     0,     1,     1,     2,     3,     4,     1,     2,
-       3,     4,     1,     3,     3,     1,     1,     4,     1,     2,
-       4,     2,     3,     4,     2,     3,     1,     3,     1,     1,
-       1,     1,     1,     0,     1,     3,     3,     5,     5,     3,
-       7,     2,     2,     0,     3,     1,     1,     1,     1,     1,
+       3,     4,     3,     1,     1,     4,     1,     2,     4,     2,
+       4,     3,     2,     3,     1,     3,     1,     1,     1,     1,
+       1,     0,     1,     3,     3,     5,     5,     3,     7,     2,
+       2,     0,     3,     1,     1,     1,     1,     1,     1,     3,
        1,     3
 };
 
@@ -1560,123 +1558,123 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 131 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                            {tree = new ASB::Root{(yyvsp[0].listTopDeclaration)->toVector()}; }
-#line 1566 "src/Parser/parser.cpp"
+#line 130 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                             {tree = new ASB::Root{(yyvsp[0].listTopDeclaration)->toVector()}; }
+#line 1564 "src/Parser/parser.cpp"
     break;
 
   case 3:
-#line 137 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 136 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = (yyvsp[-1].type);}
-#line 1572 "src/Parser/parser.cpp"
+#line 1570 "src/Parser/parser.cpp"
     break;
 
   case 4:
-#line 138 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 137 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = new ASB::IntType{}; }
-#line 1578 "src/Parser/parser.cpp"
+#line 1576 "src/Parser/parser.cpp"
     break;
 
   case 5:
-#line 139 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 138 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = new ASB::FloatType{}; }
-#line 1584 "src/Parser/parser.cpp"
+#line 1582 "src/Parser/parser.cpp"
     break;
 
   case 6:
-#line 140 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 139 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = new ASB::BooleanType{}; }
-#line 1590 "src/Parser/parser.cpp"
+#line 1588 "src/Parser/parser.cpp"
     break;
 
   case 7:
-#line 141 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 140 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = new ASB::CharType{}; }
-#line 1596 "src/Parser/parser.cpp"
+#line 1594 "src/Parser/parser.cpp"
     break;
 
   case 8:
-#line 142 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 141 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = (yyvsp[0].type);}
-#line 1602 "src/Parser/parser.cpp"
+#line 1600 "src/Parser/parser.cpp"
     break;
 
   case 9:
-#line 143 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 142 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = (yyvsp[0].type);}
-#line 1608 "src/Parser/parser.cpp"
+#line 1606 "src/Parser/parser.cpp"
     break;
 
   case 10:
-#line 149 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 148 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.type) = new ASB::IdentifierType{(yyvsp[0].identifierValue)}; delete (yyvsp[0].identifierValue);}
-#line 1614 "src/Parser/parser.cpp"
+#line 1612 "src/Parser/parser.cpp"
     break;
 
   case 11:
-#line 155 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 154 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         (yyval.type)=new ASB::FunctionType{(yyvsp[-1].fields)->toVector(), (yyvsp[0].fields)->toVector()};
                                         delete (yyvsp[-1].fields);
                                         delete (yyvsp[0].fields);
                                     }
-#line 1624 "src/Parser/parser.cpp"
+#line 1622 "src/Parser/parser.cpp"
     break;
 
   case 12:
-#line 164 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 163 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.fields)= new LinkedList<std::pair<std::string, ASB::Type *>>;}
-#line 1630 "src/Parser/parser.cpp"
+#line 1628 "src/Parser/parser.cpp"
     break;
 
   case 13:
-#line 165 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 164 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.fields) = (yyvsp[0].fields);}
-#line 1636 "src/Parser/parser.cpp"
+#line 1634 "src/Parser/parser.cpp"
     break;
 
   case 14:
-#line 166 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 165 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto type = (yyvsp[0].type);
                                         auto list = new LinkedList<std::pair<std::string, ASB::Type *>>;
                                         list->add(0, std::make_pair("", type));
                                         (yyval.fields) = list; 
                                     }
-#line 1647 "src/Parser/parser.cpp"
+#line 1645 "src/Parser/parser.cpp"
     break;
 
   case 15:
-#line 176 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 175 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                         {(yyval.fields) = new LinkedList<std::pair<std::string, ASB::Type *>>; }
-#line 1653 "src/Parser/parser.cpp"
+#line 1651 "src/Parser/parser.cpp"
     break;
 
   case 16:
-#line 177 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 176 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                         {(yyval.fields) = (yyvsp[-1].fields); }
-#line 1659 "src/Parser/parser.cpp"
+#line 1657 "src/Parser/parser.cpp"
     break;
 
   case 17:
-#line 179 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 178 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                         {(yyval.fields) = (yyvsp[-2].fields); }
-#line 1665 "src/Parser/parser.cpp"
+#line 1663 "src/Parser/parser.cpp"
     break;
 
   case 18:
-#line 184 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 183 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                         {
                                             auto type = (yyvsp[0].type);
                                             auto list = new LinkedList<std::pair<std::string, ASB::Type *>>;
                                             list->add(0, std::make_pair("", type));
                                             (yyval.fields) = list;
                                         }
-#line 1676 "src/Parser/parser.cpp"
+#line 1674 "src/Parser/parser.cpp"
     break;
 
   case 19:
-#line 191 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 190 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                         {
                                             auto ids = (yyvsp[-1].idenList)->toVector();
                                             delete (yyvsp[-1].idenList);
@@ -1688,22 +1686,22 @@ yyreduce:
                                             (yyval.fields)=list;
                                             
                                         }
-#line 1692 "src/Parser/parser.cpp"
+#line 1690 "src/Parser/parser.cpp"
     break;
 
   case 20:
-#line 203 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 202 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                         {
                                             auto type = (yyvsp[-2].type);
                                             auto list = (yyvsp[0].fields);
                                             list->add(0, std::make_pair("", type));
                                             (yyval.fields) = list;
                                         }
-#line 1703 "src/Parser/parser.cpp"
+#line 1701 "src/Parser/parser.cpp"
     break;
 
   case 21:
-#line 211 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 210 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                         {
                                             auto ids = (yyvsp[-3].idenList)->toVector();
                                             delete (yyvsp[-3].idenList);
@@ -1716,39 +1714,17 @@ yyreduce:
                                             
 
                                         }
-#line 1720 "src/Parser/parser.cpp"
+#line 1718 "src/Parser/parser.cpp"
     break;
 
   case 22:
-#line 226 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                        {
-                                            auto list = new LinkedList<std::string>{};
-                                            list->add(0, (yyvsp[0].identifierValue));
-                                            (yyval.idenList) = list;
-                                            delete (yyvsp[0].identifierValue);
-                                        }
-#line 1731 "src/Parser/parser.cpp"
+#line 229 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                   {(yyval.block) = new ASB::Block{(yyvsp[-1].listStatment)->toVector()}; delete (yyvsp[-1].listStatment);}
+#line 1724 "src/Parser/parser.cpp"
     break;
 
   case 23:
-#line 233 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                        {
-                                            auto list = (yyvsp[0].idenList);
-                                            list->add(0, (yyvsp[-2].identifierValue));
-                                            (yyval.idenList) = list;
-                                            delete (yyvsp[-2].identifierValue);
-                                        }
-#line 1742 "src/Parser/parser.cpp"
-    break;
-
-  case 24:
-#line 246 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                   {(yyval.block) = new ASB::Block{(yyvsp[-1].listStatment)->toVector()}; delete (yyvsp[-1].listStatment);}
-#line 1748 "src/Parser/parser.cpp"
-    break;
-
-  case 25:
-#line 253 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 236 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {   auto decla = (yyvsp[0].listDeclaration)->toVector();
                                         delete (yyvsp[0].listDeclaration);
                                         auto list = new LinkedList<ASB::TopDeclaration *>;
@@ -1757,104 +1733,104 @@ yyreduce:
                                         }
                                         (yyval.listTopDeclaration) = list;
                                     }
-#line 1761 "src/Parser/parser.cpp"
+#line 1737 "src/Parser/parser.cpp"
     break;
 
-  case 26:
-#line 262 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 24:
+#line 245 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto function = (yyvsp[0].topDeclaration);
                                         auto list = new LinkedList<ASB::TopDeclaration *>;
                                         list->add(0, function);
                                         (yyval.listTopDeclaration) = list;
                                     }
-#line 1772 "src/Parser/parser.cpp"
+#line 1748 "src/Parser/parser.cpp"
     break;
 
-  case 27:
-#line 273 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 25:
+#line 256 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         (yyval.topDeclaration) = new ASB::FunctionDeclaration{(yyvsp[-2].identifierValue), (yyvsp[-1].type), (yyvsp[0].block)};
                                     }
-#line 1780 "src/Parser/parser.cpp"
+#line 1756 "src/Parser/parser.cpp"
     break;
 
-  case 28:
-#line 278 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 26:
+#line 261 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {(yyval.listDeclaration) = (yyvsp[0].listDeclaration);}
-#line 1786 "src/Parser/parser.cpp"
+#line 1762 "src/Parser/parser.cpp"
     break;
 
-  case 29:
-#line 283 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 27:
+#line 266 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto varspec = (yyvsp[0].declaration);
                                         auto list = new LinkedList<ASB::Declaration *>;
                                         list->add(0, varspec);
                                         (yyval.listDeclaration) = list;
                                     }
-#line 1797 "src/Parser/parser.cpp"
+#line 1773 "src/Parser/parser.cpp"
     break;
 
-  case 30:
-#line 290 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 28:
+#line 273 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         (yyval.listDeclaration) = (yyvsp[-1].listDeclaration);
                                     }
-#line 1805 "src/Parser/parser.cpp"
+#line 1781 "src/Parser/parser.cpp"
+    break;
+
+  case 29:
+#line 279 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                            {(yyval.declaration) = new ASB::VariableDeclaration{(yyvsp[-1].idenList)->toVector(), (yyvsp[0].type), {}};}
+#line 1787 "src/Parser/parser.cpp"
+    break;
+
+  case 30:
+#line 280 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                            {(yyval.declaration) = new ASB::VariableDeclaration{(yyvsp[-3].idenList)->toVector(), (yyvsp[-2].type), (yyvsp[0].listExpression)->toVector()};}
+#line 1793 "src/Parser/parser.cpp"
     break;
 
   case 31:
-#line 296 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                            {(yyval.declaration) = new ASB::VariableDeclaration{(yyvsp[-1].idenList)->toVector(), (yyvsp[0].type), {}};}
-#line 1811 "src/Parser/parser.cpp"
+#line 281 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                            {(yyval.declaration) = new ASB::VariableDeclaration{(yyvsp[-2].idenList)->toVector(), nullptr, (yyvsp[0].listExpression)->toVector()};}
+#line 1799 "src/Parser/parser.cpp"
     break;
 
   case 32:
-#line 297 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                            {(yyval.declaration) = new ASB::VariableDeclaration{(yyvsp[-2].idenList)->toVector(), nullptr, (yyvsp[0].listExpression)->toVector()};}
-#line 1817 "src/Parser/parser.cpp"
-    break;
-
-  case 33:
-#line 298 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                            {(yyval.declaration) = new ASB::VariableDeclaration{(yyvsp[-3].idenList)->toVector(), (yyvsp[-2].type), (yyvsp[0].listExpression)->toVector()};}
-#line 1823 "src/Parser/parser.cpp"
-    break;
-
-  case 34:
-#line 302 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 285 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto varspec = (yyvsp[-1].declaration);
                                         auto list = new LinkedList<ASB::Declaration *>;
                                         list->add(0, varspec);
                                         (yyval.listDeclaration) = list;
                                     }
-#line 1834 "src/Parser/parser.cpp"
+#line 1810 "src/Parser/parser.cpp"
     break;
 
-  case 35:
-#line 308 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 33:
+#line 291 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto varspec = (yyvsp[-2].declaration);
                                         auto list = (yyvsp[0].listDeclaration);
                                         list->add(0, varspec);
                                         (yyval.listDeclaration) = list;
                                     }
-#line 1845 "src/Parser/parser.cpp"
+#line 1821 "src/Parser/parser.cpp"
     break;
 
-  case 36:
-#line 318 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 34:
+#line 301 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                             {
                                                 (yyval.listTopDeclaration) =(yyvsp[0].listTopDeclaration);
                                             }
-#line 1853 "src/Parser/parser.cpp"
+#line 1829 "src/Parser/parser.cpp"
     break;
 
-  case 37:
-#line 321 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                            {
+  case 35:
+#line 304 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                             {
                                                 auto topdeclartionlist = (yyvsp[-2].listTopDeclaration)->toVector();
                                                 delete (yyvsp[-2].listTopDeclaration);
                                                 auto list = (yyvsp[0].listTopDeclaration);
@@ -1863,55 +1839,55 @@ yyreduce:
                                                 }
                                                 (yyval.listTopDeclaration) = list;                                            
                                             }
-#line 1867 "src/Parser/parser.cpp"
+#line 1843 "src/Parser/parser.cpp"
     break;
 
-  case 38:
-#line 334 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 36:
+#line 317 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto simplestatment = (yyvsp[0].simpleStatment);
                                         auto list = new LinkedList<ASB::Statment *>;
                                         list->add(0, simplestatment);
                                         (yyval.listStatment) = list;
                                     }
-#line 1878 "src/Parser/parser.cpp"
+#line 1854 "src/Parser/parser.cpp"
     break;
 
-  case 39:
-#line 340 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 37:
+#line 323 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto ifstatment = (yyvsp[0].statment);
                                         auto list = new LinkedList<ASB::Statment *>;
                                         list->add(0, ifstatment);
                                         (yyval.listStatment) = list;
                                     }
-#line 1889 "src/Parser/parser.cpp"
+#line 1865 "src/Parser/parser.cpp"
     break;
 
-  case 40:
-#line 346 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 38:
+#line 329 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto returnstat = (yyvsp[0].statment);
                                         auto list = new LinkedList<ASB::Statment *>;
                                         list->add(0, returnstat);
                                         (yyval.listStatment) = list;
                                     }
-#line 1900 "src/Parser/parser.cpp"
+#line 1876 "src/Parser/parser.cpp"
     break;
 
-  case 41:
-#line 352 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 39:
+#line 335 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto forstat = (yyvsp[0].statment);
                                         auto list = new LinkedList<ASB::Statment *>;
                                         list->add(0, forstat);
                                         (yyval.listStatment) = list;
                                     }
-#line 1911 "src/Parser/parser.cpp"
+#line 1887 "src/Parser/parser.cpp"
     break;
 
-  case 42:
-#line 358 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 40:
+#line 341 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto listdeclaration = (yyvsp[0].listDeclaration)->toVector();
                                         delete (yyvsp[0].listDeclaration);
@@ -1921,23 +1897,23 @@ yyreduce:
                                         }                                           
                                         (yyval.listStatment) = list;
                                     }
-#line 1925 "src/Parser/parser.cpp"
+#line 1901 "src/Parser/parser.cpp"
+    break;
+
+  case 41:
+#line 355 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.simpleStatment) = new ASB::EmptyStatment{};}
+#line 1907 "src/Parser/parser.cpp"
+    break;
+
+  case 42:
+#line 356 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.simpleStatment) = new ASB::ExpressionStatment{(yyvsp[0].expression)};}
+#line 1913 "src/Parser/parser.cpp"
     break;
 
   case 43:
-#line 372 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.simpleStatment) = new ASB::EmptyStatment{};}
-#line 1931 "src/Parser/parser.cpp"
-    break;
-
-  case 44:
-#line 373 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.simpleStatment) = new ASB::ExpressionStatment{(yyvsp[0].expression)};}
-#line 1937 "src/Parser/parser.cpp"
-    break;
-
-  case 45:
-#line 375 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 358 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto leftside = (yyvsp[-2].listExpression)->toVector();
                                         auto rightside = (yyvsp[0].listExpression)->toVector();
@@ -1945,59 +1921,59 @@ yyreduce:
                                         delete (yyvsp[-2].listExpression);
                                         delete (yyvsp[0].listExpression);
                                     }
-#line 1949 "src/Parser/parser.cpp"
+#line 1925 "src/Parser/parser.cpp"
+    break;
+
+  case 44:
+#line 368 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-1].expression), (yyvsp[0].block), new ASB::Block{ {} } }; }
+#line 1931 "src/Parser/parser.cpp"
+    break;
+
+  case 45:
+#line 370 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-3].expression), (yyvsp[-2].block), new ASB::Block{{(yyvsp[0].statment)}}}; }
+#line 1937 "src/Parser/parser.cpp"
     break;
 
   case 46:
-#line 385 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-1].expression), (yyvsp[0].block), new ASB::Block{ {} } }; }
-#line 1955 "src/Parser/parser.cpp"
+#line 371 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-3].expression), (yyvsp[-2].block), (yyvsp[0].block)}; }
+#line 1943 "src/Parser/parser.cpp"
     break;
 
   case 47:
-#line 387 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-3].expression), (yyvsp[-2].block), new ASB::Block{{(yyvsp[0].statment)}}}; }
-#line 1961 "src/Parser/parser.cpp"
+#line 376 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.statment) = new ASB::ForStatment{ new ASB::EmptyStatment{}, (yyvsp[-1].expression), new ASB::EmptyStatment{}, (yyvsp[0].block)};}
+#line 1949 "src/Parser/parser.cpp"
     break;
 
   case 48:
-#line 388 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::IfStatment{(yyvsp[-3].expression), (yyvsp[-2].block), (yyvsp[0].block)}; }
-#line 1967 "src/Parser/parser.cpp"
+#line 378 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.statment) = new ASB::ForStatment{ (yyvsp[-5].simpleStatment), (yyvsp[-3].expression), (yyvsp[-1].simpleStatment), (yyvsp[0].block)};}
+#line 1955 "src/Parser/parser.cpp"
     break;
 
   case 49:
-#line 393 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::ForStatment{ new ASB::EmptyStatment{}, (yyvsp[-1].expression), new ASB::EmptyStatment{}, (yyvsp[0].block)};}
-#line 1973 "src/Parser/parser.cpp"
+#line 379 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.statment) = new ASB::ForStatment{ new ASB::EmptyStatment{}, new ASB::BoolExpression{true}, new ASB::EmptyStatment{}, (yyvsp[0].block)};}
+#line 1961 "src/Parser/parser.cpp"
     break;
 
   case 50:
-#line 395 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::ForStatment{ (yyvsp[-5].simpleStatment), (yyvsp[-3].expression), (yyvsp[-1].simpleStatment), (yyvsp[0].block)};}
-#line 1979 "src/Parser/parser.cpp"
+#line 383 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.statment) = new ASB::ReturnStatment{(yyvsp[0].listExpression)->toVector()}; }
+#line 1967 "src/Parser/parser.cpp"
     break;
 
   case 51:
-#line 396 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::ForStatment{ new ASB::EmptyStatment{}, new ASB::BoolExpression{true}, new ASB::EmptyStatment{}, (yyvsp[0].block)};}
-#line 1985 "src/Parser/parser.cpp"
+#line 387 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.listStatment) = new LinkedList<ASB::Statment *>;}
+#line 1973 "src/Parser/parser.cpp"
     break;
 
   case 52:
-#line 400 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.statment) = new ASB::ReturnStatment{(yyvsp[0].listExpression)->toVector()}; }
-#line 1991 "src/Parser/parser.cpp"
-    break;
-
-  case 53:
-#line 404 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.listStatment) = new LinkedList<ASB::Statment *>;}
-#line 1997 "src/Parser/parser.cpp"
-    break;
-
-  case 54:
-#line 405 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 388 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {   auto stat = (yyvsp[-2].listStatment)->toVector();
                                         delete (yyvsp[-2].listStatment);
                                         auto list = (yyvsp[0].listStatment);
@@ -2006,63 +1982,85 @@ yyreduce:
                                         }
                                         (yyval.listStatment) = list;
                                     }
-#line 2010 "src/Parser/parser.cpp"
+#line 1986 "src/Parser/parser.cpp"
+    break;
+
+  case 53:
+#line 400 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.expression) = new ASB::IntegerExpression{(yyvsp[0].integerValue)};}
+#line 1992 "src/Parser/parser.cpp"
+    break;
+
+  case 54:
+#line 401 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.expression) = new ASB::BoolExpression{(yyvsp[0].booleanValue)};}
+#line 1998 "src/Parser/parser.cpp"
     break;
 
   case 55:
-#line 417 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.expression) = new ASB::IntegerExpression{(yyvsp[0].integerValue)};}
-#line 2016 "src/Parser/parser.cpp"
+#line 402 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.expression) = new ASB::FloatExpression{(yyvsp[0].floatValue)};}
+#line 2004 "src/Parser/parser.cpp"
     break;
 
   case 56:
-#line 418 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.expression) = new ASB::BoolExpression{(yyvsp[0].booleanValue)};}
-#line 2022 "src/Parser/parser.cpp"
+#line 403 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.expression) = new ASB::CharExpression{(yyvsp[0].charValue)};}
+#line 2010 "src/Parser/parser.cpp"
     break;
 
   case 57:
-#line 419 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.expression) = new ASB::FloatExpression{(yyvsp[0].floatValue)};}
-#line 2028 "src/Parser/parser.cpp"
+#line 404 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                    {(yyval.expression) = new ASB::IdentifierExpression{(yyvsp[0].identifierValue)};}
+#line 2016 "src/Parser/parser.cpp"
     break;
 
   case 58:
-#line 420 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.expression) = new ASB::CharExpression{(yyvsp[0].charValue)};}
-#line 2034 "src/Parser/parser.cpp"
-    break;
-
-  case 59:
-#line 421 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
-                                    {(yyval.expression) = new ASB::IdentifierExpression{(yyvsp[0].identifierValue)};}
-#line 2040 "src/Parser/parser.cpp"
-    break;
-
-  case 60:
-#line 425 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 408 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto expr = (yyvsp[0].expression);
-                                        auto list = new LinkedList<ASB::Expression *>;
+                                        auto list = new LinkedList<ASB::Expression *>{};
                                         list->add(0, expr);
                                         (yyval.listExpression) = list;            
                                     }
-#line 2051 "src/Parser/parser.cpp"
+#line 2027 "src/Parser/parser.cpp"
     break;
 
-  case 61:
-#line 431 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+  case 59:
+#line 414 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
                                     {
                                         auto expr = (yyvsp[-2].expression);
                                         auto list = (yyvsp[0].listExpression);
                                         list->add(0, expr);
                                         (yyval.listExpression) = list;
                                     }
-#line 2062 "src/Parser/parser.cpp"
+#line 2038 "src/Parser/parser.cpp"
+    break;
+
+  case 60:
+#line 424 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                        {
+                                            auto list = new LinkedList<std::string>{};
+                                            list->add(0, (yyvsp[0].identifierValue));
+                                            (yyval.idenList) = list;
+                                            delete (yyvsp[0].identifierValue);
+                                        }
+#line 2049 "src/Parser/parser.cpp"
+    break;
+
+  case 61:
+#line 431 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+                                        {
+                                            auto list = (yyvsp[0].idenList);
+                                            list->add(0, (yyvsp[-2].identifierValue));
+                                            (yyval.idenList) = list;
+                                            delete (yyvsp[-2].identifierValue);
+                                        }
+#line 2060 "src/Parser/parser.cpp"
     break;
 
 
-#line 2066 "src/Parser/parser.cpp"
+#line 2064 "src/Parser/parser.cpp"
 
       default: break;
     }
@@ -2300,7 +2298,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 439 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
+#line 441 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Parser/parse.y"
 
 
 //debug but learn and adapt

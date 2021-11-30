@@ -15,12 +15,13 @@ int main(){
     }
     //std::cout<<"fucking something";
     yyparse();
-    std::cout<<"fucking something";
+    
     if(tree != nullptr){
+        std::cout<<"fucking Succes\n";
         return EXIT_SUCCESS;
     }else{
+        std::cout<<"fucking Failure\n";
         return EXIT_FAILURE;
     }
 
-    return 1;
 }

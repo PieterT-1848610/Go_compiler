@@ -16,6 +16,6 @@ ASB::FunctionType::~FunctionType(){
     }
 };
 
-ASB::IdentifierType::IdentifierType(std::string id): id{id}{
+ASB::IdentifierType::IdentifierType(char *id): id{std::string{id}}{
     
 };

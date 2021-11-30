@@ -20,8 +20,7 @@
             } \
         }
 
-	int line_nr = 1;
-	int col_nr = 1; 
+
 
 	char *copyString(char *input);
 	char *removeLowerLine(char *input);
@@ -47,7 +46,7 @@ heximal_literal 		0(x|X)((_)?[0-9a-fA-F]+)+
 
 decimal_float_literal  	([0-9](_)?[0-9]+)*\.([0-9]((_)?[0-9]+)*)?
 
-identifier 				[_a-zA-Z]([_a-zA-Z0-9])*
+
 
 
 rune_escape_char 		\\(a|b|c|f|n|r|t|v|\'|\"|\\)
@@ -57,10 +56,10 @@ rune_octal_value 		\\[0-7]{3}
 rune_literal 			({rune_escape_char}|{rune_hex_value}|{rune_octal_value})
 
 
-
+identifier 				[_a-zA-Z]([_a-zA-Z0-9])*
 %%
 "//".*  {}
-[\t]    {}
+[ \t\r]    {}
 \n      {
             if(semicollonPlac){
                 semicollonPlac = false;
@@ -74,21 +73,19 @@ float32 {semicollonPlac = true; return FLOAT32;}
 char    {semicollonPlac = true; return CHAR;}
 
 rune    {semicollonPlac = true; return RUNE;}
-byte    {semicollonPlac = true; return BYTE;}
 
 
 if 		{semicollonPlac = false; return IF;}
 else	{semicollonPlac = false; return ELSE;}
 for     {semicollonPlac = false; return FOR;}
-return  {semicollonPlac = false; return RETURN;}
+return  {semicollonPlac = true; return RETURN;}
 var     {semicollonPlac = false; return VAR;}
 func    {semicollonPlac = false; return FUNC;}
 
 true    {semicollonPlac = true; yylval.booleanValue = true; return BOOLEAN_LITERAL; }
-false   {semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL;}
+false   {semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL; }
 
 
-{identifier} 		{semicollonPlac = true; yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
 
 
 {decimal_literal}		{semicollonPlac = true; yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
@@ -100,8 +97,11 @@ false   {semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITE
 
 \'{rune_literal}\'		{semicollonPlac = true; yylval.charValue = charToCharLiteral(yytext); return CHAR_LITERAL;}
 
+{identifier} 		{semicollonPlac = true; yylval.identifierValue = copyString(yytext); return IDENTIFIER;}
+
+
 .                       {
-                            semicollonPlac = (*yytext == ')' || *yytext == ']' || *yytext == '}') ; 
+                            semicollonPlac = *yytext == '}' || *yytext == ']' || *yytext == ')' ; 
                                 return *yytext; 
                         }
 %%

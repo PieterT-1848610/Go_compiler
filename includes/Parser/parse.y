@@ -65,9 +65,8 @@
 %token CHAR
 //%token STRING
 %token RUNE
-%token BYTE
 
-%token SEMI
+
 %token IF
 %token ELSE
 %token FOR
@@ -112,7 +111,7 @@
 %type <fields> functionResults;
 %type <fields> functionParametersList;
 
-%type <listTopDeclaration> listTopDeclaration;
+%type <listTopDeclaration> listTopDeclarations;
 %type <listTopDeclaration> topDeclaration;
 %type <topDeclaration> functionDeclaration;
 
@@ -128,7 +127,7 @@
 //more noting
 %%
 start
-    :listTopDeclaration     {tree = new ASB::Root{$1->toVector()}; }
+    :listTopDeclarations     {tree = new ASB::Root{$1->toVector()}; }
     ;
 
 
@@ -139,8 +138,8 @@ type
     |FLOAT32                        {$$ = new ASB::FloatType{}; }
     |BOOL                           {$$ = new ASB::BooleanType{}; }
     |CHAR                           {$$ = new ASB::CharType{}; }
-    |literalType                    {$$ = $1;}
     |FUNC functionSignature         {$$ = $2;}
+    |literalType                    {$$ = $1;}
     ;
 
 
@@ -222,22 +221,6 @@ functionParametersList
                                         }
     ;
 
-identifierList
-    :IDENTIFIER                         {
-                                            auto list = new LinkedList<std::string>{};
-                                            list->add(0, $1);
-                                            $$ = list;
-                                            delete $1;
-                                        }
-    |IDENTIFIER ',' identifierList      
-                                        {
-                                            auto list = $3;
-                                            list->add(0, $1);
-                                            $$ = list;
-                                            delete $1;
-                                        }
-    ;
-
 
 
 
@@ -294,8 +277,8 @@ variableDeclaration
 
 varSpec
     :identifierList type                    {$$ = new ASB::VariableDeclaration{$1->toVector(), $2, {}};}
-    |identifierList '=' expressionList      {$$ = new ASB::VariableDeclaration{$1->toVector(), nullptr, $3->toVector()};}
     |identifierList type '=' expressionList {$$ = new ASB::VariableDeclaration{$1->toVector(), $2, $4->toVector()};}
+    |identifierList '=' expressionList      {$$ = new ASB::VariableDeclaration{$1->toVector(), nullptr, $3->toVector()};}
     ;
 
 varSpecList
@@ -314,11 +297,11 @@ varSpecList
     ;
 
 
-listTopDeclaration
+listTopDeclarations
     :topDeclaration                         {
                                                 $$ =$1;
                                             }
-    |topDeclaration ';' listTopDeclaration  {
+    |topDeclaration ';' listTopDeclarations  {
                                                 auto topdeclartionlist = $1->toVector();
                                                 delete $1;
                                                 auto list = $3;
@@ -412,7 +395,7 @@ statmentList
                                     }
     ;
 
-//expressions stuff
+//expressions stuff wrong 
 expression
     :INTEGER_LITERAL                {$$ = new ASB::IntegerExpression{$1};}
     |BOOLEAN_LITERAL                {$$ = new ASB::BoolExpression{$1};}
@@ -424,16 +407,35 @@ expression
 expressionList
     :expression                     {
                                         auto expr = $1;
-                                        auto list = new LinkedList<ASB::Expression *>;
+                                        auto list = new LinkedList<ASB::Expression *>{};
                                         list->add(0, expr);
                                         $$ = list;            
                                     }       
-    |expression ';' expressionList  {
+    |expression ',' expressionList  {
                                         auto expr = $1;
                                         auto list = $3;
                                         list->add(0, expr);
                                         $$ = list;
                                     }
+
+
+
+identifierList
+    :IDENTIFIER                         {
+                                            auto list = new LinkedList<std::string>{};
+                                            list->add(0, $1);
+                                            $$ = list;
+                                            delete $1;
+                                        }
+    |IDENTIFIER ',' identifierList      
+                                        {
+                                            auto list = $3;
+                                            list->add(0, $1);
+                                            $$ = list;
+                                            delete $1;
+                                        }
+    ;
+
 
 
 %%

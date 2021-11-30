@@ -5,52 +5,57 @@
 #include <string>
 namespace ASB
 {
-    class IntType: public Type{
+    class IntType : public Type
+    {
     public:
         virtual ~IntType() override = default;
         IntType() = default;
+    };
 
-};
-
-class BooleanType: public Type{
+    class BooleanType : public Type
+    {
     public:
         virtual ~BooleanType() override = default;
         BooleanType() = default;
-};
+    };
 
-
-class FloatType: public Type{
+    class FloatType : public Type
+    {
     public:
         virtual ~FloatType() override = default;
         FloatType() = default;
-};
+    };
 
-class CharType: public Type{
+    class CharType : public Type
+    {
     public:
         virtual ~CharType() override = default;
         CharType() = default;
-};
+    };
 
-class FunctionType: public Type{
+    class FunctionType : public Type
+    {
     public:
         FunctionType(
-            std::vector<std::pair<std::string, Type *>>parameters,
-            std::vector<std::pair<std::string, Type *>>results);
+            std::vector<std::pair<std::string, Type *>> parameters,
+            std::vector<std::pair<std::string, Type *>> results);
 
-        virtual ~FunctionType() override;    
+        virtual ~FunctionType() override;
+
     private:
         std::vector<std::pair<std::string, Type *>> parameters;
         std::vector<std::pair<std::string, Type *>> results;
-};
+    };
 
-class IdentifierType: public Type{
+    class IdentifierType : public Type
+    {
     public:
-        IdentifierType(std::string id);
+        IdentifierType(char *id);
         virtual ~IdentifierType() override = default;
 
     private:
         std::string id;
-};
+    };
 
 } // namespace ASB
 

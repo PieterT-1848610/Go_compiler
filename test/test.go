@@ -1,4 +1,5 @@
-func main() bool {
-	var test = 1 * 2 + 3;
-	return true;
+
+
+func main() {
+    var test bool
 }
