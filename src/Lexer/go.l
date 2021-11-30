@@ -39,7 +39,7 @@
     bool    semicollonPlac = false;
 %}
 
-decimal_literal 		0|([1-9](_)?[0-9]+)*
+decimal_literal 		0|([1-9]((_)?[0-9]+)*)
 binary_literal 			0(b|B)((_)?[0|1]+)+
 octal_literal 			0(o|O)?((_)?[0-7]+)+
 heximal_literal 		0(x|X)((_)?[0-9a-fA-F]+)+
@@ -82,16 +82,24 @@ return  {semicollonPlac = true; return RETURN;}
 var     {semicollonPlac = false; return VAR;}
 func    {semicollonPlac = false; return FUNC;}
 
+\&\&    {semicollonPlac = false; return AND; }
+\|\|    {semicollonPlac = false; return OR; }
+\!      {semicollonPlac = false; return NOT; }
+
+\=\=    {semicollonPlac = false; return EQ;}
+\!\=    {semicollonPlac = false; return NEQ;}
+
+
 true    {semicollonPlac = true; yylval.booleanValue = true; return BOOLEAN_LITERAL; }
 false   {semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL; }
 
 
-
-
-{decimal_literal}		{semicollonPlac = true; yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
 {binary_literal}		{semicollonPlac = true; yylval.integerValue = binaryToInteger(yytext); return INTEGER_LITERAL;}
 {octal_literal}			{semicollonPlac = true; yylval.integerValue = octalToInteger(yytext); return INTEGER_LITERAL;}
 {heximal_literal}		{semicollonPlac = true; yylval.integerValue = heximalToInteger(yytext); return INTEGER_LITERAL;}
+
+{decimal_literal}		{semicollonPlac = true; yylval.integerValue = decimalToInteger(yytext); return INTEGER_LITERAL;}
+
 
 {decimal_float_literal}	{semicollonPlac = true; yylval.floatValue = decimalToFloat(yytext); return FLOAT_LITERAL;}
 

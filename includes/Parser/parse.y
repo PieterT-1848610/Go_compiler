@@ -74,6 +74,13 @@
 %token VAR
 %token FUNC
 
+%token AND
+%token OR 
+%token NOT
+%token EQ
+%token NEQ
+
+
 %token <identifierValue> IDENTIFIER
 %token <integerValue> INTEGER_LITERAL
 %token <floatValue> FLOAT_LITERAL
@@ -120,6 +127,10 @@
 %type <listDeclaration> varSpecList;
 %type <declaration> varSpec;
 
+%left   OR
+%left   AND
+%left   NOT
+%left   EQ, NEQ
 %left '+' '-' '^'
 %left '*' '/' '%'
 
@@ -397,8 +408,8 @@ statmentList
 
 //expressions stuff wrong 
 expression
-    :INTEGER_LITERAL                {$$ = new ASB::IntegerExpression{$1};}
-    |BOOLEAN_LITERAL                {$$ = new ASB::BoolExpression{$1};}
+    :BOOLEAN_LITERAL                {$$ = new ASB::BoolExpression{$1};}
+    |INTEGER_LITERAL                {$$ = new ASB::IntegerExpression{$1};}
     |FLOAT_LITERAL                  {$$ = new ASB::FloatExpression{$1};}
     |CHAR_LITERAL                   {$$ = new ASB::CharExpression{$1};}
     |IDENTIFIER                     {$$ = new ASB::IdentifierExpression{$1};}
