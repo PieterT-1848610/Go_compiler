@@ -15,9 +15,14 @@ int main(){
     }
     //std::cout<<"fucking something";
     yyparse();
-    
+    //
     if(tree != nullptr){
+        //typechecking 
+        TypeTable<int> typeTable{};
+    
+        //tree->typecheck();
         std::cout<<"fucking Succes\n";
+        //interpreteren 
         return EXIT_SUCCESS;
     }else{
         std::cout<<"fucking Failure\n";

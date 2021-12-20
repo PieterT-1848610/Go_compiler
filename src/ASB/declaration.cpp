@@ -12,6 +12,8 @@ ASB::FunctionDeclaration::~FunctionDeclaration(){
 
 ASB::VariableDeclaration::VariableDeclaration(std::vector<std::string> ids, Type *type, std::vector<Expression *> expressions):
                                         ids {ids}, type{type}, expressions{expressions}{
+                                            
+
 
     }
 

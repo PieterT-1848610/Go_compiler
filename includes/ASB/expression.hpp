@@ -51,5 +51,12 @@ class CharExpression: public Expression{
     private:
         char value;
 };
+
+
+class BinaryOperation: public Expression{
+    
+};
+
+
 }
 #endif
