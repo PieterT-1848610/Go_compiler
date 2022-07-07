@@ -3,12 +3,20 @@
 
 #include "asb.hpp"
 #include <string>
+
+//accept in equals alle types 
+
+//leaf voor visitor
+// virtual void accept(Visitor *visitor) const  override;
+
 namespace ASB
 {
     class IntType : public Type
     {
     public:
         virtual ~IntType() override = default;
+        virtual void accept(Visitor *visitor) const  override;
+
         IntType() = default;
     };
 

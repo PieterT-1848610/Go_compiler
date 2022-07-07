@@ -1,73 +1,21 @@
 #ifndef ASB_BASE_HPP
 #define ASB_BASE_HPP
 //File voor de tree mee op te bouwen
+#include "Visitor/Visitor.hpp"
 
 
 #include <vector>
 #include <string>
+#include <iostream>
 
-template <typename T>
-//good way like the interpret thing in exp 1
-class TypeEntryTable{
-    public:
-        TypeEntryTable(std::string, T value): name(std::move(name)), type(value){}
-
-        std::string getName(){
-             return name;
-         }
-        
-        void setType(T newType){
-            type = newType;
-        }
-
-        T getType() const{
-            return type;
-        }
-
-    private:
-        std::string name;
-        T type;
-
-};
-template <typename T>
-
-class TypeTable{
-    public:
-        T get(const std::string &identifier){
-            for(auto item:list){
-                if(item.getName() == identifier){
-                    return item.getvalue();
-                }
-            }
-            return nullptr;
-        }
-
-        
-
-        void update(const std::string& identifier, T type){
-            for(auto item: list){
-                if(item.getName() == identifier){
-                    item.setType(type);
-                    return;
-                }
-            }
-
-            TypeEntryTable<T> entry = *new TypeEntryTable<T>(identifier, type);
-            list.insert(list.begin(), entry);
-        }
-
-
-    private:
-        std::vector<TypeEntryTable<T>> list;
-
-};
 
 namespace ASB{
 //Base Node class
 class Node{
     public:
         virtual ~Node() = default;
-    
+        //past niks aan in boom en bij alle subnodes
+        virtual void accept(Visitor *visitor) const = 0;
         
     protected:
             Node() = default;
@@ -79,6 +27,7 @@ class Node{
 class Statment: public Node{
     public:
         virtual ~Statment() = default;
+        virtual void accept(Visitor *visitor) const  override = 0;
 
     protected:
         Statment() = default;
@@ -87,7 +36,8 @@ class Statment: public Node{
 class SimpleStatment:  public Statment{
     public:
         virtual ~SimpleStatment() = default;
-    
+        virtual void accept(Visitor *visitor) const  override = 0;
+
     protected:
         SimpleStatment() = default;
 };
@@ -97,6 +47,7 @@ class SimpleStatment:  public Statment{
 class Expression: public Node{
     public:
         virtual ~Expression() = default;
+        virtual void accept(Visitor *visitor) const  override = 0;
 
     protected:
         Expression() = default;
@@ -104,10 +55,12 @@ class Expression: public Node{
 
 
 //Types
+//Function equals. compares to type
 class Type: public Node{
     public:
         virtual ~Type() = default;
-        
+        virtual void accept(Visitor *visitor) const  override = 0;
+       
     protected:
         Type() = default;
 };
@@ -117,7 +70,8 @@ class Type: public Node{
 class TopDeclaration: public Node{
     public:
         virtual ~TopDeclaration() = default;
-    
+        virtual void accept(Visitor *visitor) const  override = 0;
+
     protected:
         TopDeclaration() = default;
     
@@ -126,7 +80,8 @@ class TopDeclaration: public Node{
 class Declaration: public TopDeclaration{
     public:
         virtual ~Declaration() = default;
-    
+        virtual void accept(Visitor *visitor) const  override = 0;
+
     protected:
         Declaration() = default;
     
@@ -137,6 +92,7 @@ class Block: public Node{
     public:
         Block(std::vector<Statment *> statments);
         virtual ~Block();
+        virtual void accept(Visitor *visitor) const  override = 0;
 
     protected:
         std::vector<Statment * > statments; 
@@ -146,12 +102,14 @@ class Block: public Node{
 //template <typename T>
 
 //Root of program
+//is program so need visitor implementead
 class Root: public Node{
     public:
         Root(std::vector<TopDeclaration *> declarations);
         virtual ~Root();
-
+        //void print(){std::cout<<"checking";}
        // void typechecking(TypeTable<T> *table);
+        virtual void accept(Visitor *visitor) const  override;
 
     protected:
         std::vector<TopDeclaration *> declarations;

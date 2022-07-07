@@ -222,12 +222,6 @@ FLEX_INCLUDE_DIR:PATH=/usr/include
 FL_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libfl.so
 
 //Value Computed by CMake
-Go_compiler_BINARY_DIR:STATIC=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler
-
-//Value Computed by CMake
-Go_compiler_SOURCE_DIR:STATIC=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler
-
-//Value Computed by CMake
 Gocompiler_BINARY_DIR:STATIC=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler
 
 //Value Computed by CMake

@@ -4,6 +4,10 @@ ASB::IdentifierExpression::IdentifierExpression(std::string id): id{id}{
 
 }
 
+void ASB::IdentifierExpression::accept(Visitor *visitor) const{
+    visitor->identifierExperssion(this->id);
+}
+
 ASB::BoolExpression::BoolExpression(bool value): value{value}{
 
 }

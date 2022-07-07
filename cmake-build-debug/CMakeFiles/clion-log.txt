@@ -1,4 +1,0 @@
-Cannot generate into C:\Users\thomi\Documents\Master\Compilers\giti\Go_compiler
-It is already used for project \mnt\c\Users\thomi\Documents\Master\Compilers\giti\Go_compiler
-
-Please either delete it manually or select another generation directory

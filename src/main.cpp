@@ -17,8 +17,10 @@ int main(){
     yyparse();
     //
     if(tree != nullptr){
+        int a = 5;
+        //tree.print();
         //typechecking 
-        TypeTable<int> typeTable{};
+        //TypeTable<int> typeTable{};
     
         //tree->typecheck();
         std::cout<<"fucking Succes\n";

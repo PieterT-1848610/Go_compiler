@@ -5,6 +5,8 @@
 #include <string>
 
 namespace ASB{
+    //leaf node van structuur implementatie van visitor
+
 class FunctionDeclaration: public TopDeclaration{
     public:
         FunctionDeclaration(std::string id, Type *signature, Block *functionBody);

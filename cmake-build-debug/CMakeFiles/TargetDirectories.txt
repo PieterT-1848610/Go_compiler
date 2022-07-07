@@ -1,3 +1,0 @@
-C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/cmake-build-debug/CMakeFiles/Go_compiler.dir
-C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/cmake-build-debug/CMakeFiles/rebuild_cache.dir

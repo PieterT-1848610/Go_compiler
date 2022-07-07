@@ -4,9 +4,20 @@ ASB::ExpressionStatment::ExpressionStatment(Expression *expression): expression{
 
 };
 
+
 ASB::ExpressionStatment::~ExpressionStatment(){
     delete expression;
 };
+
+void ASB::ExpressionStatment::accept(Visitor *visitor) const{
+    std::function<void ()> visitExpression{ [visitor, this](){
+        this->expression->accept(visitor);
+    }}
+
+    visitor->expressionStatment(visitExpression);
+}
+
+
 
 ASB::AssignmentStatment::AssignmentStatment(std::vector<Expression *> leftSide, std::vector<Expression *> rightSide):
                                             leftSide {leftSide}, rightSide{rightSide}{

@@ -4,11 +4,13 @@
 #include "asb.hpp"
 namespace ASB{
 
+//leaf voor visitor patroon         virtual void accept(Visitor *visitor) const  override;
+
 class ExpressionStatment: public SimpleStatment{
     public:
         ExpressionStatment(Expression *expression);
         virtual  ~ExpressionStatment() override;
-
+        virtual void accept(Visitor *visitor) const  override;
     private:
         Expression *expression;
 };
