@@ -12,6 +12,7 @@ class FunctionDeclaration: public TopDeclaration{
         FunctionDeclaration(std::string id, Type *signature, Block *functionBody);
         virtual ~FunctionDeclaration() override;
 
+        virtual void accept(Visitor *visitor)const override;
     private:
         std::string id;
         Type        *signature;
@@ -22,6 +23,8 @@ class VariableDeclaration: public Declaration{
     public:
         VariableDeclaration(std::vector<std::string> ids, Type *type, std::vector<Expression *> expressions);
         virtual ~VariableDeclaration() override;
+
+        virtual void accept(Visitor *visitor)const override;
 
     private:
         std::vector<std::string>    ids;

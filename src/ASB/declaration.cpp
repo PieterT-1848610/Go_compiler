@@ -10,6 +10,17 @@ ASB::FunctionDeclaration::~FunctionDeclaration(){
     delete functionBody;
 }
 
+void ASB::FunctionDeclaration::accept(Visitor *visitor) const{
+    std::function<void ()>visitSignature{ [visitor, this](){
+        this->signature->accept(visitor);
+    }};
+    std::function<void ()>visitFunctionBody{ [visitor, this](){
+        this->functionBody->accept(visitor);
+    }};
+
+    visitor->functionDeclaration(id, visitSignature, visitFunctionBody);
+}   
+
 ASB::VariableDeclaration::VariableDeclaration(std::vector<std::string> ids, Type *type, std::vector<Expression *> expressions):
                                         ids {ids}, type{type}, expressions{expressions}{
                                             
@@ -22,4 +33,18 @@ ASB::VariableDeclaration::~VariableDeclaration(){
     for(int i=0; i<expressions.size(); i++){    
         delete expressions[i];
     }
+}
+
+void ASB::VariableDeclaration::accept(Visitor *visitor) const{
+    std::vector<std::function<void ()>>visitExpressions{};
+    for(auto expre: this->expressions){
+        visitExpressions.push_back([expre, visitor](){
+            expre->accept(visitor);
+        });
+    }
+    std::function<void ()>visitType{[visitor, this](){
+        this->type->accept(visitor);
+    }};
+
+    visitor->variableDeclaration(this->ids, visitType, visitExpressions);
 }

@@ -25,6 +25,7 @@ namespace ASB
     public:
         virtual ~BooleanType() override = default;
         BooleanType() = default;
+        virtual void accept(Visitor *Visitor) const override;
     };
 
     class FloatType : public Type
@@ -32,6 +33,8 @@ namespace ASB
     public:
         virtual ~FloatType() override = default;
         FloatType() = default;
+        virtual void accept(Visitor *Visitor) const override;
+
     };
 
     class CharType : public Type
@@ -39,6 +42,8 @@ namespace ASB
     public:
         virtual ~CharType() override = default;
         CharType() = default;
+        virtual void accept(Visitor *Visitor) const override;
+
     };
 
     class FunctionType : public Type
@@ -49,6 +54,8 @@ namespace ASB
             std::vector<std::pair<std::string, Type *>> results);
 
         virtual ~FunctionType() override;
+        
+        virtual void accept(Visitor *Visitor) const override;
 
     private:
         std::vector<std::pair<std::string, Type *>> parameters;
@@ -60,6 +67,7 @@ namespace ASB
     public:
         IdentifierType(char *id);
         virtual ~IdentifierType() override = default;
+        virtual void accept(Visitor *Visitor) const override;
 
     private:
         std::string id;

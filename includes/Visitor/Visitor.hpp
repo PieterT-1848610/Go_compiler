@@ -27,7 +27,7 @@ class Visitor{
 
         virtual void assignmentStatment(const std::vector< std::function<void ()>> visitLeftSide, const std::vector<  std::function<void ()>> visitRightSide)=0;
 
-        virtual void forStatment(const std::function<void ()> visitInit,  const std::function<void ()> condition, const std::function<void ()> visitPost, const std::function<void ()> visitBodyFor)=0;
+        virtual void forStatment(const std::function<void ()> visitInit,  const std::function<void ()> visitCondition, const std::function<void ()> visitPost, const std::function<void ()> visitBodyFor)=0;
 
         virtual void declarationStament(const std::function<void ()>visitDeclaration)=0;
 
@@ -56,13 +56,13 @@ class Visitor{
 
         virtual void boolType()=0;
 
-        virtual void FloatType()=0;
+        virtual void floatType()=0;
 
-        virtual void CharType()=0;
+        virtual void charType()=0;
 
-        virtual void FunctionType(const std::vector<std::string> parametersName,const std::vector<std::function <void ()>> visitParametersType, const std::vector<std::string> resultsName, const std::vector<std::function <void ()>> visitResultsType)=0;
+        virtual void functionType(const std::vector<std::string> parametersName,const std::vector<std::function <void ()>> visitParametersType, const std::vector<std::string> resultsName, const std::vector<std::function <void ()>> visitResultsType)=0;
 
-        virtual void identifierType(const char id)=0;
+        virtual void identifierType(const std::string id)=0;
 
 
     protected:

@@ -12,6 +12,15 @@ ASB::Block::~Block(){
     }
 };
 
+void ASB::Block::accept(Visitor *visitor) const{
+    std::vector<std::function<void ()>> visitStatments{};
+    for(auto stat: this->statments){
+        visitStatments.push_back([stat, visitor](){
+            stat->accept(visitor);
+        });
+    }
+    visitor->block(visitStatments);
+}
 
 ASB::Root::Root(std::vector<TopDeclaration *> declartions): declarations{declarations}{
 

@@ -15,6 +15,8 @@ class IdentifierExpression: public Expression{
     public:
         IdentifierExpression(std::string id);
         virtual ~IdentifierExpression() override = default;
+        
+        virtual void accept(Visitor *visitor) const  override;
 
         //getType -> IdType
     private:
@@ -26,6 +28,8 @@ class BoolExpression: public Expression{
         BoolExpression(bool value);
         virtual ~BoolExpression() override = default;
         //getType -> return Boolean;
+
+        virtual void accept(Visitor *visitor) const override;
     private:
         bool value;
 };
@@ -35,7 +39,7 @@ class IntegerExpression: public Expression{
         IntegerExpression(int value);
         virtual ~IntegerExpression() override = default;
 
-
+        virtual void accept(Visitor *visitor) const override;
     private:
         int value;
 };
@@ -44,6 +48,7 @@ class FloatExpression: public Expression{
     public:
         FloatExpression(float value);
         virtual ~FloatExpression() override = default;
+        virtual void accept(Visitor *visitor) const override;
 
     private:
         float value;
@@ -53,10 +58,13 @@ class CharExpression: public Expression{
     public:
         CharExpression(char value);
         virtual ~CharExpression() override = default;
+        virtual void accept(Visitor *visitor) const override;
 
     private:
         char value;
 };
+
+
 
 //need to be specilias  up in add, sub, 
 //so not a leaf, protected constructor

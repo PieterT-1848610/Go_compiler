@@ -92,7 +92,7 @@ class Block: public Node{
     public:
         Block(std::vector<Statment *> statments);
         virtual ~Block();
-        virtual void accept(Visitor *visitor) const  override = 0;
+        virtual void accept(Visitor *visitor) const  override;
 
     protected:
         std::vector<Statment * > statments; 
