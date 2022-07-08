@@ -103,7 +103,11 @@
 
 %type <listExpression> expressionList;
 %type <expression> expression;
-
+%type <expression> unaryExpr;
+%type <expression> primaryExpr;
+%type <expression> operand;
+%type <expression> literal;
+%type <expression> basicLiteral;
 
 %type <block> block;
 
@@ -130,7 +134,7 @@
 %left   OR
 %left   AND
 %left   NOT
-%left   EQ, NEQ
+%left   EQ NEQ
 %left '+' '-' '^'
 %left '*' '/' '%'
 
@@ -406,13 +410,38 @@ statmentList
                                     }
     ;
 
-//expressions stuff wrong 
+//expressions add other binaryOperation, know better ig
 expression
+    :unaryExpr                      { $$ = $1; }
+    |expression '+' expression      { $$ = new ASB::BinaryAddOperation($1, $3);}
+    |expression '-' expression      { $$ = new ASB::BinaryMinOperation($1, $3);}
+    ;
+
+unaryExpr
+    :primaryExpr                    {$$ = $1;}
+    ;
+
+primaryExpr
+    :operand                        {$$ = $1;}
+    ;
+
+operand
+    :literal                        {$$ = $1;}
+    |IDENTIFIER                     {$$ = new ASB::IdentifierExpression{$1};}
+    |'(' expression ')'             {$$ = $2;}
+    ;
+
+//Need composite and (Functionlitral) mogelijk
+literal
+    :basicLiteral                   {$$ = $1;}
+    ;
+
+
+basicLiteral
     :BOOLEAN_LITERAL                {$$ = new ASB::BoolExpression{$1};}
     |INTEGER_LITERAL                {$$ = new ASB::IntegerExpression{$1};}
     |FLOAT_LITERAL                  {$$ = new ASB::FloatExpression{$1};}
     |CHAR_LITERAL                   {$$ = new ASB::CharExpression{$1};}
-    |IDENTIFIER                     {$$ = new ASB::IdentifierExpression{$1};}
     ;
 
 expressionList

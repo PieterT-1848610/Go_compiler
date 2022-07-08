@@ -50,6 +50,10 @@ class Visitor{
 
         //virtual void identifierExperssion(const std::string id)=0;
         //Binary for alle operatie +, -, /, * const std::function<void ()> visitleft en const std::function<void ()>rightside (function)
+        virtual void binaryAddExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryMinExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
 
         //types
         virtual void intType()=0;
@@ -63,6 +67,8 @@ class Visitor{
         virtual void functionType(const std::vector<std::string> parametersName,const std::vector<std::function <void ()>> visitParametersType, const std::vector<std::string> resultsName, const std::vector<std::function <void ()>> visitResultsType)=0;
 
         virtual void identifierType(const std::string id)=0;
+
+        
 
 
     protected:

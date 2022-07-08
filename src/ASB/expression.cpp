@@ -42,3 +42,46 @@ ASB::CharExpression::CharExpression(char value): value{value}{
 void ASB::CharExpression::accept(Visitor *visitor) const{
     visitor->charExpression(this->value);
 }
+
+ASB::BinaryAddOperation::BinaryAddOperation(Expression *leftSide, Expression *rightSide): leftSide{leftSide}, rightSide{rightSide}{
+
+};
+
+ASB::BinaryAddOperation::~BinaryAddOperation(){
+    delete leftSide;
+    delete rightSide;
+}
+
+void ASB::BinaryAddOperation::accept(Visitor *visitor) const{
+    std::function<void ()> visitLeftSide{[visitor, this](){
+        this->leftSide->accept(visitor);
+    }};
+
+    std::function<void ()> visitRightSide{[visitor, this](){
+        this->rightSide->accept(visitor);
+    }};
+
+    visitor->binaryAddExpression(visitLeftSide, visitRightSide);
+};
+
+
+ASB::BinaryMinOperation::BinaryMinOperation(Expression *leftSide, Expression *rightSide): leftSide{leftSide}, rightSide{rightSide}{
+
+};
+
+ASB::BinaryMinOperation::~BinaryMinOperation(){
+    delete leftSide;
+    delete rightSide;
+};
+
+void ASB::BinaryMinOperation::accept(Visitor *visitor) const{
+    std::function<void ()> visitLeftSide{[visitor, this](){
+        this->leftSide->accept(visitor);
+    }};
+
+    std::function<void ()> visitRightSide{[visitor, this](){
+        this->rightSide->accept(visitor);
+    }};
+
+    visitor->binaryMinExpression(visitLeftSide, visitRightSide);
+};

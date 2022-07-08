@@ -70,6 +70,35 @@ class CharExpression: public Expression{
 //so not a leaf, protected constructor
 class BinaryOperation: public Expression{
     //type checken of beide compatible zijn
+    public:
+        virtual ~BinaryOperation() = default;
+        virtual void accept(Visitor *visitor) const override = 0;
+    
+    protected:
+        BinaryOperation() = default;
+
+};
+
+class BinaryAddOperation: public BinaryOperation{
+    public:
+        BinaryAddOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryAddOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+class BinaryMinOperation: public BinaryOperation{
+    public:
+        BinaryMinOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryMinOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
 };
 
 

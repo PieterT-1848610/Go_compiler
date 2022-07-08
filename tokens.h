@@ -2,15 +2,19 @@
 #define IDENTIFIER 251
 #define INT 252
 #define BOOL // vul zelf aan!
+
 #define PACKAGE
-#define RETURN
-#define VAR
-#define IF
-#define FOR
-#define LPAREN
-#define RPAREN
-#define LBRACE
-#define RBRACE
+
+#define RETURN V
+#define VAR V
+#define IF V
+#define FOR V
+
+#define LPAREN ?
+#define RPAREN ?
+#define LBRACE ?
+#define RBRACE ?
+
 #define PLUS
 #define MIN
 #define MUL
@@ -19,16 +23,20 @@
 #define MINASSIGN
 #define MULASSIGN
 #define DIVASSIGN
-#define AND
-#define OR
-#define NOT
+
+#define AND V
+#define OR V
+#define NOT V
+
 #define INC
 #define DEC
 #define GT
 #define GE
 #define LT
 #define LE
-#define EQ
-#define NE
+
+#define EQ V
+#define NE V
+
 #define INTLITERAL
 #define BOOLLITERAL
