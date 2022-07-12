@@ -54,6 +54,29 @@ class Visitor{
 
         virtual void binaryMinExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
 
+        virtual void binaryMulExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryDivExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryEQExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryNEQExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryANDExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryORExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryGTExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryGEExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryLTExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+        virtual void binaryLEExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
+
+
+        virtual void unaryNotExpression(const std::function<void ()> visitExpression) = 0;
+
 
         //types
         virtual void intType()=0;

@@ -89,6 +89,12 @@ func    {semicollonPlac = false; return FUNC;}
 \=\=    {semicollonPlac = false; return EQ;}
 \!\=    {semicollonPlac = false; return NEQ;}
 
+\>      {semicollonPlac = false; return GT;}
+\>\=    {semicollonPlac = false; return GE;}
+
+\<      {semicollonPlac = false; return LT;}
+\<\=    {semicollonPlac = false; return LE;}
+
 
 true    {semicollonPlac = true; yylval.booleanValue = true; return BOOLEAN_LITERAL; }
 false   {semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL; }

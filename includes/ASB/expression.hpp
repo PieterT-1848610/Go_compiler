@@ -65,7 +65,6 @@ class CharExpression: public Expression{
 };
 
 
-
 //need to be specilias  up in add, sub, 
 //so not a leaf, protected constructor
 class BinaryOperation: public Expression{
@@ -79,6 +78,7 @@ class BinaryOperation: public Expression{
 
 };
 
+
 class BinaryAddOperation: public BinaryOperation{
     public:
         BinaryAddOperation(Expression *leftSide, Expression *rightSide);
@@ -89,6 +89,7 @@ class BinaryAddOperation: public BinaryOperation{
         Expression *leftSide;
         Expression *rightSide;
 };
+
 
 class BinaryMinOperation: public BinaryOperation{
     public:
@@ -101,6 +102,154 @@ class BinaryMinOperation: public BinaryOperation{
         Expression *rightSide;
 };
 
+
+class BinaryMulOperation: public BinaryOperation{
+    public:
+        BinaryMulOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryMulOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+    
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+
+};
+
+
+class BinaryDivOperation: public BinaryOperation{
+    public:
+        BinaryDivOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryDivOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+class BinaryEQOperation: public BinaryOperation{
+    public:
+        BinaryEQOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryEQOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+class BinaryNEQOperation: public BinaryOperation{
+    public:
+        BinaryNEQOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryNEQOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+class BinaryANDOperation: public BinaryOperation{
+    public:
+        BinaryANDOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryANDOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+class BinaryOROperation: public BinaryOperation{
+    public:
+        BinaryOROperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryOROperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+//greater than >
+class BinaryGTOperation: public BinaryOperation{
+    public:
+        BinaryGTOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryGTOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+//greater than or equal >=
+class BinaryGEOperation: public BinaryOperation{
+    public:
+        BinaryGEOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryGEOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+//lesear than <
+class BinaryLTOperation: public BinaryOperation{
+    public:
+        BinaryLTOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryLTOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+//leser than or equal <=
+class BinaryLEOperation: public BinaryOperation{
+    public:
+        BinaryLEOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryLEOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
+
+//unary for not?
+//inc, dec?
+//plusassign, ...?
+
+class UnaryOperation: public Expression{
+    public:
+        virtual ~UnaryOperation() = default;
+        virtual void accept(Visitor *visitor) const override = 0;
+
+    protected:
+        UnaryOperation()= default;
+};
+
+class UnaryNotOperation: public UnaryOperation{
+    public:
+        UnaryNotOperation(Expression *expression);
+        virtual ~UnaryNotOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *expression;
+};
 
 }
 #endif

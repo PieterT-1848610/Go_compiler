@@ -80,11 +80,15 @@ extern int yydebug;
     NOT = 271,
     EQ = 272,
     NEQ = 273,
-    IDENTIFIER = 274,
-    INTEGER_LITERAL = 275,
-    FLOAT_LITERAL = 276,
-    BOOLEAN_LITERAL = 277,
-    CHAR_LITERAL = 278
+    GT = 274,
+    GE = 275,
+    LT = 276,
+    LE = 277,
+    IDENTIFIER = 278,
+    INTEGER_LITERAL = 279,
+    FLOAT_LITERAL = 280,
+    BOOLEAN_LITERAL = 281,
+    CHAR_LITERAL = 282
   };
 #endif
 
@@ -124,7 +128,7 @@ union YYSTYPE
 
     LinkedList<std::pair<std::string, ASB::Type *>> *fields;
 
-#line 128 "includes/Parser/parser.hpp"
+#line 132 "includes/Parser/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

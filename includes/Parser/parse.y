@@ -80,6 +80,11 @@
 %token EQ
 %token NEQ
 
+%token GT
+%token GE
+%token LT
+%token LE
+
 
 %token <identifierValue> IDENTIFIER
 %token <integerValue> INTEGER_LITERAL
@@ -135,6 +140,8 @@
 %left   AND
 %left   NOT
 %left   EQ NEQ
+%left   GT GE
+%left   LT LE
 %left '+' '-' '^'
 %left '*' '/' '%'
 
@@ -265,6 +272,23 @@ topDeclaration
                                     }
     ;
 
+
+listTopDeclarations
+    :topDeclaration                         {
+                                                $$ =$1;
+                                            }
+    |topDeclaration ';' listTopDeclarations  {
+                                                auto topdeclartionlist = $1->toVector();
+                                                delete $1;
+                                                auto list = $3;
+                                                for(int i=0; i < topdeclartionlist.size(); i++){
+                                                    list->add(i, topdeclartionlist[i]);
+                                                }
+                                                $$ = list;                                            
+                                            }
+    ;
+
+
 //Voor functies
 functionDeclaration
     :FUNC IDENTIFIER functionSignature block
@@ -311,21 +335,6 @@ varSpecList
                                     }
     ;
 
-
-listTopDeclarations
-    :topDeclaration                         {
-                                                $$ =$1;
-                                            }
-    |topDeclaration ';' listTopDeclarations  {
-                                                auto topdeclartionlist = $1->toVector();
-                                                delete $1;
-                                                auto list = $3;
-                                                for(int i=0; i < topdeclartionlist.size(); i++){
-                                                    list->add(i, topdeclartionlist[i]);
-                                                }
-                                                $$ = list;                                            
-                                            }
-    ;
 
 //Statments section
 statments
@@ -379,24 +388,6 @@ simpleStatment
                                     }
 
 
-ifStatment
-    :IF expression block            {$$ = new ASB::IfStatment{$2, $3, new ASB::Block{ {} } }; }
-    |IF expression block ELSE ifStatment  
-                                    {$$ = new ASB::IfStatment{$2, $3, new ASB::Block{{$5}}}; }
-    |IF expression block ELSE block {$$ = new ASB::IfStatment{$2, $3, $5}; }       
-    ;
-
-
-forStatment
-    :FOR expression block           {$$ = new ASB::ForStatment{ new ASB::EmptyStatment{}, $2, new ASB::EmptyStatment{}, $3};}
-    |FOR simpleStatment ';'  expression ';' simpleStatment block
-                                    {$$ = new ASB::ForStatment{ $2, $4, $6, $7};}
-    |FOR block                      {$$ = new ASB::ForStatment{ new ASB::EmptyStatment{}, new ASB::BoolExpression{true}, new ASB::EmptyStatment{}, $2};}
-    ;
-
-returnStatment
-    :RETURN expressionList          {$$ = new ASB::ReturnStatment{$2->toVector()}; }
-    ;
 
 statmentList
     :                               {$$ = new LinkedList<ASB::Statment *>;}
@@ -410,15 +401,45 @@ statmentList
                                     }
     ;
 
+
+ifStatment
+    :IF expression block            {$$ = new ASB::IfStatment{$2, $3, new ASB::Block{ {} } }; }
+    |IF expression block ELSE ifStatment  
+                                    {$$ = new ASB::IfStatment{$2, $3, new ASB::Block{{$5}}}; }
+    |IF expression block ELSE block {$$ = new ASB::IfStatment{$2, $3, $5}; }       
+    ;
+
+returnStatment
+    :RETURN expressionList          {$$ = new ASB::ReturnStatment{$2->toVector()}; }
+    ;
+
+
+forStatment
+    :FOR simpleStatment ';'  expression ';' simpleStatment block
+                                    {$$ = new ASB::ForStatment{ $2, $4, $6, $7};}
+    |FOR expression block           {$$ = new ASB::ForStatment{ new ASB::EmptyStatment{}, $2, new ASB::EmptyStatment{}, $3};}
+
+    |FOR block                      {$$ = new ASB::ForStatment{ new ASB::EmptyStatment{}, new ASB::BoolExpression{true}, new ASB::EmptyStatment{}, $2};}
+    ;
+
+
+
 //expressions add other binaryOperation, know better ig
 expression
     :unaryExpr                      { $$ = $1; }
     |expression '+' expression      { $$ = new ASB::BinaryAddOperation($1, $3);}
     |expression '-' expression      { $$ = new ASB::BinaryMinOperation($1, $3);}
+    |expression '*' expression      { $$ = new ASB::BinaryMulOperation($1, $3);}
+    |expression '/' expression      { $$ = new ASB::BinaryDivOperation($1, $3);}
+    |expression EQ  expression      { $$ = new ASB::BinaryEQOperation($1, $3);}
+    |expression NEQ expression      { $$ = new ASB::BinaryNEQOperation($1, $3);}
+    |expression AND expression      { $$ = new ASB::BinaryANDOperation($1, $3);}
+    |expression OR  expression      { $$ = new ASB::BinaryOROperation($1, $3);}    
     ;
 
 unaryExpr
     :primaryExpr                    {$$ = $1;}
+    |NOT unaryExpr                  { $$ = new ASB::UnaryNotOperation($2);}
     ;
 
 primaryExpr

@@ -22,7 +22,7 @@ void ASB::Block::accept(Visitor *visitor) const{
     visitor->block(visitStatments);
 }
 
-ASB::Root::Root(std::vector<TopDeclaration *> declartions): declarations{declarations}{
+ASB::Root::Root(std::vector<TopDeclaration *> declarations): declarations{declarations}{
 
 };
 

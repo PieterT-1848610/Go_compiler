@@ -15,10 +15,12 @@
 #define LBRACE ?
 #define RBRACE ?
 
-#define PLUS
-#define MIN
-#define MUL
-#define DIV
+#define PLUS V
+#define MIN  V
+#define MUL  V
+#define DIV  V
+
+
 #define PLUSASSIGN
 #define MINASSIGN
 #define MULASSIGN
@@ -26,14 +28,15 @@
 
 #define AND V
 #define OR V
-#define NOT V
+#define NOT ? Unary maybe?
 
-#define INC
-#define DEC
-#define GT
-#define GE
-#define LT
-#define LE
+#define INC ?
+#define DEC ?
+
+#define GT V
+#define GE V
+#define LT V
+#define LE V
 
 #define EQ V
 #define NE V
