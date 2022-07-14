@@ -36,8 +36,7 @@ class Visitor{
         virtual void returnStatment(const std::vector<std::function<void ()>> visitExpressions)=0;
 
 
-        //expresiions
-
+        //expresions
         virtual void identifierExperssion(const std::string id)=0;
 
         virtual void boolExperssion(const bool value)=0;
@@ -47,6 +46,7 @@ class Visitor{
         virtual void floatExperssion(const float value)=0;
 
         virtual void charExpression(const char value)=0;
+        
 
         //virtual void identifierExperssion(const std::string id)=0;
         //Binary for alle operatie +, -, /, * const std::function<void ()> visitleft en const std::function<void ()>rightside (function)
@@ -74,7 +74,7 @@ class Visitor{
 
         virtual void binaryLEExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
 
-
+        //Unary Operations
         virtual void unaryNotExpression(const std::function<void ()> visitExpression) = 0;
 
 

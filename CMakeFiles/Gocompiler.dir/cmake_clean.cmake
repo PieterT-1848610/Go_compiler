@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o.d"
   "CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o"
   "CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o.d"
+  "CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o"
+  "CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o.d"
   "CMakeFiles/Gocompiler.dir/src/main.cpp.o"
   "CMakeFiles/Gocompiler.dir/src/main.cpp.o.d"
   "Gocompiler"
