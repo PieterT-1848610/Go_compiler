@@ -321,6 +321,30 @@ src/Visitor/typechecker.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.s
 .PHONY : src/Visitor/typechecker.cpp.s
 
+src/Visitor/typedescriptor.o: src/Visitor/typedescriptor.cpp.o
+.PHONY : src/Visitor/typedescriptor.o
+
+# target to build an object file
+src/Visitor/typedescriptor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o
+.PHONY : src/Visitor/typedescriptor.cpp.o
+
+src/Visitor/typedescriptor.i: src/Visitor/typedescriptor.cpp.i
+.PHONY : src/Visitor/typedescriptor.i
+
+# target to preprocess a source file
+src/Visitor/typedescriptor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.i
+.PHONY : src/Visitor/typedescriptor.cpp.i
+
+src/Visitor/typedescriptor.s: src/Visitor/typedescriptor.cpp.s
+.PHONY : src/Visitor/typedescriptor.s
+
+# target to generate assembly for a file
+src/Visitor/typedescriptor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.s
+.PHONY : src/Visitor/typedescriptor.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -378,6 +402,9 @@ help:
 	@echo "... src/Visitor/typechecker.o"
 	@echo "... src/Visitor/typechecker.i"
 	@echo "... src/Visitor/typechecker.s"
+	@echo "... src/Visitor/typedescriptor.o"
+	@echo "... src/Visitor/typedescriptor.i"
+	@echo "... src/Visitor/typedescriptor.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

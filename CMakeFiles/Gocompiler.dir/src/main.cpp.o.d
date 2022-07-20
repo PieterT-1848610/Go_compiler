@@ -187,4 +187,15 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/uses_allocator.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/invoke.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/refwrap.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/std_function.h
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/std_function.h \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Visitor/typechecker.hpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/stack.hpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Visitor/typedescriptor.hpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/symboltable.hpp \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/unordered_map \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/aligned_buffer.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/hashtable.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/hashtable_policy.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/limits \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/unordered_map.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/erase_if.h

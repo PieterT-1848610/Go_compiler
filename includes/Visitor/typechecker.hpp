@@ -125,10 +125,10 @@ class TypeChecker: public Visitor{
         Stack<std::string> errors;
 
         //stack for printing?, wich class 
-        Stack<*TypeDescriptor> typeStack;
+        Stack<TypeDescriptor*> typeStack;
 
         //symboltable func and symboltable var;
-        SymbolTable<*TypeDescriptor> typeTable;
+        SymbolTable<TypeDescriptor*> typeTable;
         
         TypeDescriptor * expactedReturnType;
 

@@ -4,7 +4,7 @@
 #include "ASB/asb.hpp"
 extern int yyparse();
 extern ASB::Node *tree;
-
+#include "Visitor/typechecker.hpp"
 
 int main(){
     
@@ -23,6 +23,9 @@ int main(){
         //TypeTable<int> typeTable{};
     
         //tree->typecheck();
+        TypeChecker typecheck {};
+        tree->accept(&typecheck);
+
         std::cout<<"fucking Succes\n";
         //interpreteren 
         return EXIT_SUCCESS;

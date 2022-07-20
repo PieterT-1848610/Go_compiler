@@ -8,7 +8,8 @@
                 "${workspaceFolder}/includes/ASB",
                 "${workspaceFolder}/includes",
                 "/usr/include/c++/9",
-                "/usr/include/x86_64-linux-gnu/c++/9"
+                "/usr/include/x86_64-linux-gnu/c++/9",
+                "/usr/include/x86_64-linux-gnu"
             ],
             "defines": [
                 "_DEBUG",

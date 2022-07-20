@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp" "CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o" "gcc" "CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp" "CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o" "gcc" "CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/typechecker.cpp" "CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o" "gcc" "CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o.d"
+  "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/typedescriptor.cpp" "CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o" "gcc" "CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o.d"
   "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/main.cpp" "CMakeFiles/Gocompiler.dir/src/main.cpp.o" "gcc" "CMakeFiles/Gocompiler.dir/src/main.cpp.o.d"
   )
 
