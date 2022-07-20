@@ -297,29 +297,29 @@ src/Parser/parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s
 .PHONY : src/Parser/parser.cpp.s
 
-src/Visitor/visiting.o: src/Visitor/visiting.cpp.o
-.PHONY : src/Visitor/visiting.o
+src/Visitor/typechecker.o: src/Visitor/typechecker.cpp.o
+.PHONY : src/Visitor/typechecker.o
 
 # target to build an object file
-src/Visitor/visiting.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o
-.PHONY : src/Visitor/visiting.cpp.o
+src/Visitor/typechecker.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o
+.PHONY : src/Visitor/typechecker.cpp.o
 
-src/Visitor/visiting.i: src/Visitor/visiting.cpp.i
-.PHONY : src/Visitor/visiting.i
+src/Visitor/typechecker.i: src/Visitor/typechecker.cpp.i
+.PHONY : src/Visitor/typechecker.i
 
 # target to preprocess a source file
-src/Visitor/visiting.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.i
-.PHONY : src/Visitor/visiting.cpp.i
+src/Visitor/typechecker.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.i
+.PHONY : src/Visitor/typechecker.cpp.i
 
-src/Visitor/visiting.s: src/Visitor/visiting.cpp.s
-.PHONY : src/Visitor/visiting.s
+src/Visitor/typechecker.s: src/Visitor/typechecker.cpp.s
+.PHONY : src/Visitor/typechecker.s
 
 # target to generate assembly for a file
-src/Visitor/visiting.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.s
-.PHONY : src/Visitor/visiting.cpp.s
+src/Visitor/typechecker.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.s
+.PHONY : src/Visitor/typechecker.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -375,9 +375,9 @@ help:
 	@echo "... src/Parser/parser.o"
 	@echo "... src/Parser/parser.i"
 	@echo "... src/Parser/parser.s"
-	@echo "... src/Visitor/visiting.o"
-	@echo "... src/Visitor/visiting.i"
-	@echo "... src/Visitor/visiting.s"
+	@echo "... src/Visitor/typechecker.o"
+	@echo "... src/Visitor/typechecker.i"
+	@echo "... src/Visitor/typechecker.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -3,6 +3,16 @@
 
 #include <iostream>
 #include <vector>
+#include <exception>
+
+class EmptyStackException: public std::exception{
+    public:
+        EmptyStackException(std::string msg): msg{msg}{}
+
+    private:
+        std::string msg;
+};
+
 
 template <class T>
 class Stack{
@@ -16,8 +26,7 @@ class Stack{
 
         T pop(){
             if(empty()){
-                std::cout<<"we empty, error";
-                return;
+                throw new EmptyStackException("empyt stack");
             }
 
             auto value = values.back();
@@ -28,8 +37,8 @@ class Stack{
 
         T top(){
             if(empty()){
-                std::cout<<"we are empty, error";
-                return;
+                throw new EmptyStackException("empyt stack");
+
             }
 
             return values.back();

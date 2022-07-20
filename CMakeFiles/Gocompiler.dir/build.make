@@ -179,19 +179,19 @@ CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp -o CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s
 
-CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
-CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o: src/Visitor/visiting.cpp
-CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/visiting.cpp
+CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
+CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: src/Visitor/typechecker.cpp
+CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/typechecker.cpp
 
-CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/visiting.cpp > CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.i
+CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/typechecker.cpp > CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.i
 
-CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/visiting.cpp -o CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.s
+CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/typechecker.cpp -o CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.s
 
 CMakeFiles/Gocompiler.dir/src/main.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
 CMakeFiles/Gocompiler.dir/src/main.cpp.o: src/main.cpp
@@ -216,7 +216,7 @@ Gocompiler_OBJECTS = \
 "CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o" \
-"CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o" \
+"CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/main.cpp.o"
 
 # External object files for target Gocompiler
@@ -229,7 +229,7 @@ Gocompiler: CMakeFiles/Gocompiler.dir/src/ASB/statment.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o
-Gocompiler: CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o
+Gocompiler: CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/main.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/build.make
 Gocompiler: CMakeFiles/Gocompiler.dir/link.txt

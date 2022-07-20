@@ -1381,8 +1381,8 @@ CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: src/Parser/parser.cpp \
   /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
   /usr/include/x86_64-linux-gnu/bits/unistd_ext.h
 
-CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o: src/Visitor/visiting.cpp \
-  includes/Visitor/visiting.hpp \
+CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: src/Visitor/typechecker.cpp \
+  includes/Visitor/typechecker.hpp \
   /usr/include/c++/9/vector \
   /usr/include/c++/9/bits/stl_algobase.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
@@ -1572,7 +1572,15 @@ CMakeFiles/Gocompiler.dir/src/Visitor/visiting.cpp.o: src/Visitor/visiting.cpp \
   /usr/include/c++/9/bits/ostream.tcc \
   /usr/include/c++/9/istream \
   /usr/include/c++/9/bits/istream.tcc \
-  includes/Visitor/Visitor.hpp
+  includes/Visitor/Visitor.hpp \
+  includes/other/symboltable.hpp \
+  /usr/include/c++/9/unordered_map \
+  /usr/include/c++/9/ext/aligned_buffer.h \
+  /usr/include/c++/9/bits/hashtable.h \
+  /usr/include/c++/9/bits/hashtable_policy.h \
+  /usr/include/c++/9/limits \
+  /usr/include/c++/9/bits/unordered_map.h \
+  /usr/include/c++/9/bits/erase_if.h
 
 CMakeFiles/Gocompiler.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/9/iostream \
@@ -1778,7 +1786,17 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/9/bits/std_function.h
 
 
-includes/Visitor/visiting.hpp:
+/usr/include/c++/9/bits/hashtable_policy.h:
+
+/usr/include/c++/9/bits/hashtable.h:
+
+/usr/include/c++/9/ext/aligned_buffer.h:
+
+/usr/include/c++/9/unordered_map:
+
+includes/Visitor/typechecker.hpp:
+
+src/Visitor/typechecker.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
@@ -1857,6 +1875,8 @@ src/main.cpp:
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+includes/other/symboltable.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
@@ -1953,6 +1973,8 @@ includes/Visitor/Visitor.hpp:
 includes/other/stack.hpp:
 
 /usr/include/stdc-predef.h:
+
+/usr/include/c++/9/bits/erase_if.h:
 
 /usr/include/c++/9/bits/vector.tcc:
 
@@ -2132,11 +2154,11 @@ src/ASB/declaration.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
+/usr/include/c++/9/limits:
+
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
-src/Visitor/visiting.cpp:
 
 /usr/include/c++/9/debug/assertions.h:
 
@@ -2187,6 +2209,8 @@ src/ASB/types.cpp:
 /usr/include/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/c++/9/bits/unordered_map.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
