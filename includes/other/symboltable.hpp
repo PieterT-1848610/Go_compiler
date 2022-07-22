@@ -20,6 +20,7 @@ class SymbolTable{
         //ook wel ene unordered map aanmaken (global)
         SymbolTable() : table{} {
             table = std::vector<std::unordered_map<std::string, T>> {};
+            table.push_back(std::unordered_map<std::string, T> {});
         };
         ~SymbolTable() = default; //possible memory leaks, if T is pointer
 
@@ -37,7 +38,7 @@ class SymbolTable{
         //TODO: in achterste vector komt staan
         void set(std::string key, T value) {
             int a = table.size() - 1;
-            table[a][key] = value;
+            table[a].insert(std::make_pair(key, value));
         };
         
         //TODO: alles aflopen nog 
@@ -58,13 +59,10 @@ class SymbolTable{
             return keys;
         };
 
+        //check current scope only for key?
         bool contains(std::string key) {
-            for(int i =0; i<table.size(); i++){
-                if(this->table[i].contains(key)){
-                    return true;
-                }
-            }
-            return false;
+            int i = table.size() -1;
+            return(this->table[i].count(key)>0);  
         };
         //een aan maken in block
         void newScope() {

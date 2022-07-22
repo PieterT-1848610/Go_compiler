@@ -16,7 +16,7 @@ class Node{
         virtual ~Node() = default;
         //past niks aan in boom en bij alle subnodes
         virtual void accept(Visitor *visitor) const = 0;
-        
+        void print(){};
     protected:
             Node() = default;
         
@@ -107,8 +107,11 @@ class Root: public Node{
     public:
         Root(std::vector<TopDeclaration *> declarations);
         virtual ~Root();
-        //void print(){std::cout<<"checking";}
-       // void typechecking(TypeTable<T> *table);
+        void print() {
+            for(auto a: declarations){
+                std::cout<<a<<"testing";
+            }
+        }
         virtual void accept(Visitor *visitor) const  override;
 
     protected:

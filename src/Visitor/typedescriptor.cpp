@@ -1,8 +1,8 @@
 #include "Visitor/typedescriptor.hpp"
 
 
-bool BoolTypeDesc::compare(const TypeDescriptor *other) const{
-    TypeCode otherType = other->getCode();
+bool BoolTypeDesc::compare(const TypeDescriptor &other) const{
+    TypeCode otherType = other.getCode();
 
     return (TypeCode::booleanType == otherType);
 }
@@ -16,8 +16,8 @@ TypeCode BoolTypeDesc::getCode() const{
 }
 
 
-bool IntTypeDesc::compare(const TypeDescriptor *other) const{
-    TypeCode otherType = other->getCode();
+bool IntTypeDesc::compare(const TypeDescriptor &other) const{
+    TypeCode otherType = other.getCode();
 
     return (TypeCode::integerType == otherType);
 }
@@ -30,8 +30,8 @@ TypeCode IntTypeDesc::getCode() const{
     return TypeCode::integerType;
 }
 
-bool FloatTypeDesc::compare(const TypeDescriptor *other) const{
-    TypeCode otherType = other->getCode();
+bool FloatTypeDesc::compare(const TypeDescriptor &other) const{
+    TypeCode otherType = other.getCode();
 
     return (TypeCode::floatType == otherType);
 }
@@ -44,8 +44,8 @@ TypeCode FloatTypeDesc::getCode() const{
     return TypeCode::floatType;
 }
 
-bool CharTypeDesc::compare(const TypeDescriptor *other) const{
-    TypeCode otherType = other->getCode();
+bool CharTypeDesc::compare(const TypeDescriptor &other) const{
+    TypeCode otherType = other.getCode();
 
     return (TypeCode::charType == otherType);
 }
@@ -69,10 +69,41 @@ FunctionTypeDesc::~FunctionTypeDesc(){
 
 }
 
-bool FunctionTypeDesc::compare(const TypeDescriptor *other) const{
-    TypeCode otherType = other->getCode();
 
-    return (TypeCode::booleanType == otherType);
+
+bool FunctionTypeDesc::compare(const TypeDescriptor &other) const{
+    TypeCode otherType = other.getCode();
+    if(otherType != TypeCode::functionType){
+        return false;
+    }
+    //need to cast
+    const FunctionTypeDesc& otherCasted =static_cast<const FunctionTypeDesc&>(other);
+    
+    //compare lengths
+    if(this->parameters.size() != otherCasted.parameters.size()){
+        return false;
+    }
+
+    if(this->returns.size() != otherCasted.returns.size()){
+        return false;
+    }
+
+    //check pair to pair
+    for(int i = 0; i < parameters.size(); i++){
+        if(this->parameters[i].first != otherCasted.parameters[i].first
+        || !(this->parameters[i].second->compare(*otherCasted.parameters[i].second))){
+            return false;
+        }
+    }
+
+    for(int i = 0; i < returns.size(); i++){
+        if(this->returns[i].first != otherCasted.returns[i].first
+        || !(this->returns[i].second->compare(*otherCasted.returns[i].second))){
+            return false;
+        }
+    }
+
+    return true;
 }
 
 std::string FunctionTypeDesc::toString() const{

@@ -120,6 +120,7 @@ class TypeChecker: public Visitor{
 
         void identifierType(const std::string id) override;
 
+        std::vector<std::string> getErrors();
 
     private:
         Stack<std::string> errors;
@@ -130,6 +131,7 @@ class TypeChecker: public Visitor{
         //symboltable func and symboltable var;
         SymbolTable<TypeDescriptor*> typeTable;
         
+        //gets functionDescriptor to compare the return types
         TypeDescriptor * expactedReturnType;
 
 };

@@ -3,7 +3,7 @@
 #include "lexer/lexer.hpp"
 #include "ASB/asb.hpp"
 extern int yyparse();
-extern ASB::Node *tree;
+extern ASB::Root *tree;
 #include "Visitor/typechecker.hpp"
 
 int main(){
@@ -22,9 +22,12 @@ int main(){
         //typechecking 
         //TypeTable<int> typeTable{};
     
-        //tree->typecheck();
         TypeChecker typecheck {};
         tree->accept(&typecheck);
+        std::cout<<"printing possible Errors \n";
+        for(auto error: typecheck.getErrors()){
+            std::cout<<error<<"\n";
+        }
 
         std::cout<<"fucking Succes\n";
         //interpreteren 

@@ -254,22 +254,21 @@ block
 
 //Not working right
 //Declarations 
-topDeclaration
-    :listDeclaration                {   auto decla = $1->toVector();
+topDeclaration       
+    :functionDeclaration            {
+                                        auto function = $1;
+                                        auto list = new LinkedList<ASB::TopDeclaration *>;
+                                        list->add(0, function);
+                                        $$ = list;
+                                    }
+    |listDeclaration                {   auto decla = $1->toVector();
                                         delete $1;
                                         auto list = new LinkedList<ASB::TopDeclaration *>;
                                         for(int i=0; i<decla.size(); i++){
                                             list->add(i, decla[i]);
                                         }
                                         $$ = list;
-                                    }             
-    
-    |functionDeclaration            {
-                                        auto function = $1;
-                                        auto list = new LinkedList<ASB::TopDeclaration *>;
-                                        list->add(0, function);
-                                        $$ = list;
-                                    }
+                                    }  
     ;
 
 
