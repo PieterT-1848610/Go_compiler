@@ -11,10 +11,12 @@
 
     }
 
+    //fucked
     void TypeChecker::root(const std::vector< std::function<void ()>> visitDeclarations){
-        std::cout<<visitDeclarations.size()<<"\n";
+        std::cout<<"Root start: number of decla"<<visitDeclarations.size() <<"\n";
         for(auto declartion: visitDeclarations){
             declartion();
+            std::cout<<"\n\n\n";
         }
         //check and find main
         //
@@ -22,7 +24,7 @@
     }
 
     void TypeChecker::block(const std::vector< std::function<void ()>> visitStatments){
-        std::cout<<"little check block \n";
+        std::cout<<"check block \n";
         typeTable.newScope();
         for(auto stats: visitStatments){
             stats();
@@ -32,7 +34,7 @@
     }
 //not sure
     void TypeChecker::functionDeclaration(const std::string id, const std::function< void ()> visitSignature, const std::function< void ()> visitFunctionBody) {
-        std::cout<<"little chekc function \n";
+        std::cout<<"check function \n";
 
         visitSignature();
         auto functionsign = typeStack.pop();
@@ -42,25 +44,48 @@
 
     }
 
+    //TODO: deal if type is not given?
     void TypeChecker::variableDeclaration(const std::vector<std::string> ids, const std::function< void ()> visitType, const std::vector < std::function< void ()>> visitExpressions) {
-        std::cout<<"little chekc var \n";
-        visitType();
-        auto typeVar = typeStack.pop();
-        for(auto expr: visitExpressions){
-            expr();
-            auto tempExpType = typeStack.pop();
-            if(typeVar->compare(*tempExpType)){
-                errors.push("Expression type not same as giving type for Var");
+        std::cout<<"check var \n";
+
+        if(ids.size() != visitExpressions.size()){
+                errors.push("Var declaration: number of ids, not match number of expressions");
+                return;
+            }
+
+        //type is not given with decalartion of var
+        if(visitType == NULL){
+            if(visitExpressions.size() <= 0){
+                errors.push("Not allowed to create var this way");
+                return;
+            }
+            for(int i = 0; i<ids.size(); i++){
+                visitExpressions[i]();
+                auto tempExpType = typeStack.pop();
+                if(typeTable.contains(ids[i])){
+                    errors.push("Id already in use");
+                }
+                typeTable.set(ids[i], tempExpType);
+            }
+
+        }else{
+            //type is given with declaration of var
+            visitType();
+            auto typeVar = typeStack.pop();
+            for(auto expr: visitExpressions){
+                expr();
+                auto tempExpType = typeStack.pop();
+                if(!(typeVar->compare(*tempExpType))){
+                    errors.push("Expression type not same as giving type for Var");
+                }
+            }
+            for(auto id: ids){
+                if(typeTable.contains(id)){
+                    errors.push("Id already in use");
+                }
+                typeTable.set(id, typeVar);
             }
         }
-        for(auto id: ids){
-            if(typeTable.contains(id)){
-                errors.push("Id already in use");
-            }
-            typeTable.set(id, typeVar);
-
-        }
-
     }
 
 
@@ -129,36 +154,35 @@
     void TypeChecker::identifierExperssion(const std::string id) {
         std::cout<<"id expr\n";
 
+        auto tempType = typeTable.get(id);
+
+        typeStack.push(tempType);
+
     }
 
     void TypeChecker::boolExperssion(const bool value) {
         std::cout<<"bool expr\n";
 
-        BoolTypeDesc* boolTypeDesc = {};
-        typeStack.push(boolTypeDesc);
-        int a = 3;
-        a = 5;
+        typeStack.push(new BoolTypeDesc{});
+
     }
 
     void TypeChecker::intergerExperssion(const int value) {
         std::cout<<"int expr\n";
 
-        IntTypeDesc *intTypeDesc = {};
-        typeStack.push(intTypeDesc);
+        typeStack.push(new IntTypeDesc{});
     }
 
     void TypeChecker::floatExperssion(const float value) {
         std::cout<<"float expr\n";
 
-        FloatTypeDesc *floatTypeDesc = {};
-        typeStack.push(floatTypeDesc);
+        typeStack.push(new FloatTypeDesc{});
     }
 
     void TypeChecker::charExpression(const char value) {
         std::cout<<"char expr\n";
 
-        CharTypeDesc *charTypeDesc = {};
-        typeStack.push(charTypeDesc);
+        typeStack.push(new CharTypeDesc{});
     }
 
 
@@ -171,17 +195,18 @@
         visitRightSide();
         TypeDescriptor * rightSide = typeStack.pop();
 
-        if(typeid(leftSide)!=typeid(IntTypeDesc) && typeid(leftSide)!= typeid(FloatTypeDesc) && typeid(leftSide)!= typeid(BoolTypeDesc)){
-            errors.push("wrong type, only int, float and bool allowed");
-            std::cout<<"type not right, leftside (add)";
-        }
-        if(typeid(rightSide)!=typeid(IntTypeDesc) && typeid(rightSide)!= typeid(FloatTypeDesc) && typeid(rightSide)!= typeid(BoolTypeDesc)){
-            errors.push("wrong type, only int, float and bool allowed");
-            std::cout<<"type not right, rightside (add)";
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
+            errors.push("wrong type for leftSide, only int, float or bool allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
-        if(leftSide->compare(*rightSide)){
-            errors.push("can't add the differnt types");
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{})){
+            errors.push("wrong type for rightSide, only int, float or bool allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
         }
         typeStack.push(leftSide);
     }
@@ -240,29 +265,25 @@
     void TypeChecker::intType() {
         std::cout<<"int type check\n";
 
-        IntTypeDesc* intTypedesc = {};
-        typeStack.push(intTypedesc);
+       typeStack.push(new IntTypeDesc{});
     }
 
     void TypeChecker::boolType() {
         std::cout<<"bool type check\n";
 
-        BoolTypeDesc* boolTypedesc = {};
-        typeStack.push(boolTypedesc);
+        typeStack.push(new BoolTypeDesc{});
     }
 
     void TypeChecker::floatType() {
         std::cout<<"float type check\n";
 
-        FloatTypeDesc* floatTypedesc = {};
-        typeStack.push(floatTypedesc);
+        typeStack.push(new FloatTypeDesc{});
     }
 
     void TypeChecker::charType() {
         std::cout<<"char type check\n";
 
-        CharTypeDesc* charTypedesc = {};
-        typeStack.push(charTypedesc);
+        typeStack.push(new CharTypeDesc{});
     }
 
     void TypeChecker::functionType(const std::vector<std::string> parametersName,const std::vector<std::function < void ()>> visitParametersType, const std::vector<std::string> resultsName, const std::vector<std::function < void ()>> visitResultsType) {
@@ -303,4 +324,8 @@ std::vector<std::string> TypeChecker::getErrors(){
 
     return errorlist;
     
+}
+
+bool TypeChecker::emptyErrors(){
+    return errors.empty();
 }

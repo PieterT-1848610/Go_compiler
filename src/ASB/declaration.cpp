@@ -42,9 +42,14 @@ void ASB::VariableDeclaration::accept(Visitor *visitor) const{
             expre->accept(visitor);
         });
     }
+
     std::function<void ()>visitType{[visitor, this](){
         this->type->accept(visitor);
     }};
+
+    if(this->type == NULL){
+        visitType = NULL;
+    }
 
     visitor->variableDeclaration(this->ids, visitType, visitExpressions);
 }

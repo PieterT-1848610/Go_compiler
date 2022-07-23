@@ -18,7 +18,7 @@ TypeCode BoolTypeDesc::getCode() const{
 
 bool IntTypeDesc::compare(const TypeDescriptor &other) const{
     TypeCode otherType = other.getCode();
-
+    
     return (TypeCode::integerType == otherType);
 }
 

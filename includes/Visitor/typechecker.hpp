@@ -122,6 +122,8 @@ class TypeChecker: public Visitor{
 
         std::vector<std::string> getErrors();
 
+        bool emptyErrors();
+
     private:
         Stack<std::string> errors;
 

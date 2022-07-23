@@ -26,9 +26,9 @@ class SymbolTable{
 
         //TODO: van achter naar voor checken, niet bestaat error
         T get(std::string key) {
-            for(int i = 0; i<table.size(); i++){
+            for(int i = table.size() - 1; i>=0; i--){
                 
-                if(this->table[i].contains(key)){
+                if(this->table[i].count(key)>0){
                     return table[i][key];
                 }
             }

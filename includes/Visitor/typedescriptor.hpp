@@ -29,6 +29,7 @@ class TypeDescriptor{
 
 class BoolTypeDesc: public TypeDescriptor{
     public:
+        BoolTypeDesc() = default;
         bool compare (const TypeDescriptor &other) const override;  //if equal to other.getcode()
         std::string toString() const override;       //return bool as string
         TypeCode getCode() const override;          //return typeCode::bool
@@ -37,6 +38,7 @@ class BoolTypeDesc: public TypeDescriptor{
 
 class IntTypeDesc: public TypeDescriptor{
     public:
+        IntTypeDesc() = default;
         bool compare(const TypeDescriptor &other) const override;
         std::string toString() const override;
         TypeCode getCode() const override;
@@ -45,6 +47,7 @@ class IntTypeDesc: public TypeDescriptor{
 
 class FloatTypeDesc: public TypeDescriptor{
     public:
+        FloatTypeDesc() = default;
         bool compare(const TypeDescriptor &other) const override;
         std::string toString() const override;
         TypeCode getCode() const override;
@@ -53,6 +56,7 @@ class FloatTypeDesc: public TypeDescriptor{
 
 class CharTypeDesc: public TypeDescriptor{
     public:
+        CharTypeDesc() = default;
         bool compare(const TypeDescriptor &other) const override;
         std::string toString() const override;
         TypeCode getCode() const override;

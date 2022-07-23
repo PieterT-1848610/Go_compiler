@@ -17,23 +17,27 @@ int main(){
     yyparse();
     //
     if(tree != nullptr){
-        int a = 5;
-        //tree.print();
-        //typechecking 
-        //TypeTable<int> typeTable{};
+        
     
         TypeChecker typecheck {};
-        tree->accept(&typecheck);
-        std::cout<<"printing possible Errors \n";
-        for(auto error: typecheck.getErrors()){
-            std::cout<<error<<"\n";
+        try{
+            tree->accept(&typecheck);
+        }catch(...){
+            std::cout<<"crash?";
         }
+        if(!typecheck.emptyErrors()){
+            std::cout<<"printing Errors: \n";
+            for(auto error: typecheck.getErrors()){
+                std::cout<<error<<"\n";
+            }
+        }else{
+            std::cout<<"No Type errors\n";
 
-        std::cout<<"fucking Succes\n";
+        }
         //interpreteren 
         return EXIT_SUCCESS;
     }else{
-        std::cout<<"fucking Failure\n";
+        std::cout<<"Tree failed to build\n";
         return EXIT_FAILURE;
     }
 
