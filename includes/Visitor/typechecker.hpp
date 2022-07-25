@@ -134,7 +134,10 @@ class TypeChecker: public Visitor{
         SymbolTable<TypeDescriptor*> typeTable;
         
         //gets functionDescriptor to compare the return types
-        TypeDescriptor * expactedReturnType;
+        FunctionTypeDesc * currentFunctionType;
+
+        //eerste enkle sign, daarna function bezit body en de rest
+        std::vector<std::pair<std::string, std::function <void ()> >> functionSignature;
 
 };
 

@@ -273,9 +273,10 @@ topDeclaration
 
 
 listTopDeclarations
-    :topDeclaration                         {
-                                                $$ =$1;
+    :topDeclaration ';'                         {
+                                               $$ =$1;
                                             }
+
     |topDeclaration ';' listTopDeclarations  {
                                                 auto topdeclartionlist = $1->toVector();
                                                 delete $1;

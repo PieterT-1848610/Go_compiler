@@ -20,11 +20,11 @@ int main(){
         
     
         TypeChecker typecheck {};
-        try{
+       // try{
             tree->accept(&typecheck);
-        }catch(...){
-            std::cout<<"crash?";
-        }
+        //}catch(...){
+        //    std::cout<<"crash?";
+        //}
         if(!typecheck.emptyErrors()){
             std::cout<<"printing Errors: \n";
             for(auto error: typecheck.getErrors()){

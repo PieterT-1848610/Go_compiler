@@ -3,7 +3,7 @@
     #include <typeinfo>
     #include <iostream>
 
-    TypeChecker::TypeChecker(): errors{}, typeStack{}, typeTable{}, expactedReturnType{}{
+    TypeChecker::TypeChecker(): errors{}, typeStack{}, typeTable{}, currentFunctionType{}{
 
     }
 
@@ -18,6 +18,8 @@
             declartion();
             std::cout<<"\n\n\n";
         }
+
+        //daarna alle vector functie aan van de functies
         //check and find main
         //
 
@@ -26,10 +28,18 @@
     void TypeChecker::block(const std::vector< std::function<void ()>> visitStatments){
         std::cout<<"check block \n";
         typeTable.newScope();
+        //maybe set the function params?
+        //unpacken van currentFunctionType en set typeTable setten? voor params en voor Return als id hebben
+        //mag enkel als functie is
+
+        //set params vector
+        //Set return vector
+        //clear vector params
+        //claer vector return
         for(auto stats: visitStatments){
             stats();
         }
-
+        
         typeTable.removeScope();
     }
 //not sure
@@ -39,7 +49,17 @@
         visitSignature();
         auto functionsign = typeStack.pop();
         typeTable.set(id, functionsign);
-        expactedReturnType = functionsign;
+        //functionsing unpacken en die op typeTable setten
+        //std::function
+        //dat deel uistellen en in vector steken voor later op te roepen.
+        //[functionSign]
+        currentFunctionType = dynamic_cast<FunctionTypeDesc *> (functionsign);
+        //unpack get param  set op param vecctor
+        //unpack return types   set op return vector
+        //
+        if(currentFunctionType == nullptr){
+            throw("fucked up hard, casting");
+        }
         visitFunctionBody();
 
     }
@@ -136,17 +156,28 @@
 
     }
 
+
+    //TODO: not working like wtf, ExpactedReturnType keeps empty
     void TypeChecker::returnStatment(const std::vector<std::function< void ()>> visitExpressions) {
         std::cout<<"return stat\n";
         
-        for(auto expression: visitExpressions){
-            expression();
+        //auto funcSign = static_cast<FunctionTypeDesc *>(currentFunctionType);
+
+
+        //if(visitExpressions.size() != funcSign->getReturnsTypeDesc().size()){
+        //    errors.push("Return expression must match number of expected returns");
+        //}
+
+        //auto expactedTypes = funcSign->getReturnsTypeDesc();
+
+        for(int i = 0; i<visitExpressions.size(); i++){
+            visitExpressions[i]();
+            auto returnType = typeStack.pop();
+        //    if(!expactedTypes[i]->compare(* returnType)){
+        //        errors.push("Return expr don't match expected type");
+        //    }
         }
 
-        auto returnType = typeStack.pop();
-        if(returnType == expactedReturnType){
-            errors.push("return Types don't match");
-        }
     }
 
 
@@ -155,7 +186,7 @@
         std::cout<<"id expr\n";
 
         auto tempType = typeTable.get(id);
-
+        std::cout<<"id expr type " << tempType->toString() << "\n";
         typeStack.push(tempType);
 
     }
@@ -304,8 +335,8 @@
             returns.push_back(std::make_pair(resultsName[i], tempType));
         }
 
-        FunctionTypeDesc funcTypeDesc = FunctionTypeDesc(parameter, returns);
-        typeStack.push(&funcTypeDesc);
+        FunctionTypeDesc *funcTypeDesc = new FunctionTypeDesc(parameter, returns);
+        typeStack.push(funcTypeDesc);
 
     }
 
