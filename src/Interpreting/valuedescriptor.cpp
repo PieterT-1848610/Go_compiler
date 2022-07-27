@@ -1,8 +1,8 @@
 #include "Interpreting/valuedescriptor.hpp"
 
-ValueDescriptor* ValueDescriptor::getDescri(){
-    return this;
-}
+// ValueDescriptor* ValueDescriptor::getDescri(){
+//     return this;
+// }
 
 BoolValue::BoolValue(bool value): value{value}{
 
@@ -37,11 +37,11 @@ char CharValue::getValue(){
 }
 
 
-FunctionValue::FunctionValue(){
+FunctionValue::FunctionValue(std::function<void ()> func): func{func}{
 
 }
 
-// ValueDescriptor * FunctionValue::execute(std::vector<ValueDescriptor *> paramValues){
+void FunctionValue::execute(){
+    func();
 
-
-// }
+}

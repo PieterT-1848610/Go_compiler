@@ -65,6 +65,8 @@ class TypeChecker: public Visitor{
         void floatExperssion(const float value) override;
 
         void charExpression(const char value) override;
+
+        void callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments) override;
         
 
         //void identifierExperssion(const std::string id);
@@ -123,6 +125,8 @@ class TypeChecker: public Visitor{
         std::vector<std::string> getErrors();
 
         bool emptyErrors();
+
+        bool checkDuplicateStrings(std::vector<std::string> listString);
 
     private:
         Stack<std::string> errors;

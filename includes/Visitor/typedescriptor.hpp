@@ -78,6 +78,8 @@ class FunctionTypeDesc: public TypeDescriptor{
         std::string toString() const override;
         TypeCode getCode() const override;
 
+        bool compareType(const TypeDescriptor &other) const;
+
         std::vector<std::string> getParametersIds();
         std::vector<TypeDescriptor *> getParametersTypeDesc();
 

@@ -69,7 +69,11 @@ FunctionTypeDesc::~FunctionTypeDesc(){
 
 }
 
+bool FunctionTypeDesc::compareType(const TypeDescriptor &other) const{
+    TypeCode otherType = other.getCode();
 
+    return (TypeCode::functionType == otherType);
+}
 
 bool FunctionTypeDesc::compare(const TypeDescriptor &other) const{
     TypeCode otherType = other.getCode();

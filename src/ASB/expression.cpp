@@ -43,6 +43,33 @@ void ASB::CharExpression::accept(Visitor *visitor) const{
     visitor->charExpression(this->value);
 }
 
+ASB::CallExpression::CallExpression(Expression *expression, std::vector<Expression *> arguments): 
+arguments{arguments}, expression{expression}{
+
+}
+
+ASB::CallExpression::~CallExpression(){
+    delete expression;
+    for(auto arg: arguments){
+        delete arg;
+    }
+}
+
+void ASB::CallExpression::accept(Visitor *visitor) const{
+    std::function<void ()> visitExpression{[visitor, this](){
+        this->expression->accept(visitor);
+    }};
+    std::vector<std::function<void ()>> visitArguments {};
+    for(auto arg: this->arguments){
+        visitArguments.push_back([arg, visitor](){
+            arg->accept(visitor);
+        });
+    }
+
+    visitor->callExpression(visitExpression, visitArguments);
+
+}
+
 ASB::BinaryAddOperation::BinaryAddOperation(Expression *leftSide, Expression *rightSide): leftSide{leftSide}, rightSide{rightSide}{
 
 };

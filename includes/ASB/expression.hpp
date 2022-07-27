@@ -3,6 +3,7 @@
 
 #include "asb.hpp"
 #include <string>
+#include <vector>
 
 namespace ASB{
 //leaf dus impl van visitor
@@ -64,6 +65,17 @@ class CharExpression: public Expression{
         char value;
 };
 
+
+class CallExpression: public Expression{
+    public:
+        CallExpression(Expression * expression, std::vector<Expression *> arguments);
+        virtual ~CallExpression() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        std::vector<Expression *> arguments;
+        Expression* expression;
+};
 
 //need to be specilias  up in add, sub, 
 //so not a leaf, protected constructor

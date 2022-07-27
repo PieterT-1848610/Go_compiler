@@ -443,7 +443,10 @@ unaryExpr
     ;
 
 primaryExpr
-    :operand                        {$$ = $1;}
+    :operand                            {$$ = $1;}
+    |primaryExpr '(' ')'                {$$ = new ASB::CallExpression{$1, {}};}
+    |primaryExpr '(' expressionList ')'
+                                        {$$ = new ASB::CallExpression{$1, $3->toVector()};}
     ;
 
 operand

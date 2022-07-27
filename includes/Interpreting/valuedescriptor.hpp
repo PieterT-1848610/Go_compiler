@@ -4,12 +4,13 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <functional>
 
 class ValueDescriptor{
 
     public:
         virtual ~ValueDescriptor()= default;
-        virtual ValueDescriptor * getDescri();
+        //virtual ValueDescriptor * getDescri();
 
     protected:
         ValueDescriptor() = default;
@@ -25,7 +26,7 @@ class BoolValue: public ValueDescriptor{
         bool value;
 };
 
-
+//na kijken of long long moet zijn (64bit of 32 bit)
 class IntValue: public ValueDescriptor{
     public:
         IntValue(long value);
@@ -60,12 +61,12 @@ class CharValue: public ValueDescriptor{
 //TODO: needs work, parameters, body, rest
 class FunctionValue: public ValueDescriptor{
     public:
-        FunctionValue();
+        FunctionValue(std::function<void ()> func);
         ~FunctionValue() = default;
 
-        //ValueDescriptor* execute(std::vector<ValueDescriptor *> paramValues);
+        void execute();
     private:
-
+        std::function <void ()> func;     //wat de code uitvoert
         
 
 };

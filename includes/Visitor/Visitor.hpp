@@ -46,6 +46,8 @@ class Visitor{
         virtual void floatExperssion(const float value)=0;
 
         virtual void charExpression(const char value)=0;
+
+        virtual void callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments)=0;
         
 
         //virtual void identifierExperssion(const std::string id)=0;

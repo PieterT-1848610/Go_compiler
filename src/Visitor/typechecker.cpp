@@ -2,10 +2,17 @@
     #include <vector>
     #include <typeinfo>
     #include <iostream>
+    #include <map>
 
+
+    //add option for other print statments
     TypeChecker::TypeChecker(bool debug): errors{}, typeStack{}, typeTable{}, 
     currentFunctionType{}, functionSignatures{}, paramTypes{}, 
     returnTypes{}, debug{debug}{
+
+        typeTable.set("printInt", new FunctionTypeDesc{{ std::make_pair("value", new IntTypeDesc{})} , {}});
+        typeTable.set("printFloat", new FunctionTypeDesc{{ std::make_pair("value", new FloatTypeDesc{})} , {}});
+        typeTable.set("printBool", new FunctionTypeDesc{{ std::make_pair("value", new BoolTypeDesc{})} , {}});
 
     }
 
@@ -120,13 +127,21 @@
                 errors.push("Not allowed to create var this way");
                 return;
             }
+            std::vector<TypeDescriptor *> tempTypes = {};
             for(int i = 0; i<ids.size(); i++){
                 visitExpressions[i]();
-                auto tempExpType = typeStack.pop();
+                tempTypes.push_back(typeStack.pop());
+
+                // if(typeTable.contains(ids[i])){
+                //     errors.push("Id already in use");
+                // }
+                // typeTable.set(ids[i], tempExpType);
+            }
+            for(int i = 0; i<ids.size(); i++){
                 if(typeTable.contains(ids[i])){
                     errors.push("Id already in use");
                 }
-                typeTable.set(ids[i], tempExpType);
+                typeTable.set(ids[i], tempTypes[i]);
             }
 
         }else{
@@ -278,6 +293,48 @@
         typeStack.push(new CharTypeDesc{});
     }
 
+    void TypeChecker::callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments){
+        if(debug){
+            std::cout<<"Call expr \n";
+        }
+        visitExpression();
+        auto exprType = typeStack.pop();
+        //maybe do something with?
+        std::vector<TypeDescriptor *> argTypes{};
+        for(auto arg: visitArguments){
+            arg();
+            argTypes.push_back(typeStack.pop());
+        }
+
+        FunctionTypeDesc *tempFunc {};
+
+        if(!tempFunc->compareType(*exprType)){
+            errors.push("Call needs to be to a function");
+        }
+
+
+        auto funcType = dynamic_cast<FunctionTypeDesc *>(exprType);
+
+        auto paramType = funcType->getParametersTypeDesc();
+
+        if(paramType.size() != argTypes.size()){
+            errors.push("No same amount of params as arguments for function");
+        }
+
+        for(int i = 0; i<paramType.size(); i++){
+            if(!paramType[i]->compare(*argTypes[i])){
+                errors.push("Argument Type did not match expacted paramtype for function");
+            }
+        }
+
+        auto returnType = funcType->getReturnsTypeDesc();
+        for(auto ret: returnType){
+            typeStack.push(ret);
+        }
+
+
+    }
+
 
     // void Visiting::identifierExperssion(const std::string id);
     //Binary for alle operatie +, -, /, * const std::function< void ()> visitleft en const std::function< void ()>rightside (function)
@@ -396,7 +453,15 @@
             std::cout<<"function type \n";
         }
 
+        if(checkDuplicateStrings(parametersName)){
+            errors.push("Cant use same name for different params");
+        }
+        if(checkDuplicateStrings(resultsName)){
+            errors.push("Cant use same name for different returns");
+        }
+
         std::vector<std::pair<std::string, TypeDescriptor *>> parameter = {};
+
 
         for(int i = 0; i < visitParametersType.size(); i++){
             visitParametersType[i]();
@@ -438,4 +503,21 @@ std::vector<std::string> TypeChecker::getErrors(){
 
 bool TypeChecker::emptyErrors(){
     return errors.empty();
+}
+
+bool TypeChecker::checkDuplicateStrings(std::vector<std::string> listString){
+    std::map<std::string, int> countMap = {};
+
+    for(auto elem: listString){
+        auto result = countMap.insert(std::pair<std::string, int>(elem, 1));
+        if(result.second ==false){
+            result.first->second++;
+        }
+    }
+    for(auto elem: countMap){
+        if(elem.second >1){
+            return true;
+        }
+    }
+    return false;
 }

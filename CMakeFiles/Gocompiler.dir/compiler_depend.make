@@ -1325,7 +1325,15 @@ CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o: src/Interpreti
   /usr/include/c++/9/bits/stl_bvector.h \
   /usr/include/c++/9/bits/vector.tcc \
   /usr/include/c++/9/utility \
-  /usr/include/c++/9/bits/stl_relops.h
+  /usr/include/c++/9/bits/stl_relops.h \
+  /usr/include/c++/9/functional \
+  /usr/include/c++/9/tuple \
+  /usr/include/c++/9/array \
+  /usr/include/c++/9/stdexcept \
+  /usr/include/c++/9/bits/uses_allocator.h \
+  /usr/include/c++/9/bits/invoke.h \
+  /usr/include/c++/9/bits/refwrap.h \
+  /usr/include/c++/9/bits/std_function.h
 
 CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o: src/Lexer/lexer.cpp \
   /usr/include/stdio.h \
@@ -1943,7 +1951,11 @@ CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: src/Visitor/typechecker
   /usr/include/c++/9/bits/hashtable_policy.h \
   /usr/include/c++/9/limits \
   /usr/include/c++/9/bits/unordered_map.h \
-  /usr/include/c++/9/bits/erase_if.h
+  /usr/include/c++/9/bits/erase_if.h \
+  /usr/include/c++/9/map \
+  /usr/include/c++/9/bits/stl_tree.h \
+  /usr/include/c++/9/bits/stl_map.h \
+  /usr/include/c++/9/bits/stl_multimap.h
 
 CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o: src/Visitor/typedescriptor.cpp \
   includes/Visitor/typedescriptor.hpp \
@@ -2322,6 +2334,10 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: src/main.cpp \
   includes/Interpreting/valuedescriptor.hpp
 
 
+/usr/include/c++/9/bits/stl_tree.h:
+
+/usr/include/c++/9/map:
+
 includes/Visitor/typechecker.hpp:
 
 src/Visitor/typechecker.cpp:
@@ -2524,6 +2540,8 @@ includes/other/stack.hpp:
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h:
 
+/usr/include/c++/9/bits/stl_map.h:
+
 /usr/include/c++/9/bits/stl_uninitialized.h:
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/c++allocator.h:
@@ -2569,6 +2587,8 @@ src/Parser/parser.cpp:
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+
+/usr/include/c++/9/bits/stl_multimap.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 

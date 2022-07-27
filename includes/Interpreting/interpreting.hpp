@@ -52,6 +52,9 @@ class Interpreting: public Visitor{
         void floatExperssion(const float value) override;
 
         void charExpression(const char value) override;
+
+        void callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments) override;
+
         
 
         //Binary for alle operatie +, -, /, * const std::function<void ()> visitleft en const std::function<void ()>rightside (function)
@@ -102,9 +105,15 @@ class Interpreting: public Visitor{
 
         Stack<ValueDescriptor *> valueStack;
 
+        
         SymbolTable<ValueDescriptor *> valueTable;
 
-        std::vector<std::pair<std::string, std::function <void ()> >> functionSignature;
+        std::vector<std::pair<std::string, ValueDescriptor *>> paramValues;
+        
+
+        std::vector<std::string> paramNames;
+        //mapping van function op naam
+        //std::vector<std::pair<std::string, std::function <void ()> >> functionSignature;
 
 };
 
