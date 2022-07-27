@@ -1,19 +1,19 @@
-#ifndef VISITING_VISITING_HPP
-#define VISITING_VISITING_HPP
+#ifndef INTERPRETING_INTERPRETING_HPP
+#define INTERPRETING_INTERPRETING_HPP
+
 
 #include <vector>
 #include <string>
 #include <functional>
 #include "other/stack.hpp"
-#include "Visitor/typedescriptor.hpp"
-#include "Visitor.hpp"
+#include "valuedescriptor.hpp"
+#include "Visitor/Visitor.hpp"
 #include "other/symboltable.hpp"
 
-
-class TypeChecker: public Visitor{
+class Interpreting: public Visitor{
     public:
-        TypeChecker(bool debug = false);
-        ~TypeChecker();
+        Interpreting();
+        ~Interpreting();
     
         void root(const std::vector< std::function<void ()>> visitDeclarations) override;
 
@@ -22,25 +22,12 @@ class TypeChecker: public Visitor{
 
         //Declaration
         void functionDeclaration(const std::string id, const std::function<void ()> visitSignature, const std::function<void ()> visitFunctionBody) override;   //add to funcTable
-        //visitSign, gaat para en return visit komen op stack
-        //assign functypdesc to id and push to functionTable
-        //set ExpactedReturnType
-        //visitFunctionBody
-
-
-
+        
 
         void variableDeclaration(const std::vector<std::string> ids, const std::function<void ()> visitType, const std::vector < std::function<void ()>> visitExpressions) override; 
-        //vistType and pop
-        //visit all Expr
-        //compare with type
-        //
-        //check if id already exists
-        //add to varTable (ids, and type) 
-
 
         //statments
-        void expressionStatment(const std::function<void ()> visitExperssion) override; //hint pop last type
+        void expressionStatment(const std::function<void ()> visitExperssion) override; 
 
         void emptyStatment() override;  
 
@@ -52,7 +39,7 @@ class TypeChecker: public Visitor{
 
         void ifStatment(const std::function<void ()> visitCondition, const std::function<void ()> visitTrueCondition, const std::function<void ()> visitFalseCondition) override;
 
-        void returnStatment(const std::vector<std::function<void ()>> visitExpressions) override;   //pop type and compare to expactedreturntype
+        void returnStatment(const std::vector<std::function<void ()>> visitExpressions) override;   
 
 
         //expresions
@@ -67,17 +54,8 @@ class TypeChecker: public Visitor{
         void charExpression(const char value) override;
         
 
-        //void identifierExperssion(const std::string id);
         //Binary for alle operatie +, -, /, * const std::function<void ()> visitleft en const std::function<void ()>rightside (function)
-        void binaryAddExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) override;     //visitleftside() (for visiting side)
-                                                                                                                                        //pop 
-                                                                                                                                        //visitright
-                                                                                                                                        //pop
-
-                                                                                                                                        //check if types are allowed
-                                                                                                                                        //left and right
-                                                                                                                                        //compare the types
-                                                                                                                                        //push type of leftside on stack
+        void binaryAddExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) override;     
                                                                                                                                         
 
         void binaryMinExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) override;
@@ -107,7 +85,7 @@ class TypeChecker: public Visitor{
 
 
         //types
-        void intType() override;    //wordt op de typeStack gegooit
+        void intType() override;    
 
         void boolType() override;
 
@@ -116,33 +94,17 @@ class TypeChecker: public Visitor{
         void charType() override;
 
         void functionType(const std::vector<std::string> parametersName,const std::vector<std::function <void ()>> visitParametersType, const std::vector<std::string> resultsName, const std::vector<std::function <void ()>> visitResultsType) override;
-            //visit and make functiondesc
+
 
         void identifierType(const std::string id) override;
 
-        std::vector<std::string> getErrors();
-
-        bool emptyErrors();
-
     private:
-        Stack<std::string> errors;
 
-        //stack for printing?, wich class 
-        Stack<TypeDescriptor*> typeStack;
+        Stack<ValueDescriptor *> valueStack;
 
-        //symboltable func and symboltable var;
-        SymbolTable<TypeDescriptor*> typeTable;
-        
-        //gets functionDescriptor to compare the return types
-        FunctionTypeDesc * currentFunctionType;
+        SymbolTable<ValueDescriptor *> valueTable;
 
-        //eerste enkle sign, daarna function bezit body en de rest
-        std::vector<std::pair<std::string, std::function <void ()> >> functionSignatures;
-
-        std::vector<std::pair<std::string, TypeDescriptor*>> paramTypes;
-        std::vector<std::pair<std::string, TypeDescriptor*>> returnTypes;
-
-        bool debug;
+        std::vector<std::pair<std::string, std::function <void ()> >> functionSignature;
 
 };
 

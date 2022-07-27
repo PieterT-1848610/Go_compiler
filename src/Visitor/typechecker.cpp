@@ -3,7 +3,9 @@
     #include <typeinfo>
     #include <iostream>
 
-    TypeChecker::TypeChecker(): errors{}, typeStack{}, typeTable{}, currentFunctionType{}{
+    TypeChecker::TypeChecker(bool debug): errors{}, typeStack{}, typeTable{}, 
+    currentFunctionType{}, functionSignatures{}, paramTypes{}, 
+    returnTypes{}, debug{debug}{
 
     }
 
@@ -13,12 +15,28 @@
 
     //fucked
     void TypeChecker::root(const std::vector< std::function<void ()>> visitDeclarations){
-        std::cout<<"Root start: number of decla"<<visitDeclarations.size() <<"\n";
+        if(debug){
+            std::cout<<"Root start: number of decla"<<visitDeclarations.size() <<"\n";
+        }
         for(auto declartion: visitDeclarations){
             declartion();
-            std::cout<<"\n\n\n";
+        }
+        if(!typeTable.contains("main")){
+            errors.push("No main function found");
+        }
+        auto mainFunc = dynamic_cast<FunctionTypeDesc *>(typeTable.get("main"));
+        if(mainFunc == nullptr){
+            throw("casting problem typechecking");
         }
 
+        if(mainFunc->getParametersIds().size() != 0 || mainFunc->getReturnsIds().size() != 0){
+            errors.push("no input or output allow for main function");
+        }
+
+
+        for(int i = 0; i < functionSignatures.size(); i++){
+            functionSignatures[i].second();
+        }
         //daarna alle vector functie aan van de functies
         //check and find main
         //
@@ -26,16 +44,29 @@
     }
 
     void TypeChecker::block(const std::vector< std::function<void ()>> visitStatments){
-        std::cout<<"check block \n";
+        if(debug){
+            std::cout<<"check block \n";
+        }
         typeTable.newScope();
         //maybe set the function params?
         //unpacken van currentFunctionType en set typeTable setten? voor params en voor Return als id hebben
         //mag enkel als functie is
-
         //set params vector
-        //Set return vector
-        //clear vector params
-        //claer vector return
+        if(!paramTypes.empty()){
+            for(auto param: paramTypes){
+                typeTable.set(param.first, param.second);
+            }
+        }
+        if(!returnTypes.empty()){
+            for(auto returning: returnTypes){
+                typeTable.set(returning.first, returning.second);
+            }
+        }
+
+        paramTypes.clear();
+        returnTypes.clear();
+    
+        
         for(auto stats: visitStatments){
             stats();
         }
@@ -44,7 +75,10 @@
     }
 //not sure
     void TypeChecker::functionDeclaration(const std::string id, const std::function< void ()> visitSignature, const std::function< void ()> visitFunctionBody) {
-        std::cout<<"check function \n";
+        if(debug){
+            std::cout<<"check function \n";
+        }
+
 
         visitSignature();
         auto functionsign = typeStack.pop();
@@ -53,20 +87,27 @@
         //std::function
         //dat deel uistellen en in vector steken voor later op te roepen.
         //[functionSign]
-        currentFunctionType = dynamic_cast<FunctionTypeDesc *> (functionsign);
-        //unpack get param  set op param vecctor
-        //unpack return types   set op return vector
-        //
-        if(currentFunctionType == nullptr){
-            throw("fucked up hard, casting");
-        }
-        visitFunctionBody();
+        std::function<void ()>visitRest{[functionsign, visitFunctionBody, this](){
+            currentFunctionType = dynamic_cast<FunctionTypeDesc *>(functionsign);
+            if(currentFunctionType == nullptr){
+                throw("fucked up hard, casting error");
+            }
+            paramTypes = this->currentFunctionType->getParams();
+            returnTypes = this->currentFunctionType->getReturns();
 
+            visitFunctionBody();
+            
+        }};
+
+        functionSignatures.push_back(std::make_pair(id, visitRest));
+        
     }
 
     //TODO: deal if type is not given?
     void TypeChecker::variableDeclaration(const std::vector<std::string> ids, const std::function< void ()> visitType, const std::vector < std::function< void ()>> visitExpressions) {
-        std::cout<<"check var \n";
+        if(debug){
+           std::cout<<"check var \n";
+        }
 
         if(ids.size() != visitExpressions.size()){
                 errors.push("Var declaration: number of ids, not match number of expressions");
@@ -111,18 +152,26 @@
 
     //statments
     void TypeChecker::expressionStatment(const std::function< void ()> visitExperssion) {
-        std::cout<<"check expre stat\n";
+        if(debug){
+            std::cout<<"check expre stat\n";
+        }
+        
+        
         visitExperssion();
         typeStack.pop();
     }
 
     void TypeChecker::emptyStatment() {
-        std::cout<<"empyt stat\n";
+        if(debug){
+            std::cout<<"empyt stat\n";
+        }
     }
 
     //further
     void TypeChecker::assignmentStatment(const std::vector< std::function< void ()>> visitLeftSide, const std::vector<  std::function< void ()>> visitRightSide) {
-        std::cout<<"assignstat stat\n";
+        if(debug){
+            std::cout<<"assignstat stat\n";
+        }
 
         for(auto leftSide: visitLeftSide){
             leftSide();
@@ -136,15 +185,18 @@
     }
 
     void TypeChecker::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {
-        std::cout<<"for stat\n";
-
+        if(debug){
+            std::cout<<"for stat\n";
+        }
 
 
     }
 
     void TypeChecker::declarationStament(const std::function< void ()>visitDeclaration) {
-        std::cout<<"decl  stat\n";
+        if(debug){
+            std::cout<<"decl  stat\n";
         
+        }
         visitDeclaration();
         //typeStack.pop();
 
@@ -152,30 +204,31 @@
     }
 
     void TypeChecker::ifStatment(const std::function< void ()> visitCondition, const std::function< void ()> visitTrueCondition, const std::function< void ()> visitFalseCondition) {
-        std::cout<<"if stat\n";
+        if(debug){
+            std::cout<<"if stat\n";
+        }
 
     }
 
 
     //TODO: not working like wtf, ExpactedReturnType keeps empty
     void TypeChecker::returnStatment(const std::vector<std::function< void ()>> visitExpressions) {
-        std::cout<<"return stat\n";
-        
-        //auto funcSign = static_cast<FunctionTypeDesc *>(currentFunctionType);
+        if(debug){
+            std::cout<<"return stat\n";
+        }
+            
+        if(visitExpressions.size() != currentFunctionType->getReturnsTypeDesc().size()){
+            errors.push("Return expression must match number of expected returns");
+        }
 
-
-        //if(visitExpressions.size() != funcSign->getReturnsTypeDesc().size()){
-        //    errors.push("Return expression must match number of expected returns");
-        //}
-
-        //auto expactedTypes = funcSign->getReturnsTypeDesc();
+        auto expactedTypes = currentFunctionType->getReturnsTypeDesc();
 
         for(int i = 0; i<visitExpressions.size(); i++){
             visitExpressions[i]();
             auto returnType = typeStack.pop();
-        //    if(!expactedTypes[i]->compare(* returnType)){
-        //        errors.push("Return expr don't match expected type");
-        //    }
+            if(!expactedTypes[i]->compare(* returnType)){
+                errors.push("Return expr don't match expected type");
+            }
         }
 
     }
@@ -183,35 +236,44 @@
 
     //expresions
     void TypeChecker::identifierExperssion(const std::string id) {
-        std::cout<<"id expr\n";
+        if(debug){
+            std::cout<<"id expr\n";
+        }
 
         auto tempType = typeTable.get(id);
-        std::cout<<"id expr type " << tempType->toString() << "\n";
         typeStack.push(tempType);
 
     }
 
     void TypeChecker::boolExperssion(const bool value) {
-        std::cout<<"bool expr\n";
+        if(debug){
+            std::cout<<"bool expr\n";
+        }
 
         typeStack.push(new BoolTypeDesc{});
 
     }
 
     void TypeChecker::intergerExperssion(const int value) {
-        std::cout<<"int expr\n";
+        if(debug){
+            std::cout<<"int expr\n";
+        }
 
         typeStack.push(new IntTypeDesc{});
     }
 
     void TypeChecker::floatExperssion(const float value) {
-        std::cout<<"float expr\n";
+        if(debug){
+            std::cout<<"float expr\n";
+        }
 
         typeStack.push(new FloatTypeDesc{});
     }
 
     void TypeChecker::charExpression(const char value) {
-        std::cout<<"char expr\n";
+        if(debug){
+            std::cout<<"char expr\n";
+        }
 
         typeStack.push(new CharTypeDesc{});
     }
@@ -220,7 +282,10 @@
     // void Visiting::identifierExperssion(const std::string id);
     //Binary for alle operatie +, -, /, * const std::function< void ()> visitleft en const std::function< void ()>rightside (function)
     void TypeChecker::binaryAddExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
-        std::cout<<"binary Add expre \n";
+        if(debug){
+            std::cout<<"binary Add expre \n";
+        }
+                       
         visitLeftSide();
         TypeDescriptor * leftSide = typeStack.pop();
         visitRightSide();
@@ -294,31 +359,43 @@
 
     //types
     void TypeChecker::intType() {
-        std::cout<<"int type check\n";
+        if(debug){
+            std::cout<<"int type check\n";
+        }
 
-       typeStack.push(new IntTypeDesc{});
+        typeStack.push(new IntTypeDesc{});
     }
 
     void TypeChecker::boolType() {
-        std::cout<<"bool type check\n";
+        if(debug){
+            std::cout<<"bool type check\n";
+        }
 
         typeStack.push(new BoolTypeDesc{});
     }
 
     void TypeChecker::floatType() {
-        std::cout<<"float type check\n";
+        if(debug){
+            std::cout<<"float type check\n";
+        }
+
 
         typeStack.push(new FloatTypeDesc{});
     }
 
     void TypeChecker::charType() {
-        std::cout<<"char type check\n";
+        if(debug){
+            std::cout<<"char type check\n";
+        }
 
         typeStack.push(new CharTypeDesc{});
     }
 
     void TypeChecker::functionType(const std::vector<std::string> parametersName,const std::vector<std::function < void ()>> visitParametersType, const std::vector<std::string> resultsName, const std::vector<std::function < void ()>> visitResultsType) {
-        std::cout<<"function type \n";
+        if(debug){
+            std::cout<<"function type \n";
+        }
+
         std::vector<std::pair<std::string, TypeDescriptor *>> parameter = {};
 
         for(int i = 0; i < visitParametersType.size(); i++){
@@ -341,7 +418,9 @@
     }
 
     void TypeChecker::identifierType(const std::string id) {
-        std::cout<<"identiefier type check";
+        if(debug){
+            std::cout<<"identiefier type check";
+        }
         
     }
 

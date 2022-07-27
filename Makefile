@@ -249,6 +249,54 @@ src/ASB/types.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.s
 .PHONY : src/ASB/types.cpp.s
 
+src/Interpreting/interpreting.o: src/Interpreting/interpreting.cpp.o
+.PHONY : src/Interpreting/interpreting.o
+
+# target to build an object file
+src/Interpreting/interpreting.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o
+.PHONY : src/Interpreting/interpreting.cpp.o
+
+src/Interpreting/interpreting.i: src/Interpreting/interpreting.cpp.i
+.PHONY : src/Interpreting/interpreting.i
+
+# target to preprocess a source file
+src/Interpreting/interpreting.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.i
+.PHONY : src/Interpreting/interpreting.cpp.i
+
+src/Interpreting/interpreting.s: src/Interpreting/interpreting.cpp.s
+.PHONY : src/Interpreting/interpreting.s
+
+# target to generate assembly for a file
+src/Interpreting/interpreting.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.s
+.PHONY : src/Interpreting/interpreting.cpp.s
+
+src/Interpreting/valuedescriptor.o: src/Interpreting/valuedescriptor.cpp.o
+.PHONY : src/Interpreting/valuedescriptor.o
+
+# target to build an object file
+src/Interpreting/valuedescriptor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o
+.PHONY : src/Interpreting/valuedescriptor.cpp.o
+
+src/Interpreting/valuedescriptor.i: src/Interpreting/valuedescriptor.cpp.i
+.PHONY : src/Interpreting/valuedescriptor.i
+
+# target to preprocess a source file
+src/Interpreting/valuedescriptor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.i
+.PHONY : src/Interpreting/valuedescriptor.cpp.i
+
+src/Interpreting/valuedescriptor.s: src/Interpreting/valuedescriptor.cpp.s
+.PHONY : src/Interpreting/valuedescriptor.s
+
+# target to generate assembly for a file
+src/Interpreting/valuedescriptor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Gocompiler.dir/build.make CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.s
+.PHONY : src/Interpreting/valuedescriptor.cpp.s
+
 src/Lexer/lexer.o: src/Lexer/lexer.cpp.o
 .PHONY : src/Lexer/lexer.o
 
@@ -393,6 +441,12 @@ help:
 	@echo "... src/ASB/types.o"
 	@echo "... src/ASB/types.i"
 	@echo "... src/ASB/types.s"
+	@echo "... src/Interpreting/interpreting.o"
+	@echo "... src/Interpreting/interpreting.i"
+	@echo "... src/Interpreting/interpreting.s"
+	@echo "... src/Interpreting/valuedescriptor.o"
+	@echo "... src/Interpreting/valuedescriptor.i"
+	@echo "... src/Interpreting/valuedescriptor.s"
 	@echo "... src/Lexer/lexer.o"
 	@echo "... src/Lexer/lexer.i"
 	@echo "... src/Lexer/lexer.s"

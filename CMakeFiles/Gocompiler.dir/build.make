@@ -150,11 +150,39 @@ CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/ASB/types.cpp -o CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.s
 
+CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
+CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o: src/Interpreting/interpreting.cpp
+CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/interpreting.cpp
+
+CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/interpreting.cpp > CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.i
+
+CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/interpreting.cpp -o CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.s
+
+CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
+CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o: src/Interpreting/valuedescriptor.cpp
+CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/valuedescriptor.cpp
+
+CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/valuedescriptor.cpp > CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.i
+
+CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/valuedescriptor.cpp -o CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.s
+
 CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
 CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o: src/Lexer/lexer.cpp
 CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o: src/Parser/parser.hpp
 CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp
 
 CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.i: cmake_force
@@ -165,24 +193,10 @@ CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/lexer.cpp -o CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.s
 
-CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
-CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: src/Parser/parser.cpp
-CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp
-
-CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp > CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.i
-
-CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp -o CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s
-
 CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
 CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: src/Visitor/typechecker.cpp
 CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/typechecker.cpp
 
 CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.i: cmake_force
@@ -196,7 +210,7 @@ CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.s: cmake_force
 CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
 CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o: src/Visitor/typedescriptor.cpp
 CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Visitor/typedescriptor.cpp
 
 CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.i: cmake_force
@@ -210,7 +224,7 @@ CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.s: cmake_force
 CMakeFiles/Gocompiler.dir/src/main.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
 CMakeFiles/Gocompiler.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/Gocompiler.dir/src/main.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Gocompiler.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Gocompiler.dir/src/main.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/main.cpp.o -MF CMakeFiles/Gocompiler.dir/src/main.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/main.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/main.cpp
 
 CMakeFiles/Gocompiler.dir/src/main.cpp.i: cmake_force
@@ -221,6 +235,20 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/main.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/main.cpp -o CMakeFiles/Gocompiler.dir/src/main.cpp.s
 
+CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: CMakeFiles/Gocompiler.dir/flags.make
+CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: src/Parser/parser.cpp
+CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o: CMakeFiles/Gocompiler.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o -MF CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o.d -o CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o -c /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp
+
+CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp > CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.i
+
+CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Parser/parser.cpp -o CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.s
+
 # Object files for target Gocompiler
 Gocompiler_OBJECTS = \
 "CMakeFiles/Gocompiler.dir/src/ASB/asb.cpp.o" \
@@ -228,11 +256,13 @@ Gocompiler_OBJECTS = \
 "CMakeFiles/Gocompiler.dir/src/ASB/expression.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/ASB/statment.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.o" \
+"CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o" \
+"CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o" \
-"CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o" \
 "CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o" \
-"CMakeFiles/Gocompiler.dir/src/main.cpp.o"
+"CMakeFiles/Gocompiler.dir/src/main.cpp.o" \
+"CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o"
 
 # External object files for target Gocompiler
 Gocompiler_EXTERNAL_OBJECTS =
@@ -242,14 +272,16 @@ Gocompiler: CMakeFiles/Gocompiler.dir/src/ASB/declaration.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/ASB/expression.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/ASB/statment.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/ASB/types.cpp.o
+Gocompiler: CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o
+Gocompiler: CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/Lexer/lexer.cpp.o
-Gocompiler: CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/Visitor/typechecker.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/Visitor/typedescriptor.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/src/main.cpp.o
+Gocompiler: CMakeFiles/Gocompiler.dir/src/Parser/parser.cpp.o
 Gocompiler: CMakeFiles/Gocompiler.dir/build.make
 Gocompiler: CMakeFiles/Gocompiler.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable Gocompiler"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Gocompiler"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Gocompiler.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -5,6 +5,7 @@
 extern int yyparse();
 extern ASB::Root *tree;
 #include "Visitor/typechecker.hpp"
+#include "Interpreting/interpreting.hpp"
 
 int main(){
     
@@ -19,7 +20,7 @@ int main(){
     if(tree != nullptr){
         
     
-        TypeChecker typecheck {};
+        TypeChecker typecheck = TypeChecker(false);
        // try{
             tree->accept(&typecheck);
         //}catch(...){
@@ -32,6 +33,9 @@ int main(){
             }
         }else{
             std::cout<<"No Type errors\n";
+            Interpreting interpret {};
+            std::cout<<"starting interpreting \n";
+            tree->accept(&interpret);
 
         }
         //interpreteren 

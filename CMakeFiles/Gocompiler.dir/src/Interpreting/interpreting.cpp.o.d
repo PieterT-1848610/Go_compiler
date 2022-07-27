@@ -1,6 +1,8 @@
-CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/main.cpp \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/iostream \
+CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o: \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/interpreting.cpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpreting.hpp \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/vector \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_algobase.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/c++config.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
   /usr/include/features.h /usr/include/stdc-predef.h \
@@ -10,18 +12,55 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/cpu_defines.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ostream \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ios \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/iosfwd \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stringfwd.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/functexcept.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/exception_defines.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/cpp_type_traits.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/type_traits.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/numeric_traits.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_pair.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/move.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/concept_check.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/type_traits \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_iterator_base_types.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_iterator_base_funcs.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/debug/assertions.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_iterator.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/ptr_traits.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/debug/debug.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/predefined_ops.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/allocator.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/c++allocator.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/new_allocator.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/new \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/exception \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/exception.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/exception_ptr.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/cxxabi_init_exception.h \
+  /usr/lib/llvm-10/lib/clang/10.0.0/include/stddef.h \
+  /usr/lib/llvm-10/lib/clang/10.0.0/include/__stddef_max_align_t.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/typeinfo \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/hash_bytes.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/nested_exception.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/memoryfwd.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_construct.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/alloc_traits.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/alloc_traits.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_uninitialized.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_vector.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/initializer_list \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_bvector.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/functional_hash.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/range_access.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/vector.tcc \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/string \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stringfwd.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/char_traits.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/postypes.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/cwchar \
   /usr/include/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
-  /usr/lib/llvm-10/lib/clang/10.0.0/include/stddef.h \
   /usr/lib/llvm-10/lib/clang/10.0.0/include/stdarg.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
@@ -31,33 +70,6 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/exception \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/exception.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/exception_ptr.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/exception_defines.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/cxxabi_init_exception.h \
-  /usr/lib/llvm-10/lib/clang/10.0.0/include/__stddef_max_align_t.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/typeinfo \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/hash_bytes.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/new \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/nested_exception.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/move.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/concept_check.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/type_traits \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/char_traits.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_algobase.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/functexcept.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/cpp_type_traits.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/type_traits.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/numeric_traits.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_pair.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_iterator_base_types.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_iterator_base_funcs.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/debug/assertions.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_iterator.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/ptr_traits.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/debug/debug.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/predefined_ops.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/cstdint \
   /usr/lib/llvm-10/lib/clang/10.0.0/include/stdint.h \
   /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/types.h \
@@ -70,10 +82,15 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/c++locale.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/clocale \
   /usr/include/locale.h /usr/include/x86_64-linux-gnu/bits/locale.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/iosfwd \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/cctype \
   /usr/include/ctype.h /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/ios_base.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/ostream_insert.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/cxxabi_forced.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_function.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward/binders.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/basic_string.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/atomicity.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/gthr.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/gthr-default.h \
@@ -98,20 +115,6 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/atomic_word.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/locale_classes.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/string \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/allocator.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/c++allocator.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/new_allocator.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/ostream_insert.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/cxxabi_forced.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_function.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward/binders.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/range_access.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/initializer_list \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/basic_string.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/alloc_traits.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/alloc_traits.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/string_conversions.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/cstdlib \
   /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
@@ -141,12 +144,26 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/functional_hash.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/basic_string.tcc \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/functional \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/tuple \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/utility \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_relops.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/array \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/stdexcept \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/uses_allocator.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/invoke.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/refwrap.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/std_function.h \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/stack.hpp \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/iostream \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ostream \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ios \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/ios_base.h \
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/locale_classes.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/locale_classes.tcc \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/system_error \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/error_constants.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/stdexcept \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/streambuf \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/streambuf.tcc \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/basic_ios.h \
@@ -162,35 +179,8 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/ostream.tcc \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/istream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/istream.tcc \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/lexer/lexer.hpp \
-  /usr/include/string.h /usr/include/strings.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/stdlib.h \
-  /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
-  /usr/include/x86_64-linux-gnu/bits/environments.h \
-  /usr/include/x86_64-linux-gnu/bits/confname.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
-  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
-  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/ASB/asb.hpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Visitor/Visitor.hpp \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/vector \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_construct.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_uninitialized.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_vector.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_bvector.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/vector.tcc \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/functional \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/tuple \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/utility \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/stl_relops.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/array \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/uses_allocator.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/invoke.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/refwrap.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/std_function.h \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Visitor/typechecker.hpp \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/stack.hpp \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Visitor/typedescriptor.hpp \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/symboltable.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/unordered_map \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/ext/aligned_buffer.h \
@@ -198,6 +188,4 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/hashtable_policy.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/limits \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/unordered_map.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/erase_if.h \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpreting.hpp \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/erase_if.h

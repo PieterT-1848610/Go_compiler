@@ -84,6 +84,9 @@ class FunctionTypeDesc: public TypeDescriptor{
         std::vector<std::string> getReturnsIds();
         std::vector<TypeDescriptor *> getReturnsTypeDesc();
 
+        std::vector<std::pair<std::string, TypeDescriptor *>> getParams();
+        std::vector<std::pair<std::string, TypeDescriptor *>> getReturns();
+
     private:
         std::vector<std::pair<std::string, TypeDescriptor *>> parameters;
         std::vector<std::pair<std::string, TypeDescriptor *>> returns;

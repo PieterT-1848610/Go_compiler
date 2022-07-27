@@ -21,11 +21,11 @@ func plus(a int, b int ) int {
 } 
 
 
-// func main(a int, b int)  int{
-// 	var test int = 1
-// 	var test2 int = 2
-// 	test = a * test2
-// 	test2 = !test
-// 	return true
-// }
+func main() {
+	var test int = 1
+	var test2 int = 2
+	test = test + test2
+	test2 = test
+	//return true
+}
 

@@ -155,3 +155,12 @@ std::vector<TypeDescriptor *> FunctionTypeDesc::getReturnsTypeDesc(){
 
     return returnTypes;
 }
+
+
+std::vector<std::pair<std::string, TypeDescriptor*>> FunctionTypeDesc::getParams(){
+    return parameters;
+}
+
+std::vector<std::pair<std::string, TypeDescriptor*>> FunctionTypeDesc::getReturns(){
+    return returns;
+}
