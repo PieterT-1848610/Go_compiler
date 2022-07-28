@@ -200,4 +200,5 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/unordered_map.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/erase_if.h \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpreting.hpp \
-  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpretoperand.hpp

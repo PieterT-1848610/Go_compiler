@@ -20,12 +20,23 @@ long IntValue::getValue(){
     return value;
 }
 
+
+ValueDescriptor* IntValue::add(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other);
+    return new IntValue(value + otherValue->getValue());
+}
+
 FloatValue::FloatValue(float value): value{value}{
 
 }
 
 float FloatValue::getValue(){
     return value;
+}
+
+ValueDescriptor* FloatValue::add(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other);
+    return new FloatValue(value + otherValue->getValue());
 }
 
 CharValue::CharValue(char value): value{value}{

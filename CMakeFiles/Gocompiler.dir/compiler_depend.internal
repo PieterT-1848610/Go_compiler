@@ -1163,6 +1163,7 @@ CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o
  /usr/include/c++/9/istream
  /usr/include/c++/9/bits/istream.tcc
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpretoperand.hpp
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Visitor/Visitor.hpp
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/symboltable.hpp
  /usr/include/c++/9/unordered_map
@@ -1176,6 +1177,7 @@ CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o
 CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/valuedescriptor.cpp
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpretoperand.hpp
  /usr/include/c++/9/string
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h
@@ -2344,4 +2346,5 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o
  /usr/include/c++/9/bits/erase_if.h
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpreting.hpp
  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp
+ /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpretoperand.hpp
 

@@ -1,6 +1,8 @@
 #ifndef VALUEDESCRIPTOR_VALUE_HPP
 #define VALUEDESCRIPTOR_VALUE_HPP
 
+#include "Interpreting/interpretoperand.hpp"
+
 #include <string>
 #include <vector>
 #include <utility>
@@ -27,21 +29,25 @@ class BoolValue: public ValueDescriptor{
 };
 
 //na kijken of long long moet zijn (64bit of 32 bit)
-class IntValue: public ValueDescriptor{
+class IntValue: public ValueDescriptor, public Add{
     public:
         IntValue(long value);
         ~IntValue() = default;
         long getValue();
 
+        ValueDescriptor* add(ValueDescriptor *other) override;
+
     private:
         long value;
 };
 
-class FloatValue: public ValueDescriptor{
+class FloatValue: public ValueDescriptor, public Add{
     public:
         FloatValue(float value);
         ~FloatValue() = default;
         float getValue();
+
+        ValueDescriptor* add(ValueDescriptor *other) override;
 
     private:
         float value; 

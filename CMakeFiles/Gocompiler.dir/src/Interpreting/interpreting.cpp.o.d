@@ -180,6 +180,7 @@ CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o: \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/istream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/bits/istream.tcc \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpretoperand.hpp \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Visitor/Visitor.hpp \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/other/symboltable.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/unordered_map \

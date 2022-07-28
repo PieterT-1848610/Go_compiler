@@ -1157,6 +1157,7 @@ CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o: src/Interpreting/
   /usr/include/c++/9/istream \
   /usr/include/c++/9/bits/istream.tcc \
   includes/Interpreting/valuedescriptor.hpp \
+  includes/Interpreting/interpretoperand.hpp \
   includes/Visitor/Visitor.hpp \
   includes/other/symboltable.hpp \
   /usr/include/c++/9/unordered_map \
@@ -1169,6 +1170,7 @@ CMakeFiles/Gocompiler.dir/src/Interpreting/interpreting.cpp.o: src/Interpreting/
 
 CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o: src/Interpreting/valuedescriptor.cpp \
   includes/Interpreting/valuedescriptor.hpp \
+  includes/Interpreting/interpretoperand.hpp \
   /usr/include/c++/9/string \
   /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
@@ -2331,7 +2333,8 @@ CMakeFiles/Gocompiler.dir/src/main.cpp.o: src/main.cpp \
   /usr/include/c++/9/bits/unordered_map.h \
   /usr/include/c++/9/bits/erase_if.h \
   includes/Interpreting/interpreting.hpp \
-  includes/Interpreting/valuedescriptor.hpp
+  includes/Interpreting/valuedescriptor.hpp \
+  includes/Interpreting/interpretoperand.hpp
 
 
 /usr/include/c++/9/bits/stl_tree.h:
@@ -2573,6 +2576,8 @@ src/Parser/parser.cpp:
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/x86_64-linux-gnu/c++/9/bits/gthr.h:
+
+includes/Interpreting/interpretoperand.hpp:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 

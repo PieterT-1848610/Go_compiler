@@ -44,7 +44,7 @@ binary_literal 			0(b|B)((_)?[0|1]+)+
 octal_literal 			0(o|O)?((_)?[0-7]+)+
 heximal_literal 		0(x|X)((_)?[0-9a-fA-F]+)+
 
-decimal_float_literal  	([0-9](_)?[0-9]+)*\.([0-9]((_)?[0-9]+)*)?
+decimal_float_literal  	[0-9]((_)?[0-9]+)*\.([0-9]((_)?[0-9]+)*)?
 
 
 
@@ -247,7 +247,7 @@ long heximalToInteger(char *input){
 
 float decimalToFloat(char *input){
 	auto formated = removeLowerLine(input);
-	return std::stof(formated);
+	return std::stof(formated, NULL);
 }
 
 char charToCharLiteral(char *input){

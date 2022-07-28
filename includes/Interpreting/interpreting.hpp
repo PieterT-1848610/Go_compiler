@@ -12,7 +12,7 @@
 
 class Interpreting: public Visitor{
     public:
-        Interpreting();
+        Interpreting(bool debug = false);
         ~Interpreting();
     
         void root(const std::vector< std::function<void ()>> visitDeclarations) override;
@@ -114,6 +114,8 @@ class Interpreting: public Visitor{
         std::vector<std::string> paramNames;
         //mapping van function op naam
         //std::vector<std::pair<std::string, std::function <void ()> >> functionSignature;
+
+        bool debug;
 
 };
 

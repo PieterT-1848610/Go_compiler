@@ -173,7 +173,7 @@
         
         
         visitExperssion();
-        typeStack.pop();
+        //typeStack.pop();
     }
 
     void TypeChecker::emptyStatment() {

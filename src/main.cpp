@@ -33,7 +33,8 @@ int main(){
             }
         }else{
             std::cout<<"No Type errors\n";
-            Interpreting interpret {};
+            Interpreting interpret = Interpreting(false);
+
             std::cout<<"starting interpreting \n";
             tree->accept(&interpret);
 

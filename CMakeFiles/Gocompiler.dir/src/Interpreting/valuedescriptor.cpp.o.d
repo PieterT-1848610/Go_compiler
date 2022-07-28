@@ -1,6 +1,7 @@
 CMakeFiles/Gocompiler.dir/src/Interpreting/valuedescriptor.cpp.o: \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Interpreting/valuedescriptor.cpp \
   /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/valuedescriptor.hpp \
+  /mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/includes/Interpreting/interpretoperand.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/string \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/c++config.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9/bits/os_defines.h \

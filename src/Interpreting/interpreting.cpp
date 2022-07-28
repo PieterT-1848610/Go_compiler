@@ -1,15 +1,28 @@
 #include "Interpreting/interpreting.hpp"
 
-    Interpreting::Interpreting():valueStack{}, valueTable{}, paramValues{}, paramNames{}{
+    Interpreting::Interpreting(bool debug):valueStack{}, valueTable{}, paramValues{}, paramNames{}, debug{debug}{
         
         //Not working 
-        std::function<void ()>func{[this](){
+        std::function<void ()>funcInt{[this](){
             auto valueDesc = this->valueStack.pop();
             auto value = dynamic_cast<IntValue *>(valueDesc);
-            std::cout<<value->getValue();
+            std::cout<<value->getValue()<<"\n";
         }};
-        
-        valueTable.set("printInt", new FunctionValue(func) );    
+        valueTable.set("printInt", new FunctionValue(funcInt) );
+
+        std::function<void ()>funcFloat{[this](){
+            auto valueDesc = this->valueStack.pop();
+            auto value = dynamic_cast<FloatValue *>(valueDesc);
+            std::cout<<value->getValue()<<"\n";
+        }};  
+        valueTable.set("printFloat", new FunctionValue(funcFloat));
+
+        std::function<void ()>funcBool{[this](){
+            auto valueDesc = this->valueStack.pop();
+            auto value = dynamic_cast<BoolValue *>(valueDesc);
+            std::cout<<value->getValue()<<"\n";
+        }};  
+        valueTable.set("printBool", new FunctionValue(funcBool));
 
     }
 
@@ -44,6 +57,10 @@
         paramNames.clear();
         //set params, van vector param
         //clear vector param
+        for(auto stat: visitStatments){
+            stat();
+        }
+
 
         //removescope
         valueTable.removeScope();
@@ -82,6 +99,10 @@
     void Interpreting::variableDeclaration(const std::vector<std::string> ids, const std::function< void ()> visitType, const std::vector < std::function< void ()>> visitExpressions) {
         //visitExpressions
         //pop valueStack
+        if(debug){
+            std::cout<<"var interpreting \n";
+        }
+
         std::vector<ValueDescriptor *> values;
         for(auto expr: visitExpressions){
             expr();
@@ -97,23 +118,54 @@
 
 
     //statments
-    void Interpreting::expressionStatment(const std::function< void ()> visitExperssion) {}
+    void Interpreting::expressionStatment(const std::function< void ()> visitExperssion) {
+        if(debug){
+            std::cout<<"expr stat \n";
+        }
 
-    void Interpreting::emptyStatment() {}
+        visitExperssion();
+    }
+
+    void Interpreting::emptyStatment() {
+        if(debug){
+            std::cout<<"expr empty stat \n";
+        }
+    }
 
     void Interpreting::assignmentStatment(const std::vector< std::function< void ()>> visitLeftSide, const std::vector<  std::function< void ()>> visitRightSide) {
+        if(debug){
+            std::cout<<"assing stat \n";
+        }
+
         //visitleft
 
         //visitrightside
     }
 
-    void Interpreting::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {}
+    void Interpreting::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {
 
-    void Interpreting::declarationStament(const std::function< void ()>visitDeclaration) {}
+    }
 
-    void Interpreting::ifStatment(const std::function< void ()> visitCondition, const std::function< void ()> visitTrueCondition, const std::function< void ()> visitFalseCondition) {}
+    void Interpreting::declarationStament(const std::function< void ()>visitDeclaration) {
+        if(debug){
+            std::cout<<"decl stat \n";
+        }
+
+        visitDeclaration();
+    }
+
+    void Interpreting::ifStatment(const std::function< void ()> visitCondition, const std::function< void ()> visitTrueCondition, const std::function< void ()> visitFalseCondition) {
+
+    }
 
     void Interpreting::returnStatment(const std::vector<std::function< void ()>> visitExpressions) {
+        if(debug){
+            std::cout<<"return stat \n";
+        }
+        
+        for(auto expr: visitExpressions){
+            expr();
+        }
         //visitExpression();
 
     }
@@ -121,38 +173,80 @@
 
     //expresions
     void Interpreting::identifierExperssion(const std::string id) {
+        if(debug){
+            std::cout<<"id expr \n";
+        }
+
         auto idExpr = valueTable.get(id);
         valueStack.push(idExpr);
 
     }
 
     void Interpreting::boolExperssion(const bool value) {
+        if(debug){
+            std::cout<<"bool expr \n";
+        }
+
         valueStack.push(new BoolValue(value));
     }
 
     void Interpreting::intergerExperssion(const int value) {
+        if(debug){
+            std::cout<<"int expr \n";
+        }
+
         valueStack.push(new IntValue(value));
     }
 
     void Interpreting::floatExperssion(const float value) {
+        if(debug){
+            std::cout<<"float expr \n";
+        }
+
         valueStack.push(new FloatValue(value));
     }
 
     void Interpreting::charExpression(const char value) {
+        if(debug){
+            std::cout<<"char expr \n";
+        }
+
         valueStack.push(new CharValue(value));
     }
 
 
     //TODO: reason print can't work
     void Interpreting::callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments){
-        //visitExpression()
+        if(debug){
+            std::cout<<"call expr \n";
+        }
+        visitExpression();
+        auto func = valueStack.pop();
+
+
+        for(auto arg: visitArguments){
+             arg();
+        }
+
+        auto funcExc = dynamic_cast<FunctionValue *>(func);
+        funcExc->execute();
+
         
 
     }
 
     // void Interpreting::identifierExperssion(const std::string id);
     //Binary for alle operatie +, -, /, * const std::function< void ()> visitleft en const std::function< void ()>rightside (function)
-    void Interpreting::binaryAddExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+    void Interpreting::binaryAddExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<Add *>(valueStack.pop());
+
+        visitRightSide();
+        auto rightSide = (valueStack.pop());
+
+        valueStack.push(leftSide->add(rightSide));
+
+    }
 
     void Interpreting::binaryMinExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
 
