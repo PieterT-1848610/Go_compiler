@@ -5,8 +5,12 @@ class ValueDescriptor;
 
 class Add {
     public:
-        virtual ValueDescriptor* add(ValueDescriptor *other) =0;
+        virtual ValueDescriptor* add(ValueDescriptor *other) = 0;
 };
 
+class Equal {
+    public:
+        virtual ValueDescriptor* equal(ValueDescriptor *ohter) = 0;
+};
 
 #endif

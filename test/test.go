@@ -19,6 +19,14 @@ func plus(a int, c int ) int {
 	return a + c
 } 
 
+func rec(x int) int{
+	printInt(x)
+	if(x == 6){
+		return x
+	}else{
+		rec(x + 1)
+	}
+}
 
 func main() {
 	var x = 2.31
@@ -26,6 +34,20 @@ func main() {
 	var test, a float32 = 100.0, 7.0
 	var test2 = x + a
 	printFloat(test2)
+	if(a == 8.0){
+		printInt(3)
+	}else if(test2 == x){
+		printFloat(3.12)
+	}else{
+		printInt(55)
+	}
+	var y = 1
+	printInt(rec(y))
+
+	var i = 0
+
+
+
 	//test2 = plus(a, test)
 	//printInt(test)
 	//test = test + test2

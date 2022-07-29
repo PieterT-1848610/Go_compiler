@@ -148,6 +148,8 @@ class TypeChecker: public Visitor{
 
         bool debug;
 
+        Stack<bool> referncableStack;
+
 };
 
 #endif

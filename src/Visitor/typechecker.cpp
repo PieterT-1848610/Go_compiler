@@ -188,6 +188,7 @@
             std::cout<<"assignstat stat\n";
         }
 
+        //needs to be refernceable
         for(auto leftSide: visitLeftSide){
             leftSide();
         }
@@ -203,6 +204,18 @@
         if(debug){
             std::cout<<"for stat\n";
         }
+        visitInit();
+
+        visitCondition();
+        auto cond = dynamic_cast<BoolTypeDesc *>(typeStack.pop());
+
+        if(!cond->compare(BoolTypeDesc{})){
+            errors.push("for stat, condition needs to be a bool type");
+        }
+
+        visitPost();
+
+        visitBodyFor();
 
 
     }
@@ -218,10 +231,22 @@
 
     }
 
+    //maybe do things with visitTrue and visitFalse
     void TypeChecker::ifStatment(const std::function< void ()> visitCondition, const std::function< void ()> visitTrueCondition, const std::function< void ()> visitFalseCondition) {
         if(debug){
             std::cout<<"if stat\n";
         }
+
+        visitCondition();
+        auto condType = typeStack.pop();
+
+        if(!condType->compare(BoolTypeDesc{})){
+            errors.push("Condition for if-stat must be Bool, but it ain't");
+        }
+
+        visitTrueCondition();
+
+        visitFalseCondition();
 
     }
 
@@ -250,6 +275,7 @@
 
 
     //expresions
+    //true add
     void TypeChecker::identifierExperssion(const std::string id) {
         if(debug){
             std::cout<<"id expr\n";
@@ -260,6 +286,7 @@
 
     }
 
+    //false add
     void TypeChecker::boolExperssion(const bool value) {
         if(debug){
             std::cout<<"bool expr\n";
@@ -293,10 +320,13 @@
         typeStack.push(new CharTypeDesc{});
     }
 
+    //pop all arguments
+    //push false equal amount of returns
     void TypeChecker::callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments){
         if(debug){
             std::cout<<"Call expr \n";
         }
+
         visitExpression();
         auto exprType = typeStack.pop();
         //maybe do something with?
@@ -311,7 +341,6 @@
         if(!tempFunc->compareType(*exprType)){
             errors.push("Call needs to be to a function");
         }
-
 
         auto funcType = dynamic_cast<FunctionTypeDesc *>(exprType);
 
@@ -331,13 +360,12 @@
         for(auto ret: returnType){
             typeStack.push(ret);
         }
-
-
     }
 
 
     // void Visiting::identifierExperssion(const std::string id);
     //Binary for alle operatie +, -, /, * const std::function< void ()> visitleft en const std::function< void ()>rightside (function)
+    //pop 2 and add 1 
     void TypeChecker::binaryAddExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
         if(debug){
             std::cout<<"binary Add expre \n";
@@ -364,6 +392,7 @@
         typeStack.push(leftSide);
     }
 
+
     void TypeChecker::binaryMinExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
 
     }
@@ -377,8 +406,31 @@
     }
 
     void TypeChecker::binaryEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"binary EQ expre \n";
+        }
+                       
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
 
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){    
+            errors.push("wrong type for leftSide, only int, float or bool allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){
+            errors.push("wrong type for rightSide, only int, float or bool allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
     }
+
 
     void TypeChecker::binaryNEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
 
@@ -404,7 +456,11 @@
 
     }
 
+    //<=
     void TypeChecker::binaryLEExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"lesser or equal expr \n";
+        }
 
     }
 

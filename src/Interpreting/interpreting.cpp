@@ -155,6 +155,17 @@
     }
 
     void Interpreting::ifStatment(const std::function< void ()> visitCondition, const std::function< void ()> visitTrueCondition, const std::function< void ()> visitFalseCondition) {
+        if(debug){
+            std::cout<<"if stat \n";
+        }
+        visitCondition();
+        auto cond = dynamic_cast<BoolValue *>(valueStack.pop());
+
+        if(cond->getValue()){
+            visitTrueCondition();
+        }else{
+            visitFalseCondition();
+        }
 
     }
 
@@ -254,7 +265,16 @@
 
     void Interpreting::binaryDivExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
 
-    void Interpreting::binaryEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+    void Interpreting::binaryEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<Equal *>(valueStack.pop());
+
+        visitRightSide();
+        auto rightSide = (valueStack.pop());
+
+        valueStack.push(leftSide->equal(rightSide));
+
+    }
 
     void Interpreting::binaryNEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
 

@@ -18,47 +18,53 @@ class ValueDescriptor{
         ValueDescriptor() = default;
 };
 
-class BoolValue: public ValueDescriptor{
+class BoolValue: public ValueDescriptor, public Equal{
     public:
         BoolValue(bool value);
         ~BoolValue() = default;
         bool getValue();
+
+        ValueDescriptor* equal(ValueDescriptor *other) override;
 
     private:
         bool value;
 };
 
 //na kijken of long long moet zijn (64bit of 32 bit)
-class IntValue: public ValueDescriptor, public Add{
+class IntValue: public ValueDescriptor, public Add, public Equal{
     public:
         IntValue(long value);
         ~IntValue() = default;
         long getValue();
 
         ValueDescriptor* add(ValueDescriptor *other) override;
+        ValueDescriptor* equal(ValueDescriptor *other) override;
 
     private:
         long value;
 };
 
-class FloatValue: public ValueDescriptor, public Add{
+class FloatValue: public ValueDescriptor, public Add, public Equal{
     public:
         FloatValue(float value);
         ~FloatValue() = default;
         float getValue();
 
         ValueDescriptor* add(ValueDescriptor *other) override;
+        ValueDescriptor* equal(ValueDescriptor *other) override;
 
     private:
         float value; 
 };
 
-class CharValue: public ValueDescriptor{
+class CharValue: public ValueDescriptor, public Equal{
     public:
         CharValue(char value);
         ~CharValue() = default;
 
         char getValue();
+        ValueDescriptor* equal(ValueDescriptor *other) override;
+
     private:
         char value;
 };

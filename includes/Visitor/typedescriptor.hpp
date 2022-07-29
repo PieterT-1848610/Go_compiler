@@ -14,6 +14,8 @@ enum class TypeCode{
     functionType,
 };
 
+//reference value firstr all op true
+
 
 class TypeDescriptor{
 
