@@ -8,7 +8,7 @@
     //add option for other print statments
     TypeChecker::TypeChecker(bool debug): errors{}, typeStack{}, typeTable{}, 
     currentFunctionType{}, functionSignatures{}, paramTypes{}, 
-    returnTypes{}, debug{debug}{
+    returnTypes{}, debug{debug}, referncableStack{}{
 
         typeTable.set("printInt", new FunctionTypeDesc{{ std::make_pair("value", new IntTypeDesc{})} , {}});
         typeTable.set("printFloat", new FunctionTypeDesc{{ std::make_pair("value", new FloatTypeDesc{})} , {}});
@@ -132,6 +132,8 @@
                 visitExpressions[i]();
                 tempTypes.push_back(typeStack.pop());
 
+                referncableStack.pop();
+
                 // if(typeTable.contains(ids[i])){
                 //     errors.push("Id already in use");
                 // }
@@ -151,6 +153,9 @@
             for(auto expr: visitExpressions){
                 expr();
                 auto tempExpType = typeStack.pop();
+
+                referncableStack.pop();
+
                 if(!(typeVar->compare(*tempExpType))){
                     errors.push("Expression type not same as giving type for Var");
                 }
@@ -187,14 +192,40 @@
         if(debug){
             std::cout<<"assignstat stat\n";
         }
+        if(visitLeftSide.size() != visitRightSide.size()){
+            errors.push("Assignment but left and right side don't have same number of values");
+            return;
+        }
 
+        std::vector<TypeDescriptor *> leftTypes {};
+        std::vector<bool> leftReference {};
         //needs to be refernceable
         for(auto leftSide: visitLeftSide){
             leftSide();
+            leftTypes.push_back(typeStack.pop());
+
+            leftReference.push_back(referncableStack.pop());
         }
 
+        std::vector<TypeDescriptor *> rightTypes {};
         for(auto rightSide: visitRightSide){
             rightSide();
+            rightTypes.push_back(typeStack.pop());
+
+            referncableStack.pop();
+        }
+
+        for(int i = 0; i < leftTypes.size(); i++){
+            auto leftType = leftTypes[i];
+            auto rightType = rightTypes[i];
+
+            if(!leftReference[i]){
+                errors.push("Left side of assignment need to be assignable");
+            }
+
+            if(!leftType->compare(*rightType)){
+                errors.push("Right Side has not excpacted type for the assigment of left");
+            }
         }
 
 
@@ -208,6 +239,7 @@
 
         visitCondition();
         auto cond = dynamic_cast<BoolTypeDesc *>(typeStack.pop());
+        referncableStack.pop();
 
         if(!cond->compare(BoolTypeDesc{})){
             errors.push("for stat, condition needs to be a bool type");
@@ -266,6 +298,9 @@
         for(int i = 0; i<visitExpressions.size(); i++){
             visitExpressions[i]();
             auto returnType = typeStack.pop();
+
+            referncableStack.pop();
+
             if(!expactedTypes[i]->compare(* returnType)){
                 errors.push("Return expr don't match expected type");
             }
@@ -284,6 +319,7 @@
         auto tempType = typeTable.get(id);
         typeStack.push(tempType);
 
+        referncableStack.push(true);
     }
 
     //false add
@@ -294,6 +330,7 @@
 
         typeStack.push(new BoolTypeDesc{});
 
+        referncableStack.push(false);
     }
 
     void TypeChecker::intergerExperssion(const int value) {
@@ -302,6 +339,8 @@
         }
 
         typeStack.push(new IntTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     void TypeChecker::floatExperssion(const float value) {
@@ -310,6 +349,8 @@
         }
 
         typeStack.push(new FloatTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     void TypeChecker::charExpression(const char value) {
@@ -318,6 +359,8 @@
         }
 
         typeStack.push(new CharTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     //pop all arguments
@@ -334,6 +377,9 @@
         for(auto arg: visitArguments){
             arg();
             argTypes.push_back(typeStack.pop());
+
+            //pop for refern
+            referncableStack.pop();
         }
 
         FunctionTypeDesc *tempFunc {};
@@ -359,6 +405,8 @@
         auto returnType = funcType->getReturnsTypeDesc();
         for(auto ret: returnType){
             typeStack.push(ret);
+
+            referncableStack.push(false);
         }
     }
 
@@ -373,8 +421,11 @@
                        
         visitLeftSide();
         TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+
         visitRightSide();
         TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
             errors.push("wrong type for leftSide, only int, float or bool allowed");
@@ -390,11 +441,40 @@
             errors.push("can't add the different types");
         }
         typeStack.push(leftSide);
+        
+        referncableStack.push(false);
     }
 
 
     void TypeChecker::binaryMinExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"binary Add expre \n";
+        }
+                       
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
 
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
+            errors.push("wrong type for leftSide, only int, float or bool allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{})){
+            errors.push("wrong type for rightSide, only int, float or bool allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(leftSide);
+        
+        referncableStack.push(false);
     }
 
     void TypeChecker::binaryMulExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
@@ -412,8 +492,11 @@
                        
         visitLeftSide();
         TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
         visitRightSide();
         TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){    
             errors.push("wrong type for leftSide, only int, float or bool allowed");
@@ -429,6 +512,8 @@
             errors.push("can't add the different types");
         }
         typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
 
@@ -462,11 +547,35 @@
             std::cout<<"lesser or equal expr \n";
         }
 
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
+            errors.push("wrong type for leftSide, only int, float");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
+            errors.push("wrong type for rightSide, only int, float ");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't compare the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     //Unary Operations
     void TypeChecker::unaryNotExpression(const std::function< void ()> visitExpression) {
-
+        
     }
 
 

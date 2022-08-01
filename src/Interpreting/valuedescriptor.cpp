@@ -1,8 +1,8 @@
 #include "Interpreting/valuedescriptor.hpp"
 
-// ValueDescriptor* ValueDescriptor::getDescri(){
-//     return this;
-// }
+ValueDescriptor* ValueDescriptor::getDescri(){
+     return this;
+ }
 
 BoolValue::BoolValue(bool value): value{value}{
 
@@ -13,7 +13,7 @@ bool BoolValue::getValue(){
 }
 
 ValueDescriptor* BoolValue::equal(ValueDescriptor *other){
-    BoolValue* otherValue = dynamic_cast<BoolValue *>(other);
+    BoolValue* otherValue = dynamic_cast<BoolValue *>(other->getDescri());
     return new BoolValue(value == otherValue->getValue());
 }
 
@@ -28,15 +28,24 @@ long IntValue::getValue(){
 
 
 ValueDescriptor* IntValue::add(ValueDescriptor *other){
-    IntValue* otherValue = dynamic_cast<IntValue *>(other);
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
     return new IntValue(value + otherValue->getValue());
 }
 
 ValueDescriptor* IntValue::equal(ValueDescriptor *other){
-    IntValue* otherValue = dynamic_cast<IntValue *>(other);
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
     return new BoolValue(value == otherValue->getValue());
 }
 
+ValueDescriptor* IntValue::min(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new IntValue(value - otherValue->getValue());
+}
+
+ValueDescriptor* IntValue::lesserOrEqual(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new BoolValue(value <= otherValue->getValue());
+}
 
 FloatValue::FloatValue(float value): value{value}{
 
@@ -47,13 +56,23 @@ float FloatValue::getValue(){
 }
 
 ValueDescriptor* FloatValue::add(ValueDescriptor *other){
-    FloatValue* otherValue = dynamic_cast<FloatValue *>(other);
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
     return new FloatValue(value + otherValue->getValue());
 }
 
 ValueDescriptor* FloatValue::equal(ValueDescriptor *other){
-    FloatValue* otherValue = dynamic_cast<FloatValue *>(other);
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
     return new BoolValue(value == otherValue->getValue());
+}
+
+ValueDescriptor* FloatValue::min(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new FloatValue(value - otherValue->getValue());
+}
+
+ValueDescriptor* FloatValue::lesserOrEqual(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new BoolValue(value <= otherValue->getValue());
 }
 
 CharValue::CharValue(char value): value{value}{
@@ -77,4 +96,38 @@ FunctionValue::FunctionValue(std::function<void ()> func): func{func}{
 void FunctionValue::execute(){
     func();
 
+}
+
+ReferenceValue::ReferenceValue(std::function<ValueDescriptor * ()> getter, 
+                                std::function<void (ValueDescriptor *)> setter): 
+                                getter{getter}, setter{setter}{
+
+}
+
+ValueDescriptor* ReferenceValue::getDescri(){
+    return getter();
+}
+
+void ReferenceValue::setValue(ValueDescriptor* valueDescr){
+    setter(valueDescr);
+}
+
+ValueDescriptor* ReferenceValue::add(ValueDescriptor *other){
+    auto value = dynamic_cast<Add *>(this->getDescri());
+    return value->add(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::equal(ValueDescriptor *other){
+    auto value = dynamic_cast<Equal *>(this->getDescri());
+    return value->equal(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::min(ValueDescriptor *other){
+    auto value = dynamic_cast<Min *>(this->getDescri());
+    return value->min(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::lesserOrEqual(ValueDescriptor *other){
+    auto value = dynamic_cast<LesserOrEqual *>(this->getDescri());
+    return value->lesserOrEqual(other->getDescri());
 }

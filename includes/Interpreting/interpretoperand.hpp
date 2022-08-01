@@ -13,4 +13,14 @@ class Equal {
         virtual ValueDescriptor* equal(ValueDescriptor *ohter) = 0;
 };
 
+class Min {
+    public:
+        virtual ValueDescriptor* min(ValueDescriptor *other) = 0;
+};
+
+class LesserOrEqual{
+    public:
+    virtual ValueDescriptor* lesserOrEqual(ValueDescriptor *other) = 0;
+};
+
 #endif

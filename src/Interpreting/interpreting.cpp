@@ -5,21 +5,22 @@
         //Not working 
         std::function<void ()>funcInt{[this](){
             auto valueDesc = this->valueStack.pop();
-            auto value = dynamic_cast<IntValue *>(valueDesc);
+            auto value = dynamic_cast<IntValue *>(valueDesc->getDescri());
             std::cout<<value->getValue()<<"\n";
+
         }};
         valueTable.set("printInt", new FunctionValue(funcInt) );
 
         std::function<void ()>funcFloat{[this](){
             auto valueDesc = this->valueStack.pop();
-            auto value = dynamic_cast<FloatValue *>(valueDesc);
+            auto value = dynamic_cast<FloatValue *>(valueDesc->getDescri());
             std::cout<<value->getValue()<<"\n";
         }};  
         valueTable.set("printFloat", new FunctionValue(funcFloat));
 
         std::function<void ()>funcBool{[this](){
             auto valueDesc = this->valueStack.pop();
-            auto value = dynamic_cast<BoolValue *>(valueDesc);
+            auto value = dynamic_cast<BoolValue *>(valueDesc->getDescri());
             std::cout<<value->getValue()<<"\n";
         }};  
         valueTable.set("printBool", new FunctionValue(funcBool));
@@ -132,17 +133,50 @@
         }
     }
 
+    //x, y = y,x not working
     void Interpreting::assignmentStatment(const std::vector< std::function< void ()>> visitLeftSide, const std::vector<  std::function< void ()>> visitRightSide) {
         if(debug){
             std::cout<<"assing stat \n";
         }
-
         //visitleft
+        std::vector<ValueDescriptor *> leftValues {};
+        for(auto leftSide: visitLeftSide){
+            leftSide();
+            leftValues.push_back(valueStack.pop());
+        }
 
         //visitrightside
+        std::vector<ValueDescriptor *> rightValues {};
+        //std::vector<ValueDescriptor> tempValues {};
+        for(auto rightSide: visitRightSide){
+            rightSide();
+            rightValues.push_back(valueStack.pop()->getDescri());
+            //tempValues.push_back(* valueStack.pop());
+        }
+
+        for(int i=0; i<visitLeftSide.size(); i++){
+           dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(rightValues[i]->getDescri());
+           //dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(tempValues[i].getDescri());
+        }
+
+
     }
 
     void Interpreting::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {
+        visitInit();
+
+        visitCondition();
+        bool cond = dynamic_cast<BoolValue *>(valueStack.pop()->getDescri())->getValue();
+
+        while (cond){
+            visitBodyFor();
+
+
+            visitPost();
+
+            visitCondition();
+            cond = dynamic_cast<BoolValue *>(valueStack.pop()->getDescri())->getValue();
+        }
 
     }
 
@@ -159,7 +193,7 @@
             std::cout<<"if stat \n";
         }
         visitCondition();
-        auto cond = dynamic_cast<BoolValue *>(valueStack.pop());
+        auto cond = dynamic_cast<BoolValue *>(valueStack.pop()->getDescri());
 
         if(cond->getValue()){
             visitTrueCondition();
@@ -187,9 +221,20 @@
         if(debug){
             std::cout<<"id expr \n";
         }
+        
+        std::function<void (ValueDescriptor*)> setFunc = [this, id](ValueDescriptor* newVal){
+            auto _id = id;
+            //this->valueTable.set(_id, newVal);
+            this->valueTable.replace(_id, newVal);
+        };
 
-        auto idExpr = valueTable.get(id);
-        valueStack.push(idExpr);
+        std::function<ValueDescriptor* ()> getFunc = [this, id]()->ValueDescriptor *{
+            auto _id = id;
+            return this->valueTable.get(_id);
+        };
+        
+        valueStack.push(new ReferenceValue(getFunc, setFunc));
+        //valueStack.push(idExpr);
 
     }
 
@@ -239,7 +284,7 @@
              arg();
         }
 
-        auto funcExc = dynamic_cast<FunctionValue *>(func);
+        auto funcExc = dynamic_cast<FunctionValue *>(func->getDescri());
         funcExc->execute();
 
         
@@ -249,17 +294,36 @@
     // void Interpreting::identifierExperssion(const std::string id);
     //Binary for alle operatie +, -, /, * const std::function< void ()> visitleft en const std::function< void ()>rightside (function)
     void Interpreting::binaryAddExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"Add expr \n";
+        }
         visitLeftSide();
         auto leftSide = dynamic_cast<Add *>(valueStack.pop());
 
         visitRightSide();
         auto rightSide = (valueStack.pop());
 
+
+        //auto result = leftSide->add(rightSide);
         valueStack.push(leftSide->add(rightSide));
 
     }
 
-    void Interpreting::binaryMinExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+    void Interpreting::binaryMinExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"Min expr \n";
+        }
+        visitLeftSide();
+        auto leftSide = dynamic_cast<Min *>(valueStack.pop());
+
+        visitRightSide();
+        auto rightSide = (valueStack.pop());
+
+
+        //auto result = leftSide->add(rightSide);
+        valueStack.push(leftSide->min(rightSide));
+        
+    }
 
     void Interpreting::binaryMulExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
 
@@ -267,10 +331,10 @@
 
     void Interpreting::binaryEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
         visitLeftSide();
-        auto leftSide = dynamic_cast<Equal *>(valueStack.pop());
+        auto leftSide = dynamic_cast<Equal *>(valueStack.pop()->getDescri());
 
         visitRightSide();
-        auto rightSide = (valueStack.pop());
+        auto rightSide = (valueStack.pop()->getDescri());
 
         valueStack.push(leftSide->equal(rightSide));
 
@@ -288,7 +352,16 @@
 
     void Interpreting::binaryLTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
 
-    void Interpreting::binaryLEExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+    void Interpreting::binaryLEExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<LesserOrEqual *>(valueStack.pop()->getDescri());
+
+        visitRightSide();
+        auto rightSide = valueStack.pop()->getDescri();
+
+        valueStack.push(leftSide->lesserOrEqual(rightSide)); 
+
+    }
 
     //Unary Operations
     void Interpreting::unaryNotExpression(const std::function< void ()> visitExpression) {}

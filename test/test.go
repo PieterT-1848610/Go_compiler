@@ -19,16 +19,7 @@ func plus(a int, c int ) int {
 	return a + c
 } 
 
-func rec(x int) int{
-	printInt(x)
-	if(x == 6){
-		return x
-	}else{
-		rec(x + 1)
-	}
-}
-
-func main() {
+func testingIfs(){
 	var x = 2.31
 	printFloat(x)
 	var test, a float32 = 100.0, 7.0
@@ -41,13 +32,64 @@ func main() {
 	}else{
 		printInt(55)
 	}
-	var y = 1
-	printInt(rec(y))
+}
 
-	var i = 0
+func fib(n int) int {
+    if n == 0 {
+        return 0
+    } else if n == 1 {
+		return 1
+	} else {
+		return fib(n-1) + fib(n-2)
+	}
+}
+
+func assingCheck() {
+	var y = 10
+	var x = 5
+	printInt(x)
+	printInt(y)
+	x, y = y,x 
+	printInt(x)
+	printInt(y)
+}
 
 
+func main() {
+	//testingIfs()
+	var y= 10
+	var x int = 6
+	var i =  0
+	var j = 0
+	for j=0; j <=5; j = j + 1{
+		i =  i + 1
+		printInt(j)
+		x = 4554
+	}
+	printInt(x)
 
+	i = 0
+	for i <= 10{
+		if(i<=5){
+			i = i+2
+		}else{
+			i = i + 1
+		}
+		printInt(i)
+	}
+	printInt(i)
+	//printInt(x)
+	//x  = x + 8
+	//y = x
+	//printInt(x)
+	//printInt(y)
+	//var y = 1
+	//y = plus(x, 4)
+	//printInt(y)
+	//printInt(rec(1))
+	//x = fib(x)
+	assingCheck()
+	
 	//test2 = plus(a, test)
 	//printInt(test)
 	//test = test + test2

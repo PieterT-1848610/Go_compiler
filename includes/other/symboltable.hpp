@@ -35,11 +35,33 @@ class SymbolTable{
             throw new SymbolException("Symbool don't exist");
         };
 
-        //TODO: in achterste vector komt staan
+        //TODO:maybe problem for assign
         void set(std::string key, T value) {
             int a = table.size() - 1;
             table[a].insert(std::make_pair(key, value));
+            //this->table.back()[key] = value;
+            
         };
+
+        //No nbeed anymore fixed with [key]
+        void replace(std::string key, T value){
+            int place = checkcontain(key);
+            if(place == -1){
+                set(key, value);
+            }else{
+                table[place].erase(key);
+                table[place].insert(std::make_pair(key, value));
+            }
+        }
+
+        int checkcontain(std::string key){
+            for(int i = table.size()-1; i>=0; i--){
+                if(this->table[i].count(key)>0){
+                    return i;
+                }
+            }
+            return -1;
+        }
         
         //TODO: alles aflopen nog 
         std::vector<std::vector<std::string>> keys() {
@@ -50,7 +72,7 @@ class SymbolTable{
                 for(int i =0; i<table.size(); i++){
                     std::vector<std::string> temp = {};
                 
-                    for(auto kv: table){
+                    for(auto kv: table[i]){
                         temp.push_back(kv.first);
                     }
                     keys.push_back(temp);
@@ -58,6 +80,8 @@ class SymbolTable{
 
             return keys;
         };
+
+
 
         //check current scope only for key?
         bool contains(std::string key) {

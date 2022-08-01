@@ -435,6 +435,10 @@ expression
     |expression NEQ expression      { $$ = new ASB::BinaryNEQOperation($1, $3);}
     |expression AND expression      { $$ = new ASB::BinaryANDOperation($1, $3);}
     |expression OR  expression      { $$ = new ASB::BinaryOROperation($1, $3);}    
+    |expression GT  expression      { $$ = new ASB::BinaryGTOperation($1, $3);}
+    |expression GE  expression      { $$ = new ASB::BinaryGEOperation($1, $3);}
+    |expression LT  expression      { $$ = new ASB::BinaryLTOperation($1, $3);}
+    |expression LE  expression      { $$ = new ASB::BinaryLEOperation($1, $3);}
     ;
 
 unaryExpr
