@@ -54,11 +54,7 @@ func assingCheck() {
 	printInt(y)
 }
 
-
-func main() {
-	//testingIfs()
-	var y= 10
-	var x int = 6
+func forLoop(x int){
 	var i =  0
 	var j = 0
 	for j=0; j <=5; j = j + 1{
@@ -78,6 +74,23 @@ func main() {
 		printInt(i)
 	}
 	printInt(i)
+
+}
+
+
+func main() {
+	//testingIfs()
+	var y= 10
+	var x int = 6
+	var t bool = true
+	var z bool = !t
+	if(!t){
+		printInt(6)
+	}else{
+		printInt(8)
+	}
+	printBool(t)
+	printBool(z)
 	//printInt(x)
 	//x  = x + 8
 	//y = x
@@ -88,7 +101,7 @@ func main() {
 	//printInt(y)
 	//printInt(rec(1))
 	//x = fib(x)
-	assingCheck()
+	//assingCheck()
 	
 	//test2 = plus(a, test)
 	//printInt(test)

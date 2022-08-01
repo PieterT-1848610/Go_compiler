@@ -364,7 +364,13 @@
     }
 
     //Unary Operations
-    void Interpreting::unaryNotExpression(const std::function< void ()> visitExpression) {}
+    void Interpreting::unaryNotExpression(const std::function< void ()> visitExpression) {
+        visitExpression();
+        auto expr = dynamic_cast<Not *>(valueStack.pop()->getDescri());
+
+        valueStack.push(expr->notFunc());
+
+    }
 
 
     //types

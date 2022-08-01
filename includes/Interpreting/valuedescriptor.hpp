@@ -18,13 +18,14 @@ class ValueDescriptor{
         ValueDescriptor() = default;
 };
 
-class BoolValue: public ValueDescriptor, public Equal{
+class BoolValue: public ValueDescriptor, public Equal, public Not{
     public:
         BoolValue(bool value);
         ~BoolValue() = default;
         bool getValue();
 
         ValueDescriptor* equal(ValueDescriptor *other) override;
+        ValueDescriptor* notFunc() override;
 
     private:
         bool value;
@@ -87,7 +88,7 @@ class FunctionValue: public ValueDescriptor{
         std::function <void ()> func;     //wat de code uitvoert
 };
 
-class ReferenceValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual{
+class ReferenceValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public Not{
     public:
         ReferenceValue(std::function<ValueDescriptor * ()> getter, std::function<void (ValueDescriptor *)> setter);
         ~ReferenceValue() = default;
@@ -100,6 +101,7 @@ class ReferenceValue: public ValueDescriptor, public Add, public Equal, public M
         ValueDescriptor* equal(ValueDescriptor* other) override;
         ValueDescriptor* min(ValueDescriptor *other) override;
         ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* notFunc() override;
 
 
     private:

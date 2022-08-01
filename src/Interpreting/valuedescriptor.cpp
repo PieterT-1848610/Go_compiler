@@ -17,6 +17,9 @@ ValueDescriptor* BoolValue::equal(ValueDescriptor *other){
     return new BoolValue(value == otherValue->getValue());
 }
 
+ValueDescriptor* BoolValue::notFunc(){
+    return new BoolValue(!this->value);
+}
 
 IntValue::IntValue(long value): value{value}{
 
@@ -130,4 +133,9 @@ ValueDescriptor* ReferenceValue::min(ValueDescriptor *other){
 ValueDescriptor* ReferenceValue::lesserOrEqual(ValueDescriptor *other){
     auto value = dynamic_cast<LesserOrEqual *>(this->getDescri());
     return value->lesserOrEqual(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::notFunc(){
+    auto value = dynamic_cast<Not *>(this->getDescri());
+    return value->notFunc();
 }

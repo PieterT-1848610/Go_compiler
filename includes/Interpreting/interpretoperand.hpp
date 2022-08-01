@@ -20,7 +20,12 @@ class Min {
 
 class LesserOrEqual{
     public:
-    virtual ValueDescriptor* lesserOrEqual(ValueDescriptor *other) = 0;
+            virtual ValueDescriptor* lesserOrEqual(ValueDescriptor *other) = 0;
+};
+
+class Not{
+    public:
+        virtual ValueDescriptor* notFunc() = 0;
 };
 
 #endif

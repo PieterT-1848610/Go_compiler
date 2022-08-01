@@ -575,7 +575,21 @@
 
     //Unary Operations
     void TypeChecker::unaryNotExpression(const std::function< void ()> visitExpression) {
-        
+        if(debug){
+            std::cout<<"unary not \n";
+        }
+        visitExpression();
+        TypeDescriptor * expr=typeStack.pop();
+        referncableStack.pop();
+
+        if(!expr->compare(BoolTypeDesc{})){
+            errors.push("Wrong type not expr, needs to be bool");
+        }
+
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
+
     }
 
 
