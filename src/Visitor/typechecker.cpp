@@ -572,15 +572,96 @@
 
 
     void TypeChecker::binaryNEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"binary NEQ expre \n";
+        }
+                       
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
 
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){    
+            errors.push("wrong type for leftSide, only int, float, bool or char allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){
+            errors.push("wrong type for rightSide, only int, float, bool or char allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     void TypeChecker::binaryANDExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"binary AND expre \n";
+        }
+                       
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
 
+        if(!leftSide->compare(BoolTypeDesc{})){    
+            errors.push("wrong type for leftSide, only bool allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(BoolTypeDesc{})){
+            errors.push("wrong type for rightSide bool allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     void TypeChecker::binaryORExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"binary OR expre \n";
+        }
+                       
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
 
+        if(!leftSide->compare(BoolTypeDesc{})){    
+            errors.push("wrong type for leftSide, only bool allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(BoolTypeDesc{})){
+            errors.push("wrong type for rightSide bool allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     // >

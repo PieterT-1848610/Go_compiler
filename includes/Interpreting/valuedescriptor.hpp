@@ -18,7 +18,7 @@ class ValueDescriptor{
         ValueDescriptor() = default;
 };
 
-class BoolValue: public ValueDescriptor, public Equal, public Not{
+class BoolValue: public ValueDescriptor, public Equal, public Not, public AndOper, public OrOper, public NotEqual{
     public:
         BoolValue(bool value);
         ~BoolValue() = default;
@@ -27,13 +27,17 @@ class BoolValue: public ValueDescriptor, public Equal, public Not{
         ValueDescriptor* equal(ValueDescriptor *other) override;
         ValueDescriptor* notFunc() override;
 
+        ValueDescriptor* notEqual(ValueDescriptor *other) override;
+        ValueDescriptor* andOpr(ValueDescriptor *other) override;
+        ValueDescriptor* orOpr(ValueDescriptor *other) override;
+
     private:
         bool value;
 };
 
 //na kijken of long long moet zijn (64bit of 32 bit)
 class IntValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
-                public GreaterOrEqual, public GreaterThan, public Mul, public Div{
+                public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual{
     public:
         IntValue(long value);
         ~IntValue() = default;
@@ -46,6 +50,7 @@ class IntValue: public ValueDescriptor, public Add, public Equal, public Min, pu
 
 
         ValueDescriptor* equal(ValueDescriptor *other) override;
+        ValueDescriptor* notEqual(ValueDescriptor *other) override;
 
 
         ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
@@ -59,7 +64,7 @@ class IntValue: public ValueDescriptor, public Add, public Equal, public Min, pu
 };
 
 class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
-                    public GreaterOrEqual, public GreaterThan, public Mul, public Div{
+                    public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual{
     public:
         FloatValue(float value);
         ~FloatValue() = default;
@@ -72,6 +77,7 @@ class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, 
 
 
         ValueDescriptor* equal(ValueDescriptor *other) override;
+        ValueDescriptor* notEqual(ValueDescriptor *other) override;
 
         ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
         ValueDescriptor* lesserThan(ValueDescriptor *other) override;
@@ -84,13 +90,14 @@ class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, 
         float value; 
 };
 
-class CharValue: public ValueDescriptor, public Equal{
+class CharValue: public ValueDescriptor, public Equal, public NotEqual{
     public:
         CharValue(char value);
         ~CharValue() = default;
 
         char getValue();
         ValueDescriptor* equal(ValueDescriptor *other) override;
+        ValueDescriptor* notEqual(ValueDescriptor *other) override;
 
     private:
         char value;
@@ -110,7 +117,7 @@ class FunctionValue: public ValueDescriptor{
 
 class ReferenceValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, 
                     public Not, public LesserThan, public GreaterOrEqual, public GreaterThan, public Mul,
-                    public Div{
+                    public Div, public AndOper, public OrOper, public NotEqual{
     public:
         ReferenceValue(std::function<ValueDescriptor * ()> getter, std::function<void (ValueDescriptor *)> setter);
         ~ReferenceValue() = default;
@@ -128,6 +135,10 @@ class ReferenceValue: public ValueDescriptor, public Add, public Equal, public M
 
         ValueDescriptor* equal(ValueDescriptor* other) override;
         ValueDescriptor* notFunc() override;
+
+        ValueDescriptor* notEqual(ValueDescriptor *other) override;
+        ValueDescriptor* andOpr(ValueDescriptor *other) override;
+        ValueDescriptor* orOpr(ValueDescriptor *other) override;
 
 
         ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;

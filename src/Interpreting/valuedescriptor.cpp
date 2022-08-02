@@ -21,6 +21,23 @@ ValueDescriptor* BoolValue::notFunc(){
     return new BoolValue(!this->value);
 }
 
+ValueDescriptor* BoolValue::notEqual(ValueDescriptor *other){
+    BoolValue* otherValue = dynamic_cast<BoolValue *>(other->getDescri());
+    return new BoolValue(value != otherValue->getValue());
+}
+
+ValueDescriptor* BoolValue::andOpr(ValueDescriptor *other){
+    BoolValue* otherValue = dynamic_cast<BoolValue *>(other->getDescri());
+    return new BoolValue(value && otherValue->getValue());
+}
+
+ValueDescriptor* BoolValue::orOpr(ValueDescriptor *other){
+    BoolValue* otherValue = dynamic_cast<BoolValue *>(other->getDescri());
+    return new BoolValue(value || otherValue->getValue());
+}
+
+
+
 IntValue::IntValue(long value): value{value}{
 
 }
@@ -54,6 +71,11 @@ ValueDescriptor* IntValue::div(ValueDescriptor *other){
 ValueDescriptor* IntValue::equal(ValueDescriptor *other){
     IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
     return new BoolValue(value == otherValue->getValue());
+}
+
+ValueDescriptor* IntValue::notEqual(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new BoolValue(value != otherValue->getValue());
 }
 
 
@@ -113,6 +135,10 @@ ValueDescriptor* FloatValue::equal(ValueDescriptor *other){
     return new BoolValue(value == otherValue->getValue());
 }
 
+ValueDescriptor* FloatValue::notEqual(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new BoolValue(value != otherValue->getValue());
+}
 
 ValueDescriptor* FloatValue::lesserOrEqual(ValueDescriptor *other){
     FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
@@ -146,6 +172,11 @@ char CharValue::getValue(){
 ValueDescriptor* CharValue::equal(ValueDescriptor *other){
     CharValue* otherValue = dynamic_cast<CharValue *>(other);
     return new BoolValue(value == otherValue->getValue());
+}
+
+ValueDescriptor* CharValue::notEqual(ValueDescriptor *other){
+    CharValue* otherValue = dynamic_cast<CharValue *>(other);
+    return new BoolValue(value != otherValue->getValue());
 }
 
 
@@ -197,6 +228,22 @@ ValueDescriptor* ReferenceValue::div(ValueDescriptor *other){
 ValueDescriptor* ReferenceValue::equal(ValueDescriptor *other){
     auto value = dynamic_cast<Equal *>(this->getDescri());
     return value->equal(other->getDescri());
+}
+
+
+ValueDescriptor* ReferenceValue::notEqual(ValueDescriptor *other){
+    auto value = dynamic_cast<NotEqual *>(this->getDescri());
+    return value->notEqual(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::andOpr(ValueDescriptor *other){
+    auto value = dynamic_cast<AndOper *>(this->getDescri());
+    return value->andOpr(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::orOpr(ValueDescriptor *other){
+    auto value = dynamic_cast<OrOper *>(this->getDescri());
+    return value->orOpr(other->getDescri());
 }
 
 

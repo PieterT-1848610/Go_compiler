@@ -8,6 +8,21 @@ class Equal {
         virtual ValueDescriptor* equal(ValueDescriptor *ohter) = 0;
 };
 
+class NotEqual{
+    public:
+        virtual ValueDescriptor* notEqual(ValueDescriptor *other) = 0;
+};
+
+class AndOper{
+    public:
+        virtual ValueDescriptor* andOpr(ValueDescriptor *other) = 0;
+};
+
+class OrOper{
+    public:
+        virtual ValueDescriptor* orOpr(ValueDescriptor *other) = 0;
+};
+
 class Not{
     public:
         virtual ValueDescriptor* notFunc() = 0;

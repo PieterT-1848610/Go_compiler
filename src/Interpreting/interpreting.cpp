@@ -369,11 +369,37 @@
 
     }
 
-    void Interpreting::binaryNEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+    void Interpreting::binaryNEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<NotEqual *>(valueStack.pop()->getDescri());
 
-    void Interpreting::binaryANDExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+        visitRightSide();
+        auto rightSide = (valueStack.pop()->getDescri());
 
-    void Interpreting::binaryORExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+        valueStack.push(leftSide->notEqual(rightSide));
+    }
+
+    void Interpreting::binaryANDExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<AndOper *>(valueStack.pop()->getDescri());
+
+        visitRightSide();
+        auto rightSide = (valueStack.pop()->getDescri());
+
+        valueStack.push(leftSide->andOpr(rightSide));
+
+    }
+
+    void Interpreting::binaryORExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<OrOper *>(valueStack.pop()->getDescri());
+
+        visitRightSide();
+        auto rightSide = (valueStack.pop()->getDescri());
+
+        valueStack.push(leftSide->orOpr(rightSide));
+
+    }
 
     // >
     void Interpreting::binaryGTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {

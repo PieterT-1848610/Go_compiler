@@ -77,6 +77,26 @@ func forLoop(x int){
 
 }
 
+func testingOpr(){
+	var x = true;
+	var x2 = true;
+	var y = false;
+	var y2= false;
+
+	if(x && x2){
+		printBool(x)
+	}
+	if(x && y){
+		printBool(y)
+	}
+	if(x||y){
+		printBool(x)
+	}
+	if(y || !y2){
+		printBool(x)
+	}
+}
+
 
 func main() {
 	//testingIfs()
@@ -104,6 +124,7 @@ func main() {
 	}
 	y = x/6
 	printInt(y)
+	testingOpr()
 	//x = fib(x)
 	//assingCheck()
 	
