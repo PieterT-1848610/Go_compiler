@@ -92,14 +92,18 @@ func main() {
 	printBool(t)
 	printBool(z)
 	//printInt(x)
-	//x  = x + 8
-	//y = x
-	//printInt(x)
-	//printInt(y)
-	//var y = 1
-	//y = plus(x, 4)
-	//printInt(y)
-	//printInt(rec(1))
+	x  = x * 8
+	printInt(x)
+	if(x > 9){
+		if(y >= 10){
+			printBool(true)
+		}
+		printInt(0)
+	}else{
+		printInt(1)
+	}
+	y = x/6
+	printInt(y)
 	//x = fib(x)
 	//assingCheck()
 	

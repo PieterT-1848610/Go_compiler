@@ -3,14 +3,19 @@
 
 class ValueDescriptor;
 
-class Add {
-    public:
-        virtual ValueDescriptor* add(ValueDescriptor *other) = 0;
-};
-
 class Equal {
     public:
         virtual ValueDescriptor* equal(ValueDescriptor *ohter) = 0;
+};
+
+class Not{
+    public:
+        virtual ValueDescriptor* notFunc() = 0;
+};
+
+class Add {
+    public:
+        virtual ValueDescriptor* add(ValueDescriptor *other) = 0;
 };
 
 class Min {
@@ -18,14 +23,34 @@ class Min {
         virtual ValueDescriptor* min(ValueDescriptor *other) = 0;
 };
 
-class LesserOrEqual{
+class Mul {
     public:
-            virtual ValueDescriptor* lesserOrEqual(ValueDescriptor *other) = 0;
+        virtual ValueDescriptor* mul(ValueDescriptor *other) = 0;
 };
 
-class Not{
+class Div {
     public:
-        virtual ValueDescriptor* notFunc() = 0;
+        virtual ValueDescriptor* div(ValueDescriptor *other) = 0;
+};
+
+class LesserOrEqual{
+    public:
+        virtual ValueDescriptor* lesserOrEqual(ValueDescriptor *other) = 0;
+};
+
+class LesserThan{
+    public:
+        virtual ValueDescriptor* lesserThan(ValueDescriptor *other) = 0;
+};
+
+class GreaterOrEqual{
+    public:
+        virtual ValueDescriptor* greaterOrEqual(ValueDescriptor *other) = 0;
+};
+
+class GreaterThan{
+    public:
+        virtual ValueDescriptor* greaterThan(ValueDescriptor *other) = 0;
 };
 
 #endif

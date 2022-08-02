@@ -35,20 +35,49 @@ ValueDescriptor* IntValue::add(ValueDescriptor *other){
     return new IntValue(value + otherValue->getValue());
 }
 
-ValueDescriptor* IntValue::equal(ValueDescriptor *other){
-    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
-    return new BoolValue(value == otherValue->getValue());
-}
-
 ValueDescriptor* IntValue::min(ValueDescriptor *other){
     IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
     return new IntValue(value - otherValue->getValue());
 }
 
+ValueDescriptor* IntValue::mul(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new IntValue(value * otherValue->getValue());
+}
+
+ValueDescriptor* IntValue::div(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new IntValue(value / otherValue->getValue());
+}
+
+
+ValueDescriptor* IntValue::equal(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new BoolValue(value == otherValue->getValue());
+}
+
+
 ValueDescriptor* IntValue::lesserOrEqual(ValueDescriptor *other){
     IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
     return new BoolValue(value <= otherValue->getValue());
 }
+
+ValueDescriptor* IntValue::lesserThan(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new BoolValue(value < otherValue->getValue());
+}
+
+ValueDescriptor* IntValue::greaterOrEqual(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new BoolValue(value >= otherValue->getValue());
+}
+
+ValueDescriptor* IntValue::greaterThan(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new BoolValue(value > otherValue->getValue());
+}
+
+
 
 FloatValue::FloatValue(float value): value{value}{
 
@@ -63,20 +92,48 @@ ValueDescriptor* FloatValue::add(ValueDescriptor *other){
     return new FloatValue(value + otherValue->getValue());
 }
 
-ValueDescriptor* FloatValue::equal(ValueDescriptor *other){
-    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
-    return new BoolValue(value == otherValue->getValue());
-}
-
 ValueDescriptor* FloatValue::min(ValueDescriptor *other){
     FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
     return new FloatValue(value - otherValue->getValue());
 }
 
+ValueDescriptor* FloatValue::mul(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new FloatValue(value * otherValue->getValue());
+}
+
+ValueDescriptor* FloatValue::div(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new FloatValue(value / otherValue->getValue());
+}
+
+
+ValueDescriptor* FloatValue::equal(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new BoolValue(value == otherValue->getValue());
+}
+
+
 ValueDescriptor* FloatValue::lesserOrEqual(ValueDescriptor *other){
     FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
     return new BoolValue(value <= otherValue->getValue());
 }
+
+ValueDescriptor* FloatValue::lesserThan(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new BoolValue(value < otherValue->getValue());
+}
+
+ValueDescriptor* FloatValue::greaterOrEqual(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new BoolValue(value >= otherValue->getValue());
+}
+
+ValueDescriptor* FloatValue::greaterThan(ValueDescriptor *other){
+    FloatValue* otherValue = dynamic_cast<FloatValue *>(other->getDescri());
+    return new BoolValue(value > otherValue->getValue());
+}
+
 
 CharValue::CharValue(char value): value{value}{
 
@@ -115,14 +172,10 @@ void ReferenceValue::setValue(ValueDescriptor* valueDescr){
     setter(valueDescr);
 }
 
+
 ValueDescriptor* ReferenceValue::add(ValueDescriptor *other){
     auto value = dynamic_cast<Add *>(this->getDescri());
     return value->add(other->getDescri());
-}
-
-ValueDescriptor* ReferenceValue::equal(ValueDescriptor *other){
-    auto value = dynamic_cast<Equal *>(this->getDescri());
-    return value->equal(other->getDescri());
 }
 
 ValueDescriptor* ReferenceValue::min(ValueDescriptor *other){
@@ -130,12 +183,45 @@ ValueDescriptor* ReferenceValue::min(ValueDescriptor *other){
     return value->min(other->getDescri());
 }
 
+ValueDescriptor* ReferenceValue::mul(ValueDescriptor *other){
+    auto value = dynamic_cast<Mul *>(this->getDescri());
+    return value->mul(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::div(ValueDescriptor *other){
+    auto value = dynamic_cast<Div *>(this->getDescri());
+    return value->div(other->getDescri());
+}
+
+
+ValueDescriptor* ReferenceValue::equal(ValueDescriptor *other){
+    auto value = dynamic_cast<Equal *>(this->getDescri());
+    return value->equal(other->getDescri());
+}
+
+
+ValueDescriptor* ReferenceValue::notFunc(){
+    auto value = dynamic_cast<Not *>(this->getDescri());
+    return value->notFunc();
+}
+
+
 ValueDescriptor* ReferenceValue::lesserOrEqual(ValueDescriptor *other){
     auto value = dynamic_cast<LesserOrEqual *>(this->getDescri());
     return value->lesserOrEqual(other->getDescri());
 }
 
-ValueDescriptor* ReferenceValue::notFunc(){
-    auto value = dynamic_cast<Not *>(this->getDescri());
-    return value->notFunc();
+ValueDescriptor* ReferenceValue::lesserThan(ValueDescriptor *other){
+    auto value = dynamic_cast<LesserThan *>(this->getDescri());
+    return value->lesserThan(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::greaterOrEqual(ValueDescriptor *other){
+    auto value = dynamic_cast<GreaterOrEqual *>(this->getDescri());
+    return value->greaterOrEqual(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::greaterThan(ValueDescriptor *other){
+    auto value = dynamic_cast<GreaterThan *>(this->getDescri());
+    return value->greaterThan(other->getDescri());
 }

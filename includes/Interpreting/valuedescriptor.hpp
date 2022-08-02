@@ -32,32 +32,52 @@ class BoolValue: public ValueDescriptor, public Equal, public Not{
 };
 
 //na kijken of long long moet zijn (64bit of 32 bit)
-class IntValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual{
+class IntValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
+                public GreaterOrEqual, public GreaterThan, public Mul, public Div{
     public:
         IntValue(long value);
         ~IntValue() = default;
         long getValue();
 
         ValueDescriptor* add(ValueDescriptor *other) override;
-        ValueDescriptor* equal(ValueDescriptor *other) override;
         ValueDescriptor* min(ValueDescriptor *other) override;
+        ValueDescriptor* mul(ValueDescriptor *other) override;
+        ValueDescriptor* div(ValueDescriptor *other) override;
+
+
+        ValueDescriptor* equal(ValueDescriptor *other) override;
+
+
         ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* lesserThan(ValueDescriptor *other) override;
+
+        ValueDescriptor* greaterOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* greaterThan(ValueDescriptor *other) override;
 
     private:
         long value;
 };
 
-class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual{
+class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
+                    public GreaterOrEqual, public GreaterThan, public Mul, public Div{
     public:
         FloatValue(float value);
         ~FloatValue() = default;
         float getValue();
 
         ValueDescriptor* add(ValueDescriptor *other) override;
-        ValueDescriptor* equal(ValueDescriptor *other) override;
         ValueDescriptor* min(ValueDescriptor *other) override;
-        ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* mul(ValueDescriptor *other) override;
+        ValueDescriptor* div(ValueDescriptor *other) override;
 
+
+        ValueDescriptor* equal(ValueDescriptor *other) override;
+
+        ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* lesserThan(ValueDescriptor *other) override;
+
+        ValueDescriptor* greaterOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* greaterThan(ValueDescriptor *other) override;
 
 
     private:
@@ -88,7 +108,9 @@ class FunctionValue: public ValueDescriptor{
         std::function <void ()> func;     //wat de code uitvoert
 };
 
-class ReferenceValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public Not{
+class ReferenceValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, 
+                    public Not, public LesserThan, public GreaterOrEqual, public GreaterThan, public Mul,
+                    public Div{
     public:
         ReferenceValue(std::function<ValueDescriptor * ()> getter, std::function<void (ValueDescriptor *)> setter);
         ~ReferenceValue() = default;
@@ -98,11 +120,21 @@ class ReferenceValue: public ValueDescriptor, public Add, public Equal, public M
 
 
         ValueDescriptor* add(ValueDescriptor *other) override;
-        ValueDescriptor* equal(ValueDescriptor* other) override;
         ValueDescriptor* min(ValueDescriptor *other) override;
-        ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* mul(ValueDescriptor *other) override;
+        ValueDescriptor* div(ValueDescriptor *other) override;
+
+
+
+        ValueDescriptor* equal(ValueDescriptor* other) override;
         ValueDescriptor* notFunc() override;
 
+
+        ValueDescriptor* lesserOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* lesserThan(ValueDescriptor *other) override;
+
+        ValueDescriptor* greaterOrEqual(ValueDescriptor *other) override;
+        ValueDescriptor* greaterThan(ValueDescriptor *other) override;
 
     private:
         std::function<ValueDescriptor * ()> getter;

@@ -21,7 +21,11 @@
         std::function<void ()>funcBool{[this](){
             auto valueDesc = this->valueStack.pop();
             auto value = dynamic_cast<BoolValue *>(valueDesc->getDescri());
-            std::cout<<value->getValue()<<"\n";
+            if(value->getValue()){
+                std::cout<<"true \n";
+            }else{
+                std::cout<<"false \n";
+            }
         }};  
         valueTable.set("printBool", new FunctionValue(funcBool));
 
@@ -322,12 +326,37 @@
 
         //auto result = leftSide->add(rightSide);
         valueStack.push(leftSide->min(rightSide));
-        
     }
 
-    void Interpreting::binaryMulExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+    void Interpreting::binaryMulExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"Mul expr \n";
+        }
+        visitLeftSide();
+        auto leftSide = dynamic_cast<Mul *>(valueStack.pop());
 
-    void Interpreting::binaryDivExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+        visitRightSide();
+        auto rightSide = (valueStack.pop());
+
+
+        //auto result = leftSide->add(rightSide);
+        valueStack.push(leftSide->mul(rightSide));
+    }
+
+    void Interpreting::binaryDivExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"Div expr \n";
+        }
+        visitLeftSide();
+        auto leftSide = dynamic_cast<Div *>(valueStack.pop());
+
+        visitRightSide();
+        auto rightSide = (valueStack.pop());
+
+
+        //auto result = leftSide->add(rightSide);
+        valueStack.push(leftSide->div(rightSide));
+    }
 
     void Interpreting::binaryEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
         visitLeftSide();
@@ -346,12 +375,40 @@
 
     void Interpreting::binaryORExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
 
-    void Interpreting::binaryGTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+    // >
+    void Interpreting::binaryGTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<GreaterThan *>(valueStack.pop()->getDescri());
 
-    void Interpreting::binaryGEExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+        visitRightSide();
+        auto rightSide = valueStack.pop()->getDescri();
 
-    void Interpreting::binaryLTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {}
+        valueStack.push(leftSide->greaterThan(rightSide));
+    }
 
+    //>=
+    void Interpreting::binaryGEExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<GreaterOrEqual *>(valueStack.pop()->getDescri());
+
+        visitRightSide();
+        auto rightSide = valueStack.pop()->getDescri();
+
+        valueStack.push(leftSide->greaterOrEqual(rightSide));
+    }
+
+    // <
+    void Interpreting::binaryLTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<LesserThan *>(valueStack.pop()->getDescri());
+
+        visitRightSide();
+        auto rightSide = valueStack.pop()->getDescri();
+
+        valueStack.push(leftSide->lesserThan(rightSide));
+    }
+
+    //<=
     void Interpreting::binaryLEExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
         visitLeftSide();
         auto leftSide = dynamic_cast<LesserOrEqual *>(valueStack.pop()->getDescri());
@@ -360,7 +417,6 @@
         auto rightSide = valueStack.pop()->getDescri();
 
         valueStack.push(leftSide->lesserOrEqual(rightSide)); 
-
     }
 
     //Unary Operations
@@ -369,7 +425,6 @@
         auto expr = dynamic_cast<Not *>(valueStack.pop()->getDescri());
 
         valueStack.push(expr->notFunc());
-
     }
 
 

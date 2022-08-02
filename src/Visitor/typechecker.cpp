@@ -427,13 +427,13 @@
         TypeDescriptor * rightSide = typeStack.pop();
         referncableStack.pop();
 
-        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int, float or bool allowed");
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{})){    
+            errors.push("wrong type for leftSide, only int or float allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
-        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{})){
-            errors.push("wrong type for rightSide, only int, float or bool allowed");
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{})){
+            errors.push("wrong type for rightSide, only int or float allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
@@ -448,7 +448,7 @@
 
     void TypeChecker::binaryMinExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
         if(debug){
-            std::cout<<"binary Add expre \n";
+            std::cout<<"binary Min expre \n";
         }
                        
         visitLeftSide();
@@ -460,12 +460,12 @@
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int, float or bool allowed");
+            errors.push("wrong type for leftSide, only int or float allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{})){
-            errors.push("wrong type for rightSide, only int, float or bool allowed");
+            errors.push("wrong type for rightSide, only int or float allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
@@ -478,11 +478,65 @@
     }
 
     void TypeChecker::binaryMulExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"binary Mul expre \n";
+        }
+                       
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
 
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
+            errors.push("wrong type for leftSide, only int or float allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{})){
+            errors.push("wrong type for rightSide, only int or float allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(leftSide);
+        
+        referncableStack.push(false);
     }
 
     void TypeChecker::binaryDivExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"binary Div expre \n";
+        }
+                       
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
 
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{})){    
+            errors.push("wrong type for leftSide, only int or float allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{})){
+            errors.push("wrong type for rightSide, only int or float allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(leftSide);
+        
+        referncableStack.push(false);
     }
 
     void TypeChecker::binaryEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
@@ -499,12 +553,12 @@
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int, float or bool allowed");
+            errors.push("wrong type for leftSide, only int, float, bool or char allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){
-            errors.push("wrong type for rightSide, only int, float or bool allowed");
+            errors.push("wrong type for rightSide, only int, float, bool or char allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
@@ -529,16 +583,101 @@
 
     }
 
+    // >
     void TypeChecker::binaryGTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"Greater than expr \n";
+        }
 
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
+            errors.push("wrong type for leftSide, only int, float");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
+            errors.push("wrong type for rightSide, only int, float ");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't compare the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
+
+    // >=
     void TypeChecker::binaryGEExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"greater equal expr \n";
+        }
 
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
+            errors.push("wrong type for leftSide, only int, float");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
+            errors.push("wrong type for rightSide, only int, float ");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't compare the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
+    // <
     void TypeChecker::binaryLTExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"lesser than expr \n";
+        }
 
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+        
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
+            errors.push("wrong type for leftSide, only int, float");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
+            errors.push("wrong type for rightSide, only int, float ");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't compare the different types");
+        }
+        typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
     }
 
     //<=
