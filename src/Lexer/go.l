@@ -82,6 +82,7 @@ return  {semicollonPlac = true; return RETURN;}
 var     {semicollonPlac = false; return VAR;}
 func    {semicollonPlac = false; return FUNC;}
 
+
 \&\&    {semicollonPlac = false; return AND; }
 \|\|    {semicollonPlac = false; return OR; }
 \!      {semicollonPlac = false; return NOT; }

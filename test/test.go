@@ -1,24 +1,9 @@
-//package main
-
-// func plus(a int, b int) int {
-// 	return a
-// }
-
-// func main() {
-// 	var test, a, b int = 1, 5, 8
-// 	var test2, f = 2, true
-// 	test = a + test2
-// 	var test3 = test
-// 	//test2 = test + test2
-// }}
-
-
-//package main
 
 func plus(a int, c int ) int {
 	return a + c
 } 
 
+//testing if else statments
 func testingIfs(){
 	var x = 2.31
 	printFloat(x)
@@ -32,8 +17,14 @@ func testingIfs(){
 	}else{
 		printInt(55)
 	}
+
+	var f = 0
+	if(f == 0){
+		printBool(true)
+	}
 }
 
+//recursion test fibo
 func fib(n int) int {
     if n == 0 {
         return 0
@@ -44,6 +35,7 @@ func fib(n int) int {
 	}
 }
 
+//check swithc assign
 func assingCheck() {
 	var y = 10
 	var x = 5
@@ -54,9 +46,11 @@ func assingCheck() {
 	printInt(y)
 }
 
+//testing the different two for loops
 func forLoop(x int){
 	var i =  0
 	var j = 0
+	printInt(x)
 	for j=0; j <=5; j = j + 1{
 		i =  i + 1
 		printInt(j)
@@ -77,6 +71,7 @@ func forLoop(x int){
 
 }
 
+//testing bool operation and, or, not
 func testingOpr(){
 	var x = true;
 	var x2 = true;
@@ -97,41 +92,42 @@ func testingOpr(){
 	}
 }
 
+func expo(value int, exponent int) int{
+	var i = 0
+	if(exponent == 0){
+		return 0	
+	}else if(exponent == 1){
+		return value
+	}
+
+	var result int = value
+	for i = 0; i < exponent; i = i +1{
+		result = result * value
+	}
+	return result
+}
+
+func testReturn() int{
+	var p = 99
+	return p
+}
+
 
 func main() {
 	//testingIfs()
-	var y= 10
-	var x int = 6
-	var t bool = true
-	var z bool = !t
-	if(!t){
-		printInt(6)
-	}else{
-		printInt(8)
-	}
-	printBool(t)
-	printBool(z)
-	//printInt(x)
-	x  = x * 8
-	printInt(x)
-	if(x > 9){
-		if(y >= 10){
-			printBool(true)
-		}
-		printInt(0)
-	}else{
-		printInt(1)
-	}
-	y = x/6
-	printInt(y)
-	testingOpr()
-	//x = fib(x)
-	//assingCheck()
+	//var y int = 1
+	//var x int = 6
+	//var i = 6
+	//var p = 6
+	var z = testReturn()
+	printInt(z)
+
+	z = z +1
+	//printInt(p)
+	//var z = expo(x, y)
+	//printInt(z)
+	printInt(z)
+	//testingOpr()
 	
-	//test2 = plus(a, test)
-	//printInt(test)
-	//test = test + test2
-	//test2 = test
-	//return true
 }
 

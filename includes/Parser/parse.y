@@ -148,6 +148,7 @@
 
 //more noting
 %%
+
 start
     :listTopDeclarations     {tree = new ASB::Root{$1->toVector()}; }
     ;
@@ -159,7 +160,7 @@ type
     |INT                            {$$ = new ASB::IntType{}; }
     |FLOAT32                        {$$ = new ASB::FloatType{}; }
     |BOOL                           {$$ = new ASB::BooleanType{}; }
-    |CHAR                           {$$ = new ASB::CharType{}; }
+    |RUNE                           {$$ = new ASB::CharType{}; }
     |FUNC functionSignature         {$$ = $2;}
     |literalType                    {$$ = $1;}
     ;

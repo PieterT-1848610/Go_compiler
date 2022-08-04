@@ -1,12 +1,16 @@
 #include "Interpreting/interpreting.hpp"
 
-    Interpreting::Interpreting(bool debug):valueStack{}, valueTable{}, paramValues{}, paramNames{}, debug{debug}{
+    Interpreting::Interpreting(bool debug):valueStack{}, valueTable{}, paramValues{}, paramNames{}, debug{debug}, returnValue{false}{
         
         //Not working 
         std::function<void ()>funcInt{[this](){
             auto valueDesc = this->valueStack.pop();
             auto value = dynamic_cast<IntValue *>(valueDesc->getDescri());
-            std::cout<<value->getValue()<<"\n";
+            if(this->debug){
+                std::cout<<"\n\n\n"<<value->getValue()<<"\n\n\n";
+            }else{
+                std::cout<<value->getValue()<<"\n";
+            }
 
         }};
         valueTable.set("printInt", new FunctionValue(funcInt) );
@@ -14,18 +18,30 @@
         std::function<void ()>funcFloat{[this](){
             auto valueDesc = this->valueStack.pop();
             auto value = dynamic_cast<FloatValue *>(valueDesc->getDescri());
-            std::cout<<value->getValue()<<"\n";
+            if(this->debug){
+                std::cout<<"\n\n\n"<<value->getValue()<<"\n\n\n";
+            }else{
+                std::cout<<value->getValue()<<"\n";
+            }
         }};  
         valueTable.set("printFloat", new FunctionValue(funcFloat));
 
         std::function<void ()>funcBool{[this](){
             auto valueDesc = this->valueStack.pop();
             auto value = dynamic_cast<BoolValue *>(valueDesc->getDescri());
+            std::string boolString {};
             if(value->getValue()){
-                std::cout<<"true \n";
+                boolString.assign("true");
             }else{
-                std::cout<<"false \n";
+                boolString.assign("false");
             }
+
+            if(this->debug){
+                std::cout<<"\n\n\n"<<boolString<<"\n\n\n";
+            }else{
+                std::cout<<boolString<<"\n";
+            }
+            
         }};  
         valueTable.set("printBool", new FunctionValue(funcBool));
 
@@ -52,7 +68,12 @@
     }
 
     //Block
+    //TODO: fix socope problem
     void Interpreting::block(const std::vector< std::function< void ()>> visitStatments) {
+        if(debug){
+            std::cout<<"Enter Block\n";
+        }
+        
         //newscope table
         valueTable.newScope();
         for(auto param: paramValues){
@@ -64,11 +85,18 @@
         //clear vector param
         for(auto stat: visitStatments){
             stat();
+            if(returnValue){
+                break;
+            }
         }
 
-
+        
         //removescope
         valueTable.removeScope();
+        if(debug){
+            std::cout<<"Exit of block \n";
+        }
+
     }
 
     //Declaration
@@ -111,10 +139,10 @@
         std::vector<ValueDescriptor *> values;
         for(auto expr: visitExpressions){
             expr();
-            values.push_back(valueStack.pop());
+            values.push_back(valueStack.pop()->getDescri());
         }
         for(int i=0; i<ids.size(); i++){
-            valueTable.set(ids[i], values[i]);
+            valueTable.set(ids[i], values[i]->getDescri());
         }
 
         //set with valueTable id and value
@@ -159,7 +187,7 @@
         }
 
         for(int i=0; i<visitLeftSide.size(); i++){
-           dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(rightValues[i]->getDescri());
+           dynamic_cast<ReferenceValue *>(leftValues[i]->getDescri())->setValue(rightValues[i]->getDescri());
            //dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(tempValues[i].getDescri());
         }
 
@@ -175,6 +203,9 @@
         while (cond){
             visitBodyFor();
 
+            if(returnValue){
+                break;
+            }
 
             visitPost();
 
@@ -211,10 +242,11 @@
         if(debug){
             std::cout<<"return stat \n";
         }
-        
         for(auto expr: visitExpressions){
             expr();
         }
+        returnValue = true;
+
         //visitExpression();
 
     }
@@ -281,16 +313,16 @@
             std::cout<<"call expr \n";
         }
         visitExpression();
-        auto func = valueStack.pop();
+        auto func = valueStack.pop()->getDescri();
 
 
         for(auto arg: visitArguments){
              arg();
         }
-
+        returnValue =false;
         auto funcExc = dynamic_cast<FunctionValue *>(func->getDescri());
         funcExc->execute();
-
+        returnValue = false;
         
 
     }
@@ -302,10 +334,10 @@
             std::cout<<"Add expr \n";
         }
         visitLeftSide();
-        auto leftSide = dynamic_cast<Add *>(valueStack.pop());
+        auto leftSide = dynamic_cast<Add *>(valueStack.pop()->getDescri());
 
         visitRightSide();
-        auto rightSide = (valueStack.pop());
+        auto rightSide = (valueStack.pop()->getDescri());
 
 
         //auto result = leftSide->add(rightSide);
@@ -318,10 +350,10 @@
             std::cout<<"Min expr \n";
         }
         visitLeftSide();
-        auto leftSide = dynamic_cast<Min *>(valueStack.pop());
+        auto leftSide = dynamic_cast<Min *>(valueStack.pop()->getDescri());
 
         visitRightSide();
-        auto rightSide = (valueStack.pop());
+        auto rightSide = (valueStack.pop()->getDescri());
 
 
         //auto result = leftSide->add(rightSide);
@@ -333,10 +365,10 @@
             std::cout<<"Mul expr \n";
         }
         visitLeftSide();
-        auto leftSide = dynamic_cast<Mul *>(valueStack.pop());
+        auto leftSide = dynamic_cast<Mul *>(valueStack.pop()->getDescri());
 
         visitRightSide();
-        auto rightSide = (valueStack.pop());
+        auto rightSide = (valueStack.pop()->getDescri());
 
 
         //auto result = leftSide->add(rightSide);
@@ -348,10 +380,10 @@
             std::cout<<"Div expr \n";
         }
         visitLeftSide();
-        auto leftSide = dynamic_cast<Div *>(valueStack.pop());
+        auto leftSide = dynamic_cast<Div *>(valueStack.pop()->getDescri());
 
         visitRightSide();
-        auto rightSide = (valueStack.pop());
+        auto rightSide = (valueStack.pop()->getDescri());
 
 
         //auto result = leftSide->add(rightSide);

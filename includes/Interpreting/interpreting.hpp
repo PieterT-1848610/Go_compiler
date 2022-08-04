@@ -117,6 +117,8 @@ class Interpreting: public Visitor{
 
         bool debug;
 
+        bool returnValue;
+
 };
 
 #endif
