@@ -170,12 +170,12 @@ char CharValue::getValue(){
 }
 
 ValueDescriptor* CharValue::equal(ValueDescriptor *other){
-    CharValue* otherValue = dynamic_cast<CharValue *>(other);
+    CharValue* otherValue = dynamic_cast<CharValue *>(other->getDescri());
     return new BoolValue(value == otherValue->getValue());
 }
 
 ValueDescriptor* CharValue::notEqual(ValueDescriptor *other){
-    CharValue* otherValue = dynamic_cast<CharValue *>(other);
+    CharValue* otherValue = dynamic_cast<CharValue *>(other->getDescri());
     return new BoolValue(value != otherValue->getValue());
 }
 
@@ -200,7 +200,7 @@ ValueDescriptor* ReferenceValue::getDescri(){
 }
 
 void ReferenceValue::setValue(ValueDescriptor* valueDescr){
-    setter(valueDescr);
+    setter(valueDescr->getDescri());
 }
 
 

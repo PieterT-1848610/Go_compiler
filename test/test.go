@@ -101,7 +101,7 @@ func expo(value int, exponent int) int{
 	}
 
 	var result int = value
-	for i = 0; i < exponent; i = i +1{
+	for i = 1; i < exponent; i = i +1{
 		result = result * value
 	}
 	return result
@@ -109,25 +109,46 @@ func expo(value int, exponent int) int{
 
 func testReturn() int{
 	var p = 99
-	return p
+	return p 
 }
 
+func retBool() bool{
+	var val = true
+	return true
+}
 
 func main() {
-	//testingIfs()
-	//var y int = 1
-	//var x int = 6
-	//var i = 6
-	//var p = 6
-	var z = testReturn()
-	printInt(z)
+	assingCheck()
+	testingIfs()
+	var i = plus(7, 56)
+	printInt(i)
+	var p = 6
+	var z = 1
+	p = p + 6
+	z = testReturn()
+	printInt(p)
+	if(z == 198){
+		printBool(true)
+	}
+	printInt(2)
+	var x = retBool()
+	printBool(x)
+	x = !x
+	printBool(x)
+	forLoop(p)
 
-	z = z +1
-	//printInt(p)
-	//var z = expo(x, y)
-	//printInt(z)
+	z = z +1		//breaks
+	var y = z		//works
 	printInt(z)
-	//testingOpr()
+	//printInt(p)
+	y = fib(20)
+	var value, exponent = 6, 3
+	z = expo(value, exponent)
+	// //printInt(z)
+	printInt(z)
+	testingOpr()
+	x = (p == z)||(y !=z)
+	printBool(x)
 	
 }
 

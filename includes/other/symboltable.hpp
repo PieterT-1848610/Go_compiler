@@ -43,6 +43,11 @@ class SymbolTable{
             
         };
 
+        void setOther(std::string key, T value){
+            this->table.back()[key] = value;
+        }
+
+
         //No nbeed anymore fixed with [key]
         void replace(std::string key, T value){
             int place = checkcontain(key);

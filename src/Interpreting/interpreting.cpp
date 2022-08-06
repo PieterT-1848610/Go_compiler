@@ -117,14 +117,14 @@
             visitSignature();
             
             for(int i = this->paramNames.size() -1; i>=0 ; i--){
-                auto tempValue = this->valueStack.pop();
+                auto tempValue = this->valueStack.pop()->getDescri();
                 this->paramValues.push_back(std::make_pair(this->paramNames[i],tempValue));
             }
 
             visitFunctionBody();
         }};
         FunctionValue *functionValue = new FunctionValue(func);
-        valueTable.set(id, functionValue);
+        valueTable.set(id, functionValue->getDescri());
         
         //set to Table
     }
@@ -187,7 +187,7 @@
         }
 
         for(int i=0; i<visitLeftSide.size(); i++){
-           dynamic_cast<ReferenceValue *>(leftValues[i]->getDescri())->setValue(rightValues[i]->getDescri());
+           dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(rightValues[i]->getDescri());
            //dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(tempValues[i].getDescri());
         }
 
@@ -244,11 +244,10 @@
         }
         for(auto expr: visitExpressions){
             expr();
+            auto temp = valueStack.pop();
+            valueStack.push(temp->getDescri());
         }
         returnValue = true;
-
-        //visitExpression();
-
     }
 
 
@@ -260,13 +259,15 @@
         
         std::function<void (ValueDescriptor*)> setFunc = [this, id](ValueDescriptor* newVal){
             auto _id = id;
-            //this->valueTable.set(_id, newVal);
+            //this->valueTable.setOther(_id, newVal);
             this->valueTable.replace(_id, newVal);
         };
 
         std::function<ValueDescriptor* ()> getFunc = [this, id]()->ValueDescriptor *{
             auto _id = id;
             return this->valueTable.get(_id);
+            //return temp->getDescri();
+            //return temp;
         };
         
         valueStack.push(new ReferenceValue(getFunc, setFunc));
@@ -324,7 +325,6 @@
         funcExc->execute();
         returnValue = false;
         
-
     }
 
     // void Interpreting::identifierExperssion(const std::string id);
@@ -341,7 +341,7 @@
 
 
         //auto result = leftSide->add(rightSide);
-        valueStack.push(leftSide->add(rightSide));
+        valueStack.push(leftSide->add(rightSide)->getDescri());
 
     }
 
@@ -357,7 +357,7 @@
 
 
         //auto result = leftSide->add(rightSide);
-        valueStack.push(leftSide->min(rightSide));
+        valueStack.push(leftSide->min(rightSide)->getDescri());
     }
 
     void Interpreting::binaryMulExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
@@ -372,7 +372,7 @@
 
 
         //auto result = leftSide->add(rightSide);
-        valueStack.push(leftSide->mul(rightSide));
+        valueStack.push(leftSide->mul(rightSide)->getDescri());
     }
 
     void Interpreting::binaryDivExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
@@ -387,7 +387,7 @@
 
 
         //auto result = leftSide->add(rightSide);
-        valueStack.push(leftSide->div(rightSide));
+        valueStack.push(leftSide->div(rightSide)->getDescri());
     }
 
     void Interpreting::binaryEQExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
@@ -397,7 +397,7 @@
         visitRightSide();
         auto rightSide = (valueStack.pop()->getDescri());
 
-        valueStack.push(leftSide->equal(rightSide));
+        valueStack.push(leftSide->equal(rightSide)->getDescri());
 
     }
 
@@ -408,7 +408,7 @@
         visitRightSide();
         auto rightSide = (valueStack.pop()->getDescri());
 
-        valueStack.push(leftSide->notEqual(rightSide));
+        valueStack.push(leftSide->notEqual(rightSide)->getDescri());
     }
 
     void Interpreting::binaryANDExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
@@ -418,7 +418,7 @@
         visitRightSide();
         auto rightSide = (valueStack.pop()->getDescri());
 
-        valueStack.push(leftSide->andOpr(rightSide));
+        valueStack.push(leftSide->andOpr(rightSide)->getDescri());
 
     }
 
@@ -429,7 +429,7 @@
         visitRightSide();
         auto rightSide = (valueStack.pop()->getDescri());
 
-        valueStack.push(leftSide->orOpr(rightSide));
+        valueStack.push(leftSide->orOpr(rightSide)->getDescri());
 
     }
 
@@ -441,7 +441,7 @@
         visitRightSide();
         auto rightSide = valueStack.pop()->getDescri();
 
-        valueStack.push(leftSide->greaterThan(rightSide));
+        valueStack.push(leftSide->greaterThan(rightSide)->getDescri());
     }
 
     //>=
@@ -452,7 +452,7 @@
         visitRightSide();
         auto rightSide = valueStack.pop()->getDescri();
 
-        valueStack.push(leftSide->greaterOrEqual(rightSide));
+        valueStack.push(leftSide->greaterOrEqual(rightSide)->getDescri());
     }
 
     // <
@@ -463,7 +463,7 @@
         visitRightSide();
         auto rightSide = valueStack.pop()->getDescri();
 
-        valueStack.push(leftSide->lesserThan(rightSide));
+        valueStack.push(leftSide->lesserThan(rightSide)->getDescri());
     }
 
     //<=
@@ -482,7 +482,7 @@
         visitExpression();
         auto expr = dynamic_cast<Not *>(valueStack.pop()->getDescri());
 
-        valueStack.push(expr->notFunc());
+        valueStack.push(expr->notFunc()->getDescri());
     }
 
 
