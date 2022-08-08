@@ -100,6 +100,10 @@ ValueDescriptor* IntValue::greaterThan(ValueDescriptor *other){
 }
 
 
+ValueDescriptor* IntValue::increaseOne(){
+    return new IntValue(value + 1);
+}
+
 
 FloatValue::FloatValue(float value): value{value}{
 
@@ -160,6 +164,9 @@ ValueDescriptor* FloatValue::greaterThan(ValueDescriptor *other){
     return new BoolValue(value > otherValue->getValue());
 }
 
+ValueDescriptor* FloatValue::increaseOne(){
+    return new FloatValue(value + 1);
+}
 
 CharValue::CharValue(char value): value{value}{
 
@@ -271,4 +278,9 @@ ValueDescriptor* ReferenceValue::greaterOrEqual(ValueDescriptor *other){
 ValueDescriptor* ReferenceValue::greaterThan(ValueDescriptor *other){
     auto value = dynamic_cast<GreaterThan *>(this->getDescri());
     return value->greaterThan(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::increaseOne(){
+    auto value = dynamic_cast<IncreaseOne *>(this->getDescri());
+    return value->increaseOne();
 }

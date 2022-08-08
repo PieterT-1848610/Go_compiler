@@ -231,6 +231,25 @@
 
     }
 
+    void TypeChecker::incrStatment(const std::function<void ()> visitExpression){
+        if(debug){
+            std::cout<<"incr stat \n";
+        }
+
+        visitExpression();
+        auto temp = typeStack.pop();
+        auto referncheck = referncableStack.pop();
+        if(!referncheck){
+            errors.push("Incr statment, value still needs to be referenceable");
+        }
+
+        if(!temp->compare(IntTypeDesc{}) && !temp->compare(FloatTypeDesc{})){    
+            errors.push("wrong type for increseas, only int or float allowed");
+        }
+        referncableStack.push(false);
+
+    }
+
     void TypeChecker::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {
         if(debug){
             std::cout<<"for stat\n";
@@ -318,7 +337,6 @@
 
         auto tempType = typeTable.get(id);
         typeStack.push(tempType);
-
         referncableStack.push(true);
     }
 
@@ -395,6 +413,7 @@
         if(paramType.size() != argTypes.size()){
             errors.push("No same amount of params as arguments for function");
         }
+    
 
         for(int i = 0; i<paramType.size(); i++){
             if(!paramType[i]->compare(*argTypes[i])){
@@ -855,9 +874,9 @@
         if(checkDuplicateStrings(parametersName)){
             errors.push("Cant use same name for different params");
         }
-        if(checkDuplicateStrings(resultsName)){
-            errors.push("Cant use same name for different returns");
-        }
+        // if(checkDuplicateStrings(resultsName)){
+        //     errors.push("Cant use same name for different returns");
+        // }
 
         std::vector<std::pair<std::string, TypeDescriptor *>> parameter = {};
 

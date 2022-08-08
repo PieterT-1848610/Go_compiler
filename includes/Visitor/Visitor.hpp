@@ -27,6 +27,8 @@ class Visitor{
 
         virtual void assignmentStatment(const std::vector< std::function<void ()>> visitLeftSide, const std::vector<  std::function<void ()>> visitRightSide)=0;
 
+        virtual void incrStatment(const std::function<void ()> visitExpression) = 0;
+        
         virtual void forStatment(const std::function<void ()> visitInit,  const std::function<void ()> visitCondition, const std::function<void ()> visitPost, const std::function<void ()> visitBodyFor)=0;
 
         virtual void declarationStament(const std::function<void ()>visitDeclaration)=0;

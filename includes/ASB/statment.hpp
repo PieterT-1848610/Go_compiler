@@ -36,6 +36,18 @@ class AssignmentStatment: public SimpleStatment{
 };
 
 
+class IncrStatment: public SimpleStatment{
+    public:
+        IncrStatment(Expression* expression);
+        virtual ~IncrStatment() override;
+
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression* expression;
+};
+
+
 class ForStatment: public Statment{
     public:
         ForStatment(SimpleStatment *init, Expression *condition, SimpleStatment *post, Block *bodyFor);

@@ -57,6 +57,21 @@ ASB::AssignmentStatment::~AssignmentStatment(){
     }
 };
 
+ASB::IncrStatment::IncrStatment(Expression * expression):expression{expression}{
+
+}
+
+ASB::IncrStatment::~IncrStatment(){
+    delete expression;
+}
+
+void ASB::IncrStatment::accept(Visitor *visitor) const{
+    std::function<void ()> visitExpression{[this, visitor](){
+        this->expression->accept(visitor);
+    }};
+
+    visitor->incrStatment(visitExpression);
+}
 
 ASB::ForStatment::ForStatment(SimpleStatment *init, Expression *condition, SimpleStatment *post, Block *bodyFor):
                         initStatment{init}, condition{condition}, postStatment{post}, bodyFor{bodyFor}{

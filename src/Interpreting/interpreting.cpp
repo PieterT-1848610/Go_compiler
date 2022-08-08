@@ -193,6 +193,20 @@
 
 
     }
+    
+
+    //hmmmm, not working skip it maybe. cast to ref
+    void Interpreting::incrStatment(const std::function <void ()> visitExpression){
+        if(debug){
+            std::cout<<"incr stat \n";
+        }
+        // visitExpression();
+        // auto expr = valueStack.pop()->getDescri();
+        // //auto inc_expr = dynamic_cast<IncreaseOne *>(expr);
+        // //auto newVal = inc_expr->increaseOne();
+        // //dynamic_cast<ReferenceValue *>(expr)->setValue(newVal->getDescri());
+        // dynamic_cast<ReferenceValue *>(expr)->setValue(new IntValue(3));
+    }
 
     void Interpreting::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {
         visitInit();

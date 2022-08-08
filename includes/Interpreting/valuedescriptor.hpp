@@ -37,7 +37,7 @@ class BoolValue: public ValueDescriptor, public Equal, public Not, public AndOpe
 
 //na kijken of long long moet zijn (64bit of 32 bit)
 class IntValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
-                public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual{
+                public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual, public IncreaseOne{
     public:
         IntValue(long value);
         ~IntValue() = default;
@@ -59,12 +59,14 @@ class IntValue: public ValueDescriptor, public Add, public Equal, public Min, pu
         ValueDescriptor* greaterOrEqual(ValueDescriptor *other) override;
         ValueDescriptor* greaterThan(ValueDescriptor *other) override;
 
+        ValueDescriptor* increaseOne() override;
+
     private:
         long value;
 };
 
 class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
-                    public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual{
+                    public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual, public IncreaseOne{
     public:
         FloatValue(float value);
         ~FloatValue() = default;
@@ -85,6 +87,7 @@ class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, 
         ValueDescriptor* greaterOrEqual(ValueDescriptor *other) override;
         ValueDescriptor* greaterThan(ValueDescriptor *other) override;
 
+        ValueDescriptor* increaseOne() override;
 
     private:
         float value; 
@@ -117,7 +120,7 @@ class FunctionValue: public ValueDescriptor{
 
 class ReferenceValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, 
                     public Not, public LesserThan, public GreaterOrEqual, public GreaterThan, public Mul,
-                    public Div, public AndOper, public OrOper, public NotEqual{
+                    public Div, public AndOper, public OrOper, public NotEqual,  public IncreaseOne{
     public:
         ReferenceValue(std::function<ValueDescriptor * ()> getter, std::function<void (ValueDescriptor *)> setter);
         ~ReferenceValue() = default;
@@ -146,6 +149,9 @@ class ReferenceValue: public ValueDescriptor, public Add, public Equal, public M
 
         ValueDescriptor* greaterOrEqual(ValueDescriptor *other) override;
         ValueDescriptor* greaterThan(ValueDescriptor *other) override;
+
+
+        ValueDescriptor* increaseOne() override;
 
     private:
         std::function<ValueDescriptor * ()> getter;

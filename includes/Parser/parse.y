@@ -85,6 +85,9 @@
 %token LT
 %token LE
 
+%token INCR
+%token DECR
+
 
 %token <identifierValue> IDENTIFIER
 %token <integerValue> INTEGER_LITERAL
@@ -105,6 +108,7 @@
 %type <simpleStatment> simpleStatment;
 //%type <simpleStatment> expressionStatment;
 //%type <simpleStatment> assignmentStatment;
+%type <simpleStatment> incdecStatment;
 
 %type <listExpression> expressionList;
 %type <expression> expression;
@@ -379,6 +383,7 @@ statments
 simpleStatment
     :                               {$$ = new ASB::EmptyStatment{};}
     |expression                     {$$ = new ASB::ExpressionStatment{$1};}
+    |incdecStatment                 {$$ = $1;}
     |expressionList '=' expressionList
                                     {
                                         auto leftside = $1->toVector();
@@ -387,8 +392,10 @@ simpleStatment
                                         delete $1;
                                         delete $3;
                                     }
+    ;
 
-
+incdecStatment
+    :expression INCR                {$$ = new ASB::IncrStatment($1);}
 
 statmentList
     :                               {$$ = new LinkedList<ASB::Statment *>;}

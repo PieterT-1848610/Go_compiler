@@ -46,6 +46,9 @@ class TypeChecker: public Visitor{
 
         void assignmentStatment(const std::vector< std::function<void ()>> visitLeftSide, const std::vector<  std::function<void ()>> visitRightSide) override;     //for visit left, and visit right
 
+        void incrStatment(const std::function<void ()> visitExpression) override;
+
+        
         void forStatment(const std::function<void ()> visitInit,  const std::function<void ()> visitCondition, const std::function<void ()> visitPost, const std::function<void ()> visitBodyFor) override;
 
         void declarationStament(const std::function<void ()>visitDeclaration) override;

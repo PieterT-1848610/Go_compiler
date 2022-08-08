@@ -68,4 +68,9 @@ class GreaterThan{
         virtual ValueDescriptor* greaterThan(ValueDescriptor *other) = 0;
 };
 
+class IncreaseOne{
+    public:
+        virtual ValueDescriptor* increaseOne() = 0;
+};
+
 #endif

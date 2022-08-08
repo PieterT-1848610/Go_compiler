@@ -21,7 +21,7 @@ int main(){
         
     
         TypeChecker typecheck = TypeChecker(false);
-       // try{
+        //try{
             tree->accept(&typecheck);
         //}catch(...){
         //    std::cout<<"crash?";
