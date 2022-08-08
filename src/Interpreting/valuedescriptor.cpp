@@ -2,7 +2,11 @@
 
 ValueDescriptor* ValueDescriptor::getDescri(){
      return this;
- }
+}
+
+bool ValueDescriptor::manyVals(){
+    return false;
+}
 
 BoolValue::BoolValue(bool value): value{value}{
 
@@ -283,4 +287,22 @@ ValueDescriptor* ReferenceValue::greaterThan(ValueDescriptor *other){
 ValueDescriptor* ReferenceValue::increaseOne(){
     auto value = dynamic_cast<IncreaseOne *>(this->getDescri());
     return value->increaseOne();
+}
+
+ManyValues::ManyValues(std::vector<ValueDescriptor *> manyValues): manyValues{manyValues}{
+
+}
+
+ManyValues::~ManyValues(){
+    for(auto vals: manyValues){
+        delete vals;
+    }
+}
+
+std::vector<ValueDescriptor *> ManyValues::getValues(){
+    return manyValues;
+}
+
+bool ManyValues::manyVals(){
+    return true;
 }

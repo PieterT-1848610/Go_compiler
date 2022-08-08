@@ -139,7 +139,16 @@
         std::vector<ValueDescriptor *> values;
         for(auto expr: visitExpressions){
             expr();
-            values.push_back(valueStack.pop()->getDescri());
+            auto temp = valueStack.pop()->getDescri();
+            if(temp->manyVals()){
+                std::vector<ValueDescriptor *> manyVals = dynamic_cast<ManyValues *>(temp)->getValues();
+                for(auto val: manyVals){
+                    values.push_back(val->getDescri());
+                }
+            }else{
+                values.push_back(temp);
+            }
+            //values.push_back(valueStack.pop()->getDescri());
         }
         for(int i=0; i<ids.size(); i++){
             valueTable.set(ids[i], values[i]->getDescri());
@@ -182,7 +191,17 @@
         //std::vector<ValueDescriptor> tempValues {};
         for(auto rightSide: visitRightSide){
             rightSide();
-            rightValues.push_back(valueStack.pop()->getDescri());
+            auto temp = valueStack.pop()->getDescri();
+            if(temp->manyVals()){
+                std::vector<ValueDescriptor *> manyVals = dynamic_cast<ManyValues *>(temp)->getValues();
+                for(auto val: manyVals){
+                    rightValues.push_back(val->getDescri());
+                }
+            }else{
+                rightValues.push_back(temp);
+            }
+
+            //rightValues.push_back(valueStack.pop()->getDescri());
             //tempValues.push_back(* valueStack.pop());
         }
 
@@ -256,11 +275,15 @@
         if(debug){
             std::cout<<"return stat \n";
         }
+
+        std::vector<ValueDescriptor *> tempValues = {};
         for(auto expr: visitExpressions){
             expr();
             auto temp = valueStack.pop();
-            valueStack.push(temp->getDescri());
+            //valueStack.push(temp->getDescri());
+            tempValues.push_back(temp->getDescri());
         }
+        valueStack.push(new ManyValues(tempValues));
         returnValue = true;
     }
 
@@ -332,7 +355,7 @@
 
 
         for(auto arg: visitArguments){
-             arg();
+            arg();
         }
         returnValue =false;
         auto funcExc = dynamic_cast<FunctionValue *>(func->getDescri());

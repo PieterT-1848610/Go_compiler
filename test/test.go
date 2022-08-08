@@ -107,23 +107,27 @@
 // 	return result
 // }
 
-func testReturn() int{
-	var p = 99
-	return p 
+// func testReturn() int{
+// 	var p = 99
+// 	return p 
+// }
+
+// func retBool() bool{
+// 	var val = true
+// 	return true
+// }
+
+func vals() (int, int) {
+    return 3, 7
 }
-
-func retBool() bool{
-	var val = true
-	return true
-}
-
-
 
 func main() {
-	//var i, j = 2, 1
-	var i, j (bool) = retBool(), !retBool()
-	printBool(i)
-	printBool(j)
+	var i, j int = vals()
+	printInt(i)
+	printInt(j)
+	j, i = vals()
+	printInt(i)
+	printInt(j)
 	// assingCheck()
 	// testingIfs()
 	// var i = plus(7, 56)

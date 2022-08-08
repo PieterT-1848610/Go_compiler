@@ -13,7 +13,7 @@ class ValueDescriptor{
     public:
         virtual ~ValueDescriptor()= default;
         virtual ValueDescriptor * getDescri();
-
+        virtual bool manyVals();
     protected:
         ValueDescriptor() = default;
 };
@@ -157,6 +157,19 @@ class ReferenceValue: public ValueDescriptor, public Add, public Equal, public M
         std::function<ValueDescriptor * ()> getter;
         std::function<void (ValueDescriptor *)> setter;
     
+};
+
+class ManyValues: public ValueDescriptor{
+    public:
+        ManyValues(std::vector<ValueDescriptor *> manyValues);
+        ~ManyValues();
+
+        std::vector<ValueDescriptor *> getValues();
+        bool manyVals() override;
+
+        
+    private:
+        std::vector<ValueDescriptor *> manyValues;
 };
 
 #endif

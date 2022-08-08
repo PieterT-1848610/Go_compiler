@@ -12,6 +12,7 @@ enum class TypeCode{
     floatType,
     charType,
     functionType,
+    manyType,
 };
 
 //reference value firstr all op true
@@ -65,7 +66,19 @@ class CharTypeDesc: public TypeDescriptor{
 
 };
 
+//Try to solve multi return
+class ManyTypeDesc: public TypeDescriptor{
+    public:
+        ManyTypeDesc(std::vector<TypeDescriptor *> allTypes);
+        ~ManyTypeDesc() override;
+        bool compare(const TypeDescriptor &other) const override;
 
+        std::string toString() const override;
+        TypeCode getCode() const override; 
+        std::vector<TypeDescriptor *> getTypes() const;
+    private:
+        std::vector<TypeDescriptor *> allTypes;
+};
 
 //? constructor
 class FunctionTypeDesc: public TypeDescriptor{

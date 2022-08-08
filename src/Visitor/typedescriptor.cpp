@@ -59,6 +59,36 @@ TypeCode CharTypeDesc::getCode() const{
 }
 
 
+ManyTypeDesc::ManyTypeDesc(std::vector<TypeDescriptor *> allTypes): allTypes{allTypes}{
+
+}
+
+ManyTypeDesc::~ManyTypeDesc(){
+    for(auto types: allTypes){
+        delete types;
+    }
+}
+
+bool ManyTypeDesc::compare(const TypeDescriptor &other) const{
+    TypeCode otherType = other.getCode();
+
+    return (TypeCode::manyType == otherType);
+}
+
+//maybe different to compare all types?
+std::string ManyTypeDesc::toString() const{
+    return "Many Type";
+}
+
+TypeCode ManyTypeDesc::getCode() const{
+    return TypeCode::manyType;
+}
+
+
+std::vector<TypeDescriptor *> ManyTypeDesc::getTypes() const{
+    return this->allTypes;
+}
+
 //Still needs work
 FunctionTypeDesc::FunctionTypeDesc(std::vector<std::pair<std::string, TypeDescriptor *>> parameters,
                 std::vector<std::pair<std::string, TypeDescriptor *>> returns): parameters{parameters}, returns{returns} {

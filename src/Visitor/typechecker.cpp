@@ -116,11 +116,6 @@
            std::cout<<"check var \n";
         }
 
-        if(ids.size() != visitExpressions.size()){
-                errors.push("Var declaration: number of ids, not match number of expressions");
-                return;
-            }
-
         //type is not given with decalartion of var
         if(visitType == NULL){
             if(visitExpressions.size() <= 0){
@@ -128,16 +123,25 @@
                 return;
             }
             std::vector<TypeDescriptor *> tempTypes = {};
-            for(int i = 0; i<ids.size(); i++){
+            for(int i = 0; i<visitExpressions.size(); i++){
                 visitExpressions[i]();
-                tempTypes.push_back(typeStack.pop());
+                auto tempExpType = typeStack.pop();
 
-                referncableStack.pop();
-
-                // if(typeTable.contains(ids[i])){
-                //     errors.push("Id already in use");
-                // }
-                // typeTable.set(ids[i], tempExpType);
+                // referncableStack.pop();
+                if(tempExpType->compare(ManyTypeDesc({}))){
+                    std::vector<TypeDescriptor *> manyTypes = dynamic_cast<ManyTypeDesc *>(tempExpType)->getTypes();
+                    for(auto types: manyTypes){
+                        tempTypes.push_back(types);
+                        referncableStack.pop();
+                    }
+                }else{
+                    tempTypes.push_back(tempExpType);
+                    referncableStack.pop();
+                }
+            }
+            if(ids.size() != tempTypes.size()){
+                errors.push("Not same amount of var and expression values");
+                return;
             }
             for(int i = 0; i<ids.size(); i++){
                 if(typeTable.contains(ids[i])){
@@ -156,9 +160,23 @@
 
                 referncableStack.pop();
 
-                if(!(typeVar->compare(*tempExpType))){
-                    errors.push("Expression type not same as giving type for Var");
+                if(tempExpType->compare(ManyTypeDesc({}))){
+                    std::vector<TypeDescriptor *> manyTypes = dynamic_cast<ManyTypeDesc *>(tempExpType)->getTypes();
+                    for(auto types: manyTypes){
+                        if(!(typeVar->compare(*types))){
+                            errors.push("Expression type not same as giving type for var");
+                        }
+                        referncableStack.pop();
+                    }
+                }else{
+                    if(!(typeVar->compare(*tempExpType))){
+                        errors.push("Expression type not same as giving type for Var");
+                    }
+                    referncableStack.pop();
                 }
+
+
+                
             }
             for(auto id: ids){
                 if(typeTable.contains(id)){
@@ -192,10 +210,7 @@
         if(debug){
             std::cout<<"assignstat stat\n";
         }
-        if(visitLeftSide.size() != visitRightSide.size()){
-            errors.push("Assignment but left and right side don't have same number of values");
-            return;
-        }
+        
 
         std::vector<TypeDescriptor *> leftTypes {};
         std::vector<bool> leftReference {};
@@ -210,9 +225,23 @@
         std::vector<TypeDescriptor *> rightTypes {};
         for(auto rightSide: visitRightSide){
             rightSide();
-            rightTypes.push_back(typeStack.pop());
+            auto tempType = typeStack.pop();
+            //rightTypes.push_back(typeStack.pop());
+            if(tempType->compare(ManyTypeDesc({}))){
+                std::vector<TypeDescriptor *> manyTypes = dynamic_cast<ManyTypeDesc *>(tempType)->getTypes();
+                for(auto types: manyTypes){
+                    rightTypes.push_back(types);
+                    referncableStack.pop();
+                }
 
-            referncableStack.pop();
+            }else{
+                rightTypes.push_back(tempType);
+                referncableStack.pop();
+            }
+        }
+        if(leftTypes.size() != rightTypes.size()){
+            errors.push("Assignment but left and right side don't have same number of values");
+            return;
         }
 
         for(int i = 0; i < leftTypes.size(); i++){
@@ -313,18 +342,27 @@
         }
 
         auto expactedTypes = currentFunctionType->getReturnsTypeDesc();
-
-        for(int i = 0; i<visitExpressions.size(); i++){
-            visitExpressions[i]();
+        if(visitExpressions.size() == 1){
+            visitExpressions[0]();
             auto returnType = typeStack.pop();
-
             referncableStack.pop();
 
-            if(!expactedTypes[i]->compare(* returnType)){
+            if(!expactedTypes[0]->compare( * returnType)){
                 errors.push("Return expr don't match expected type");
+
+            }
+        }else{
+            for(int i = 0; i<visitExpressions.size(); i++){
+                visitExpressions[i]();
+                auto returnType = typeStack.pop();
+                referncableStack.pop();
+
+                if(!expactedTypes[i]->compare(* returnType)){
+                    errors.push("Return expr don't match expected type");
+                }
             }
         }
-
+        
     }
 
 
@@ -422,11 +460,13 @@
         }
 
         auto returnType = funcType->getReturnsTypeDesc();
+        auto manyReturnType = new ManyTypeDesc(returnType);
         for(auto ret: returnType){
-            typeStack.push(ret);
+            //typeStack.push(ret);
 
             referncableStack.push(false);
         }
+        typeStack.push(manyReturnType);
     }
 
 
