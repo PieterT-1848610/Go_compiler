@@ -159,6 +159,10 @@
     }
 
 
+    void Interpreting::packageDeclaration(const std::string packageName){
+        
+    }
+
     //statments
     void Interpreting::expressionStatment(const std::function< void ()> visitExperssion) {
         if(debug){
@@ -277,13 +281,20 @@
         }
 
         std::vector<ValueDescriptor *> tempValues = {};
-        for(auto expr: visitExpressions){
+        
+        if(visitExpressions.size() == 1){
+            visitExpressions[0]();
+            auto temp = valueStack.pop();
+            valueStack.push(temp->getDescri());
+        }else{
+            for(auto expr: visitExpressions){
             expr();
             auto temp = valueStack.pop();
             //valueStack.push(temp->getDescri());
             tempValues.push_back(temp->getDescri());
+            }
+            valueStack.push(new ManyValues(tempValues));
         }
-        valueStack.push(new ManyValues(tempValues));
         returnValue = true;
     }
 

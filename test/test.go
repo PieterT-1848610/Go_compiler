@@ -1,3 +1,4 @@
+package main
 
 // func plus(a int, c int ) int {
 // 	return a + c
@@ -25,15 +26,15 @@
 // }
 
 // //recursion test fibo
-// func fib(n int) int {
-//     if n == 0 {
-//         return 0
-//     } else if n == 1 {
-// 		return 1
-// 	} else {
-// 		return fib(n-1) + fib(n-2)
-// 	}
-// }
+func fib(n int) int {
+    if n == 0 {
+        return 0
+    } else if n == 1 {
+		return 1
+	} else {
+		return fib(n-1) + fib(n-2)
+	}
+}
 
 // //check swithc assign
 // func assingCheck() {
@@ -122,12 +123,12 @@ func vals() (int, int) {
 }
 
 func main() {
-	var i, j int = vals()
-	printInt(i)
-	printInt(j)
-	j, i = vals()
-	printInt(i)
-	printInt(j)
+	// var i, j int = vals()
+	// printInt(i)
+	// printInt(j)
+	// j, i = vals()
+	// printInt(i)
+	// printInt(j)
 	// assingCheck()
 	// testingIfs()
 	// var i = plus(7, 56)
@@ -146,12 +147,13 @@ func main() {
 	// x = !x
 	// printBool(x)
 	// forLoop(p)
-
-	// z = z +1		//breaks
-	// var y = z		//works
-	// printInt(z)
-	// //printInt(p)
-	// y = fib(20)
+	var z = 1
+	z = z +1		//breaks
+	var y = z		//works
+	printInt(z)
+	//printInt(p)
+	y = fib(20)
+	printInt(y)
 	// var value, exponent = 6, 3
 	// z = expo(value, exponent)
 	// // //printInt(z)

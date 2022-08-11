@@ -8,7 +8,7 @@
     //add option for other print statments
     TypeChecker::TypeChecker(bool debug): errors{}, typeStack{}, typeTable{}, 
     currentFunctionType{}, functionSignatures{}, paramTypes{}, 
-    returnTypes{}, debug{debug}, referncableStack{}{
+    returnTypes{}, debug{debug}, referncableStack{}, packageMain{false}{
 
         typeTable.set("printInt", new FunctionTypeDesc{{ std::make_pair("value", new IntTypeDesc{})} , {}});
         typeTable.set("printFloat", new FunctionTypeDesc{{ std::make_pair("value", new FloatTypeDesc{})} , {}});
@@ -30,6 +30,9 @@
         }
         if(!typeTable.contains("main")){
             errors.push("No main function found");
+        }
+        if(!packageMain){
+            errors.push("No main package found");
         }
         auto mainFunc = dynamic_cast<FunctionTypeDesc *>(typeTable.get("main"));
         if(mainFunc == nullptr){
@@ -188,6 +191,21 @@
     }
 
 
+
+    void TypeChecker::packageDeclaration(const std::string packageName){
+        if(debug){
+            std::cout<<"check package\n";
+        }
+        if(packageMain){
+            errors.push("Only support main package");
+        }
+        if(packageName != "main"){
+            errors.push("wrong package name");
+        }else{
+            packageMain = true;
+        }
+    }
+
     //statments
     void TypeChecker::expressionStatment(const std::function< void ()> visitExperssion) {
         if(debug){
@@ -342,25 +360,26 @@
         }
 
         auto expactedTypes = currentFunctionType->getReturnsTypeDesc();
-        if(visitExpressions.size() == 1){
-            visitExpressions[0]();
-            auto returnType = typeStack.pop();
-            referncableStack.pop();
+        // if(visitExpressions.size() == 1){
+        //     visitExpressions[0]();
+        //     auto returnType = typeStack.pop();
+        //     referncableStack.pop();
 
-            if(!expactedTypes[0]->compare( * returnType)){
-                errors.push("Return expr don't match expected type");
+        //     if(!expactedTypes[0]->compare( * returnType)){
+        //         errors.push("Return expr don't match expected type");
 
-            }
-        }else{
+        //     }
+        // }else{
             for(int i = 0; i<visitExpressions.size(); i++){
                 visitExpressions[i]();
                 auto returnType = typeStack.pop();
                 referncableStack.pop();
 
                 if(!expactedTypes[i]->compare(* returnType)){
+                    std::cout<<"return type"<<returnType->toString()<<"\n";
                     errors.push("Return expr don't match expected type");
                 }
-            }
+            //}
         }
         
     }
@@ -460,13 +479,19 @@
         }
 
         auto returnType = funcType->getReturnsTypeDesc();
-        auto manyReturnType = new ManyTypeDesc(returnType);
-        for(auto ret: returnType){
-            //typeStack.push(ret);
-
+        if(returnType.size()==1){
             referncableStack.push(false);
+            typeStack.push(returnType[0]);
+        }else if(returnType.size() > 1){
+            auto manyReturnType = new ManyTypeDesc(returnType);
+            for(auto ret: returnType){
+                //typeStack.push(ret);
+
+                referncableStack.push(false);
+            }
+            typeStack.push(manyReturnType);
         }
-        typeStack.push(manyReturnType);
+        
     }
 
 

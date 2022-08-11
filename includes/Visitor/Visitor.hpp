@@ -19,6 +19,8 @@ class Visitor{
 
         virtual void variableDeclaration(const std::vector<std::string> ids, const std::function<void ()> visitType, const std::vector < std::function<void ()>> visitExpressions)=0;
 
+        virtual void packageDeclaration(const std::string packageName) = 0;
+
 
         //statments
         virtual void expressionStatment(const std::function<void ()> visitExperssion)=0;

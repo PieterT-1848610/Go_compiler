@@ -69,28 +69,29 @@ extern int yydebug;
     BOOL = 260,
     CHAR = 261,
     RUNE = 262,
-    IF = 263,
-    ELSE = 264,
-    FOR = 265,
-    RETURN = 266,
-    VAR = 267,
-    FUNC = 268,
-    AND = 269,
-    OR = 270,
-    NOT = 271,
-    EQ = 272,
-    NEQ = 273,
-    GT = 274,
-    GE = 275,
-    LT = 276,
-    LE = 277,
-    INCR = 278,
-    DECR = 279,
-    IDENTIFIER = 280,
-    INTEGER_LITERAL = 281,
-    FLOAT_LITERAL = 282,
-    BOOLEAN_LITERAL = 283,
-    CHAR_LITERAL = 284
+    PACKAGE = 263,
+    IF = 264,
+    ELSE = 265,
+    FOR = 266,
+    RETURN = 267,
+    VAR = 268,
+    FUNC = 269,
+    AND = 270,
+    OR = 271,
+    NOT = 272,
+    EQ = 273,
+    NEQ = 274,
+    GT = 275,
+    GE = 276,
+    LT = 277,
+    LE = 278,
+    INCR = 279,
+    DECR = 280,
+    IDENTIFIER = 281,
+    INTEGER_LITERAL = 282,
+    FLOAT_LITERAL = 283,
+    BOOLEAN_LITERAL = 284,
+    CHAR_LITERAL = 285
   };
 #endif
 
@@ -106,6 +107,7 @@ union YYSTYPE
     char charValue;
     char *identifierValue;
     
+
     ASB::Block *block;
     
     ASB::Type  *type;
@@ -130,7 +132,7 @@ union YYSTYPE
 
     LinkedList<std::pair<std::string, ASB::Type *>> *fields;
 
-#line 134 "includes/Parser/parser.hpp"
+#line 136 "includes/Parser/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

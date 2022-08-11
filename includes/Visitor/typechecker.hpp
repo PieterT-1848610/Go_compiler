@@ -38,6 +38,8 @@ class TypeChecker: public Visitor{
         //check if id already exists
         //add to varTable (ids, and type) 
 
+        void packageDeclaration(const std::string packageName) override;
+
 
         //statments
         void expressionStatment(const std::function<void ()> visitExperssion) override; //hint pop last type
@@ -152,6 +154,8 @@ class TypeChecker: public Visitor{
         bool debug;
 
         Stack<bool> referncableStack;
+
+        bool packageMain;
 
 };
 

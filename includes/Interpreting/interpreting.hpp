@@ -26,6 +26,10 @@ class Interpreting: public Visitor{
 
         void variableDeclaration(const std::vector<std::string> ids, const std::function<void ()> visitType, const std::vector < std::function<void ()>> visitExpressions) override; 
 
+        
+        void packageDeclaration(const std::string packageName) override;
+
+        
         //statments
         void expressionStatment(const std::function<void ()> visitExperssion) override; 
 

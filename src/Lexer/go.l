@@ -74,6 +74,7 @@ char    {semicollonPlac = true; return CHAR;}
 
 rune    {semicollonPlac = true; return RUNE;}
 
+package {semicollonPlac = true; return PACKAGE;}
 
 if 		{semicollonPlac = false; return IF;}
 else	{semicollonPlac = false; return ELSE;}

@@ -31,6 +31,19 @@ class VariableDeclaration: public Declaration{
         Type                        *type;
         std::vector<Expression *>   expressions;
 };
+
+class PackageDeclaration: public Declaration{
+    public:
+        PackageDeclaration(std::string name);
+        virtual ~PackageDeclaration() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        std::string name;
+
+};
+
+
 }
 
 #endif

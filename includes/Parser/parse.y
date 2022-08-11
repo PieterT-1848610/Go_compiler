@@ -32,6 +32,7 @@
     char charValue;
     char *identifierValue;
     
+
     ASB::Block *block;
     
     ASB::Type  *type;
@@ -66,6 +67,7 @@
 //%token STRING
 %token RUNE
 
+%token PACKAGE
 
 %token IF
 %token ELSE
@@ -140,6 +142,8 @@
 %type <listDeclaration> varSpecList;
 %type <declaration> varSpec;
 
+%type <topDeclaration> packages;
+
 %left   OR
 %left   AND
 %left   NOT
@@ -153,10 +157,15 @@
 //more noting
 %%
 
+
+
 start
     :listTopDeclarations     {tree = new ASB::Root{$1->toVector()}; }
     ;
 
+packages
+    :PACKAGE IDENTIFIER             {$$ = new ASB::PackageDeclaration{$2};}
+    ;
 
 //For type things
 type
@@ -266,6 +275,12 @@ topDeclaration
                                         list->add(0, function);
                                         $$ = list;
                                     }
+    |packages                       {
+                                        auto package = $1;
+                                        auto list = new LinkedList<ASB::TopDeclaration *>;
+                                        list->add(0, package);
+                                        $$ = list;
+                                    }  
     |listDeclaration                {   auto decla = $1->toVector();
                                         delete $1;
                                         auto list = new LinkedList<ASB::TopDeclaration *>;
@@ -273,7 +288,8 @@ topDeclaration
                                             list->add(i, decla[i]);
                                         }
                                         $$ = list;
-                                    }  
+                                    }
+    
     ;
 
 

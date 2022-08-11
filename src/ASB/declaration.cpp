@@ -53,3 +53,15 @@ void ASB::VariableDeclaration::accept(Visitor *visitor) const{
 
     visitor->variableDeclaration(this->ids, visitType, visitExpressions);
 }
+
+ASB::PackageDeclaration::PackageDeclaration(std::string name):name{name}{
+
+}
+ASB::PackageDeclaration::~PackageDeclaration(){
+
+}
+
+void ASB::PackageDeclaration::accept(Visitor *visitor) const{
+
+    visitor->packageDeclaration(this->name);
+}
