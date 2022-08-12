@@ -239,6 +239,17 @@ class BinaryLEOperation: public BinaryOperation{
         Expression *rightSide;
 };
 
+class BinaryModOperation: public BinaryOperation{
+    public:
+        BinaryModOperation(Expression *leftSide, Expression *rightSide);
+        virtual ~BinaryModOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression *leftSide;
+        Expression *rightSide;
+};
+
 
 //unary for not?
 //inc, dec?
@@ -262,6 +273,27 @@ class UnaryNotOperation: public UnaryOperation{
     private:
         Expression *expression;
 };
+
+class UnaryPosOperation: public UnaryOperation{
+    public:
+        UnaryPosOperation(Expression *expression);
+        virtual ~UnaryPosOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+    
+    private:
+        Expression *expression;
+};
+
+class UnaryNegOperation: public UnaryOperation{
+    public:
+        UnaryNegOperation(Expression *expression);
+        virtual ~UnaryNegOperation() override;
+        virtual void accept(Visitor *visitor) const override;
+    
+    private:
+        Expression *expression;
+};
+
 
 }
 #endif

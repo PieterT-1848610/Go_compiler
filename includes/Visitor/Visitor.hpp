@@ -31,6 +31,8 @@ class Visitor{
 
         virtual void incrStatment(const std::function<void ()> visitExpression) = 0;
         
+        virtual void decrStatment(const std::function<void ()> visitExpression) = 0;
+        
         virtual void forStatment(const std::function<void ()> visitInit,  const std::function<void ()> visitCondition, const std::function<void ()> visitPost, const std::function<void ()> visitBodyFor)=0;
 
         virtual void declarationStament(const std::function<void ()>visitDeclaration)=0;
@@ -38,6 +40,15 @@ class Visitor{
         virtual void ifStatment(const std::function<void ()> visitCondition, const std::function<void ()> visitTrueCondition, const std::function<void ()> visitFalseCondition)=0;
 
         virtual void returnStatment(const std::vector<std::function<void ()>> visitExpressions)=0;
+
+
+        virtual void decrAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) = 0;
+
+        virtual void incrAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) = 0;
+
+        virtual void mulAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) = 0;
+
+        virtual void divAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) = 0;
 
 
         //expresions
@@ -80,9 +91,14 @@ class Visitor{
 
         virtual void binaryLEExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) =0;
 
+        virtual void binaryModExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) = 0;
+
         //Unary Operations
         virtual void unaryNotExpression(const std::function<void ()> visitExpression) = 0;
 
+        virtual void unaryPosExpression(const std::function<void ()> visitExpression) = 0;
+
+        virtual void unaryNegExpression(const std::function<void ()> visitExpression) = 0;
 
         //types
         virtual void intType()=0;

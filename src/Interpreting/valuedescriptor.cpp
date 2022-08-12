@@ -108,6 +108,22 @@ ValueDescriptor* IntValue::increaseOne(){
     return new IntValue(value + 1);
 }
 
+ValueDescriptor* IntValue::decreaseOne(){
+    return new IntValue(value - 1);
+}
+
+ValueDescriptor* IntValue::modulo(ValueDescriptor *other){
+    IntValue* otherValue = dynamic_cast<IntValue *>(other->getDescri());
+    return new IntValue(value % otherValue->getValue());
+}
+
+ValueDescriptor* IntValue::posValue(){
+    return new IntValue(this->value);
+}
+
+ValueDescriptor* IntValue::negValue(){
+    return new IntValue(-this->value);
+}
 
 FloatValue::FloatValue(float value): value{value}{
 
@@ -170,6 +186,21 @@ ValueDescriptor* FloatValue::greaterThan(ValueDescriptor *other){
 
 ValueDescriptor* FloatValue::increaseOne(){
     return new FloatValue(value + 1);
+}
+
+ValueDescriptor* FloatValue::decreaseOne(){
+    return new FloatValue(value - 1);
+}
+
+
+
+
+ValueDescriptor* FloatValue::posValue(){
+    return new FloatValue(this->value);
+}
+
+ValueDescriptor* FloatValue::negValue(){
+    return new FloatValue(-this->value);
 }
 
 CharValue::CharValue(char value): value{value}{
@@ -287,6 +318,27 @@ ValueDescriptor* ReferenceValue::greaterThan(ValueDescriptor *other){
 ValueDescriptor* ReferenceValue::increaseOne(){
     auto value = dynamic_cast<IncreaseOne *>(this->getDescri());
     return value->increaseOne();
+}
+
+ValueDescriptor* ReferenceValue::decreaseOne(){
+    auto value = dynamic_cast<DecreaseOne *>(this->getDescri());
+    return value->decreaseOne();
+}
+
+ValueDescriptor* ReferenceValue::modulo(ValueDescriptor *other){
+    auto value = dynamic_cast<Modulo *>(this->getDescri());
+    return value->modulo(other->getDescri());
+}
+
+ValueDescriptor* ReferenceValue::posValue(){
+    auto value = dynamic_cast<PosValue *>(this->getDescri());
+    return value->posValue();
+}
+
+
+ValueDescriptor* ReferenceValue::negValue(){
+    auto value = dynamic_cast<NegValue *>(this->getDescri());
+    return value->negValue();
 }
 
 ManyValues::ManyValues(std::vector<ValueDescriptor *> manyValues): manyValues{manyValues}{

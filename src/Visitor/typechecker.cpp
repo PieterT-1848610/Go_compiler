@@ -297,6 +297,153 @@
 
     }
 
+    void TypeChecker::decrStatment(const std::function<void ()> visitExpression){
+        if(debug){
+            std::cout<<"decr stat \n";
+        }
+
+        visitExpression();
+        auto temp = typeStack.pop();
+        auto referncheck = referncableStack.pop();
+        if(!referncheck){
+            errors.push("Decr statment, value still needs to be referenceable");
+        }
+
+        if(!temp->compare(IntTypeDesc{}) && !temp->compare(FloatTypeDesc{})){    
+            errors.push("wrong type for decrease, only int or float allowed");
+        }
+        referncableStack.push(false);
+
+    }
+
+    void TypeChecker::decrAssignStatment(const std::function<void ()>visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"decr assign stat\n";
+        }
+        //leftSide
+        visitLeftExpression();
+        auto leftType = typeStack.pop();
+        auto referncheck = referncableStack.pop();
+        if(!referncheck){
+            errors.push("Decr Assign stat, value needs to be referenceable");
+        }
+
+        if(!leftType->compare(IntTypeDesc{}) && !leftType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        //rightSide 
+        visitRightExpression();
+        auto rightType = typeStack.pop();
+        referncableStack.pop();
+        
+        if(!rightType->compare(IntTypeDesc{}) && !rightType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        if(!leftType->compare(* leftType)){
+            errors.push("Left side of assing is differnt from right");
+        }
+
+        referncableStack.push(false);
+    }
+
+void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"incr assign stat\n";
+        }
+        //leftSide
+        visitLeftExpression();
+        auto leftType = typeStack.pop();
+        auto referncheck = referncableStack.pop();
+        if(!referncheck){
+            errors.push("Decr Assign stat, value needs to be referenceable");
+        }
+
+        if(!leftType->compare(IntTypeDesc{}) && !leftType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        //rightSide 
+        visitRightExpression();
+        auto rightType = typeStack.pop();
+        referncableStack.pop();
+        
+        if(!rightType->compare(IntTypeDesc{}) && !rightType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        if(!leftType->compare(* leftType)){
+            errors.push("Left side of assing is differnt from right");
+        }
+
+        referncableStack.push(false);
+    }
+
+    void TypeChecker::mulAssignStatment(const std::function<void ()>visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"mul assign stat\n";
+        }
+        //leftSide
+        visitLeftExpression();
+        auto leftType = typeStack.pop();
+        auto referncheck = referncableStack.pop();
+        if(!referncheck){
+            errors.push("Decr Assign stat, value needs to be referenceable");
+        }
+
+        if(!leftType->compare(IntTypeDesc{}) && !leftType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        //rightSide 
+        visitRightExpression();
+        auto rightType = typeStack.pop();
+        referncableStack.pop();
+        
+        if(!rightType->compare(IntTypeDesc{}) && !rightType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        if(!leftType->compare(* leftType)){
+            errors.push("Left side of assing is differnt from right");
+        }
+
+        referncableStack.push(false);
+    }
+
+    void TypeChecker::divAssignStatment(const std::function<void ()>visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"div assign stat\n";
+        }
+        //leftSide
+        visitLeftExpression();
+        auto leftType = typeStack.pop();
+        auto referncheck = referncableStack.pop();
+        if(!referncheck){
+            errors.push("Decr Assign stat, value needs to be referenceable");
+        }
+
+        if(!leftType->compare(IntTypeDesc{}) && !leftType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        //rightSide 
+        visitRightExpression();
+        auto rightType = typeStack.pop();
+        referncableStack.pop();
+        
+        if(!rightType->compare(IntTypeDesc{}) && !rightType->compare(FloatTypeDesc{})){
+            errors.push("Wrong type for decr assign stat, only int or float allowed");
+        }
+
+        if(!leftType->compare(* leftType)){
+            errors.push("Left side of assing is differnt from right");
+        }
+
+        referncableStack.push(false);
+    }
+
     void TypeChecker::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {
         if(debug){
             std::cout<<"for stat\n";
@@ -877,6 +1024,39 @@
         referncableStack.push(false);
     }
 
+    void TypeChecker::binaryModExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        if(debug){
+            std::cout<<"Mod expr \n";
+        }
+
+        visitLeftSide();
+        TypeDescriptor * leftSide = typeStack.pop();
+        referncableStack.pop();
+
+        visitRightSide();
+        TypeDescriptor * rightSide = typeStack.pop();
+        referncableStack.pop();
+
+        if(!leftSide->compare(IntTypeDesc{}) ){    
+            errors.push("wrong type for leftSide, only int allowed");
+            //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
+        }
+
+        if(!rightSide->compare(IntTypeDesc{}) ){
+            errors.push("wrong type for rightSide, only int  allowed");
+           // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
+        }
+
+        if(!leftSide->compare(*rightSide)){
+            errors.push("can't add the different types");
+        }
+        typeStack.push(leftSide);
+        
+        referncableStack.push(false);
+    }
+
+
+
     //Unary Operations
     void TypeChecker::unaryNotExpression(const std::function< void ()> visitExpression) {
         if(debug){
@@ -891,6 +1071,42 @@
         }
 
         typeStack.push(new BoolTypeDesc{});
+
+        referncableStack.push(false);
+
+    }
+
+    void TypeChecker::unaryPosExpression(const std::function< void ()> visitExpression) {
+        if(debug){
+            std::cout<<"unary Pos \n";
+        }
+        visitExpression();
+        TypeDescriptor * expr=typeStack.pop();
+        referncableStack.pop();
+
+        if(!expr->compare(IntTypeDesc{}) && !expr->compare(FloatTypeDesc{}) ){
+            errors.push("Wrong type not expr, needs to be int or float for pos expression");
+        }
+
+        typeStack.push(expr);
+
+        referncableStack.push(false);
+
+    }
+
+    void TypeChecker::unaryNegExpression(const std::function< void ()> visitExpression) {
+        if(debug){
+            std::cout<<"unary Neg \n";
+        }
+        visitExpression();
+        TypeDescriptor * expr=typeStack.pop();
+        referncableStack.pop();
+
+        if(!expr->compare(IntTypeDesc{}) && !expr->compare(FloatTypeDesc{})){
+            errors.push("Wrong type not expr, needs to be int or float for neg expression");
+        }
+
+        typeStack.push(expr);
 
         referncableStack.push(false);
 

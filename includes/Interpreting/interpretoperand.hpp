@@ -73,4 +73,24 @@ class IncreaseOne{
         virtual ValueDescriptor* increaseOne() = 0;
 };
 
+class DecreaseOne{
+    public:
+        virtual ValueDescriptor* decreaseOne() = 0;
+};
+
+class Modulo{
+    public:
+        virtual ValueDescriptor* modulo(ValueDescriptor *other) = 0;
+};
+
+class PosValue{
+    public:
+        virtual ValueDescriptor* posValue() = 0;
+};
+
+class NegValue{
+    public:
+        virtual ValueDescriptor* negValue() = 0;
+};
+
 #endif

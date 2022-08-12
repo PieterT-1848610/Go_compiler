@@ -223,12 +223,87 @@
         if(debug){
             std::cout<<"incr stat \n";
         }
-        // visitExpression();
-        // auto expr = valueStack.pop()->getDescri();
-        // //auto inc_expr = dynamic_cast<IncreaseOne *>(expr);
-        // //auto newVal = inc_expr->increaseOne();
-        // //dynamic_cast<ReferenceValue *>(expr)->setValue(newVal->getDescri());
-        // dynamic_cast<ReferenceValue *>(expr)->setValue(new IntValue(3));
+        visitExpression();
+        auto expr = valueStack.pop();
+        auto inc_expr = dynamic_cast<IncreaseOne *>(expr);
+        auto newVal = inc_expr->increaseOne();
+        
+        dynamic_cast<ReferenceValue *>(expr)->setValue(newVal->getDescri());
+    }
+
+
+    void Interpreting::decrStatment(const std::function <void ()> visitExpression){
+        if(debug){
+            std::cout<<"decr stat \n";
+        }
+        visitExpression();
+        auto expr = valueStack.pop();
+        auto inc_expr = dynamic_cast<DecreaseOne *>(expr);
+        auto newVal = inc_expr->decreaseOne();
+        
+        dynamic_cast<ReferenceValue *>(expr)->setValue(newVal->getDescri());
+    }
+
+
+    void Interpreting::decrAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"decr assing stat\n";
+        }
+        visitLeftExpression();
+        auto leftValue = valueStack.pop();
+        visitRightExpression();
+        auto rightValue = valueStack.pop()->getDescri();
+
+        auto leftSideEq = dynamic_cast<Min *>(leftValue->getDescri());
+        auto result = leftSideEq->min(rightValue)->getDescri();
+        dynamic_cast<ReferenceValue *>(leftValue)->setValue(result);
+
+    }
+
+    void Interpreting::incrAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"incr assing stat\n";
+        }
+        visitLeftExpression();
+        auto leftValue = valueStack.pop();
+        visitRightExpression();
+        auto rightValue = valueStack.pop()->getDescri();
+
+        auto leftSideEq = dynamic_cast<Add *>(leftValue->getDescri());
+        auto result = leftSideEq->add(rightValue)->getDescri();
+        dynamic_cast<ReferenceValue *>(leftValue)->setValue(result);
+
+    }
+
+    void Interpreting::mulAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"mull assing stat\n";
+        }
+        visitLeftExpression();
+        auto leftValue = valueStack.pop();
+        visitRightExpression();
+        auto rightValue = valueStack.pop()->getDescri();
+
+        auto leftSideEq = dynamic_cast<Mul *>(leftValue->getDescri());
+        auto result = leftSideEq->mul(rightValue)->getDescri();
+        dynamic_cast<ReferenceValue *>(leftValue)->setValue(result);
+
+    }
+
+
+    void Interpreting::divAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression){
+        if(debug){
+            std::cout<<"div assing stat\n";
+        }
+        visitLeftExpression();
+        auto leftValue = valueStack.pop();
+        visitRightExpression();
+        auto rightValue = valueStack.pop()->getDescri();
+
+        auto leftSideEq = dynamic_cast<Div *>(leftValue->getDescri());
+        auto result = leftSideEq->div(rightValue)->getDescri();
+        dynamic_cast<ReferenceValue *>(leftValue)->setValue(result);
+
     }
 
     void Interpreting::forStatment(const std::function< void ()> visitInit,  const std::function< void ()> visitCondition, const std::function< void ()> visitPost, const std::function< void ()> visitBodyFor) {
@@ -525,6 +600,15 @@
         valueStack.push(leftSide->lesserOrEqual(rightSide)); 
     }
 
+    void Interpreting::binaryModExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
+        visitLeftSide();
+        auto leftSide = dynamic_cast<Modulo *>(valueStack.pop()->getDescri());
+
+        visitRightSide();
+        auto rightSide = valueStack.pop()->getDescri();
+
+        valueStack.push(leftSide->modulo(rightSide)->getDescri());
+    }
     //Unary Operations
     void Interpreting::unaryNotExpression(const std::function< void ()> visitExpression) {
         visitExpression();
@@ -533,6 +617,20 @@
         valueStack.push(expr->notFunc()->getDescri());
     }
 
+
+    void Interpreting::unaryNegExpression(const std::function< void ()> visitExpression) {
+        visitExpression();
+        auto expr = dynamic_cast<NegValue *>(valueStack.pop()->getDescri());
+
+        valueStack.push(expr->negValue()->getDescri());
+    }
+
+    void Interpreting::unaryPosExpression(const std::function< void ()> visitExpression) {
+        visitExpression();
+        auto expr = dynamic_cast<PosValue *>(valueStack.pop()->getDescri());
+
+        valueStack.push(expr->posValue()->getDescri());
+    }
 
     //types
     //no need ?

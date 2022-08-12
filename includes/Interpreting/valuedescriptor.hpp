@@ -37,7 +37,8 @@ class BoolValue: public ValueDescriptor, public Equal, public Not, public AndOpe
 
 //na kijken of long long moet zijn (64bit of 32 bit)
 class IntValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
-                public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual, public IncreaseOne{
+                public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual, public IncreaseOne,
+                public DecreaseOne, public Modulo, public PosValue, public NegValue{
     public:
         IntValue(long value);
         ~IntValue() = default;
@@ -60,13 +61,20 @@ class IntValue: public ValueDescriptor, public Add, public Equal, public Min, pu
         ValueDescriptor* greaterThan(ValueDescriptor *other) override;
 
         ValueDescriptor* increaseOne() override;
+        ValueDescriptor* decreaseOne() override;
+
+        ValueDescriptor* modulo(ValueDescriptor *other) override;
+        ValueDescriptor* posValue() override;
+        ValueDescriptor* negValue() override;
+
 
     private:
         long value;
 };
 
 class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, public LesserThan, 
-                    public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual, public IncreaseOne{
+                    public GreaterOrEqual, public GreaterThan, public Mul, public Div, public NotEqual, public IncreaseOne,
+                    public DecreaseOne, public PosValue, public NegValue{
     public:
         FloatValue(float value);
         ~FloatValue() = default;
@@ -88,6 +96,10 @@ class FloatValue: public ValueDescriptor, public Add, public Equal, public Min, 
         ValueDescriptor* greaterThan(ValueDescriptor *other) override;
 
         ValueDescriptor* increaseOne() override;
+        ValueDescriptor* decreaseOne() override;
+
+        ValueDescriptor* posValue() override;
+        ValueDescriptor* negValue() override;
 
     private:
         float value; 
@@ -120,7 +132,8 @@ class FunctionValue: public ValueDescriptor{
 
 class ReferenceValue: public ValueDescriptor, public Add, public Equal, public Min, public LesserOrEqual, 
                     public Not, public LesserThan, public GreaterOrEqual, public GreaterThan, public Mul,
-                    public Div, public AndOper, public OrOper, public NotEqual,  public IncreaseOne{
+                    public Div, public AndOper, public OrOper, public NotEqual,  public IncreaseOne,
+                    public DecreaseOne, public Modulo, public PosValue, public NegValue{
     public:
         ReferenceValue(std::function<ValueDescriptor * ()> getter, std::function<void (ValueDescriptor *)> setter);
         ~ReferenceValue() = default;
@@ -152,6 +165,11 @@ class ReferenceValue: public ValueDescriptor, public Add, public Equal, public M
 
 
         ValueDescriptor* increaseOne() override;
+        ValueDescriptor* decreaseOne() override;
+
+        ValueDescriptor* modulo(ValueDescriptor *other) override;
+        ValueDescriptor* posValue() override;
+        ValueDescriptor* negValue() override;
 
     private:
         std::function<ValueDescriptor * ()> getter;

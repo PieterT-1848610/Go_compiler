@@ -97,9 +97,14 @@ func    {semicollonPlac = false; return FUNC;}
 \<      {semicollonPlac = false; return LT;}
 \<\=    {semicollonPlac = false; return LE;}
 
+--    {semicollonPlac = true; return DECR;}
 \+\+    {semicollonPlac = true; return INCR;}
-\-\-    {semicollonPlac = true; return DECR;}
 
+
+\-\=    {semicollonPlac = true; return DECASS;}
+\+\=    {semicollonPlac = true; return INCASS;}
+\*\=    {semicollonPlac = true; return MULASS;}
+\\\=    {semicollonPlac = true; return DIVASS;}
 
 true    {semicollonPlac = true; yylval.booleanValue = true; return BOOLEAN_LITERAL; }
 false   {semicollonPlac = true; yylval.booleanValue = false; return BOOLEAN_LITERAL; }

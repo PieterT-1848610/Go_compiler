@@ -73,6 +73,116 @@ void ASB::IncrStatment::accept(Visitor *visitor) const{
     visitor->incrStatment(visitExpression);
 }
 
+
+ASB::DecrStatment::DecrStatment(Expression * expression):expression{expression}{
+
+}
+
+ASB::DecrStatment::~DecrStatment(){
+    delete expression;
+}
+
+void ASB::DecrStatment::accept(Visitor *visitor) const{
+    std::function<void ()> visitExpression{[this, visitor](){
+        this->expression->accept(visitor);
+    }};
+
+    visitor->decrStatment(visitExpression);
+}
+
+
+ASB::DecrAssignStatment::DecrAssignStatment(Expression* leftExpression, Expression* rightExpression): 
+    leftExpression{leftExpression}, rightExpression{rightExpression}{
+
+}
+
+ASB::DecrAssignStatment::~DecrAssignStatment(){
+    delete rightExpression;
+    delete leftExpression;
+}
+
+void ASB::DecrAssignStatment::accept(Visitor *visitor) const{
+    std::function<void ()> visitLeftExpr{[this, visitor](){
+        this->leftExpression->accept(visitor);
+    }};
+
+    std::function<void ()> visitRightExpr{[this, visitor](){
+        this->rightExpression->accept(visitor);
+    }};
+    
+    visitor->decrAssignStatment(visitLeftExpr, visitRightExpr);
+
+}
+
+ASB::IncrAssignStatment::IncrAssignStatment(Expression* leftExpression, Expression* rightExpression): 
+    leftExpression{leftExpression}, rightExpression{rightExpression}{
+
+}
+
+ASB::IncrAssignStatment::~IncrAssignStatment(){
+    delete rightExpression;
+    delete leftExpression;
+}
+
+void ASB::IncrAssignStatment::accept(Visitor *visitor) const{
+    std::function<void ()> visitLeftExpr{[this, visitor](){
+        this->leftExpression->accept(visitor);
+    }};
+
+    std::function<void ()> visitRightExpr{[this, visitor](){
+        this->rightExpression->accept(visitor);
+    }};
+    
+    visitor->incrAssignStatment(visitLeftExpr, visitRightExpr);
+
+}
+
+ASB::MultpAssignStatment::MultpAssignStatment(Expression* leftExpression, Expression* rightExpression): 
+    leftExpression{leftExpression}, rightExpression{rightExpression}{
+
+}
+
+ASB::MultpAssignStatment::~MultpAssignStatment(){
+    delete rightExpression;
+    delete leftExpression;
+}
+
+void ASB::MultpAssignStatment::accept(Visitor *visitor) const{
+    std::function<void ()> visitLeftExpr{[this, visitor](){
+        this->leftExpression->accept(visitor);
+    }};
+
+    std::function<void ()> visitRightExpr{[this, visitor](){
+        this->rightExpression->accept(visitor);
+    }};
+    
+    visitor->mulAssignStatment(visitLeftExpr, visitRightExpr);
+
+}
+
+ASB::DivAssignStatment::DivAssignStatment(Expression* leftExpression, Expression* rightExpression): 
+    leftExpression{leftExpression}, rightExpression{rightExpression}{
+
+}
+
+ASB::DivAssignStatment::~DivAssignStatment(){
+    delete rightExpression;
+    delete leftExpression;
+}
+
+void ASB::DivAssignStatment::accept(Visitor *visitor) const{
+    std::function<void ()> visitLeftExpr{[this, visitor](){
+        this->leftExpression->accept(visitor);
+    }};
+
+    std::function<void ()> visitRightExpr{[this, visitor](){
+        this->rightExpression->accept(visitor);
+    }};
+    
+    visitor->divAssignStatment(visitLeftExpr, visitRightExpr);
+
+}
+
 ASB::ForStatment::ForStatment(SimpleStatment *init, Expression *condition, SimpleStatment *post, Block *bodyFor):
                         initStatment{init}, condition{condition}, postStatment{post}, bodyFor{bodyFor}{
 

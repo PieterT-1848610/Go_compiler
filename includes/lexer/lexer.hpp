@@ -469,7 +469,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 126 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
+#line 131 "/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/src/Lexer/go.l"
 
 
 #line 476 "includes/Lexer/lexer.hpp"

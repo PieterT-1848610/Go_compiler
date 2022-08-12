@@ -50,7 +50,8 @@ class TypeChecker: public Visitor{
 
         void incrStatment(const std::function<void ()> visitExpression) override;
 
-        
+        void decrStatment(const std::function<void ()> visitExpression) override;
+
         void forStatment(const std::function<void ()> visitInit,  const std::function<void ()> visitCondition, const std::function<void ()> visitPost, const std::function<void ()> visitBodyFor) override;
 
         void declarationStament(const std::function<void ()>visitDeclaration) override;
@@ -58,6 +59,16 @@ class TypeChecker: public Visitor{
         void ifStatment(const std::function<void ()> visitCondition, const std::function<void ()> visitTrueCondition, const std::function<void ()> visitFalseCondition) override;
 
         void returnStatment(const std::vector<std::function<void ()>> visitExpressions) override;   //pop type and compare to expactedreturntype
+
+
+
+        void decrAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) override;
+
+        void incrAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) override;
+
+        void mulAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) override;
+
+        void divAssignStatment(const std::function<void ()> visitLeftExpression, const std::function<void ()> visitRightExpression) override;
 
 
         //expresions
@@ -109,8 +120,15 @@ class TypeChecker: public Visitor{
 
         void binaryLEExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) override;
 
+        void binaryModExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) override;
+
+
         //Unary Operations
         void unaryNotExpression(const std::function<void ()> visitExpression) override;
+
+        void unaryPosExpression(const std::function<void ()> visitExpression) override;
+
+        void unaryNegExpression(const std::function<void ()> visitExpression) override;
 
 
         //types

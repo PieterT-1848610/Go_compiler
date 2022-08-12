@@ -87,9 +87,13 @@
 %token LT
 %token LE
 
-%token INCR
 %token DECR
+%token INCR
 
+%token DECASS
+%token INCASS
+%token MULASS
+%token DIVASS
 
 %token <identifierValue> IDENTIFIER
 %token <integerValue> INTEGER_LITERAL
@@ -111,6 +115,8 @@
 //%type <simpleStatment> expressionStatment;
 //%type <simpleStatment> assignmentStatment;
 %type <simpleStatment> incdecStatment;
+%type <simpleStatment> oprAssStatment;
+
 
 %type <listExpression> expressionList;
 %type <expression> expression;
@@ -400,6 +406,7 @@ simpleStatment
     :                               {$$ = new ASB::EmptyStatment{};}
     |expression                     {$$ = new ASB::ExpressionStatment{$1};}
     |incdecStatment                 {$$ = $1;}
+    |oprAssStatment                 {$$ = $1;}
     |expressionList '=' expressionList
                                     {
                                         auto leftside = $1->toVector();
@@ -411,7 +418,16 @@ simpleStatment
     ;
 
 incdecStatment
-    :expression INCR                {$$ = new ASB::IncrStatment($1);}
+    :expression DECR                {$$ = new ASB::DecrStatment($1);}
+    |expression INCR                {$$ = new ASB::IncrStatment($1);}
+    ;
+
+oprAssStatment
+    :expression DECASS expression   {$$ = new ASB::DecrAssignStatment($1, $3);}
+    |expression INCASS expression   {$$ = new ASB::IncrAssignStatment($1, $3);}
+    |expression MULASS expression   {$$ = new ASB::MultpAssignStatment($1, $3);}
+    |expression '/' '=' expression   {$$ = new ASB::DivAssignStatment($1, $4);}
+    ;
 
 statmentList
     :                               {$$ = new LinkedList<ASB::Statment *>;}
@@ -451,10 +467,11 @@ forStatment
 //expressions add other binaryOperation, know better ig
 expression
     :unaryExpr                      { $$ = $1; }
-    |expression '+' expression      { $$ = new ASB::BinaryAddOperation($1, $3);}
-    |expression '-' expression      { $$ = new ASB::BinaryMinOperation($1, $3);}
     |expression '*' expression      { $$ = new ASB::BinaryMulOperation($1, $3);}
     |expression '/' expression      { $$ = new ASB::BinaryDivOperation($1, $3);}
+    |expression '%' expression      { $$ = new ASB::BinaryModOperation($1, $3);}
+    |expression '+' expression      { $$ = new ASB::BinaryAddOperation($1, $3);}
+    |expression '-' expression      { $$ = new ASB::BinaryMinOperation($1, $3);}
     |expression EQ  expression      { $$ = new ASB::BinaryEQOperation($1, $3);}
     |expression NEQ expression      { $$ = new ASB::BinaryNEQOperation($1, $3);}
     |expression AND expression      { $$ = new ASB::BinaryANDOperation($1, $3);}
@@ -468,6 +485,8 @@ expression
 unaryExpr
     :primaryExpr                    {$$ = $1;}
     |NOT unaryExpr                  { $$ = new ASB::UnaryNotOperation($2);}
+    |'-' unaryExpr                  { $$ = new ASB::UnaryNegOperation($2);}
+    |'+' unaryExpr                  { $$ = new ASB::UnaryPosOperation($2);}
     ;
 
 primaryExpr

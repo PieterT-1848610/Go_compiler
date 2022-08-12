@@ -325,6 +325,29 @@ void ASB::BinaryLEOperation::accept(Visitor *visitor) const{
     visitor->binaryLEExpression(visitLeftSide, visitRightSide);
 };
 
+ASB::BinaryModOperation::BinaryModOperation(Expression *leftSide, Expression *rightSide): leftSide{leftSide}, rightSide{rightSide}{
+
+};
+
+ASB::BinaryModOperation::~BinaryModOperation(){
+    delete leftSide;
+    delete rightSide;
+};
+
+void ASB::BinaryModOperation::accept(Visitor *visitor) const{
+    std::function<void ()> visitLeftSide{[visitor, this](){
+        this->leftSide->accept(visitor);
+    }};
+
+    std::function<void ()> visitRightSide{[visitor, this](){
+        this->rightSide->accept(visitor);
+    }};
+
+    visitor->binaryModExpression(visitLeftSide, visitRightSide);
+};
+
+
+
 ASB::UnaryNotOperation::UnaryNotOperation(Expression *expression): expression{expression}{
 
 };
@@ -339,4 +362,36 @@ void ASB::UnaryNotOperation::accept(Visitor *visitor) const{
     }};
 
     visitor->unaryNotExpression(visitExpression);
+}
+
+ASB::UnaryPosOperation::UnaryPosOperation(Expression *expression): expression{expression}{
+
+};
+
+ASB::UnaryPosOperation::~UnaryPosOperation(){
+    delete expression;
+}
+
+void ASB::UnaryPosOperation::accept(Visitor *visitor) const{
+    std::function<void ()> visitExpression{[visitor, this](){
+        this->expression->accept(visitor);
+    }};
+
+    visitor->unaryPosExpression(visitExpression);
+}
+
+ASB::UnaryNegOperation::UnaryNegOperation(Expression *expression): expression{expression}{
+
+};
+
+ASB::UnaryNegOperation::~UnaryNegOperation(){
+    delete expression;
+}
+
+void ASB::UnaryNegOperation::accept(Visitor *visitor) const{
+    std::function<void ()> visitExpression{[visitor, this](){
+        this->expression->accept(visitor);
+    }};
+
+    visitor->unaryNegExpression(visitExpression);
 }

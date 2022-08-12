@@ -47,6 +47,61 @@ class IncrStatment: public SimpleStatment{
         Expression* expression;
 };
 
+class DecrStatment: public SimpleStatment{
+    public:
+        DecrStatment(Expression* expression);
+        virtual ~DecrStatment() override;
+
+        virtual void accept(Visitor *visitor) const override;
+
+    private:
+        Expression* expression;
+};
+
+
+class DecrAssignStatment: public SimpleStatment{
+    public:
+        DecrAssignStatment(Expression* leftExpression, Expression* rightExpression);
+        ~DecrAssignStatment() override;
+
+        virtual void accept(Visitor *visitor) const override;
+    private:
+        Expression* leftExpression;
+        Expression* rightExpression;
+};
+
+class IncrAssignStatment: public SimpleStatment{
+    public:
+        IncrAssignStatment(Expression* leftExpression, Expression* rightExpression);
+        ~IncrAssignStatment() override;
+
+        virtual void accept(Visitor *visitor) const override;
+    private:
+        Expression* leftExpression;
+        Expression* rightExpression;
+};
+
+class MultpAssignStatment: public SimpleStatment{
+    public:
+        MultpAssignStatment(Expression* leftExpression, Expression* rightExpression);
+        ~MultpAssignStatment() override;
+
+        virtual void accept(Visitor *visitor) const override;
+    private:
+        Expression* leftExpression;
+        Expression* rightExpression;
+};
+
+class DivAssignStatment: public SimpleStatment{
+    public:
+        DivAssignStatment(Expression* leftExpression, Expression* rightExpression);
+        ~DivAssignStatment() override;
+
+        virtual void accept(Visitor *visitor) const override;
+    private:
+        Expression* leftExpression;
+        Expression* rightExpression;
+};
 
 class ForStatment: public Statment{
     public:

@@ -26,15 +26,15 @@ package main
 // }
 
 // //recursion test fibo
-func fib(n int) int {
-    if n == 0 {
-        return 0
-    } else if n == 1 {
-		return 1
-	} else {
-		return fib(n-1) + fib(n-2)
-	}
-}
+// func fib(n int) int {
+//     if n == 0 {
+//         return 0
+//     } else if n == 1 {
+// 		return 1
+// 	} else {
+// 		return fib(n-1) + fib(n-2)
+// 	}
+// }
 
 // //check swithc assign
 // func assingCheck() {
@@ -118,9 +118,9 @@ func fib(n int) int {
 // 	return true
 // }
 
-func vals() (int, int) {
-    return 3, 7
-}
+// func vals() (int, int) {
+//     return 3, 7
+// }
 
 func main() {
 	// var i, j int = vals()
@@ -147,12 +147,22 @@ func main() {
 	// x = !x
 	// printBool(x)
 	// forLoop(p)
-	var z = 1
-	z = z +1		//breaks
-	var y = z		//works
-	printInt(z)
+	//var z = 1
+	//z = z +1		//breaks
+	//var y = z		//works
+	//printInt(z)
 	//printInt(p)
-	y = fib(20)
+	//y = fib(20)
+	var y = 2
+	y+=5
+	printInt(y)
+	y-=3
+	printInt(y)
+	y*=4
+	printInt(y)
+	y = y * 5
+	y=y % 3
+	y = 75 + +3
 	printInt(y)
 	// var value, exponent = 6, 3
 	// z = expo(value, exponent)
