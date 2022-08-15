@@ -39,7 +39,7 @@
         }
 
         if(mainFunc->getParametersIds().size() != 0 || mainFunc->getReturnsIds().size() != 0){
-            errors.push("no input or output allow for main function");
+            errors.push("no input or output allowed for main function");
         }
 
 
@@ -94,7 +94,7 @@
         std::function<void ()>visitRest{[functionsign, visitFunctionBody, this](){
             currentFunctionType = dynamic_cast<FunctionTypeDesc *>(functionsign);
             if(currentFunctionType == nullptr){
-                throw("fucked up hard, casting error");
+                throw("casting error");
             }
             paramTypes = this->currentFunctionType->getParams();
             returnTypes = this->currentFunctionType->getReturns();
@@ -116,7 +116,7 @@
         //type is not given with decalartion of var
         if(visitType == NULL){
             if(visitExpressions.size() <= 0){
-                errors.push("Not allowed to create var this way");
+                errors.push("Expression needed to create new Var");
                 return;
             }
             std::vector<TypeDescriptor *> tempTypes = {};
@@ -137,7 +137,7 @@
                 }
             }
             if(ids.size() != tempTypes.size()){
-                errors.push("Not same amount of var and expression values");
+                errors.push("Not same amount of var and expression values, when creating new Variable(s)");
                 return;
             }
             for(int i = 0; i<ids.size(); i++){
@@ -161,13 +161,13 @@
                     std::vector<TypeDescriptor *> manyTypes = dynamic_cast<ManyTypeDesc *>(tempExpType)->getTypes();
                     for(auto types: manyTypes){
                         if(!(typeVar->compare(*types))){
-                            errors.push("Expression type not same as giving type for var");
+                            errors.push("Expression type not same as giving type of the new var");
                         }
                         referncableStack.pop();
                     }
                 }else{
                     if(!(typeVar->compare(*tempExpType))){
-                        errors.push("Expression type not same as giving type for Var");
+                        errors.push("Expression type not same as giving type of the new var");
                     }
                     referncableStack.pop();
                 }
@@ -175,7 +175,7 @@
             }
             for(auto id: ids){
                 if(typeTable.contains(id)){
-                    errors.push("Id already in use");
+                    errors.push("Id already in use, can't use same id twice");
                 }
                 typeTable.set(id, typeVar);
             }
@@ -189,7 +189,7 @@
             std::cout<<"check package\n";
         }
         if(packageMain){
-            errors.push("Only support main package");
+            errors.push("Only support one main package");
         }
         if(packageName != "main"){
             errors.push("wrong package name");
@@ -247,7 +247,7 @@
             }
         }
         if(leftTypes.size() != rightTypes.size()){
-            errors.push("Assignment but left and right side don't have same number of values");
+            errors.push("Assignment of variable, left and right side need to have same number of values");
             return;
         }
 
@@ -256,7 +256,7 @@
             auto rightType = rightTypes[i];
 
             if(!leftReference[i]){
-                errors.push("Left side of assignment need to be assignable");
+                errors.push("Assignment, Left side of assignment need to be assignable");
             }
 
             if(!leftType->compare(*rightType)){
@@ -331,7 +331,7 @@
         }
 
         if(!leftType->compare(* rightType)){
-            errors.push("Left side of assing is differnt from right");
+            errors.push("Left side of decr assing is differnt from right");
         }
 
         referncableStack.push(false);
@@ -346,11 +346,11 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         auto leftType = typeStack.pop();
         auto referncheck = referncableStack.pop();
         if(!referncheck){
-            errors.push("Decr Assign stat, value needs to be referenceable");
+            errors.push("Incr Assign stat, value needs to be referenceable");
         }
 
         if(!leftType->compare(IntTypeDesc{}) && !leftType->compare(FloatTypeDesc{})){
-            errors.push("Wrong type for decr assign stat, only int or float allowed");
+            errors.push("Wrong type for incr assign stat, only int or float allowed");
         }
 
         //rightSide 
@@ -359,11 +359,11 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
         
         if(!rightType->compare(IntTypeDesc{}) && !rightType->compare(FloatTypeDesc{})){
-            errors.push("Wrong type for decr assign stat, only int or float allowed");
+            errors.push("Wrong type for incr assign stat, only int or float allowed");
         }
 
         if(!leftType->compare(* rightType)){
-            errors.push("Left side of assing is differnt from right");
+            errors.push("Left side of incr assing is differnt from right");
         }
 
         referncableStack.push(false);
@@ -378,11 +378,11 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         auto leftType = typeStack.pop();
         auto referncheck = referncableStack.pop();
         if(!referncheck){
-            errors.push("Decr Assign stat, value needs to be referenceable");
+            errors.push("Mul Assign stat, value needs to be referenceable");
         }
 
         if(!leftType->compare(IntTypeDesc{}) && !leftType->compare(FloatTypeDesc{})){
-            errors.push("Wrong type for decr assign stat, only int or float allowed");
+            errors.push("Wrong type for mul assign stat, only int or float allowed");
         }
 
         //rightSide 
@@ -391,11 +391,11 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
         
         if(!rightType->compare(IntTypeDesc{}) && !rightType->compare(FloatTypeDesc{})){
-            errors.push("Wrong type for decr assign stat, only int or float allowed");
+            errors.push("Wrong type for mul assign stat, only int or float allowed");
         }
 
         if(!leftType->compare(* rightType)){
-            errors.push("Left side of assing is differnt from right");
+            errors.push("Left side of mul assing is differnt from right");
         }
 
         referncableStack.push(false);
@@ -410,11 +410,11 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         auto leftType = typeStack.pop();
         auto referncheck = referncableStack.pop();
         if(!referncheck){
-            errors.push("Decr Assign stat, value needs to be referenceable");
+            errors.push("Div Assign stat, value needs to be referenceable");
         }
 
         if(!leftType->compare(IntTypeDesc{}) && !leftType->compare(FloatTypeDesc{})){
-            errors.push("Wrong type for decr assign stat, only int or float allowed");
+            errors.push("Wrong type for div assign stat, only int or float allowed");
         }
 
         //rightSide 
@@ -423,11 +423,11 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
         
         if(!rightType->compare(IntTypeDesc{}) && !rightType->compare(FloatTypeDesc{})){
-            errors.push("Wrong type for decr assign stat, only int or float allowed");
+            errors.push("Wrong type for div assign stat, only int or float allowed");
         }
 
         if(!leftType->compare(* rightType)){
-            errors.push("Left side of assing is differnt from right");
+            errors.push("Left side of div assing is differnt from right");
         }
 
         referncableStack.push(false);
@@ -500,8 +500,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
                 referncableStack.pop();
 
                 if(!expactedTypes[i]->compare(* returnType)){
-                    std::cout<<"return type"<<returnType->toString()<<"\n";
-                    errors.push("Return expr don't match expected type");
+                    errors.push("Return expr don't match expected return type");
                 }
             //}
         }
@@ -590,14 +589,14 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         auto paramType = funcType->getParametersTypeDesc();
 
         if(paramType.size() != argTypes.size()){
-            errors.push("Function needs different amount of parameters, than is given");
+            errors.push("Not right amount of arguments given for the fuction");
             return;
         }
     
 
         for(int i = 0; i<paramType.size(); i++){
             if(!paramType[i]->compare(*argTypes[i])){
-                errors.push("Argument Type did not match expacted paramtype for function");
+                errors.push("Argument Type did not match expacted paramtype of the function");
             }
         }
 
@@ -632,17 +631,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int or float allowed");
+            errors.push("Add: wrong type for leftSide, only int or float allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{})){
-            errors.push("wrong type for rightSide, only int or float allowed");
+            errors.push("Add: wrong type for rightSide, only int or float allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("Add: Types need to be the same");
         }
         typeStack.push(leftSide);
         
@@ -664,17 +663,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int or float allowed");
+            errors.push("Min: wrong type for leftSide, only int or float allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{})){
-            errors.push("wrong type for rightSide, only int or float allowed");
+            errors.push("Min: wrong type for rightSide, only int or float allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("Min: Types need to be the same");
         }
         typeStack.push(leftSide);
         
@@ -695,17 +694,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int or float allowed");
+            errors.push("Mul: wrong type for leftSide, only int or float allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{})){
-            errors.push("wrong type for rightSide, only int or float allowed");
+            errors.push("Mul: wrong type for rightSide, only int or float allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("Mul: can't add the different types");
         }
         typeStack.push(leftSide);
         
@@ -726,17 +725,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int or float allowed");
+            errors.push("Div: wrong type for leftSide, only int or float allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{})){
-            errors.push("wrong type for rightSide, only int or float allowed");
+            errors.push("Div: wrong type for rightSide, only int or float allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("Div: Types need to be the same");
         }
         typeStack.push(leftSide);
         
@@ -757,17 +756,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int, float, bool or char allowed");
+            errors.push("EQ: wrong type for leftSide, only int, float, bool or char allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){
-            errors.push("wrong type for rightSide, only int, float, bool or char allowed");
+            errors.push("EQ: wrong type for rightSide, only int, float, bool or char allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("EQ: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -789,17 +788,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) && !leftSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){    
-            errors.push("wrong type for leftSide, only int, float, bool or char allowed");
+            errors.push("NEQ: wrong type for leftSide, only int, float, bool or char allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) && ! rightSide->compare(BoolTypeDesc{}) && !leftSide->compare(CharTypeDesc{})){
-            errors.push("wrong type for rightSide, only int, float, bool or char allowed");
+            errors.push("NEQ: wrong type for rightSide, only int, float, bool or char allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("NEQ: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -820,17 +819,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(BoolTypeDesc{})){    
-            errors.push("wrong type for leftSide, only bool allowed");
+            errors.push("AND: wrong type for leftSide only bool allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(BoolTypeDesc{})){
-            errors.push("wrong type for rightSide bool allowed");
+            errors.push("AND: wrong type for rightSide only bool allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("AND: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -851,17 +850,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(BoolTypeDesc{})){    
-            errors.push("wrong type for leftSide, only bool allowed");
+            errors.push("OR: wrong type for leftSide only bool allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(BoolTypeDesc{})){
-            errors.push("wrong type for rightSide bool allowed");
+            errors.push("OR: wrong type for rightSide only bool allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("OR: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -883,17 +882,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
-            errors.push("wrong type for leftSide, only int, float");
+            errors.push("Greater Than: wrong type for leftSide, only int, float");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
-            errors.push("wrong type for rightSide, only int, float ");
+            errors.push("Greater Than: wrong type for rightSide, only int, float ");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't compare the different types");
+            errors.push("Greater Than: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -916,17 +915,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
-            errors.push("wrong type for leftSide, only int, float");
+            errors.push("Greater Equal: wrong type for leftSide, only int, float");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
-            errors.push("wrong type for rightSide, only int, float ");
+            errors.push("Greater Equal: wrong type for rightSide, only int, float ");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't compare the different types");
+            errors.push("Greater Equal: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -948,17 +947,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
-            errors.push("wrong type for leftSide, only int, float");
+            errors.push("Lesser Than: wrong type for leftSide, only int, float");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
-            errors.push("wrong type for rightSide, only int, float ");
+            errors.push("Lesser Than: wrong type for rightSide, only int, float ");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't compare the different types");
+            errors.push("Lesser Than: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -980,17 +979,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) && !leftSide->compare(FloatTypeDesc{}) ){    
-            errors.push("wrong type for leftSide, only int, float");
+            errors.push("Lesser Equal: wrong type for leftSide, only int, float");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) && !rightSide->compare(FloatTypeDesc{}) ){
-            errors.push("wrong type for rightSide, only int, float ");
+            errors.push("Lesser Equal: wrong type for rightSide, only int, float ");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't compare the different types");
+            errors.push("Lesser Equal: Types need to be the same");
         }
         typeStack.push(new BoolTypeDesc{});
 
@@ -1011,17 +1010,17 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!leftSide->compare(IntTypeDesc{}) ){    
-            errors.push("wrong type for leftSide, only int allowed");
+            errors.push("Modulo: wrong type for leftSide, only int allowed");
             //std::cout<<"type not allowed, leftside (add) "<<leftSide->toString()<<"\n";
         }
 
         if(!rightSide->compare(IntTypeDesc{}) ){
-            errors.push("wrong type for rightSide, only int  allowed");
+            errors.push("Modulo: wrong type for rightSide, only int  allowed");
            // std::cout<<"type not allowed, rightside (add) "<<rightSide->toString()<<"\n";
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't modulo the different types");
+            errors.push("Modulo: Types need to be the same");
         }
         typeStack.push(leftSide);
         
@@ -1040,7 +1039,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!expr->compare(BoolTypeDesc{})){
-            errors.push("Wrong type not expr, needs to be bool");
+            errors.push("Wrong type for Not expr needs to be type bool");
         }
 
         typeStack.push(new BoolTypeDesc{});
@@ -1058,7 +1057,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!expr->compare(IntTypeDesc{}) && !expr->compare(FloatTypeDesc{}) ){
-            errors.push("Wrong type not expr, needs to be int or float for pos expression");
+            errors.push("Wrong type for Positief expr, needs to be int or float");
         }
 
         typeStack.push(expr);
@@ -1076,7 +1075,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.pop();
 
         if(!expr->compare(IntTypeDesc{}) && !expr->compare(FloatTypeDesc{})){
-            errors.push("Wrong type not expr, needs to be int or float for neg expression");
+            errors.push("Wrong type for Negatief expr, needs to be int or float");
         }
 
         typeStack.push(expr);
@@ -1126,7 +1125,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         }
 
         if(checkDuplicateStrings(parametersName)){
-            errors.push("Cant use same name for different params");
+            errors.push("Params need to have different names from each other");
         }
         // if(checkDuplicateStrings(resultsName)){
         //     errors.push("Cant use same name for different returns");
