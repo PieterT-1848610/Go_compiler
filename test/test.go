@@ -52,8 +52,6 @@ func showingif(){
 
 
 
-
-
 func main() {
 	compareValues()
 	showingif()	

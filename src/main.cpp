@@ -9,7 +9,7 @@ extern ASB::Root *tree;
 
 int main(){
     
-    yyin = fopen("/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/test/test.go", "r");
+    yyin = fopen("/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/test/test2.go", "r");
     if(yyin == NULL){
         std::cout<<"error opening file";
         return -1;

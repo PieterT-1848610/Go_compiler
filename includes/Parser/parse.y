@@ -216,8 +216,8 @@ functionResults
 functionParameters
     :'(' ')'                            {$$ = new LinkedList<std::pair<std::string, ASB::Type *>>; }
     |'(' functionParametersList ')'     {$$ = $2; }
-    |'(' functionParametersList ',' ')' 
-                                        {$$ = $2; }
+    // |'(' functionParametersList ',' ')' 
+    //                                     {$$ = $2; }
     ;
 
 

@@ -1,19 +1,12 @@
 Terminals unused in grammar
 
-    RUNE
-    NOT
-    GT
-    GE
-    LT
-    LE
+    CHAR
+    DIVASS
     '^'
-    '%'
 
 
-State 53 conflicts: 1 shift/reduce
-State 55 conflicts: 1 shift/reduce
-State 81 conflicts: 1 shift/reduce
-State 94 conflicts: 2 shift/reduce
+State 58 conflicts: 1 shift/reduce
+State 108 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -22,25 +15,26 @@ Grammar
 
     1 start: listTopDeclarations
 
-    2 type: '(' type ')'
-    3     | INT
-    4     | FLOAT32
-    5     | BOOL
-    6     | CHAR
-    7     | FUNC functionSignature
-    8     | literalType
+    2 packages: PACKAGE IDENTIFIER
 
-    9 literalType: IDENTIFIER
+    3 type: '(' type ')'
+    4     | INT
+    5     | FLOAT32
+    6     | BOOL
+    7     | RUNE
+    8     | FUNC functionSignature
+    9     | literalType
 
-   10 functionSignature: functionParameters functionResults
+   10 literalType: IDENTIFIER
 
-   11 functionResults: %empty
-   12                | functionParameters
-   13                | type
+   11 functionSignature: functionParameters functionResults
 
-   14 functionParameters: '(' ')'
-   15                   | '(' functionParametersList ')'
-   16                   | '(' functionParametersList ',' ')'
+   12 functionResults: %empty
+   13                | functionParameters
+   14                | type
+
+   15 functionParameters: '(' ')'
+   16                   | '(' functionParametersList ')'
 
    17 functionParametersList: type
    18                       | identifierList type
@@ -49,1832 +43,2686 @@ Grammar
 
    21 block: '{' statmentList '}'
 
-   22 topDeclaration: listDeclaration
-   23               | functionDeclaration
+   22 topDeclaration: functionDeclaration
+   23               | packages
+   24               | listDeclaration
 
-   24 listTopDeclarations: topDeclaration
-   25                    | topDeclaration ';' listTopDeclarations
+   25 listTopDeclarations: topDeclaration ';'
+   26                    | topDeclaration ';' listTopDeclarations
 
-   26 functionDeclaration: FUNC IDENTIFIER functionSignature block
+   27 functionDeclaration: FUNC IDENTIFIER functionSignature block
 
-   27 listDeclaration: variableDeclaration
+   28 listDeclaration: variableDeclaration
 
-   28 variableDeclaration: VAR varSpec
-   29                    | VAR '(' varSpecList ')'
+   29 variableDeclaration: VAR varSpec
+   30                    | VAR '(' varSpecList ')'
 
-   30 varSpec: identifierList type
-   31        | identifierList type '=' expressionList
-   32        | identifierList '=' expressionList
+   31 varSpec: identifierList type
+   32        | identifierList type '=' expressionList
+   33        | identifierList '=' expressionList
 
-   33 varSpecList: varSpec ';'
-   34            | varSpec ';' varSpecList
+   34 varSpecList: varSpec ';'
+   35            | varSpec ';' varSpecList
 
-   35 statments: simpleStatment
-   36          | ifStatment
-   37          | returnStatment
-   38          | forStatment
-   39          | listDeclaration
+   36 statments: simpleStatment
+   37          | ifStatment
+   38          | returnStatment
+   39          | forStatment
+   40          | listDeclaration
 
-   40 simpleStatment: %empty
-   41               | expression
-   42               | expressionList '=' expressionList
+   41 simpleStatment: %empty
+   42               | expression
+   43               | incdecStatment
+   44               | oprAssStatment
+   45               | expressionList '=' expressionList
 
-   43 statmentList: %empty
-   44             | statments ';' statmentList
+   46 incdecStatment: expression DECR
+   47               | expression INCR
 
-   45 ifStatment: IF expression block
-   46           | IF expression block ELSE ifStatment
-   47           | IF expression block ELSE block
+   48 oprAssStatment: expression DECASS expression
+   49               | expression INCASS expression
+   50               | expression MULASS expression
+   51               | expression '/' '=' expression
 
-   48 returnStatment: RETURN expressionList
+   52 statmentList: %empty
+   53             | statments ';' statmentList
 
-   49 forStatment: FOR simpleStatment ';' expression ';' simpleStatment block
-   50            | FOR expression block
-   51            | FOR block
+   54 ifStatment: IF expression block
+   55           | IF expression block ELSE ifStatment
+   56           | IF expression block ELSE block
 
-   52 expression: unaryExpr
-   53           | expression '+' expression
-   54           | expression '-' expression
-   55           | expression '*' expression
-   56           | expression '/' expression
-   57           | expression EQ expression
-   58           | expression NEQ expression
-   59           | expression AND expression
-   60           | expression OR expression
+   57 returnStatment: RETURN expressionList
 
-   61 unaryExpr: primaryExpr
-   62          | '!' unaryExpr
+   58 forStatment: FOR simpleStatment ';' expression ';' simpleStatment block
+   59            | FOR expression block
+   60            | FOR block
 
-   63 primaryExpr: operand
+   61 expression: unaryExpr
+   62           | expression '*' expression
+   63           | expression '/' expression
+   64           | expression '%' expression
+   65           | expression '+' expression
+   66           | expression '-' expression
+   67           | expression EQ expression
+   68           | expression NEQ expression
+   69           | expression AND expression
+   70           | expression OR expression
+   71           | expression GT expression
+   72           | expression GE expression
+   73           | expression LT expression
+   74           | expression LE expression
 
-   64 operand: literal
-   65        | IDENTIFIER
-   66        | '(' expression ')'
+   75 unaryExpr: primaryExpr
+   76          | NOT unaryExpr
+   77          | '-' unaryExpr
+   78          | '+' unaryExpr
 
-   67 literal: basicLiteral
+   79 primaryExpr: operand
+   80            | primaryExpr '(' ')'
+   81            | primaryExpr '(' expressionList ')'
 
-   68 basicLiteral: BOOLEAN_LITERAL
-   69             | INTEGER_LITERAL
-   70             | FLOAT_LITERAL
-   71             | CHAR_LITERAL
+   82 operand: literal
+   83        | IDENTIFIER
+   84        | '(' expression ')'
 
-   72 expressionList: expression
-   73               | expression ',' expressionList
+   85 literal: basicLiteral
 
-   74 identifierList: IDENTIFIER
-   75               | IDENTIFIER ',' identifierList
+   86 basicLiteral: BOOLEAN_LITERAL
+   87             | INTEGER_LITERAL
+   88             | FLOAT_LITERAL
+   89             | CHAR_LITERAL
+
+   90 expressionList: expression
+   91               | expression ',' expressionList
+
+   92 identifierList: IDENTIFIER
+   93               | IDENTIFIER ',' identifierList
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
-    '!' (33) 62
-    '%' (37)
-    '(' (40) 2 14 15 16 29 66
-    ')' (41) 2 14 15 16 29 66
-    '*' (42) 55
-    '+' (43) 53
-    ',' (44) 16 19 20 73 75
-    '-' (45) 54
-    '/' (47) 56
-    ';' (59) 25 33 34 44 49
-    '=' (61) 31 32 42
+    '%' (37) 64
+    '(' (40) 3 15 16 30 80 81 84
+    ')' (41) 3 15 16 30 80 81 84
+    '*' (42) 62
+    '+' (43) 65 78
+    ',' (44) 19 20 91 93
+    '-' (45) 66 77
+    '/' (47) 51 63
+    ';' (59) 25 26 34 35 53 58
+    '=' (61) 32 33 45 51
     '^' (94)
     '{' (123) 21
     '}' (125) 21
     error (256)
-    INT (258) 3
-    FLOAT32 (259) 4
-    BOOL (260) 5
-    CHAR (261) 6
-    RUNE (262)
-    IF (263) 45 46 47
-    ELSE (264) 46 47
-    FOR (265) 49 50 51
-    RETURN (266) 48
-    VAR (267) 28 29
-    FUNC (268) 7 26
-    AND (269) 59
-    OR (270) 60
-    NOT (271)
-    EQ (272) 57
-    NEQ (273) 58
-    GT (274)
-    GE (275)
-    LT (276)
-    LE (277)
-    IDENTIFIER <identifierValue> (278) 9 26 65 74 75
-    INTEGER_LITERAL <integerValue> (279) 69
-    FLOAT_LITERAL <floatValue> (280) 70
-    BOOLEAN_LITERAL <booleanValue> (281) 68
-    CHAR_LITERAL <charValue> (282) 71
+    INT (258) 4
+    FLOAT32 (259) 5
+    BOOL (260) 6
+    CHAR (261)
+    RUNE (262) 7
+    PACKAGE (263) 2
+    IF (264) 54 55 56
+    ELSE (265) 55 56
+    FOR (266) 58 59 60
+    RETURN (267) 57
+    VAR (268) 29 30
+    FUNC (269) 8 27
+    AND (270) 69
+    OR (271) 70
+    NOT (272) 76
+    EQ (273) 67
+    NEQ (274) 68
+    GT (275) 71
+    GE (276) 72
+    LT (277) 73
+    LE (278) 74
+    DECR (279) 46
+    INCR (280) 47
+    DECASS (281) 48
+    INCASS (282) 49
+    MULASS (283) 50
+    DIVASS (284)
+    IDENTIFIER <identifierValue> (285) 2 10 27 83 92 93
+    INTEGER_LITERAL <integerValue> (286) 87
+    FLOAT_LITERAL <floatValue> (287) 88
+    BOOLEAN_LITERAL <booleanValue> (288) 86
+    CHAR_LITERAL <charValue> (289) 89
 
 
 Nonterminals, with rules where they appear
 
-    $accept (42)
+    $accept (48)
         on left: 0
-    start (43)
+    start (49)
         on left: 1
         on right: 0
-    type <type> (44)
-        on left: 2 3 4 5 6 7 8
-        on right: 2 13 17 18 19 20 30 31
-    literalType <type> (45)
-        on left: 9
-        on right: 8
-    functionSignature <type> (46)
-        on left: 10
-        on right: 7 26
-    functionResults <fields> (47)
-        on left: 11 12 13
-        on right: 10
-    functionParameters <fields> (48)
-        on left: 14 15 16
-        on right: 10 12
-    functionParametersList <fields> (49)
-        on left: 17 18 19 20
-        on right: 15 16 19 20
-    block <block> (50)
-        on left: 21
-        on right: 26 45 46 47 49 50 51
-    topDeclaration <listTopDeclaration> (51)
-        on left: 22 23
-        on right: 24 25
-    listTopDeclarations <listTopDeclaration> (52)
-        on left: 24 25
-        on right: 1 25
-    functionDeclaration <topDeclaration> (53)
-        on left: 26
+    packages <topDeclaration> (50)
+        on left: 2
         on right: 23
-    listDeclaration <listDeclaration> (54)
+    type <type> (51)
+        on left: 3 4 5 6 7 8 9
+        on right: 3 14 17 18 19 20 31 32
+    literalType <type> (52)
+        on left: 10
+        on right: 9
+    functionSignature <type> (53)
+        on left: 11
+        on right: 8 27
+    functionResults <fields> (54)
+        on left: 12 13 14
+        on right: 11
+    functionParameters <fields> (55)
+        on left: 15 16
+        on right: 11 13
+    functionParametersList <fields> (56)
+        on left: 17 18 19 20
+        on right: 16 19 20
+    block <block> (57)
+        on left: 21
+        on right: 27 54 55 56 58 59 60
+    topDeclaration <listTopDeclaration> (58)
+        on left: 22 23 24
+        on right: 25 26
+    listTopDeclarations <listTopDeclaration> (59)
+        on left: 25 26
+        on right: 1 26
+    functionDeclaration <topDeclaration> (60)
         on left: 27
-        on right: 22 39
-    variableDeclaration <listDeclaration> (55)
-        on left: 28 29
-        on right: 27
-    varSpec <declaration> (56)
-        on left: 30 31 32
-        on right: 28 33 34
-    varSpecList <listDeclaration> (57)
-        on left: 33 34
-        on right: 29 34
-    statments <listStatment> (58)
-        on left: 35 36 37 38 39
+        on right: 22
+    listDeclaration <listDeclaration> (61)
+        on left: 28
+        on right: 24 40
+    variableDeclaration <listDeclaration> (62)
+        on left: 29 30
+        on right: 28
+    varSpec <declaration> (63)
+        on left: 31 32 33
+        on right: 29 34 35
+    varSpecList <listDeclaration> (64)
+        on left: 34 35
+        on right: 30 35
+    statments <listStatment> (65)
+        on left: 36 37 38 39 40
+        on right: 53
+    simpleStatment <simpleStatment> (66)
+        on left: 41 42 43 44 45
+        on right: 36 58
+    incdecStatment <simpleStatment> (67)
+        on left: 46 47
+        on right: 43
+    oprAssStatment <simpleStatment> (68)
+        on left: 48 49 50 51
         on right: 44
-    simpleStatment <simpleStatment> (59)
-        on left: 40 41 42
-        on right: 35 49
-    statmentList <listStatment> (60)
-        on left: 43 44
-        on right: 21 44
-    ifStatment <statment> (61)
-        on left: 45 46 47
-        on right: 36 46
-    returnStatment <statment> (62)
-        on left: 48
-        on right: 37
-    forStatment <statment> (63)
-        on left: 49 50 51
+    statmentList <listStatment> (69)
+        on left: 52 53
+        on right: 21 53
+    ifStatment <statment> (70)
+        on left: 54 55 56
+        on right: 37 55
+    returnStatment <statment> (71)
+        on left: 57
         on right: 38
-    expression <expression> (64)
-        on left: 52 53 54 55 56 57 58 59 60
-        on right: 41 45 46 47 49 50 53 54 55 56 57 58 59 60 66 72 73
-    unaryExpr <expression> (65)
-        on left: 61 62
-        on right: 52 62
-    primaryExpr <expression> (66)
-        on left: 63
-        on right: 61
-    operand <expression> (67)
-        on left: 64 65 66
-        on right: 63
-    literal <expression> (68)
-        on left: 67
-        on right: 64
-    basicLiteral <expression> (69)
-        on left: 68 69 70 71
-        on right: 67
-    expressionList <listExpression> (70)
-        on left: 72 73
-        on right: 31 32 42 48 73
-    identifierList <idenList> (71)
-        on left: 74 75
-        on right: 18 20 30 31 32 75
+    forStatment <statment> (72)
+        on left: 58 59 60
+        on right: 39
+    expression <expression> (73)
+        on left: 61 62 63 64 65 66 67 68 69 70 71 72 73 74
+        on right: 42 46 47 48 49 50 51 54 55 56 58 59 62 63 64 65 66 67 68 69 70 71 72 73 74 84 90 91
+    unaryExpr <expression> (74)
+        on left: 75 76 77 78
+        on right: 61 76 77 78
+    primaryExpr <expression> (75)
+        on left: 79 80 81
+        on right: 75 80 81
+    operand <expression> (76)
+        on left: 82 83 84
+        on right: 79
+    literal <expression> (77)
+        on left: 85
+        on right: 82
+    basicLiteral <expression> (78)
+        on left: 86 87 88 89
+        on right: 85
+    expressionList <listExpression> (79)
+        on left: 90 91
+        on right: 32 33 45 57 81 91
+    identifierList <idenList> (80)
+        on left: 92 93
+        on right: 18 20 31 32 33 93
 
 
 State 0
 
     0 $accept: . start $end
 
-    VAR   shift, and go to state 1
-    FUNC  shift, and go to state 2
+    PACKAGE  shift, and go to state 1
+    VAR      shift, and go to state 2
+    FUNC     shift, and go to state 3
 
-    start                go to state 3
-    topDeclaration       go to state 4
-    listTopDeclarations  go to state 5
-    functionDeclaration  go to state 6
-    listDeclaration      go to state 7
-    variableDeclaration  go to state 8
+    start                go to state 4
+    packages             go to state 5
+    topDeclaration       go to state 6
+    listTopDeclarations  go to state 7
+    functionDeclaration  go to state 8
+    listDeclaration      go to state 9
+    variableDeclaration  go to state 10
 
 
 State 1
 
-   28 variableDeclaration: VAR . varSpec
-   29                    | VAR . '(' varSpecList ')'
+    2 packages: PACKAGE . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 9
-    '('         shift, and go to state 10
-
-    varSpec         go to state 11
-    identifierList  go to state 12
+    IDENTIFIER  shift, and go to state 11
 
 
 State 2
 
-   26 functionDeclaration: FUNC . IDENTIFIER functionSignature block
+   29 variableDeclaration: VAR . varSpec
+   30                    | VAR . '(' varSpecList ')'
 
-    IDENTIFIER  shift, and go to state 13
+    IDENTIFIER  shift, and go to state 12
+    '('         shift, and go to state 13
+
+    varSpec         go to state 14
+    identifierList  go to state 15
 
 
 State 3
 
-    0 $accept: start . $end
+   27 functionDeclaration: FUNC . IDENTIFIER functionSignature block
 
-    $end  shift, and go to state 14
+    IDENTIFIER  shift, and go to state 16
 
 
 State 4
 
-   24 listTopDeclarations: topDeclaration .
-   25                    | topDeclaration . ';' listTopDeclarations
+    0 $accept: start . $end
 
-    ';'  shift, and go to state 15
-
-    $default  reduce using rule 24 (listTopDeclarations)
+    $end  shift, and go to state 17
 
 
 State 5
+
+   23 topDeclaration: packages .
+
+    $default  reduce using rule 23 (topDeclaration)
+
+
+State 6
+
+   25 listTopDeclarations: topDeclaration . ';'
+   26                    | topDeclaration . ';' listTopDeclarations
+
+    ';'  shift, and go to state 18
+
+
+State 7
 
     1 start: listTopDeclarations .
 
     $default  reduce using rule 1 (start)
 
 
-State 6
+State 8
 
-   23 topDeclaration: functionDeclaration .
-
-    $default  reduce using rule 23 (topDeclaration)
-
-
-State 7
-
-   22 topDeclaration: listDeclaration .
+   22 topDeclaration: functionDeclaration .
 
     $default  reduce using rule 22 (topDeclaration)
 
 
-State 8
-
-   27 listDeclaration: variableDeclaration .
-
-    $default  reduce using rule 27 (listDeclaration)
-
-
 State 9
 
-   74 identifierList: IDENTIFIER .
-   75               | IDENTIFIER . ',' identifierList
+   24 topDeclaration: listDeclaration .
 
-    ','  shift, and go to state 16
-
-    $default  reduce using rule 74 (identifierList)
+    $default  reduce using rule 24 (topDeclaration)
 
 
 State 10
 
-   29 variableDeclaration: VAR '(' . varSpecList ')'
+   28 listDeclaration: variableDeclaration .
 
-    IDENTIFIER  shift, and go to state 9
-
-    varSpec         go to state 17
-    varSpecList     go to state 18
-    identifierList  go to state 12
+    $default  reduce using rule 28 (listDeclaration)
 
 
 State 11
 
-   28 variableDeclaration: VAR varSpec .
+    2 packages: PACKAGE IDENTIFIER .
 
-    $default  reduce using rule 28 (variableDeclaration)
+    $default  reduce using rule 2 (packages)
 
 
 State 12
 
-   30 varSpec: identifierList . type
-   31        | identifierList . type '=' expressionList
-   32        | identifierList . '=' expressionList
+   92 identifierList: IDENTIFIER .
+   93               | IDENTIFIER . ',' identifierList
 
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 24
-    '('         shift, and go to state 25
-    '='         shift, and go to state 26
+    ','  shift, and go to state 19
 
-    type         go to state 27
-    literalType  go to state 28
+    $default  reduce using rule 92 (identifierList)
 
 
 State 13
 
-   26 functionDeclaration: FUNC IDENTIFIER . functionSignature block
+   30 variableDeclaration: VAR '(' . varSpecList ')'
 
-    '('  shift, and go to state 29
+    IDENTIFIER  shift, and go to state 12
 
-    functionSignature   go to state 30
-    functionParameters  go to state 31
+    varSpec         go to state 20
+    varSpecList     go to state 21
+    identifierList  go to state 15
 
 
 State 14
+
+   29 variableDeclaration: VAR varSpec .
+
+    $default  reduce using rule 29 (variableDeclaration)
+
+
+State 15
+
+   31 varSpec: identifierList . type
+   32        | identifierList . type '=' expressionList
+   33        | identifierList . '=' expressionList
+
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    '('         shift, and go to state 28
+    '='         shift, and go to state 29
+
+    type         go to state 30
+    literalType  go to state 31
+
+
+State 16
+
+   27 functionDeclaration: FUNC IDENTIFIER . functionSignature block
+
+    '('  shift, and go to state 32
+
+    functionSignature   go to state 33
+    functionParameters  go to state 34
+
+
+State 17
 
     0 $accept: start $end .
 
     $default  accept
 
 
-State 15
-
-   25 listTopDeclarations: topDeclaration ';' . listTopDeclarations
-
-    VAR   shift, and go to state 1
-    FUNC  shift, and go to state 2
-
-    topDeclaration       go to state 4
-    listTopDeclarations  go to state 32
-    functionDeclaration  go to state 6
-    listDeclaration      go to state 7
-    variableDeclaration  go to state 8
-
-
-State 16
-
-   75 identifierList: IDENTIFIER ',' . identifierList
-
-    IDENTIFIER  shift, and go to state 9
-
-    identifierList  go to state 33
-
-
-State 17
-
-   33 varSpecList: varSpec . ';'
-   34            | varSpec . ';' varSpecList
-
-    ';'  shift, and go to state 34
-
-
 State 18
 
-   29 variableDeclaration: VAR '(' varSpecList . ')'
+   25 listTopDeclarations: topDeclaration ';' .
+   26                    | topDeclaration ';' . listTopDeclarations
 
-    ')'  shift, and go to state 35
+    PACKAGE  shift, and go to state 1
+    VAR      shift, and go to state 2
+    FUNC     shift, and go to state 3
+
+    $default  reduce using rule 25 (listTopDeclarations)
+
+    packages             go to state 5
+    topDeclaration       go to state 6
+    listTopDeclarations  go to state 35
+    functionDeclaration  go to state 8
+    listDeclaration      go to state 9
+    variableDeclaration  go to state 10
 
 
 State 19
 
-    3 type: INT .
+   93 identifierList: IDENTIFIER ',' . identifierList
 
-    $default  reduce using rule 3 (type)
+    IDENTIFIER  shift, and go to state 12
+
+    identifierList  go to state 36
 
 
 State 20
 
-    4 type: FLOAT32 .
+   34 varSpecList: varSpec . ';'
+   35            | varSpec . ';' varSpecList
 
-    $default  reduce using rule 4 (type)
+    ';'  shift, and go to state 37
 
 
 State 21
 
-    5 type: BOOL .
+   30 variableDeclaration: VAR '(' varSpecList . ')'
 
-    $default  reduce using rule 5 (type)
+    ')'  shift, and go to state 38
 
 
 State 22
 
-    6 type: CHAR .
+    4 type: INT .
 
-    $default  reduce using rule 6 (type)
+    $default  reduce using rule 4 (type)
 
 
 State 23
 
-    7 type: FUNC . functionSignature
+    5 type: FLOAT32 .
 
-    '('  shift, and go to state 29
-
-    functionSignature   go to state 36
-    functionParameters  go to state 31
+    $default  reduce using rule 5 (type)
 
 
 State 24
 
-    9 literalType: IDENTIFIER .
+    6 type: BOOL .
 
-    $default  reduce using rule 9 (literalType)
+    $default  reduce using rule 6 (type)
 
 
 State 25
 
-    2 type: '(' . type ')'
-
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 24
-    '('         shift, and go to state 25
-
-    type         go to state 37
-    literalType  go to state 28
-
-
-State 26
-
-   32 varSpec: identifierList '=' . expressionList
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression      go to state 45
-    unaryExpr       go to state 46
-    primaryExpr     go to state 47
-    operand         go to state 48
-    literal         go to state 49
-    basicLiteral    go to state 50
-    expressionList  go to state 51
-
-
-State 27
-
-   30 varSpec: identifierList type .
-   31        | identifierList type . '=' expressionList
-
-    '='  shift, and go to state 52
-
-    $default  reduce using rule 30 (varSpec)
-
-
-State 28
-
-    8 type: literalType .
-
-    $default  reduce using rule 8 (type)
-
-
-State 29
-
-   14 functionParameters: '(' . ')'
-   15                   | '(' . functionParametersList ')'
-   16                   | '(' . functionParametersList ',' ')'
-
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 53
-    '('         shift, and go to state 25
-    ')'         shift, and go to state 54
-
-    type                    go to state 55
-    literalType             go to state 28
-    functionParametersList  go to state 56
-    identifierList          go to state 57
-
-
-State 30
-
-   26 functionDeclaration: FUNC IDENTIFIER functionSignature . block
-
-    '{'  shift, and go to state 58
-
-    block  go to state 59
-
-
-State 31
-
-   10 functionSignature: functionParameters . functionResults
-
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 24
-    '('         shift, and go to state 60
-
-    $default  reduce using rule 11 (functionResults)
-
-    type                go to state 61
-    literalType         go to state 28
-    functionResults     go to state 62
-    functionParameters  go to state 63
-
-
-State 32
-
-   25 listTopDeclarations: topDeclaration ';' listTopDeclarations .
-
-    $default  reduce using rule 25 (listTopDeclarations)
-
-
-State 33
-
-   75 identifierList: IDENTIFIER ',' identifierList .
-
-    $default  reduce using rule 75 (identifierList)
-
-
-State 34
-
-   33 varSpecList: varSpec ';' .
-   34            | varSpec ';' . varSpecList
-
-    IDENTIFIER  shift, and go to state 9
-
-    $default  reduce using rule 33 (varSpecList)
-
-    varSpec         go to state 17
-    varSpecList     go to state 64
-    identifierList  go to state 12
-
-
-State 35
-
-   29 variableDeclaration: VAR '(' varSpecList ')' .
-
-    $default  reduce using rule 29 (variableDeclaration)
-
-
-State 36
-
-    7 type: FUNC functionSignature .
+    7 type: RUNE .
 
     $default  reduce using rule 7 (type)
 
 
-State 37
+State 26
 
-    2 type: '(' type . ')'
+    8 type: FUNC . functionSignature
 
-    ')'  shift, and go to state 65
+    '('  shift, and go to state 32
 
+    functionSignature   go to state 39
+    functionParameters  go to state 34
 
-State 38
 
-   65 operand: IDENTIFIER .
+State 27
 
-    $default  reduce using rule 65 (operand)
+   10 literalType: IDENTIFIER .
 
+    $default  reduce using rule 10 (literalType)
 
-State 39
 
-   69 basicLiteral: INTEGER_LITERAL .
+State 28
 
-    $default  reduce using rule 69 (basicLiteral)
+    3 type: '(' . type ')'
 
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    '('         shift, and go to state 28
 
-State 40
+    type         go to state 40
+    literalType  go to state 31
 
-   70 basicLiteral: FLOAT_LITERAL .
 
-    $default  reduce using rule 70 (basicLiteral)
+State 29
 
+   33 varSpec: identifierList '=' . expressionList
 
-State 41
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-   68 basicLiteral: BOOLEAN_LITERAL .
+    expression      go to state 50
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 56
 
-    $default  reduce using rule 68 (basicLiteral)
 
+State 30
 
-State 42
+   31 varSpec: identifierList type .
+   32        | identifierList type . '=' expressionList
 
-   71 basicLiteral: CHAR_LITERAL .
-
-    $default  reduce using rule 71 (basicLiteral)
-
-
-State 43
-
-   66 operand: '(' . expression ')'
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 66
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 44
-
-   62 unaryExpr: '!' . unaryExpr
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    unaryExpr     go to state 67
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 45
-
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
-   72 expressionList: expression .
-   73               | expression . ',' expressionList
-
-    AND  shift, and go to state 68
-    OR   shift, and go to state 69
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-    ','  shift, and go to state 76
-
-    $default  reduce using rule 72 (expressionList)
-
-
-State 46
-
-   52 expression: unaryExpr .
-
-    $default  reduce using rule 52 (expression)
-
-
-State 47
-
-   61 unaryExpr: primaryExpr .
-
-    $default  reduce using rule 61 (unaryExpr)
-
-
-State 48
-
-   63 primaryExpr: operand .
-
-    $default  reduce using rule 63 (primaryExpr)
-
-
-State 49
-
-   64 operand: literal .
-
-    $default  reduce using rule 64 (operand)
-
-
-State 50
-
-   67 literal: basicLiteral .
-
-    $default  reduce using rule 67 (literal)
-
-
-State 51
-
-   32 varSpec: identifierList '=' expressionList .
-
-    $default  reduce using rule 32 (varSpec)
-
-
-State 52
-
-   31 varSpec: identifierList type '=' . expressionList
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression      go to state 45
-    unaryExpr       go to state 46
-    primaryExpr     go to state 47
-    operand         go to state 48
-    literal         go to state 49
-    basicLiteral    go to state 50
-    expressionList  go to state 77
-
-
-State 53
-
-    9 literalType: IDENTIFIER .
-   74 identifierList: IDENTIFIER .
-   75               | IDENTIFIER . ',' identifierList
-
-    ','  shift, and go to state 16
-
-    ')'       reduce using rule 9 (literalType)
-    ','       [reduce using rule 9 (literalType)]
-    $default  reduce using rule 74 (identifierList)
-
-
-State 54
-
-   14 functionParameters: '(' ')' .
-
-    $default  reduce using rule 14 (functionParameters)
-
-
-State 55
-
-   17 functionParametersList: type .
-   19                       | type . ',' functionParametersList
-
-    ','  shift, and go to state 78
-
-    ','       [reduce using rule 17 (functionParametersList)]
-    $default  reduce using rule 17 (functionParametersList)
-
-
-State 56
-
-   15 functionParameters: '(' functionParametersList . ')'
-   16                   | '(' functionParametersList . ',' ')'
-
-    ')'  shift, and go to state 79
-    ','  shift, and go to state 80
-
-
-State 57
-
-   18 functionParametersList: identifierList . type
-   20                       | identifierList . type ',' functionParametersList
-
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 24
-    '('         shift, and go to state 25
-
-    type         go to state 81
-    literalType  go to state 28
-
-
-State 58
-
-   21 block: '{' . statmentList '}'
-
-    IF               shift, and go to state 82
-    FOR              shift, and go to state 83
-    RETURN           shift, and go to state 84
-    VAR              shift, and go to state 1
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    '}'       reduce using rule 43 (statmentList)
-    $default  reduce using rule 40 (simpleStatment)
-
-    listDeclaration      go to state 85
-    variableDeclaration  go to state 8
-    statments            go to state 86
-    simpleStatment       go to state 87
-    statmentList         go to state 88
-    ifStatment           go to state 89
-    returnStatment       go to state 90
-    forStatment          go to state 91
-    expression           go to state 92
-    unaryExpr            go to state 46
-    primaryExpr          go to state 47
-    operand              go to state 48
-    literal              go to state 49
-    basicLiteral         go to state 50
-    expressionList       go to state 93
-
-
-State 59
-
-   26 functionDeclaration: FUNC IDENTIFIER functionSignature block .
-
-    $default  reduce using rule 26 (functionDeclaration)
-
-
-State 60
-
-    2 type: '(' . type ')'
-   14 functionParameters: '(' . ')'
-   15                   | '(' . functionParametersList ')'
-   16                   | '(' . functionParametersList ',' ')'
-
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 53
-    '('         shift, and go to state 25
-    ')'         shift, and go to state 54
-
-    type                    go to state 94
-    literalType             go to state 28
-    functionParametersList  go to state 56
-    identifierList          go to state 57
-
-
-State 61
-
-   13 functionResults: type .
-
-    $default  reduce using rule 13 (functionResults)
-
-
-State 62
-
-   10 functionSignature: functionParameters functionResults .
-
-    $default  reduce using rule 10 (functionSignature)
-
-
-State 63
-
-   12 functionResults: functionParameters .
-
-    $default  reduce using rule 12 (functionResults)
-
-
-State 64
-
-   34 varSpecList: varSpec ';' varSpecList .
-
-    $default  reduce using rule 34 (varSpecList)
-
-
-State 65
-
-    2 type: '(' type ')' .
-
-    $default  reduce using rule 2 (type)
-
-
-State 66
-
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
-   66 operand: '(' expression . ')'
-
-    AND  shift, and go to state 68
-    OR   shift, and go to state 69
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-    ')'  shift, and go to state 95
-
-
-State 67
-
-   62 unaryExpr: '!' unaryExpr .
-
-    $default  reduce using rule 62 (unaryExpr)
-
-
-State 68
-
-   59 expression: expression AND . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 96
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 69
-
-   60 expression: expression OR . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 97
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 70
-
-   57 expression: expression EQ . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 98
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 71
-
-   58 expression: expression NEQ . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 99
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 72
-
-   53 expression: expression '+' . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 100
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 73
-
-   54 expression: expression '-' . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 101
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 74
-
-   55 expression: expression '*' . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 102
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 75
-
-   56 expression: expression '/' . expression
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 103
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
-
-
-State 76
-
-   73 expressionList: expression ',' . expressionList
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression      go to state 45
-    unaryExpr       go to state 46
-    primaryExpr     go to state 47
-    operand         go to state 48
-    literal         go to state 49
-    basicLiteral    go to state 50
-    expressionList  go to state 104
-
-
-State 77
-
-   31 varSpec: identifierList type '=' expressionList .
+    '='  shift, and go to state 57
 
     $default  reduce using rule 31 (varSpec)
 
 
-State 78
+State 31
 
-   19 functionParametersList: type ',' . functionParametersList
+    9 type: literalType .
 
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 53
-    '('         shift, and go to state 25
-
-    type                    go to state 55
-    literalType             go to state 28
-    functionParametersList  go to state 105
-    identifierList          go to state 57
+    $default  reduce using rule 9 (type)
 
 
-State 79
+State 32
 
-   15 functionParameters: '(' functionParametersList ')' .
+   15 functionParameters: '(' . ')'
+   16                   | '(' . functionParametersList ')'
+
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 58
+    '('         shift, and go to state 28
+    ')'         shift, and go to state 59
+
+    type                    go to state 60
+    literalType             go to state 31
+    functionParametersList  go to state 61
+    identifierList          go to state 62
+
+
+State 33
+
+   27 functionDeclaration: FUNC IDENTIFIER functionSignature . block
+
+    '{'  shift, and go to state 63
+
+    block  go to state 64
+
+
+State 34
+
+   11 functionSignature: functionParameters . functionResults
+
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    '('         shift, and go to state 65
+
+    $default  reduce using rule 12 (functionResults)
+
+    type                go to state 66
+    literalType         go to state 31
+    functionResults     go to state 67
+    functionParameters  go to state 68
+
+
+State 35
+
+   26 listTopDeclarations: topDeclaration ';' listTopDeclarations .
+
+    $default  reduce using rule 26 (listTopDeclarations)
+
+
+State 36
+
+   93 identifierList: IDENTIFIER ',' identifierList .
+
+    $default  reduce using rule 93 (identifierList)
+
+
+State 37
+
+   34 varSpecList: varSpec ';' .
+   35            | varSpec ';' . varSpecList
+
+    IDENTIFIER  shift, and go to state 12
+
+    $default  reduce using rule 34 (varSpecList)
+
+    varSpec         go to state 20
+    varSpecList     go to state 69
+    identifierList  go to state 15
+
+
+State 38
+
+   30 variableDeclaration: VAR '(' varSpecList ')' .
+
+    $default  reduce using rule 30 (variableDeclaration)
+
+
+State 39
+
+    8 type: FUNC functionSignature .
+
+    $default  reduce using rule 8 (type)
+
+
+State 40
+
+    3 type: '(' type . ')'
+
+    ')'  shift, and go to state 70
+
+
+State 41
+
+   76 unaryExpr: NOT . unaryExpr
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    unaryExpr     go to state 71
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 42
+
+   83 operand: IDENTIFIER .
+
+    $default  reduce using rule 83 (operand)
+
+
+State 43
+
+   87 basicLiteral: INTEGER_LITERAL .
+
+    $default  reduce using rule 87 (basicLiteral)
+
+
+State 44
+
+   88 basicLiteral: FLOAT_LITERAL .
+
+    $default  reduce using rule 88 (basicLiteral)
+
+
+State 45
+
+   86 basicLiteral: BOOLEAN_LITERAL .
+
+    $default  reduce using rule 86 (basicLiteral)
+
+
+State 46
+
+   89 basicLiteral: CHAR_LITERAL .
+
+    $default  reduce using rule 89 (basicLiteral)
+
+
+State 47
+
+   78 unaryExpr: '+' . unaryExpr
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    unaryExpr     go to state 72
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 48
+
+   77 unaryExpr: '-' . unaryExpr
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    unaryExpr     go to state 73
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 49
+
+   84 operand: '(' . expression ')'
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 74
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 50
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+   90 expressionList: expression .
+   91               | expression . ',' expressionList
+
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+    ','  shift, and go to state 88
+
+    $default  reduce using rule 90 (expressionList)
+
+
+State 51
+
+   61 expression: unaryExpr .
+
+    $default  reduce using rule 61 (expression)
+
+
+State 52
+
+   75 unaryExpr: primaryExpr .
+   80 primaryExpr: primaryExpr . '(' ')'
+   81            | primaryExpr . '(' expressionList ')'
+
+    '('  shift, and go to state 89
+
+    $default  reduce using rule 75 (unaryExpr)
+
+
+State 53
+
+   79 primaryExpr: operand .
+
+    $default  reduce using rule 79 (primaryExpr)
+
+
+State 54
+
+   82 operand: literal .
+
+    $default  reduce using rule 82 (operand)
+
+
+State 55
+
+   85 literal: basicLiteral .
+
+    $default  reduce using rule 85 (literal)
+
+
+State 56
+
+   33 varSpec: identifierList '=' expressionList .
+
+    $default  reduce using rule 33 (varSpec)
+
+
+State 57
+
+   32 varSpec: identifierList type '=' . expressionList
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression      go to state 50
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 90
+
+
+State 58
+
+   10 literalType: IDENTIFIER .
+   92 identifierList: IDENTIFIER .
+   93               | IDENTIFIER . ',' identifierList
+
+    ','  shift, and go to state 19
+
+    ')'       reduce using rule 10 (literalType)
+    ','       [reduce using rule 10 (literalType)]
+    $default  reduce using rule 92 (identifierList)
+
+
+State 59
+
+   15 functionParameters: '(' ')' .
 
     $default  reduce using rule 15 (functionParameters)
 
 
+State 60
+
+   17 functionParametersList: type .
+   19                       | type . ',' functionParametersList
+
+    ','  shift, and go to state 91
+
+    $default  reduce using rule 17 (functionParametersList)
+
+
+State 61
+
+   16 functionParameters: '(' functionParametersList . ')'
+
+    ')'  shift, and go to state 92
+
+
+State 62
+
+   18 functionParametersList: identifierList . type
+   20                       | identifierList . type ',' functionParametersList
+
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 27
+    '('         shift, and go to state 28
+
+    type         go to state 93
+    literalType  go to state 31
+
+
+State 63
+
+   21 block: '{' . statmentList '}'
+
+    IF               shift, and go to state 94
+    FOR              shift, and go to state 95
+    RETURN           shift, and go to state 96
+    VAR              shift, and go to state 2
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    '}'       reduce using rule 52 (statmentList)
+    $default  reduce using rule 41 (simpleStatment)
+
+    listDeclaration      go to state 97
+    variableDeclaration  go to state 10
+    statments            go to state 98
+    simpleStatment       go to state 99
+    incdecStatment       go to state 100
+    oprAssStatment       go to state 101
+    statmentList         go to state 102
+    ifStatment           go to state 103
+    returnStatment       go to state 104
+    forStatment          go to state 105
+    expression           go to state 106
+    unaryExpr            go to state 51
+    primaryExpr          go to state 52
+    operand              go to state 53
+    literal              go to state 54
+    basicLiteral         go to state 55
+    expressionList       go to state 107
+
+
+State 64
+
+   27 functionDeclaration: FUNC IDENTIFIER functionSignature block .
+
+    $default  reduce using rule 27 (functionDeclaration)
+
+
+State 65
+
+    3 type: '(' . type ')'
+   15 functionParameters: '(' . ')'
+   16                   | '(' . functionParametersList ')'
+
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 58
+    '('         shift, and go to state 28
+    ')'         shift, and go to state 59
+
+    type                    go to state 108
+    literalType             go to state 31
+    functionParametersList  go to state 61
+    identifierList          go to state 62
+
+
+State 66
+
+   14 functionResults: type .
+
+    $default  reduce using rule 14 (functionResults)
+
+
+State 67
+
+   11 functionSignature: functionParameters functionResults .
+
+    $default  reduce using rule 11 (functionSignature)
+
+
+State 68
+
+   13 functionResults: functionParameters .
+
+    $default  reduce using rule 13 (functionResults)
+
+
+State 69
+
+   35 varSpecList: varSpec ';' varSpecList .
+
+    $default  reduce using rule 35 (varSpecList)
+
+
+State 70
+
+    3 type: '(' type ')' .
+
+    $default  reduce using rule 3 (type)
+
+
+State 71
+
+   76 unaryExpr: NOT unaryExpr .
+
+    $default  reduce using rule 76 (unaryExpr)
+
+
+State 72
+
+   78 unaryExpr: '+' unaryExpr .
+
+    $default  reduce using rule 78 (unaryExpr)
+
+
+State 73
+
+   77 unaryExpr: '-' unaryExpr .
+
+    $default  reduce using rule 77 (unaryExpr)
+
+
+State 74
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+   84 operand: '(' expression . ')'
+
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+    ')'  shift, and go to state 109
+
+
+State 75
+
+   69 expression: expression AND . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 110
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 76
+
+   70 expression: expression OR . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 111
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 77
+
+   67 expression: expression EQ . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 112
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 78
+
+   68 expression: expression NEQ . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 113
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 79
+
+   71 expression: expression GT . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 114
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
 State 80
 
-   16 functionParameters: '(' functionParametersList ',' . ')'
+   72 expression: expression GE . expression
 
-    ')'  shift, and go to state 106
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 115
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 81
 
-   18 functionParametersList: identifierList type .
-   20                       | identifierList type . ',' functionParametersList
+   73 expression: expression LT . expression
 
-    ','  shift, and go to state 107
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-    ','       [reduce using rule 18 (functionParametersList)]
-    $default  reduce using rule 18 (functionParametersList)
+    expression    go to state 116
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 82
 
-   45 ifStatment: IF . expression block
-   46           | IF . expression block ELSE ifStatment
-   47           | IF . expression block ELSE block
+   74 expression: expression LE . expression
 
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-    expression    go to state 108
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
+    expression    go to state 117
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 83
 
-   49 forStatment: FOR . simpleStatment ';' expression ';' simpleStatment block
-   50            | FOR . expression block
-   51            | FOR . block
+   65 expression: expression '+' . expression
 
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '{'              shift, and go to state 58
-    '!'              shift, and go to state 44
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-    $default  reduce using rule 40 (simpleStatment)
-
-    block           go to state 109
-    simpleStatment  go to state 110
-    expression      go to state 111
-    unaryExpr       go to state 46
-    primaryExpr     go to state 47
-    operand         go to state 48
-    literal         go to state 49
-    basicLiteral    go to state 50
-    expressionList  go to state 93
+    expression    go to state 118
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 84
 
-   48 returnStatment: RETURN . expressionList
+   66 expression: expression '-' . expression
 
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-    expression      go to state 45
-    unaryExpr       go to state 46
-    primaryExpr     go to state 47
-    operand         go to state 48
-    literal         go to state 49
-    basicLiteral    go to state 50
-    expressionList  go to state 112
+    expression    go to state 119
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 85
 
-   39 statments: listDeclaration .
+   62 expression: expression '*' . expression
 
-    $default  reduce using rule 39 (statments)
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 120
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 86
 
-   44 statmentList: statments . ';' statmentList
+   63 expression: expression '/' . expression
 
-    ';'  shift, and go to state 113
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 121
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 87
 
-   35 statments: simpleStatment .
+   64 expression: expression '%' . expression
 
-    $default  reduce using rule 35 (statments)
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 122
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 88
 
-   21 block: '{' statmentList . '}'
+   91 expressionList: expression ',' . expressionList
 
-    '}'  shift, and go to state 114
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression      go to state 50
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 123
 
 
 State 89
 
-   36 statments: ifStatment .
+   80 primaryExpr: primaryExpr '(' . ')'
+   81            | primaryExpr '(' . expressionList ')'
 
-    $default  reduce using rule 36 (statments)
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+    ')'              shift, and go to state 124
+
+    expression      go to state 50
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 125
 
 
 State 90
 
-   37 statments: returnStatment .
+   32 varSpec: identifierList type '=' expressionList .
 
-    $default  reduce using rule 37 (statments)
+    $default  reduce using rule 32 (varSpec)
 
 
 State 91
 
-   38 statments: forStatment .
+   19 functionParametersList: type ',' . functionParametersList
 
-    $default  reduce using rule 38 (statments)
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 58
+    '('         shift, and go to state 28
+
+    type                    go to state 60
+    literalType             go to state 31
+    functionParametersList  go to state 126
+    identifierList          go to state 62
 
 
 State 92
 
-   41 simpleStatment: expression .
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
-   72 expressionList: expression .
-   73               | expression . ',' expressionList
+   16 functionParameters: '(' functionParametersList ')' .
 
-    AND  shift, and go to state 68
-    OR   shift, and go to state 69
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-    ','  shift, and go to state 76
-
-    '='       reduce using rule 72 (expressionList)
-    $default  reduce using rule 41 (simpleStatment)
+    $default  reduce using rule 16 (functionParameters)
 
 
 State 93
 
-   42 simpleStatment: expressionList . '=' expressionList
+   18 functionParametersList: identifierList type .
+   20                       | identifierList type . ',' functionParametersList
 
-    '='  shift, and go to state 115
+    ','  shift, and go to state 127
+
+    $default  reduce using rule 18 (functionParametersList)
 
 
 State 94
 
-    2 type: '(' type . ')'
-   17 functionParametersList: type .
-   19                       | type . ',' functionParametersList
+   54 ifStatment: IF . expression block
+   55           | IF . expression block ELSE ifStatment
+   56           | IF . expression block ELSE block
 
-    ')'  shift, and go to state 65
-    ','  shift, and go to state 78
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-    ')'  [reduce using rule 17 (functionParametersList)]
-    ','  [reduce using rule 17 (functionParametersList)]
+    expression    go to state 128
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
 State 95
 
-   66 operand: '(' expression ')' .
+   58 forStatment: FOR . simpleStatment ';' expression ';' simpleStatment block
+   59            | FOR . expression block
+   60            | FOR . block
 
-    $default  reduce using rule 66 (operand)
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+    '{'              shift, and go to state 63
+
+    $default  reduce using rule 41 (simpleStatment)
+
+    block           go to state 129
+    simpleStatment  go to state 130
+    incdecStatment  go to state 100
+    oprAssStatment  go to state 101
+    expression      go to state 131
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 107
 
 
 State 96
 
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   59           | expression AND expression .
-   60           | expression . OR expression
+   57 returnStatment: RETURN . expressionList
 
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-    $default  reduce using rule 59 (expression)
+    expression      go to state 50
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 132
 
 
 State 97
 
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
-   60           | expression OR expression .
+   40 statments: listDeclaration .
 
-    AND  shift, and go to state 68
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-
-    $default  reduce using rule 60 (expression)
+    $default  reduce using rule 40 (statments)
 
 
 State 98
 
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   57           | expression EQ expression .
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
+   53 statmentList: statments . ';' statmentList
 
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-
-    $default  reduce using rule 57 (expression)
+    ';'  shift, and go to state 133
 
 
 State 99
 
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   58           | expression NEQ expression .
-   59           | expression . AND expression
-   60           | expression . OR expression
+   36 statments: simpleStatment .
 
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-
-    $default  reduce using rule 58 (expression)
+    $default  reduce using rule 36 (statments)
 
 
 State 100
 
-   53 expression: expression . '+' expression
-   53           | expression '+' expression .
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
+   43 simpleStatment: incdecStatment .
 
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-
-    $default  reduce using rule 53 (expression)
+    $default  reduce using rule 43 (simpleStatment)
 
 
 State 101
 
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   54           | expression '-' expression .
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
+   44 simpleStatment: oprAssStatment .
 
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-
-    $default  reduce using rule 54 (expression)
+    $default  reduce using rule 44 (simpleStatment)
 
 
 State 102
 
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   55           | expression '*' expression .
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
+   21 block: '{' statmentList . '}'
 
-    $default  reduce using rule 55 (expression)
+    '}'  shift, and go to state 134
 
 
 State 103
 
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   56           | expression '/' expression .
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
+   37 statments: ifStatment .
 
-    $default  reduce using rule 56 (expression)
+    $default  reduce using rule 37 (statments)
 
 
 State 104
 
-   73 expressionList: expression ',' expressionList .
+   38 statments: returnStatment .
 
-    $default  reduce using rule 73 (expressionList)
+    $default  reduce using rule 38 (statments)
 
 
 State 105
+
+   39 statments: forStatment .
+
+    $default  reduce using rule 39 (statments)
+
+
+State 106
+
+   42 simpleStatment: expression .
+   46 incdecStatment: expression . DECR
+   47               | expression . INCR
+   48 oprAssStatment: expression . DECASS expression
+   49               | expression . INCASS expression
+   50               | expression . MULASS expression
+   51               | expression . '/' '=' expression
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+   90 expressionList: expression .
+   91               | expression . ',' expressionList
+
+    AND     shift, and go to state 75
+    OR      shift, and go to state 76
+    EQ      shift, and go to state 77
+    NEQ     shift, and go to state 78
+    GT      shift, and go to state 79
+    GE      shift, and go to state 80
+    LT      shift, and go to state 81
+    LE      shift, and go to state 82
+    DECR    shift, and go to state 135
+    INCR    shift, and go to state 136
+    DECASS  shift, and go to state 137
+    INCASS  shift, and go to state 138
+    MULASS  shift, and go to state 139
+    '+'     shift, and go to state 83
+    '-'     shift, and go to state 84
+    '*'     shift, and go to state 85
+    '/'     shift, and go to state 140
+    '%'     shift, and go to state 87
+    ','     shift, and go to state 88
+
+    '='       reduce using rule 90 (expressionList)
+    $default  reduce using rule 42 (simpleStatment)
+
+
+State 107
+
+   45 simpleStatment: expressionList . '=' expressionList
+
+    '='  shift, and go to state 141
+
+
+State 108
+
+    3 type: '(' type . ')'
+   17 functionParametersList: type .
+   19                       | type . ',' functionParametersList
+
+    ')'  shift, and go to state 70
+    ','  shift, and go to state 91
+
+    ')'  [reduce using rule 17 (functionParametersList)]
+
+
+State 109
+
+   84 operand: '(' expression ')' .
+
+    $default  reduce using rule 84 (operand)
+
+
+State 110
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   69           | expression AND expression .
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 69 (expression)
+
+
+State 111
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   70           | expression OR expression .
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    AND  shift, and go to state 75
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 70 (expression)
+
+
+State 112
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   67           | expression EQ expression .
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 67 (expression)
+
+
+State 113
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   68           | expression NEQ expression .
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 68 (expression)
+
+
+State 114
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   71           | expression GT expression .
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 71 (expression)
+
+
+State 115
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   72           | expression GE expression .
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 72 (expression)
+
+
+State 116
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   73           | expression LT expression .
+   74           | expression . LE expression
+
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 73 (expression)
+
+
+State 117
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+   74           | expression LE expression .
+
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 74 (expression)
+
+
+State 118
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   65           | expression '+' expression .
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 65 (expression)
+
+
+State 119
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   66           | expression '-' expression .
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 66 (expression)
+
+
+State 120
+
+   62 expression: expression . '*' expression
+   62           | expression '*' expression .
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    $default  reduce using rule 62 (expression)
+
+
+State 121
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   63           | expression '/' expression .
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    $default  reduce using rule 63 (expression)
+
+
+State 122
+
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   64           | expression '%' expression .
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    $default  reduce using rule 64 (expression)
+
+
+State 123
+
+   91 expressionList: expression ',' expressionList .
+
+    $default  reduce using rule 91 (expressionList)
+
+
+State 124
+
+   80 primaryExpr: primaryExpr '(' ')' .
+
+    $default  reduce using rule 80 (primaryExpr)
+
+
+State 125
+
+   81 primaryExpr: primaryExpr '(' expressionList . ')'
+
+    ')'  shift, and go to state 142
+
+
+State 126
 
    19 functionParametersList: type ',' functionParametersList .
 
     $default  reduce using rule 19 (functionParametersList)
 
 
-State 106
-
-   16 functionParameters: '(' functionParametersList ',' ')' .
-
-    $default  reduce using rule 16 (functionParameters)
-
-
-State 107
+State 127
 
    20 functionParametersList: identifierList type ',' . functionParametersList
 
-    INT         shift, and go to state 19
-    FLOAT32     shift, and go to state 20
-    BOOL        shift, and go to state 21
-    CHAR        shift, and go to state 22
-    FUNC        shift, and go to state 23
-    IDENTIFIER  shift, and go to state 53
-    '('         shift, and go to state 25
+    INT         shift, and go to state 22
+    FLOAT32     shift, and go to state 23
+    BOOL        shift, and go to state 24
+    RUNE        shift, and go to state 25
+    FUNC        shift, and go to state 26
+    IDENTIFIER  shift, and go to state 58
+    '('         shift, and go to state 28
 
-    type                    go to state 55
-    literalType             go to state 28
-    functionParametersList  go to state 116
-    identifierList          go to state 57
-
-
-State 108
-
-   45 ifStatment: IF expression . block
-   46           | IF expression . block ELSE ifStatment
-   47           | IF expression . block ELSE block
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
-
-    AND  shift, and go to state 68
-    OR   shift, and go to state 69
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-    '{'  shift, and go to state 58
-
-    block  go to state 117
+    type                    go to state 60
+    literalType             go to state 31
+    functionParametersList  go to state 143
+    identifierList          go to state 62
 
 
-State 109
+State 128
 
-   51 forStatment: FOR block .
+   54 ifStatment: IF expression . block
+   55           | IF expression . block ELSE ifStatment
+   56           | IF expression . block ELSE block
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
 
-    $default  reduce using rule 51 (forStatment)
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+    '{'  shift, and go to state 63
+
+    block  go to state 144
 
 
-State 110
+State 129
 
-   49 forStatment: FOR simpleStatment . ';' expression ';' simpleStatment block
+   60 forStatment: FOR block .
 
-    ';'  shift, and go to state 118
+    $default  reduce using rule 60 (forStatment)
 
 
-State 111
+State 130
 
-   41 simpleStatment: expression .
-   50 forStatment: FOR expression . block
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
-   72 expressionList: expression .
-   73               | expression . ',' expressionList
+   58 forStatment: FOR simpleStatment . ';' expression ';' simpleStatment block
 
-    AND  shift, and go to state 68
-    OR   shift, and go to state 69
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-    ','  shift, and go to state 76
-    '{'  shift, and go to state 58
+    ';'  shift, and go to state 145
 
-    '='       reduce using rule 72 (expressionList)
+
+State 131
+
+   42 simpleStatment: expression .
+   46 incdecStatment: expression . DECR
+   47               | expression . INCR
+   48 oprAssStatment: expression . DECASS expression
+   49               | expression . INCASS expression
+   50               | expression . MULASS expression
+   51               | expression . '/' '=' expression
+   59 forStatment: FOR expression . block
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+   90 expressionList: expression .
+   91               | expression . ',' expressionList
+
+    AND     shift, and go to state 75
+    OR      shift, and go to state 76
+    EQ      shift, and go to state 77
+    NEQ     shift, and go to state 78
+    GT      shift, and go to state 79
+    GE      shift, and go to state 80
+    LT      shift, and go to state 81
+    LE      shift, and go to state 82
+    DECR    shift, and go to state 135
+    INCR    shift, and go to state 136
+    DECASS  shift, and go to state 137
+    INCASS  shift, and go to state 138
+    MULASS  shift, and go to state 139
+    '+'     shift, and go to state 83
+    '-'     shift, and go to state 84
+    '*'     shift, and go to state 85
+    '/'     shift, and go to state 140
+    '%'     shift, and go to state 87
+    ','     shift, and go to state 88
+    '{'     shift, and go to state 63
+
+    '='       reduce using rule 90 (expressionList)
+    $default  reduce using rule 42 (simpleStatment)
+
+    block  go to state 146
+
+
+State 132
+
+   57 returnStatment: RETURN expressionList .
+
+    $default  reduce using rule 57 (returnStatment)
+
+
+State 133
+
+   53 statmentList: statments ';' . statmentList
+
+    IF               shift, and go to state 94
+    FOR              shift, and go to state 95
+    RETURN           shift, and go to state 96
+    VAR              shift, and go to state 2
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    '}'       reduce using rule 52 (statmentList)
     $default  reduce using rule 41 (simpleStatment)
 
-    block  go to state 119
+    listDeclaration      go to state 97
+    variableDeclaration  go to state 10
+    statments            go to state 98
+    simpleStatment       go to state 99
+    incdecStatment       go to state 100
+    oprAssStatment       go to state 101
+    statmentList         go to state 147
+    ifStatment           go to state 103
+    returnStatment       go to state 104
+    forStatment          go to state 105
+    expression           go to state 106
+    unaryExpr            go to state 51
+    primaryExpr          go to state 52
+    operand              go to state 53
+    literal              go to state 54
+    basicLiteral         go to state 55
+    expressionList       go to state 107
 
 
-State 112
-
-   48 returnStatment: RETURN expressionList .
-
-    $default  reduce using rule 48 (returnStatment)
-
-
-State 113
-
-   44 statmentList: statments ';' . statmentList
-
-    IF               shift, and go to state 82
-    FOR              shift, and go to state 83
-    RETURN           shift, and go to state 84
-    VAR              shift, and go to state 1
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    '}'       reduce using rule 43 (statmentList)
-    $default  reduce using rule 40 (simpleStatment)
-
-    listDeclaration      go to state 85
-    variableDeclaration  go to state 8
-    statments            go to state 86
-    simpleStatment       go to state 87
-    statmentList         go to state 120
-    ifStatment           go to state 89
-    returnStatment       go to state 90
-    forStatment          go to state 91
-    expression           go to state 92
-    unaryExpr            go to state 46
-    primaryExpr          go to state 47
-    operand              go to state 48
-    literal              go to state 49
-    basicLiteral         go to state 50
-    expressionList       go to state 93
-
-
-State 114
+State 134
 
    21 block: '{' statmentList '}' .
 
     $default  reduce using rule 21 (block)
 
 
-State 115
+State 135
 
-   42 simpleStatment: expressionList '=' . expressionList
+   46 incdecStatment: expression DECR .
 
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression      go to state 45
-    unaryExpr       go to state 46
-    primaryExpr     go to state 47
-    operand         go to state 48
-    literal         go to state 49
-    basicLiteral    go to state 50
-    expressionList  go to state 121
+    $default  reduce using rule 46 (incdecStatment)
 
 
-State 116
+State 136
+
+   47 incdecStatment: expression INCR .
+
+    $default  reduce using rule 47 (incdecStatment)
+
+
+State 137
+
+   48 oprAssStatment: expression DECASS . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 148
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 138
+
+   49 oprAssStatment: expression INCASS . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 149
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 139
+
+   50 oprAssStatment: expression MULASS . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 150
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 140
+
+   51 oprAssStatment: expression '/' . '=' expression
+   63 expression: expression '/' . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+    '='              shift, and go to state 151
+
+    expression    go to state 121
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 141
+
+   45 simpleStatment: expressionList '=' . expressionList
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression      go to state 50
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 152
+
+
+State 142
+
+   81 primaryExpr: primaryExpr '(' expressionList ')' .
+
+    $default  reduce using rule 81 (primaryExpr)
+
+
+State 143
 
    20 functionParametersList: identifierList type ',' functionParametersList .
 
     $default  reduce using rule 20 (functionParametersList)
 
 
-State 117
+State 144
 
-   45 ifStatment: IF expression block .
-   46           | IF expression block . ELSE ifStatment
-   47           | IF expression block . ELSE block
+   54 ifStatment: IF expression block .
+   55           | IF expression block . ELSE ifStatment
+   56           | IF expression block . ELSE block
 
-    ELSE  shift, and go to state 122
+    ELSE  shift, and go to state 153
 
-    $default  reduce using rule 45 (ifStatment)
-
-
-State 118
-
-   49 forStatment: FOR simpleStatment ';' . expression ';' simpleStatment block
-
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
-
-    expression    go to state 123
-    unaryExpr     go to state 46
-    primaryExpr   go to state 47
-    operand       go to state 48
-    literal       go to state 49
-    basicLiteral  go to state 50
+    $default  reduce using rule 54 (ifStatment)
 
 
-State 119
+State 145
 
-   50 forStatment: FOR expression block .
+   58 forStatment: FOR simpleStatment ';' . expression ';' simpleStatment block
 
-    $default  reduce using rule 50 (forStatment)
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
 
-
-State 120
-
-   44 statmentList: statments ';' statmentList .
-
-    $default  reduce using rule 44 (statmentList)
-
-
-State 121
-
-   42 simpleStatment: expressionList '=' expressionList .
-
-    $default  reduce using rule 42 (simpleStatment)
-
-
-State 122
-
-   46 ifStatment: IF expression block ELSE . ifStatment
-   47           | IF expression block ELSE . block
-
-    IF   shift, and go to state 82
-    '{'  shift, and go to state 58
-
-    block       go to state 124
-    ifStatment  go to state 125
+    expression    go to state 154
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
 
 
-State 123
+State 146
 
-   49 forStatment: FOR simpleStatment ';' expression . ';' simpleStatment block
-   53 expression: expression . '+' expression
-   54           | expression . '-' expression
-   55           | expression . '*' expression
-   56           | expression . '/' expression
-   57           | expression . EQ expression
-   58           | expression . NEQ expression
-   59           | expression . AND expression
-   60           | expression . OR expression
+   59 forStatment: FOR expression block .
 
-    AND  shift, and go to state 68
-    OR   shift, and go to state 69
-    EQ   shift, and go to state 70
-    NEQ  shift, and go to state 71
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
-    '*'  shift, and go to state 74
-    '/'  shift, and go to state 75
-    ';'  shift, and go to state 126
+    $default  reduce using rule 59 (forStatment)
 
 
-State 124
+State 147
 
-   47 ifStatment: IF expression block ELSE block .
+   53 statmentList: statments ';' statmentList .
 
-    $default  reduce using rule 47 (ifStatment)
-
-
-State 125
-
-   46 ifStatment: IF expression block ELSE ifStatment .
-
-    $default  reduce using rule 46 (ifStatment)
+    $default  reduce using rule 53 (statmentList)
 
 
-State 126
+State 148
 
-   49 forStatment: FOR simpleStatment ';' expression ';' . simpleStatment block
+   48 oprAssStatment: expression DECASS expression .
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
 
-    IDENTIFIER       shift, and go to state 38
-    INTEGER_LITERAL  shift, and go to state 39
-    FLOAT_LITERAL    shift, and go to state 40
-    BOOLEAN_LITERAL  shift, and go to state 41
-    CHAR_LITERAL     shift, and go to state 42
-    '('              shift, and go to state 43
-    '!'              shift, and go to state 44
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
 
-    $default  reduce using rule 40 (simpleStatment)
-
-    simpleStatment  go to state 127
-    expression      go to state 92
-    unaryExpr       go to state 46
-    primaryExpr     go to state 47
-    operand         go to state 48
-    literal         go to state 49
-    basicLiteral    go to state 50
-    expressionList  go to state 93
+    $default  reduce using rule 48 (oprAssStatment)
 
 
-State 127
+State 149
 
-   49 forStatment: FOR simpleStatment ';' expression ';' simpleStatment . block
+   49 oprAssStatment: expression INCASS expression .
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
 
-    '{'  shift, and go to state 58
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
 
-    block  go to state 128
+    $default  reduce using rule 49 (oprAssStatment)
 
 
-State 128
+State 150
 
-   49 forStatment: FOR simpleStatment ';' expression ';' simpleStatment block .
+   50 oprAssStatment: expression MULASS expression .
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
 
-    $default  reduce using rule 49 (forStatment)
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 50 (oprAssStatment)
+
+
+State 151
+
+   51 oprAssStatment: expression '/' '=' . expression
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    expression    go to state 155
+    unaryExpr     go to state 51
+    primaryExpr   go to state 52
+    operand       go to state 53
+    literal       go to state 54
+    basicLiteral  go to state 55
+
+
+State 152
+
+   45 simpleStatment: expressionList '=' expressionList .
+
+    $default  reduce using rule 45 (simpleStatment)
+
+
+State 153
+
+   55 ifStatment: IF expression block ELSE . ifStatment
+   56           | IF expression block ELSE . block
+
+    IF   shift, and go to state 94
+    '{'  shift, and go to state 63
+
+    block       go to state 156
+    ifStatment  go to state 157
+
+
+State 154
+
+   58 forStatment: FOR simpleStatment ';' expression . ';' simpleStatment block
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+    ';'  shift, and go to state 158
+
+
+State 155
+
+   51 oprAssStatment: expression '/' '=' expression .
+   62 expression: expression . '*' expression
+   63           | expression . '/' expression
+   64           | expression . '%' expression
+   65           | expression . '+' expression
+   66           | expression . '-' expression
+   67           | expression . EQ expression
+   68           | expression . NEQ expression
+   69           | expression . AND expression
+   70           | expression . OR expression
+   71           | expression . GT expression
+   72           | expression . GE expression
+   73           | expression . LT expression
+   74           | expression . LE expression
+
+    AND  shift, and go to state 75
+    OR   shift, and go to state 76
+    EQ   shift, and go to state 77
+    NEQ  shift, and go to state 78
+    GT   shift, and go to state 79
+    GE   shift, and go to state 80
+    LT   shift, and go to state 81
+    LE   shift, and go to state 82
+    '+'  shift, and go to state 83
+    '-'  shift, and go to state 84
+    '*'  shift, and go to state 85
+    '/'  shift, and go to state 86
+    '%'  shift, and go to state 87
+
+    $default  reduce using rule 51 (oprAssStatment)
+
+
+State 156
+
+   56 ifStatment: IF expression block ELSE block .
+
+    $default  reduce using rule 56 (ifStatment)
+
+
+State 157
+
+   55 ifStatment: IF expression block ELSE ifStatment .
+
+    $default  reduce using rule 55 (ifStatment)
+
+
+State 158
+
+   58 forStatment: FOR simpleStatment ';' expression ';' . simpleStatment block
+
+    NOT              shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    INTEGER_LITERAL  shift, and go to state 43
+    FLOAT_LITERAL    shift, and go to state 44
+    BOOLEAN_LITERAL  shift, and go to state 45
+    CHAR_LITERAL     shift, and go to state 46
+    '+'              shift, and go to state 47
+    '-'              shift, and go to state 48
+    '('              shift, and go to state 49
+
+    $default  reduce using rule 41 (simpleStatment)
+
+    simpleStatment  go to state 159
+    incdecStatment  go to state 100
+    oprAssStatment  go to state 101
+    expression      go to state 106
+    unaryExpr       go to state 51
+    primaryExpr     go to state 52
+    operand         go to state 53
+    literal         go to state 54
+    basicLiteral    go to state 55
+    expressionList  go to state 107
+
+
+State 159
+
+   58 forStatment: FOR simpleStatment ';' expression ';' simpleStatment . block
+
+    '{'  shift, and go to state 63
+
+    block  go to state 160
+
+
+State 160
+
+   58 forStatment: FOR simpleStatment ';' expression ';' simpleStatment block .
+
+    $default  reduce using rule 58 (forStatment)
