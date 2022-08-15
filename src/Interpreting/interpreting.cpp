@@ -68,7 +68,6 @@
     }
 
     //Block
-    //TODO: fix socope problem
     void Interpreting::block(const std::vector< std::function< void ()>> visitStatments) {
         if(debug){
             std::cout<<"Enter Block\n";
@@ -102,17 +101,6 @@
     //Declaration
     void Interpreting::functionDeclaration(const std::string id, const std::function< void ()> visitSignature, const std::function< void ()> visitFunctionBody) {
         
-        //visitSignature();
-
-        //make functionValue
-        //in site std::function(
-            //eerst: visitSignature()   weet voor params name
-            //paramNames voor de ids    
-            //last name comes first for value
-            //set op vector paramvalues with names en paramvalues
-            //body()
-            //
-        //)
         std::function<void ()>func{[this, visitSignature, visitFunctionBody](){
             visitSignature();
             
@@ -130,8 +118,7 @@
     }
 
     void Interpreting::variableDeclaration(const std::vector<std::string> ids, const std::function< void ()> visitType, const std::vector < std::function< void ()>> visitExpressions) {
-        //visitExpressions
-        //pop valueStack
+       
         if(debug){
             std::cout<<"var interpreting \n";
         }
@@ -178,7 +165,6 @@
         }
     }
 
-    //x, y = y,x not working
     void Interpreting::assignmentStatment(const std::vector< std::function< void ()>> visitLeftSide, const std::vector<  std::function< void ()>> visitRightSide) {
         if(debug){
             std::cout<<"assing stat \n";
@@ -192,7 +178,6 @@
 
         //visitrightside
         std::vector<ValueDescriptor *> rightValues {};
-        //std::vector<ValueDescriptor> tempValues {};
         for(auto rightSide: visitRightSide){
             rightSide();
             auto temp = valueStack.pop()->getDescri();
@@ -205,20 +190,17 @@
                 rightValues.push_back(temp);
             }
 
-            //rightValues.push_back(valueStack.pop()->getDescri());
-            //tempValues.push_back(* valueStack.pop());
+            
         }
 
         for(int i=0; i<visitLeftSide.size(); i++){
            dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(rightValues[i]->getDescri());
-           //dynamic_cast<ReferenceValue *>(leftValues[i])->setValue(tempValues[i].getDescri());
         }
 
 
     }
     
 
-    //hmmmm, not working skip it maybe. cast to ref
     void Interpreting::incrStatment(const std::function <void ()> visitExpression){
         if(debug){
             std::cout<<"incr stat \n";
@@ -365,7 +347,6 @@
             for(auto expr: visitExpressions){
             expr();
             auto temp = valueStack.pop();
-            //valueStack.push(temp->getDescri());
             tempValues.push_back(temp->getDescri());
             }
             valueStack.push(new ManyValues(tempValues));
@@ -382,19 +363,16 @@
         
         std::function<void (ValueDescriptor*)> setFunc = [this, id](ValueDescriptor* newVal){
             auto _id = id;
-            //this->valueTable.setOther(_id, newVal);
             this->valueTable.replace(_id, newVal);
         };
 
         std::function<ValueDescriptor* ()> getFunc = [this, id]()->ValueDescriptor *{
             auto _id = id;
             return this->valueTable.get(_id);
-            //return temp->getDescri();
-            //return temp;
+            
         };
         
         valueStack.push(new ReferenceValue(getFunc, setFunc));
-        //valueStack.push(idExpr);
 
     }
 
@@ -431,7 +409,6 @@
     }
 
 
-    //TODO: reason print can't work
     void Interpreting::callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments){
         if(debug){
             std::cout<<"call expr \n";
@@ -450,8 +427,6 @@
         
     }
 
-    // void Interpreting::identifierExperssion(const std::string id);
-    //Binary for alle operatie +, -, /, * const std::function< void ()> visitleft en const std::function< void ()>rightside (function)
     void Interpreting::binaryAddExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
         if(debug){
             std::cout<<"Add expr \n";
@@ -463,7 +438,6 @@
         auto rightSide = (valueStack.pop()->getDescri());
 
 
-        //auto result = leftSide->add(rightSide);
         valueStack.push(leftSide->add(rightSide)->getDescri());
 
     }
@@ -479,7 +453,6 @@
         auto rightSide = (valueStack.pop()->getDescri());
 
 
-        //auto result = leftSide->add(rightSide);
         valueStack.push(leftSide->min(rightSide)->getDescri());
     }
 
@@ -494,7 +467,6 @@
         auto rightSide = (valueStack.pop()->getDescri());
 
 
-        //auto result = leftSide->add(rightSide);
         valueStack.push(leftSide->mul(rightSide)->getDescri());
     }
 
@@ -509,7 +481,6 @@
         auto rightSide = (valueStack.pop()->getDescri());
 
 
-        //auto result = leftSide->add(rightSide);
         valueStack.push(leftSide->div(rightSide)->getDescri());
     }
 

@@ -6,12 +6,7 @@
 #include <vector>
 
 namespace ASB{
-//leaf dus impl van visitor
 
-
-//aan de hand van type calssen. Get type
-// Type check (equeals). Compaer if given type is equal
-//Trival basic types.(Boolean, Int, Float) True
 class IdentifierExpression: public Expression{
     public:
         IdentifierExpression(std::string id);
@@ -19,7 +14,6 @@ class IdentifierExpression: public Expression{
         
         virtual void accept(Visitor *visitor) const  override;
 
-        //getType -> IdType
     private:
         std::string id;
 };
@@ -28,7 +22,6 @@ class BoolExpression: public Expression{
     public:
         BoolExpression(bool value);
         virtual ~BoolExpression() override = default;
-        //getType -> return Boolean;
 
         virtual void accept(Visitor *visitor) const override;
     private:
@@ -77,8 +70,7 @@ class CallExpression: public Expression{
         Expression* expression;
 };
 
-//need to be specilias  up in add, sub, 
-//so not a leaf, protected constructor
+
 class BinaryOperation: public Expression{
     //type checken of beide compatible zijn
     public:
@@ -251,9 +243,7 @@ class BinaryModOperation: public BinaryOperation{
 };
 
 
-//unary for not?
-//inc, dec?
-//plusassign, ...?
+
 
 class UnaryOperation: public Expression{
     public:

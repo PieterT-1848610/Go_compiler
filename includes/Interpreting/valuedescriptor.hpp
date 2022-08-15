@@ -119,7 +119,6 @@ class CharValue: public ValueDescriptor, public Equal, public NotEqual{
 };
 
 //class FunctionValue
-//TODO: needs work, parameters, body, rest
 class FunctionValue: public ValueDescriptor{
     public:
         FunctionValue(std::function<void ()> func);

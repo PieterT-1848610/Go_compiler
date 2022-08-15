@@ -14,7 +14,6 @@ namespace ASB{
 class Node{
     public:
         virtual ~Node() = default;
-        //past niks aan in boom en bij alle subnodes
         virtual void accept(Visitor *visitor) const = 0;
         void print(){};
     protected:
@@ -99,10 +98,7 @@ class Block: public Node{
         
 };
 
-//template <typename T>
 
-//Root of program
-//is program so need visitor implementead
 class Root: public Node{
     public:
         Root(std::vector<TopDeclaration *> declarations);

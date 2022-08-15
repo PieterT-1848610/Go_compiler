@@ -5,7 +5,6 @@
 #include <string>
 
 namespace ASB{
-    //leaf node van structuur implementatie van visitor
 
 class FunctionDeclaration: public TopDeclaration{
     public:

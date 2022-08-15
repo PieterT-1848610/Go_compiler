@@ -24,7 +24,7 @@ class SymbolTable{
         };
         ~SymbolTable() = default; //possible memory leaks, if T is pointer
 
-        //TODO: van achter naar voor checken, niet bestaat error
+        // van achter naar voor checken, niet bestaat error
         T get(std::string key) {
             for(int i = table.size() - 1; i>=0; i--){
                 
@@ -35,7 +35,6 @@ class SymbolTable{
             throw new SymbolException("Symbool don't exist");
         };
 
-        //TODO:maybe problem for assign
         void set(std::string key, T value) {
             int a = table.size() - 1;
             table[a].insert(std::make_pair(key, value));
@@ -48,7 +47,6 @@ class SymbolTable{
         }
 
 
-        //No nbeed anymore fixed with [key]
         void replace(std::string key, T value){
             int place = checkcontain(key);
             if(place == -1){
@@ -68,7 +66,7 @@ class SymbolTable{
             return -1;
         }
         
-        //TODO: alles aflopen nog 
+        //alles aflopen nog 
         std::vector<std::vector<std::string>> keys() {
             
                 std::vector<std::vector<std::string>>  keys;
@@ -88,7 +86,7 @@ class SymbolTable{
 
 
 
-        //check current scope only for key?
+        //check current scope only for key
         bool contains(std::string key) {
             int i = table.size() -1;
             return(this->table[i].count(key)>0);  

@@ -1,5 +1,4 @@
 # Go_compiler
-Compilers stupid project
-Lexer basic check
-Tree basic check?
-Parser!!!
+## Compilers project 2021-2022
+<p>This is an interpreteur for the language GO</p>
+Requirments check blackboard

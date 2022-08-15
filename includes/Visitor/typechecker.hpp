@@ -34,7 +34,6 @@ class TypeChecker: public Visitor{
         //vistType and pop
         //visit all Expr
         //compare with type
-        //
         //check if id already exists
         //add to varTable (ids, and type) 
 
@@ -85,13 +84,10 @@ class TypeChecker: public Visitor{
         void callExpression(const std::function<void ()> visitExpression, const std::vector<std::function<void ()>> visitArguments) override;
         
 
-        //void identifierExperssion(const std::string id);
-        //Binary for alle operatie +, -, /, * const std::function<void ()> visitleft en const std::function<void ()>rightside (function)
         void binaryAddExpression(const std::function<void ()> visitLeftSide, const std::function<void ()> visitRightSide) override;     //visitleftside() (for visiting side)
                                                                                                                                         //pop 
                                                                                                                                         //visitright
                                                                                                                                         //pop
-
                                                                                                                                         //check if types are allowed
                                                                                                                                         //left and right
                                                                                                                                         //compare the types
@@ -154,7 +150,6 @@ class TypeChecker: public Visitor{
     private:
         Stack<std::string> errors;
 
-        //stack for printing?, wich class 
         Stack<TypeDescriptor*> typeStack;
 
         //symboltable func and symboltable var;

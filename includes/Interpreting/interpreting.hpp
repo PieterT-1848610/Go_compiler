@@ -136,8 +136,7 @@ class Interpreting: public Visitor{
         
 
         std::vector<std::string> paramNames;
-        //mapping van function op naam
-        //std::vector<std::pair<std::string, std::function <void ()> >> functionSignature;
+        
 
         bool debug;
 

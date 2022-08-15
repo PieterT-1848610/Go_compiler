@@ -20,7 +20,6 @@
 
     }
 
-    //fucked
     void TypeChecker::root(const std::vector< std::function<void ()>> visitDeclarations){
         if(debug){
             std::cout<<"Root start: number of decla"<<visitDeclarations.size() <<"\n";
@@ -58,10 +57,7 @@
             std::cout<<"check block \n";
         }
         typeTable.newScope();
-        //maybe set the function params?
-        //unpacken van currentFunctionType en set typeTable setten? voor params en voor Return als id hebben
-        //mag enkel als functie is
-        //set params vector
+    
         if(!paramTypes.empty()){
             for(auto param: paramTypes){
                 typeTable.set(param.first, param.second);
@@ -83,7 +79,8 @@
         
         typeTable.removeScope();
     }
-//not sure
+
+
     void TypeChecker::functionDeclaration(const std::string id, const std::function< void ()> visitSignature, const std::function< void ()> visitFunctionBody) {
         if(debug){
             std::cout<<"check function \n";
@@ -93,10 +90,7 @@
         visitSignature();
         auto functionsign = typeStack.pop();
         typeTable.set(id, functionsign);
-        //functionsing unpacken en die op typeTable setten
-        //std::function
-        //dat deel uistellen en in vector steken voor later op te roepen.
-        //[functionSign]
+        
         std::function<void ()>visitRest{[functionsign, visitFunctionBody, this](){
             currentFunctionType = dynamic_cast<FunctionTypeDesc *>(functionsign);
             if(currentFunctionType == nullptr){
@@ -113,7 +107,7 @@
         
     }
 
-    //TODO: deal if type is not given?
+
     void TypeChecker::variableDeclaration(const std::vector<std::string> ids, const std::function< void ()> visitType, const std::vector < std::function< void ()>> visitExpressions) {
         if(debug){
            std::cout<<"check var \n";
@@ -178,8 +172,6 @@
                     referncableStack.pop();
                 }
 
-
-                
             }
             for(auto id: ids){
                 if(typeTable.contains(id)){
@@ -212,9 +204,7 @@
             std::cout<<"check expre stat\n";
         }
         
-        
         visitExperssion();
-        //typeStack.pop();
     }
 
     void TypeChecker::emptyStatment() {
@@ -223,7 +213,6 @@
         }
     }
 
-    //further
     void TypeChecker::assignmentStatment(const std::vector< std::function< void ()>> visitLeftSide, const std::vector<  std::function< void ()>> visitRightSide) {
         if(debug){
             std::cout<<"assignstat stat\n";
@@ -244,7 +233,7 @@
         for(auto rightSide: visitRightSide){
             rightSide();
             auto tempType = typeStack.pop();
-            //rightTypes.push_back(typeStack.pop());
+
             if(tempType->compare(ManyTypeDesc({}))){
                 std::vector<TypeDescriptor *> manyTypes = dynamic_cast<ManyTypeDesc *>(tempType)->getTypes();
                 for(auto types: manyTypes){
@@ -341,7 +330,7 @@
             errors.push("Wrong type for decr assign stat, only int or float allowed");
         }
 
-        if(!leftType->compare(* leftType)){
+        if(!leftType->compare(* rightType)){
             errors.push("Left side of assing is differnt from right");
         }
 
@@ -373,7 +362,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
             errors.push("Wrong type for decr assign stat, only int or float allowed");
         }
 
-        if(!leftType->compare(* leftType)){
+        if(!leftType->compare(* rightType)){
             errors.push("Left side of assing is differnt from right");
         }
 
@@ -405,7 +394,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
             errors.push("Wrong type for decr assign stat, only int or float allowed");
         }
 
-        if(!leftType->compare(* leftType)){
+        if(!leftType->compare(* rightType)){
             errors.push("Left side of assing is differnt from right");
         }
 
@@ -437,7 +426,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
             errors.push("Wrong type for decr assign stat, only int or float allowed");
         }
 
-        if(!leftType->compare(* leftType)){
+        if(!leftType->compare(* rightType)){
             errors.push("Left side of assing is differnt from right");
         }
 
@@ -471,12 +460,10 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         
         }
         visitDeclaration();
-        //typeStack.pop();
-
 
     }
 
-    //maybe do things with visitTrue and visitFalse
+
     void TypeChecker::ifStatment(const std::function< void ()> visitCondition, const std::function< void ()> visitTrueCondition, const std::function< void ()> visitFalseCondition) {
         if(debug){
             std::cout<<"if stat\n";
@@ -496,7 +483,6 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
     }
 
 
-    //TODO: not working like wtf, ExpactedReturnType keeps empty
     void TypeChecker::returnStatment(const std::vector<std::function< void ()>> visitExpressions) {
         if(debug){
             std::cout<<"return stat\n";
@@ -507,16 +493,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         }
 
         auto expactedTypes = currentFunctionType->getReturnsTypeDesc();
-        // if(visitExpressions.size() == 1){
-        //     visitExpressions[0]();
-        //     auto returnType = typeStack.pop();
-        //     referncableStack.pop();
-
-        //     if(!expactedTypes[0]->compare( * returnType)){
-        //         errors.push("Return expr don't match expected type");
-
-        //     }
-        // }else{
+        
             for(int i = 0; i<visitExpressions.size(); i++){
                 visitExpressions[i]();
                 auto returnType = typeStack.pop();
@@ -533,7 +510,6 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
 
 
     //expresions
-    //true add
     void TypeChecker::identifierExperssion(const std::string id) {
         if(debug){
             std::cout<<"id expr\n";
@@ -544,7 +520,6 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         referncableStack.push(true);
     }
 
-    //false add
     void TypeChecker::boolExperssion(const bool value) {
         if(debug){
             std::cout<<"bool expr\n";
@@ -594,7 +569,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
 
         visitExpression();
         auto exprType = typeStack.pop();
-        //maybe do something with?
+
         std::vector<TypeDescriptor *> argTypes{};
         for(auto arg: visitArguments){
             arg();
@@ -615,7 +590,8 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         auto paramType = funcType->getParametersTypeDesc();
 
         if(paramType.size() != argTypes.size()){
-            errors.push("No same amount of params as arguments for function");
+            errors.push("Function needs different amount of parameters, than is given");
+            return;
         }
     
 
@@ -632,7 +608,6 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         }else if(returnType.size() > 1){
             auto manyReturnType = new ManyTypeDesc(returnType);
             for(auto ret: returnType){
-                //typeStack.push(ret);
 
                 referncableStack.push(false);
             }
@@ -642,9 +617,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
     }
 
 
-    // void Visiting::identifierExperssion(const std::string id);
-    //Binary for alle operatie +, -, /, * const std::function< void ()> visitleft en const std::function< void ()>rightside (function)
-    //pop 2 and add 1 
+    //pop 2 and add 1 ref
     void TypeChecker::binaryAddExpression(const std::function< void ()> visitLeftSide, const std::function< void ()> visitRightSide) {
         if(debug){
             std::cout<<"binary Add expre \n";
@@ -1048,7 +1021,7 @@ void TypeChecker::incrAssignStatment(const std::function<void ()>visitLeftExpres
         }
 
         if(!leftSide->compare(*rightSide)){
-            errors.push("can't add the different types");
+            errors.push("can't modulo the different types");
         }
         typeStack.push(leftSide);
         

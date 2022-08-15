@@ -1,30 +1,21 @@
 package main
+//Show the option for multiple return and params for functions
 
 
-
-var x, p, o, m bool;
-
-func test1() (a, b bool){
-	var j int = 0
-
-	for ;j < 100; x = !x{
-		for{
-			for ;;{
-				if true {
-					var j = 0
-					return;
-					var q = 5
-				}
-			}
-		}
-	}
-	return 
-	
+//multireturn
+func multireturn() (int, int){
+	return 3, 7
 }
 
-func main() {
-	var x, y = test1() 
+//multi params
+func multiparam(x int, y int){
+	x = x + 3
+	printInt(x)
+	y = y - 4
+	printInt(y)
 }
 
-
-
+func main(){
+	var x, y = multireturn()
+	multiparam(x, y)
+}

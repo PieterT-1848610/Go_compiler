@@ -14,18 +14,14 @@ int main(){
         std::cout<<"error opening file";
         return -1;
     }
-    //std::cout<<"fucking something";
     yyparse();
     //
     if(tree != nullptr){
         
     
         TypeChecker typecheck = TypeChecker(false);
-        //try{
             tree->accept(&typecheck);
-        //}catch(...){
-        //    std::cout<<"crash?";
-        //}
+       
         if(!typecheck.emptyErrors()){
             std::cout<<"printing Errors: \n";
             for(auto error: typecheck.getErrors()){

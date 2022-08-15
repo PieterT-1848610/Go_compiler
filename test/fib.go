@@ -1,21 +1,19 @@
-package main;
+package main
 
-
-// This function calls fib for 10
-func main() {
-    var q int = fib(11)
-
-    
-}
-    
+//recursion test fibo
 func fib(n int) int {
-    if n == 0 || n == 1 {
-        return 1
-    } else {
+    if n == 0 {
+        return 0
+    } else if n == 1 {
+		return 1
+	} else {
+		return fib(n-1) + fib(n-2)
+	}
+}
 
-        return fib(n - 1) + fib(n - 2)
-    }
-};
 
-
-
+func main(){
+	var x = 10
+	x = fib(x)
+	printInt(x)
+}

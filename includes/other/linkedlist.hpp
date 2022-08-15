@@ -1,8 +1,5 @@
 #include <vector>
 #include <stdexcept>
-/*
-*   possible still has fault in it !!!
-*/
 
 
 template <class T>

@@ -2222,5 +2222,4 @@ char charToCharLiteral(char *input){
 	delete noQuotes;
 	return result;
 }
-//TODO: start making the stupid tree
 

@@ -4,173 +4,58 @@ package main
 // 	return a + c
 // } 
 
-// //testing if else statments
-// func testingIfs(){
-// 	var x = 2.31
-// 	printFloat(x)
-// 	var test, a float32 = 100.0, 7.0
-// 	var test2 = x + a
-// 	printFloat(test2)
-// 	if(a == 8.0){
-// 		printInt(3)
-// 	}else if(test2 == x){
-// 		printFloat(3.12)
-// 	}else{
-// 		printInt(55)
-// 	}
 
-// 	var f = 0
-// 	if(f == 0){
-// 		printBool(true)
-// 	}
-// }
+func compareValues(){
+	var x, y, z = 5, 7, 5
+	var comp = x == y
+	printBool(comp)
 
-// //recursion test fibo
-// func fib(n int) int {
-//     if n == 0 {
-//         return 0
-//     } else if n == 1 {
-// 		return 1
-// 	} else {
-// 		return fib(n-1) + fib(n-2)
-// 	}
-// }
+	comp = x!=y
+	printBool(comp)
 
-// //check swithc assign
-// func assingCheck() {
-// 	var y = 10
-// 	var x = 5
-// 	printInt(x)
-// 	printInt(y)
-// 	x, y = y,x 
-// 	printInt(x)
-// 	printInt(y)
-// }
+	comp = x < y
+	printBool(comp)
 
-// //testing the different two for loops
-// func forLoop(x int){
-// 	var i =  0
-// 	var j = 0
-// 	printInt(x)
-// 	for j=0; j <=5; j = j + 1{
-// 		i =  i + 1
-// 		printInt(j)
-// 		x = 4554
-// 	}
-// 	printInt(x)
+	comp = x >= z
+	printBool(comp)
 
-// 	i = 0
-// 	for i <= 10{
-// 		if(i<=5){
-// 			i = i+2
-// 		}else{
-// 			i = i + 1
-// 		}
-// 		printInt(i)
-// 	}
-// 	printInt(i)
+	comp = !comp
+	printBool(comp)
+}
 
-// }
 
-// //testing bool operation and, or, not
-// func testingOpr(){
-// 	var x = true;
-// 	var x2 = true;
-// 	var y = false;
-// 	var y2= false;
 
-// 	if(x && x2){
-// 		printBool(x)
-// 	}
-// 	if(x && y){
-// 		printBool(y)
-// 	}
-// 	if(x||y){
-// 		printBool(x)
-// 	}
-// 	if(y || !y2){
-// 		printBool(x)
-// 	}
-// }
+func showingif(){
+	if(true && true){
+		printInt(1)
+	}else{
+		printInt(0)
+	}
+	if(false || false){
+		printInt(0)
+	}else{
+		printInt(1)
+	}
 
-// func expo(value int, exponent int) int{
-// 	var i = 0
-// 	if(exponent == 0){
-// 		return 0	
-// 	}else if(exponent == 1){
-// 		return value
-// 	}
+	if(true){
+		if(!false){
+			printInt(1)
+		}else if(false){
+			printInt(0)
+		}else{
+			printInt(0)
+		}
+	}else{
+		printInt(0)
+	}
+}
 
-// 	var result int = value
-// 	for i = 1; i < exponent; i = i +1{
-// 		result = result * value
-// 	}
-// 	return result
-// }
 
-// func testReturn() int{
-// 	var p = 99
-// 	return p 
-// }
 
-// func retBool() bool{
-// 	var val = true
-// 	return true
-// }
 
-// func vals() (int, int) {
-//     return 3, 7
-// }
 
 func main() {
-	// var i, j int = vals()
-	// printInt(i)
-	// printInt(j)
-	// j, i = vals()
-	// printInt(i)
-	// printInt(j)
-	// assingCheck()
-	// testingIfs()
-	// var i = plus(7, 56)
-	// printInt(i)
-	// var p = 6
-	// var z = 1
-	// p = p + 6
-	// z = testReturn()
-	// printInt(p)
-	// if(z == 198){
-	// 	printBool(true)
-	// }
-	// printInt(2)
-	// var x = retBool()
-	// printBool(x)
-	// x = !x
-	// printBool(x)
-	// forLoop(p)
-	//var z = 1
-	//z = z +1		//breaks
-	//var y = z		//works
-	//printInt(z)
-	//printInt(p)
-	//y = fib(20)
-	var y = 2
-	y+=5
-	printInt(y)
-	y-=3
-	printInt(y)
-	y*=4
-	printInt(y)
-	y = y * 5
-	y=y % 3
-	y = 75 + +3
-	printInt(y)
-	// var value, exponent = 6, 3
-	// z = expo(value, exponent)
-	// // //printInt(z)
-	// printInt(z)
-	// testingOpr()
-	// x = (p == z)||(y !=z)
-	// printBool(x)
-	
+	compareValues()
+	showingif()	
 }
 
