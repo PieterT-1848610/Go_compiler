@@ -1,6 +1,7 @@
 Running of the parser file
 bison -v -o src/Parser/parser.cpp includes/Parser/parse.y
 
+running  of lexer no clue anymore
 
 Runnen van de go file
 go run test/test.go
@@ -9,3 +10,4 @@ go run test/test.go
 
 
 use wsl commando "cmake . && make"
+for making the project

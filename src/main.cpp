@@ -8,8 +8,9 @@ extern ASB::Root *tree;
 #include "Interpreting/interpreting.hpp"
 
 int main(){
-    
-    yyin = fopen("/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/test/test2.go", "r");
+    //file to run
+    //could be beter a command line input
+    yyin = fopen("/mnt/c/Users/thomi/Documents/Master/Compilers/giti/Go_compiler/test/expo.go", "r");
     if(yyin == NULL){
         std::cout<<"error opening file";
         return -1;
